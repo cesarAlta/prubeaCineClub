@@ -1,0 +1,85 @@
+<div class="bg-dark mt-2" style="width: 100%; height: 30px;">
+  <nav aria-label="breadcrumb ">
+    <ol class="breadcrumb ms-3">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">pelicula</li>
+    </ol>
+  </nav>
+  </div>
+<div class="container-md my-3">
+  <div class="row justify-content-center mb-3">
+    <div class="col-lg-4">
+      <div style="max-width: 300px;height: auto;" >
+        <img src="../../../../../assets/img/santiago-italia.jpg" alt=""
+        class="img-fluid" />
+
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <h3>Descripci&oacute;n</h3>
+      <p>
+        (Santiago, Italia, Italia, 2018, DCP, 80’, AM13) Documental dirigido por
+        Nanni Moretti Existe una historia poco conocida sobre el papel de Italia
+        durante un momento crucial en la historia chilena, en concreto tras el
+        derrocamiento del gobierno democrático de Salvador Allende en septiembre
+        de 1973. Entremezclando imágenes de archivo de los años 70 con
+        entrevistas registradas durante doce días en el año 2017, el documental
+        reconstruye el papel de la embajada italiana en Santiago de Chile en los
+        meses siguientes al golpe de Estado de 1973, en particular como asilo
+        para cientos de refugiados opositores a la dictadura militar de Augusto
+        Pinochet, ofreciéndoles la posibilidad de ayudarlos a abandonar el país.
+        2018: Premios David di Donatello: Mejor documental 2019: Festival de
+        Gijón: Sección oficial Martes 29/8, 18:00 hs.
+      </p>
+      <div>
+        <button
+          class="btn btn-outline-info"
+          type="button"
+          (click)="showTriler()"
+        >
+          <i class="fa-solid fa-film"></i> Ver trailer
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center" *ngIf="triler">
+    <iframe
+      width="800"
+      height="400"
+      src="https://www.youtube.com/embed/A5surOEYLLo"
+      title="El Verano Que Te Vimos (The Summer We Saw You - 2021) - Trailer - English Subtitles"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>
+    <div class="">
+      <button
+        class="btn btn-unstyled border-0 text-danger"
+        type="button"
+        (click)="showTriler()"
+      >
+        X Cerrar
+      </button>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="bg-dark">
+      <h2 class="ms-5">Pelicula</h2>
+    </div>
+    <div class="col-8" style="height: 400px">
+      <iframe
+        width="1520"
+        height="538"
+        src="https://www.youtube.com/embed/KrDKN86pgjI"
+        title="El código enigma | Película completa"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        style="width: 100%; height: 100%"
+      ></iframe>
+    </div>
+  </div>
+   
+</div>

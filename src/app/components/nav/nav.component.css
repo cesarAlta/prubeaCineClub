@@ -1,0 +1,17 @@
+.navprimary {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    transition: background-color 0.3s;
+    z-index: 1000; /* Asegura que el nav esté por encima de otros elementos */
+  }
+
+  
+  /* Cambia el color de fondo cuando se hace scroll */
+  /* .navprimary.scrolled {
+    position: sticky;
+     background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgb(0, 0, 0));
+    height: 50px;
+  } */

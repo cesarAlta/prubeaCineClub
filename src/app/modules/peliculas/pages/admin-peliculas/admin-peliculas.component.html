@@ -1,0 +1,294 @@
+<div class="bg-dark mt-2" style="width: 100%; height: 30px;">
+    <nav aria-label="breadcrumb ">
+      <ol class="breadcrumb ms-3">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">adminPeliculas</li>
+      </ol>
+    </nav>
+    </div>
+<div class="ms-3 mt-3 bg-dark">
+  <h3>Administracion</h3>
+</div>
+<div class="container-sm my-3">
+  <h4>Agregar nueva pelicula</h4>
+  <hr />
+  <fieldset>
+    <legend class="bg-dark">Datos de la pelicula</legend>
+    <div class="mb-3">
+      <label for="nameMovie" class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nameMovie"
+        placeholder="Nombre"
+      />
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label" for="">Generos</label>
+        <div class="input-group">
+          <select
+            class="form-select"
+            id="selnominacion"
+            aria-label="selnominacion"
+          >
+            <option selected>Generos</option>
+            <option value="1">Accion</option>
+            <option value="2">Terror</option>
+            <option value="3">Comedia</option>
+          </select>
+          <button class="btn btn-primary" type="button">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="col">
+        <label for="relaseMovie" class="form-label">Fecha de estreno</label>
+        <input
+          type="date"
+          class="form-control"
+          id="relaseMovie"
+          placeholder="decha de lanzamiento"
+        />
+      </div>
+      <div class="col">
+        <label for="lengthMovie" class="form-label">Duracion</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lengthMovie"
+          placeholder="Duracion en minutos"
+        />
+        <small>En minutos</small>
+      </div>
+      <div class="col">
+        <label class="form-label">Clasificaion</label>
+        <div class="input-group">
+          <select class="form-select" id="selElenco" aria-label="selElencoType">
+            <option selected>Clasificaion</option>
+            <option value="1">+12</option>
+            <option value="2">+14</option>
+            <option value="3">APT</option>
+          </select>
+          <button class="btn btn-primary" type="button">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      Se Agrego
+      <ul>
+        <li>
+          Terror
+          <button class="btn btn-sm btn-unstyled border-0 text-danger">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </li>
+        <li>
+          Drama
+          <button class="btn btn-sm btn-unstyled border-0 text-danger">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </fieldset>
+
+  <!--Elenco-->
+  <div class="row mb-3">
+    <fieldset>
+      <legend class="bg-dark mb-3">Elenco</legend>
+      <div class="row mb-3">
+        <div class="col">
+          <div class="input-group">
+            <select
+              class="form-select"
+              id="selElenco"
+              aria-label="selElencoType"
+            >
+              <option selected>Seleccione tipo de elenco</option>
+              <option value="1">Actor</option>
+              <option value="2">Director</option>
+              <option value="3">Productor</option>
+            </select>
+            <button class="btn btn-primary" type="button">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <select
+              class="form-select"
+              id="selElenco"
+              aria-label="selElencoName"
+            >
+              <option selected>Participante</option>
+              <option value="1">Actor1</option>
+              <option value="2">Actor2</option>
+              <option value="3">Director1</option>
+              <option value="4">Director2</option>
+              <option value="5">Director3</option>
+              <option value="6">Productor1</option>
+              <option value="7">Productor2</option>
+              <option value="8">Productor3</option>
+            </select>
+            <button class="btn btn-primary" type="button">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col">
+          <button class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Añadir
+          </button>
+        </div>
+      </div>
+      <div>
+        Se Agrego
+        <ul>
+          <li>
+            Director: Nombre del director
+            <button class="btn btn-sm btn-unstyled border-0 text-danger">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </li>
+          <li>
+            Productor: Nombre del productor
+            <button class="btn btn-sm btn-unstyled border-0 text-danger">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </li>
+          <li>
+            Actor: Nombre del actor
+            <button class="btn btn-sm btn-unstyled border-0 text-danger">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </li>
+          <li>
+            Actris: Nombre de la actris
+            <button class="btn btn-sm btn-unstyled border-0 text-danger">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </fieldset>
+  </div>
+  <div class="row mb-3">
+    <fieldset>
+      <legend  class="bg-dark mb-3">Nominaciones</legend>
+      <div class="row mb-3">
+        <div class="col">
+          <div class="input-group">
+            <select
+              class="form-select"
+              id="selnominacion"
+              aria-label="selnominacion"
+            >
+              <option selected>Nominaciones</option>
+              <option value="1">Nombre 1</option>
+              <option value="2">Nombre 2</option>
+              <option value="3">Nombre 3</option>
+            </select>
+            <button class="btn btn-primary" type="button">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <input
+              type="number"
+              min="1900"
+              max="2023"
+              class="form-control"
+              placeholder="año"
+            />
+            <span>Ingrese el año de la nominacion</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <select
+              class="form-select"
+              id="selElenco"
+              aria-label="selElencoName"
+            >
+              <option selected>Resultado</option>
+              <option value="1">Nominada</option>
+              <option value="2">Ganadora</option>
+            </select>
+            <button class="btn btn-primary" type="button">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col">
+          <button class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Añadir
+          </button>
+        </div>
+      </div>
+      <div>
+        Se Agrego
+        <ul>
+          <li>
+            Oscar 2021: nominada
+            <button class="btn btn-sm btn-unstyled border-0 text-danger">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </li>
+          <li>
+            Globo de oro 2021: ganadora
+            <button class="btn btn-sm btn-unstyled border-0 text-danger">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </fieldset>
+  </div>
+  <fieldset>
+    <legend  class="bg-dark mb-3">Imagenes y videos</legend>
+    <div class="mb-3">
+      <label for="linkTrailerMovie" class="form-label">Link del triler</label>
+      <input
+        type="url"
+        class="form-control"
+        id="linkTrailerMovie"
+        placeholder="link trailer"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="linkMovie" class="form-label">Link de la pelicula</label>
+      <input
+        type="url"
+        class="form-control"
+        id="linkMovie"
+        placeholder="link de la pelicula"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="frontPageMovie" class="form-label">Portada</label>
+      <input
+        type="file"
+        class="form-control"
+        id="frontPageMovie"
+        placeholder="portada"
+      />
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend  class="bg-dark mb-3">Informacion adicional</legend>
+    <div class="mb-3">
+      <label for="descriptionMovie" class="form-label">Descripcion</label>
+      <textarea class="form-control" id="descriptionMovie" rows="3"></textarea>
+    </div>
+  </fieldset>
+  <div class="d-flex justify-content-center gap-3">
+      <button class="btn btn-danger" type="button"><i class="fa-solid fa-xmark"></i> Cancelar</button>
+      <button class="btn btn-success" type="button"><i class="fa-solid fa-check"></i> Guardar</button>
+  </div>
+</div>
