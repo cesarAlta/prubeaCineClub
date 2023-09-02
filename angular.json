@@ -13,8 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/prubeaCineClub",
-
+            "outputPath": "dist/f-cine-club",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -95,6 +94,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
