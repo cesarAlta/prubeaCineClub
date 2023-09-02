@@ -6,6 +6,7 @@ import { ViewsPeliculaComponent } from './pages/views-pelicula/views-pelicula.co
 import { AdminPeliculasComponent } from './pages/admin-peliculas/admin-peliculas.component';
 
 
+
 @NgModule({
   declarations: [
     ViewsPeliculaComponent,
@@ -13,7 +14,7 @@ import { AdminPeliculasComponent } from './pages/admin-peliculas/admin-peliculas
   ],
   imports: [
     CommonModule,
-    PeliculasRoutingModule
+    PeliculasRoutingModule,
   ]
 })
 export class PeliculasModule { }
