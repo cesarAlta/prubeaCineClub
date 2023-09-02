@@ -19,8 +19,8 @@ import { FooterComponent } from './components/footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    HomeModule,
     AppRoutingModule,
+    HomeModule,
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/prubeaCineClub/' }],
   bootstrap: [AppComponent]
