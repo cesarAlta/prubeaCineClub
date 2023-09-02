@@ -22,7 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HomeModule,
     AppRoutingModule,
   ],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/prubeaCineClub/' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
