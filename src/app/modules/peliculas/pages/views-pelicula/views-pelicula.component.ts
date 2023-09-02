@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from 'src/app/modules/home/home.service';
 
 @Component({
   selector: 'app-views-pelicula',

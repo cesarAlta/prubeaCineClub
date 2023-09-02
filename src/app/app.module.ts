@@ -19,10 +19,10 @@ import { FooterComponent } from './components/footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HomeModule,
+    AppRoutingModule,
   ],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/prubeaCineClub/' }],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
