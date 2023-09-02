@@ -20,7 +20,7 @@ export const peliculas:Pelicula[]=[
   linkPelicula: "no",
   linkTrailer: "no",
   puntuacion: 2,
-  imagenPath: "../../assets/img/LaEstrella.jpg"
+  imagenPath: "./assets/img/LaEstrella.jpg"
 },
 {
   id: 2,
@@ -31,7 +31,7 @@ export const peliculas:Pelicula[]=[
   linkPelicula: "no",
   linkTrailer: "no",
   puntuacion: 3,
-  imagenPath: "../../assets/img/El verano que te vimos.jpeg"
+  imagenPath: "./assets/img/El verano que te vimos.jpeg"
 },
 {
   id: 3,
@@ -42,7 +42,7 @@ export const peliculas:Pelicula[]=[
   linkPelicula: "no",
   linkTrailer: "no",
   puntuacion: 4,
-  imagenPath: "../../assets/img/Todas-las-pistas-fueron-falsas-poster-.jpg"
+  imagenPath: "./assets/img/Todas-las-pistas-fueron-falsas-poster-.jpg"
 },
 {
   id: 4,
@@ -53,6 +53,6 @@ export const peliculas:Pelicula[]=[
   linkPelicula: "no",
   linkTrailer: "no",
   puntuacion: 5,
-  imagenPath: "../../assets/img/LaNocheMasLarga.jpg"
+  imagenPath: "./assets/img/LaNocheMasLarga.jpg"
 }
 ]
