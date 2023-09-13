@@ -104,6 +104,7 @@
   right: 0;
   width: 75%;
   height: 100%;
+  margin: 0;
   background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)); /* Gradiente de transparente a sólido */
 }
 /* Opcion 2 */
