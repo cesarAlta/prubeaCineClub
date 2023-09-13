@@ -9,18 +9,22 @@ import { HomeModule } from './modules/home/home.module';
 import { NavComponent } from './components/nav/nav.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { DashboardComponent } from './modules/private/pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     ModalComponent,
-    FooterComponent
+    FooterComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     HomeModule,
     AppRoutingModule,
+    NgbModalModule,
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
   { provide: LocationStrategy, useClass: HashLocationStrategy }
