@@ -120,10 +120,31 @@
         <div>Elenco</div>
         <div>Informacion</div>
         <div>
-          <button type="button" class="btn btn-sm btn-primary">
+          <button type="button" class="btn btn-sm btn-primary" (click)="showTriler()">
             Ver trailer
           </button>
         </div>
+      </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center" *ngIf="triler">
+      <iframe
+        width="800"
+        height="400"
+        src="https://www.youtube.com/embed/A5surOEYLLo"
+        title="El Verano Que Te Vimos (The Summer We Saw You - 2021) - Trailer - English Subtitles"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+      <div class="">
+        <button
+          class="btn btn-unstyled border-0 text-danger"
+          type="button"
+          (click)="showTriler()"
+        >
+          X Cerrar
+        </button>
       </div>
     </div>
     <br>
