@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from './modules/auth/services/usuario.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 	// images = [62, 83, 466, 965, 982, 1043, 738].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
 	// paused = false;
@@ -37,4 +38,14 @@ export class AppComponent {
 	// 		this.togglePaused();
 	// 	}
 	// }
+	constructor(private authService: UsuarioService){}
+
+	ngOnInit(){
+		let user = localStorage.getItem('userData');
+		 if(user){
+			this.authService.pushNewUser(JSON.parse(user));
+			console.log(user)
+		 }
+	}
+
 }

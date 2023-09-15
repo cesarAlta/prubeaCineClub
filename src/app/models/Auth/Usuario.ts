@@ -4,6 +4,7 @@ export class Usuario {
   apellido: string | undefined;
   contrasenia: string | undefined;
   email: string | undefined;
+  role!: string;
 }
 
 export const usuarios: Usuario[] = [
@@ -13,5 +14,6 @@ export const usuarios: Usuario[] = [
     apellido: 'El apellido mas largo',
     contrasenia: 'admin',
     email: 'admin@admin.com',
+    role: 'Admin'
   },
 ];

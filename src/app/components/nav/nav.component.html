@@ -1,6 +1,6 @@
 <nav
-  class="navbar navbar-dark navbar-expand-lg"
-  [ngClass]="{ 'bg-dark': option==2}"
+  class="navbar navbar-dark navbar-expand-lg "
+  [ngClass]="{ 'bg-dark': option == 2 }"
   style="height: 150px"
 >
   <div class="container-fluid">
@@ -34,7 +34,7 @@
               class="nav-link"
               type="button"
               routerLink="home"
-              routerLinkActive="active"
+              routerLinkActive="router-link-active"
             >
               Home
             </a>
@@ -43,47 +43,92 @@
             <a
               class="nav-link"
               routerLink="home"
+              fragment="Estrenos"
               routerLinkActive="router-link-active"
-              >Link</a
+              >Estrenos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              router
+              [routerLink]="['home']"
+              fragment = "destacadas"
+              routerLinkActive="router-link-active"
+              >Destacadas</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="home"
+              fragment="todas"
+              routerLinkActive="router-link-active"
+              >Todas</a
             >
           </li>
           <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle "
+              class="nav-link dropdown-toggle"
               href="#"
               id="navbarDropdown"
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              
             >
               Vista
             </a>
-            <ul class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" type="button" (click)=" getOption(1)">opcion1</a></li>
-              <li><a class="dropdown-item" type="button" (click)=" getOption(2)">opcion2</a></li>
+            <ul
+              class="dropdown-menu text-dark"
+              aria-labelledby="navbarDropdown"
+            >
+              <li>
+                <a class="dropdown-item" type="button" (click)="getOption(1)"
+                  >Opciión1</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" type="button" (click)="getOption(2)"
+                  >Opción2</a
+                >
+              </li>
               <li><hr class="dropdown-divider" /></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="peliculas/adminPeliculas"
-              >Privado</a
-            >
+          <li class="nav-item" *appShowForRoles="['Admin']">
+            <a class="nav-link" routerLink="/dashboard"> Administración </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="us/login"
-              ><i class="fa-solid fa-right-to-bracket"></i></a
+            <a
+              class="nav-link"
+              routerLink="us/login"
+              *ngIf="!login; else logoutTemplate"
             >
+              <i class="fa-solid fa-right-to-bracket"></i>
+            </a>
+            <ng-template #logoutTemplate>
+              <a
+                type="button"
+                role="button"
+                class="nav-link"
+                (click)="logout()"
+              >
+                <i
+                  class="fa-solid fa-right-from-bracket text-danger"
+                  title="Salir"
+                ></i>
+              </a>
+            </ng-template>
           </li>
         </ul>
         <form class="d-flex">
           <div class="input-group input-group-sm">
             <input
               type="search"
-              class="form-control me-2"
+              class="form-control"
               type="search"
-              placeholder="Buscar"
+              placeholder="Buscar película"
               aria-label="Buscar"
               aria-describedby="button-addon2"
             />
@@ -98,5 +143,16 @@
         </form>
       </div>
     </div>
+  </div>
+  <div class="d-flex position-absolute top-0 end-0 fs-4 mt-3 me-3">
+    <a type="button" role="button" class="like" (click)="like()" >
+      <i class="fa-solid fa-heart text-danger"></i>
+    </a>
+    <a class="mx-2" type="button" role="button">
+      <i class="fa-brands fa-facebook text-primary"></i>
+    </a>
+    <a type="button" role="button">
+      <i class="fa-brands fa-instagram text-danger"></i>
+    </a>
   </div>
 </nav>

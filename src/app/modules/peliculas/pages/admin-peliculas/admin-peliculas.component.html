@@ -1,32 +1,96 @@
-<div class="bg-dark mt-2" style="width: 100%; height: 30px;">
-    <nav aria-label="breadcrumb ">
-      <ol class="breadcrumb ms-3">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">adminPeliculas</li>
-      </ol>
-    </nav>
-    </div>
-<div class="ms-3 mt-3 bg-dark">
-  <h3>Administracion</h3>
+<!--breadcrumb-->
+<!-- <div class="bg-dark mt-2" style="width: 100%; height: 30px">
+  <nav aria-label="breadcrumb ">
+    <ol class="breadcrumb ms-3">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">adminPeliculas</li>
+    </ol>
+  </nav>
+</div> -->
+
+<div class="bg-dark mt-3">
+  <h3 class="border-bottom">Administración de películas</h3>
 </div>
 <div class="container-sm my-3">
-  <h4>Agregar nueva pelicula</h4>
-  <hr />
-  <fieldset>
-    <legend class="bg-dark">Datos de la pelicula</legend>
-    <div class="mb-3">
-      <label for="nameMovie" class="form-label">Nombre</label>
+  <ul class="nav nav-pills justify-content-end">
+    <li class="nav-item">
+      <button
+        class="nav-link text-white"
+        [class.active]="optSel == 'A'"
+        (click)="agregar()"
+      >
+        Agregar película
+      </button>
+    </li>
+    <li class="nav-item">
+      <button
+        class="nav-link text-white"
+        aria-current="page"
+        [class.active]="optSel == 'L'"
+        (click)="verRepo()"
+      >
+        Repositorio
+      </button>
+    </li>
+  </ul>
+</div>
+<!--repo-->
+<div *ngIf="optSel=='L'">
+  <form class="d-flex justify-content-end my-3" >
+    <div class="input-group input-group-sm" style="width: 300px;">
       <input
-        type="text"
+        type="search"
         class="form-control"
-        id="nameMovie"
-        placeholder="Nombre"
+        type="search"
+        placeholder="Buscar película"
+        aria-label="Buscar"
+        aria-describedby="button-addon2"
       />
+      <button class="btn btn-outline-success" type="button" id="button-addon2">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+  </form>
+  <app-views-pelicula ver="lista" (emitPeli)="getPeliSel($event)"></app-views-pelicula>
+</div>
+<!--nueva pelicula-->
+<form action="" *ngIf="optSel != 'L'">
+  <fieldset>
+    <legend class="bg-dark border-bottom">Ficha técnica</legend>
+    <div class="row mb-3">
+      <div class="col">
+        <label for="nameMovie" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nameMovie"
+          placeholder="Nombre"
+        />
+      </div>
+      <div class="col-3">
+        <label for="relaseMovie" class="form-label">Fecha de estreno</label>
+        <input
+          type="date"
+          class="form-control"
+          id="relaseMovie"
+          placeholder="decha de lanzamiento"
+        />
+      </div>
+      <div class="col-3">
+        <label for="lengthMovie" class="form-label">Duración</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lengthMovie"
+          placeholder="Duracion en minutos"
+        />
+        <small>En minutos</small>
+      </div>
     </div>
     <div class="row mb-3">
       <div class="col">
         <label class="form-label" for="">Generos</label>
-        <div class="input-group">
+        <div class="input-group mb-3">
           <select
             class="form-select"
             id="selnominacion"
@@ -41,29 +105,28 @@
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
+        <div>
+          Se Agregó
+          <ul>
+            <li>
+              Terror
+              <button class="btn btn-sm btn-unstyled border-0 text-danger">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </li>
+            <li>
+              Drama
+              <button class="btn btn-sm btn-unstyled border-0 text-danger">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
+      <!--clasificacion-->
       <div class="col">
-        <label for="relaseMovie" class="form-label">Fecha de estreno</label>
-        <input
-          type="date"
-          class="form-control"
-          id="relaseMovie"
-          placeholder="decha de lanzamiento"
-        />
-      </div>
-      <div class="col">
-        <label for="lengthMovie" class="form-label">Duracion</label>
-        <input
-          type="text"
-          class="form-control"
-          id="lengthMovie"
-          placeholder="Duracion en minutos"
-        />
-        <small>En minutos</small>
-      </div>
-      <div class="col">
-        <label class="form-label">Clasificaion</label>
-        <div class="input-group">
+        <label class="form-label">Clasificación</label>
+        <div class="input-group mb-3">
           <select class="form-select" id="selElenco" aria-label="selElencoType">
             <option selected>Clasificaion</option>
             <option value="1">+12</option>
@@ -74,24 +137,18 @@
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
+        <div>
+          Se Agregó
+          <ul>
+            <li>
+              +14
+              <button class="btn btn-sm btn-unstyled border-0 text-danger">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div>
-      Se Agrego
-      <ul>
-        <li>
-          Terror
-          <button class="btn btn-sm btn-unstyled border-0 text-danger">
-            <i class="fa-solid fa-trash-can"></i>
-          </button>
-        </li>
-        <li>
-          Drama
-          <button class="btn btn-sm btn-unstyled border-0 text-danger">
-            <i class="fa-solid fa-trash-can"></i>
-          </button>
-        </li>
-      </ul>
     </div>
   </fieldset>
 
@@ -141,12 +198,12 @@
         </div>
         <div class="col">
           <button class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> Añadir
+            <i class="fa-solid fa-plus"></i> Agregar
           </button>
         </div>
       </div>
       <div>
-        Se Agrego
+        Se Agregó
         <ul>
           <li>
             Director: Nombre del director
@@ -178,7 +235,7 @@
   </div>
   <div class="row mb-3">
     <fieldset>
-      <legend  class="bg-dark mb-3">Nominaciones</legend>
+      <legend class="bg-dark mb-3">Nominaciones</legend>
       <div class="row mb-3">
         <div class="col">
           <div class="input-group">
@@ -206,7 +263,7 @@
               class="form-control"
               placeholder="año"
             />
-            <span>Ingrese el año de la nominacion</span>
+            <span>Ingrese el año de la nominación</span>
           </div>
         </div>
         <div class="col">
@@ -227,12 +284,12 @@
         </div>
         <div class="col">
           <button class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> Añadir
+            <i class="fa-solid fa-plus"></i> Agregar
           </button>
         </div>
       </div>
       <div>
-        Se Agrego
+        Se Agregó
         <ul>
           <li>
             Oscar 2021: nominada
@@ -251,7 +308,7 @@
     </fieldset>
   </div>
   <fieldset>
-    <legend  class="bg-dark mb-3">Imagenes y videos</legend>
+    <legend class="bg-dark mb-3">Imágenes y videos</legend>
     <div class="mb-3">
       <label for="linkTrailerMovie" class="form-label">Link del triler</label>
       <input
@@ -262,7 +319,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="linkMovie" class="form-label">Link de la pelicula</label>
+      <label for="linkMovie" class="form-label">Link de la película</label>
       <input
         type="url"
         class="form-control"
@@ -279,16 +336,29 @@
         placeholder="portada"
       />
     </div>
+    <div class="mb-3">
+      <label for="frontPageCartelera" class="form-label">Cartelera</label>
+      <input
+        type="file"
+        class="form-control"
+        id="frontPageCartelera"
+        placeholder="cartelera"
+      />
+    </div>
   </fieldset>
   <fieldset>
-    <legend  class="bg-dark mb-3">Informacion adicional</legend>
+    <legend class="bg-dark mb-3">Informacion adicional</legend>
     <div class="mb-3">
       <label for="descriptionMovie" class="form-label">Descripcion</label>
       <textarea class="form-control" id="descriptionMovie" rows="3"></textarea>
     </div>
   </fieldset>
   <div class="d-flex justify-content-center gap-3">
-      <button class="btn btn-danger" type="button"><i class="fa-solid fa-xmark"></i> Cancelar</button>
-      <button class="btn btn-success" type="button"><i class="fa-solid fa-check"></i> Guardar</button>
+    <button class="btn btn-danger" type="button">
+      <i class="fa-solid fa-xmark"></i> Cancelar
+    </button>
+    <button class="btn btn-success" type="button">
+      <i class="fa-solid fa-check"></i> Guardar
+    </button>
   </div>
-</div>
+</form>

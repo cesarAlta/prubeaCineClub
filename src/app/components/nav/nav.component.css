@@ -5,13 +5,32 @@
     width: 100%;
     background-color: transparent;
     transition: background-color 0.3s;
-    z-index: 1000; /* Asegura que el nav esté por encima de otros elementos */
+    z-index: 3000; /* Asegura que el nav esté por encima de otros elementos */
   }
 
   
   /* Cambia el color de fondo cuando se hace scroll */
-  /* .navprimary.scrolled {
+  .navprimary.scrolled {
     position: sticky;
      background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgb(0, 0, 0));
     height: 50px;
-  } */
+  }
+
+
+
+
+.like:active {
+  animation: party 0.3s ;
+}
+
+@keyframes party {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(3);
+  }
+  100% {
+    transform: scale(5);
+  }
+}

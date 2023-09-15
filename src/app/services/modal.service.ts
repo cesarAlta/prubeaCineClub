@@ -26,7 +26,7 @@ export class ModalService {
     massage: string,
     title: string = 'Confirmacion',
     textBtnTure: string = 'Aceptar',
-    textBtnnFalse: string = 'Cancelar',
+    textBtnFalse: string = 'Cancelar',
     funcionTrue: any,
     funcionFalse: any,
     typeAlert: string = 'w'
@@ -34,8 +34,8 @@ export class ModalService {
     const modalRef = this.ngbModal.open(ModalComponent);
     modalRef.componentInstance.message = massage;
     modalRef.componentInstance.title = title;
-    modalRef.componentInstance.textoBotonTrue = textBtnTure;
-    modalRef.componentInstance.textoBotonFalse = textBtnnFalse;
+    modalRef.componentInstance.textBtnTrue = textBtnTure;
+    modalRef.componentInstance.textBtnFalse = textBtnFalse;
     modalRef.componentInstance.setTipo(typeAlert);
     modalRef.result.then((x) => (x ? funcionTrue() : funcionFalse()));
     return modalRef;
@@ -51,8 +51,8 @@ export class ModalService {
       this.screenLock.componentInstance.titulo = 'Atencion';
       this.screenLock.componentInstance.message =
         'Procesando, espere por favor';
-      this.screenLock.componentInstance.textoBotonFalse = '';
-      this.screenLock.componentInstance.textoBotonTrue = '';
+      this.screenLock.componentInstance.textBtnFalse = '';
+      this.screenLock.componentInstance.textBtnTrue = '';
       this.screenLock.componentInstance.bloquearPantalla = true;
       this.screenLock.componentInstance.setTipo('i');
     }

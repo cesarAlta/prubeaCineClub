@@ -8,6 +8,8 @@ export class Pelicula {
   linkTrailer: string | undefined;
   puntuacion: number =0;
   imagenPath: string|undefined;
+  clasificacion: string| undefined;
+  publicado: boolean|undefined;
 }
 
 export const peliculas:Pelicula[]=[
@@ -19,8 +21,9 @@ export const peliculas:Pelicula[]=[
   duracion: 65,
   linkPelicula: "no",
   linkTrailer: "no",
-  puntuacion: 2,
-  imagenPath: "./assets/img/LaEstrella.jpg"
+  puntuacion: 300,
+  imagenPath: "./assets/img/LaEstrella.jpg",
+  clasificacion: 'atp',publicado:true,
 },
 {
   id: 2,
@@ -30,8 +33,8 @@ export const peliculas:Pelicula[]=[
   duracion: 110,
   linkPelicula: "no",
   linkTrailer: "no",
-  puntuacion: 3,
-  imagenPath: "./assets/img/El verano que te vimos.jpeg"
+  puntuacion: 250,
+  imagenPath: "./assets/img/El verano que te vimos.jpeg",clasificacion: 'atp',publicado:false,
 },
 {
   id: 3,
@@ -41,18 +44,18 @@ export const peliculas:Pelicula[]=[
   duracion: 79,
   linkPelicula: "no",
   linkTrailer: "no",
-  puntuacion: 4,
-  imagenPath: "./assets/img/Todas-las-pistas-fueron-falsas-poster-.jpg"
+  puntuacion: 400,
+  imagenPath: "./assets/img/Todas-las-pistas-fueron-falsas-poster-.jpg",clasificacion: '+12',publicado:true,
 },
 {
   id: 4,
   nombre: "La noche mas larga",
   descripcion: "Sigue la historia del violador serial más conocido de la historia Argentina, que atacó a más de 93 mujeres en la ciudad de Córdoba entre 1985 y 2004 mientras paralelamente aparentaba ser un padre y esposo ejemplar. (FILMAFFINITY)",
   fechaEstreno: new Date(2018),
-  duracion: 80,
+  duracion: 127,
   linkPelicula: "no",
   linkTrailer: "no",
-  puntuacion: 5,
-  imagenPath: "./assets/img/LaNocheMasLarga.jpg"
+  puntuacion: 110,
+  imagenPath: "./assets/img/LaNocheMasLarga.jpg",clasificacion: '+16',publicado:true,
 }
 ]

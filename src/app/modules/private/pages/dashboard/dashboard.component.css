@@ -1,0 +1,32 @@
+
+.rotate-icon{
+transform: rotate(180deg);
+transition: all 0.5s;
+cursor: pointer;
+}
+.collapsed-list li{
+text-decoration: none;
+list-style: none;
+
+}
+.collapsed-list li a{
+text-decoration: none;
+color: white;
+width: 100%;
+display: block;
+}
+.collapsed-list li a:hover{
+    color: rgb(156, 156, 156);
+}
+
+.nav-link:hover{
+    background-color: rgb(53, 53, 53);
+    border-left: 3px solid red;
+}
+.collapsed-list{
+    background-color: rgb(27, 27, 27);
+}
+
+.collapsed-list li a.active{
+    background-color:rgb(53, 53, 53) ;
+     }
