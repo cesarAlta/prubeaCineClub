@@ -12,6 +12,8 @@ import { ModalService } from 'src/app/services/modal.service';
 export class NavComponent implements OnInit {
   login: boolean = false;
   
+  offcanvasmenu:boolean=false;
+  
   constructor(
     private hs: HomeService,
     private modalService: ModalService,
@@ -30,7 +32,7 @@ export class NavComponent implements OnInit {
       'Continuar',
       'Cancelar',
       () => this.authServ.logout(),
-      () => undefined,
+      () => undefined,'logo'
     );
   }
   isPartyMode: boolean = false;
@@ -47,5 +49,9 @@ export class NavComponent implements OnInit {
   getOption(opt: number) {
     this.option = opt;
     this.hs.upDateOption(opt);
+  }
+  btnOffCanvas(){
+    this.offcanvasmenu = ! this.offcanvasmenu;
+
   }
 }

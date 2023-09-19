@@ -15,74 +15,9 @@
       {{ message }}
     </p>
     <div class="d-flex" style="width: 100px; height: 100px" >
-      <svg
-        *ngIf="iconcheck"
-        id="Capa_2"
-        data-name="Capa 2"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 336.42 338.55"
-      >
-        <defs>
-          <style>
-            .cls-1 {
-              fill: none;
-              stroke: #3aaa35;
-              stroke-miterlimit: 10;
-              stroke-width: 12px;
-            }
-
-            .cls-2 {
-              fill: #3aaa35;
-              stroke-width: 0px;
-            }
-          </style>
-        </defs>
-        <g id="check-icon">
-          <g>
-            <circle class="cls-1" cx="168.21" cy="170.34" r="162.21" />
-            <path
-              class="cls-2"
-              d="m99.5,159.73c22.99,6.11,39.93,25.1,52.44,44.32,7.86,12.16,14.04,25.51,20.01,38.56.26.54.49.98.72,1.38-.31-.54-.92-1.16-1.51-1.69-5.61-4.87-14.8-2.15-16.91,4.82,0,0-.1.37-.1.37-.05.2,0,.02,0,.02l.05-.23c1.43-6.01,3.36-11.95,5.26-17.71,23.85-68.41,65.92-156.7,121.21-204.38,13.55-11.4,29.07-21.29,46.5-25.21-16.07,6.65-29.65,18-41.39,30.58-23.35,25.38-40.79,55.54-56.4,86.16-15.52,30.85-28.88,62.84-40.66,95.3-4.89,13.71-9.62,27.5-13.47,41.46-1.85,6.59-9.52,10.28-15.85,7.1-4.74-2.25-6.72-7.51-8.65-11.9-4.94-11.96-9.63-23.6-15.52-35.01-5.6-11-12.1-21.76-20.13-31.04-5.34-6.15-11.37-11.66-18.45-16-3.69-2.21-1.38-7.96,2.85-6.91h0Z"
-            />
-          </g>
-        </g>
-      </svg>
-      <svg
-        *ngIf="iconfail"
-        id="Capa_2"
-        data-name="Capa 2"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 336.42 376.74"
-      >
-        <defs>
-          <style>
-            .cls-1 {
-              fill: none;
-              stroke: #be1622;
-              stroke-miterlimit: 10;
-              stroke-width: 12px;
-            }
-
-            .cls-2 {
-              fill: #be1622;
-              stroke-width: 0px;
-            }
-          </style>
-        </defs>
-        <g id="Capa_1-2" data-name="Capa 1">
-          <g>
-            <circle class="cls-1" cx="168.21" cy="208.53" r="162.21" />
-            <path
-              class="cls-2"
-              d="m243.61,324.75c-34.31-29.84-64.45-64.36-92.18-100.24-16.65-21.46-34.12-46.35-48.77-69.23-9.07-14.26-17.69-28.81-25.83-43.61,25.79,36.33,54.8,71.32,84.89,104.16,30.19,32.59,62.25,63.51,96.14,92.16,11.04,9.86-2.62,26.11-14.25,16.76h0Z"
-            />
-            <path
-              class="cls-2"
-              d="m321.92,0c-87.98,91.94-164.15,197.67-210.77,316.52-2.23,5.65-8.62,8.43-14.27,6.2-5.63-2.22-8.4-8.56-6.23-14.2C136.68,193.42,230.65,82.6,321.92,0h0Z"
-            />
-          </g>
-        </g>
-      </svg>
+      <img src="../../../assets/img/checkSvg.svg" class="img-fluid" alt="" *ngIf="iconcheck" >
+      <img src="../../../assets/img/checkSvg.svg" class="img-fluid" alt="" *ngIf="iconfail">
+      <img src="../../../assets/img/logout.svg" alt="" class="img-fluid" *ngIf="logout">
     </div>
   </div>
   <div *ngIf="bloquearPantalla" class="progress">

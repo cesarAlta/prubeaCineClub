@@ -1,5 +1,5 @@
 <nav
-  class="navbar navbar-dark navbar-expand-lg "
+  class="navbar navbar-dark navbar-expand-lg"
   [ngClass]="{ 'bg-dark': option == 2 }"
   style="height: 150px"
 >
@@ -14,19 +14,18 @@
         <small class="text-white fs-4">CineClub Play</small>
       </div>
     </a>
-
     <button
+      #menuCanvas
       class="navbar-toggler"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
+      (click)="btnOffCanvas()"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+    >
       <div class="ms-auto me-5">
         <ul class="navbar-nav ms-auto me-5 fs-3">
           <li class="nav-item">
@@ -53,7 +52,7 @@
               class="nav-link"
               router
               [routerLink]="['home']"
-              fragment = "destacadas"
+              fragment="destacadas"
               routerLinkActive="router-link-active"
               >Destacadas</a
             >
@@ -64,6 +63,7 @@
               routerLink="home"
               fragment="todas"
               routerLinkActive="router-link-active"
+              (click)="menuCanvas.click()"
               >Todas</a
             >
           </li>
@@ -145,7 +145,7 @@
     </div>
   </div>
   <div class="d-flex position-absolute top-0 end-0 fs-4 mt-3 me-3">
-    <a type="button" role="button" class="like" (click)="like()" >
+    <a type="button" role="button" class="like" (click)="like()">
       <i class="fa-solid fa-heart text-danger"></i>
     </a>
     <a class="mx-2" type="button" role="button">
@@ -156,3 +156,137 @@
     </a>
   </div>
 </nav>
+
+<!--ofcanvas-->
+
+<div class="offcanvas-menu bg-dark" [ngClass]="{'open':offcanvasmenu}" tabindex="-1">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title fs-3">Menú</h5>
+    <button
+      type="button"
+      class="btn btn-link link-light"
+      (click)="btnOffCanvas()"
+    ><i class="fa-solid fa-x "></i></button>
+  </div>
+  <div class="offcanvas-body">
+    <form >
+      <div class="input-group input-group-sm">
+        <input
+          type="search"
+          class="form-control"
+          type="search"
+          placeholder="Buscar película"
+          aria-label="Buscar"
+          aria-describedby="button-addon2"
+        />
+        <button
+          class="btn btn-outline-success"
+          type="button"
+          id="button-addon2"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </form>
+    <ul class="navbar-nav ms-3">
+      <li class="nav-item">
+        <a
+          class="nav-link link-light"
+          type="button"
+          routerLink="home"
+          routerLinkActive="router-link-active"
+          (click)="btnOffCanvas()"
+        >
+          Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link link-light"
+          routerLink="home"
+          fragment="Estrenos"
+          routerLinkActive="router-link-active"
+          (click)="btnOffCanvas()"
+          >Estrenos</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link link-light"
+          router
+          [routerLink]="['home']"
+          fragment="destacadas"
+          routerLinkActive="router-link-active"
+          (click)="btnOffCanvas()"
+          >Destacadas</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link link-light"
+          routerLink="home"
+          fragment="todas"
+          routerLinkActive="router-link-active"
+          data-bs-dismiss="offcanvas"
+          (click)="btnOffCanvas()"
+          >Todas</a
+        >
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle link-light"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Vista
+        </a>
+        <ul class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+          <li>
+            <a
+              class="dropdown-item"
+              type="button"
+              (click)="getOption(1)"
+              >Opción1</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              type="button"
+              (click)="getOption(2)"
+              >Opción2</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item" *appShowForRoles="['Admin']">
+        <a class="nav-link link-light" routerLink="/dashboard" routerLinkActive="active" (click)="btnOffCanvas()">
+          Administración
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link link-light"
+          routerLink="us/login"
+          routerLinkActive="active"
+          (click)="btnOffCanvas()"
+          *ngIf="!login; else logoutTemplate"
+        >
+          <i class="fa-solid fa-right-to-bracket"></i>
+        </a>
+        <ng-template #logoutTemplate>
+          <a type="button" role="button" class="nav-link" (click)="logout(); btnOffCanvas()">
+            <i
+              class="fa-solid fa-right-from-bracket text-danger"
+              title="Salir"
+            ></i>
+          </a>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+</div>
+

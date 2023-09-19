@@ -1,5 +1,5 @@
 <div class="row w-100">
-  <div class="col-2 ms-0">
+  <div class="col col-md-3 col-lg-2 ms-0">
     <nav class="nav flex-column bg-dark" id="accordion-nav">
       <div class="text-center mt-2">
         <img
@@ -80,7 +80,7 @@
               Películas
             </a>
           </li>
-          <li><a class="" href="">Generos</a></li>
+          <li><a class="" routerLink="peliculas/adminGeneros" routerLinkActive="active" >Géneros</a></li>
           <li><a href="">Elencos</a></li>
           <li><a href="">Clasificacíon</a></li>
           <li><a href="">Premios</a></li>
@@ -163,20 +163,21 @@
       </a>
     </div>
   </div>
-  <div class="col-7 bg-dark">
+  <div class="col col-md-6 col-lg-8 bg-dark">
     <router-outlet></router-outlet>
   </div>
-  <div class="col-3">
-    <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+  <div class="col-auto col-md-3 col-lg-2">
+    <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 18rem">
       <div class="card-header">
         <i class="fa-solid fa-globe"></i> Sobre tu repositorio
       </div>
       <div class="card-body text-center">
-        <h5 class="card-title text-center">1.138 visitas!</h5>
+        <h5 class="card-title text-center">1.138 visitas! y  200 <i class="fa-solid fa-heart"></i>!</h5>
+        <h5 class="card-title text-center"></h5>
         <h5 class="card-title text-center">130 usuarios registrados!</h5>
       </div>
     </div>
-    <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+    <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 18rem">
       <div class="card-header">
         <i class="fa-solid fa-film"></i> Película más vista
       </div>
@@ -189,7 +190,7 @@
         </p>
       </div>
     </div>
-    <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+    <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 18rem">
       <div class="card-header">
         <i class="fa-solid fa-heart"></i> Película más valorada
       </div>
@@ -202,7 +203,7 @@
         </p>
       </div>
     </div>
-    <div class="card text-dark bg-light mb-3" style="max-width: 18rem">
+    <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 18rem">
       <div class="card-header">
         <i class="fa-solid fa-heart"></i> Géneros más vistos
       </div>

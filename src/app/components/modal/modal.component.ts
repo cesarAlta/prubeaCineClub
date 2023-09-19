@@ -16,9 +16,9 @@ export class ModalComponent implements OnInit {
   message: string = '';
   falcon: any;
   header: boolean = false;
-  iconcheck: any;
-  iconfail: any;
-
+  iconcheck: any=false;
+  iconfail: any=false;
+  logout:boolean=false;
   constructor(public activeModal: NgbActiveModal) {
     this.bloquearPantalla = false;
   }
@@ -53,6 +53,9 @@ export class ModalComponent implements OnInit {
       case 'l':
         this.classHeader = '';
         this.header = false;
+        break;
+        case 'logo':
+          this.logout=true;
         break;
       default:
         this.classHeader = 'bg-success';

@@ -11,7 +11,7 @@
 <div class="bg-dark mt-3">
   <h3 class="border-bottom">Administración de películas</h3>
 </div>
-<div class="container-sm my-3">
+<div class="container-sm my-3 bg-secondary p-2 m-0">
   <ul class="nav nav-pills justify-content-end">
     <li class="nav-item">
       <button
@@ -88,15 +88,16 @@
       </div>
     </div>
     <div class="row mb-3">
-      <div class="col">
-        <label class="form-label" for="">Generos</label>
+      <!--genero-->
+      <div class="col position-relative">
+        <label class="form-label" for="">Géneros</label>
         <div class="input-group mb-3">
           <select
             class="form-select"
             id="selnominacion"
             aria-label="selnominacion"
           >
-            <option selected>Generos</option>
+            <option selected>Géneros</option>
             <option value="1">Accion</option>
             <option value="2">Terror</option>
             <option value="3">Comedia</option>
@@ -128,7 +129,7 @@
         <label class="form-label">Clasificación</label>
         <div class="input-group mb-3">
           <select class="form-select" id="selElenco" aria-label="selElencoType">
-            <option selected>Clasificaion</option>
+            <option selected>Clasificación</option>
             <option value="1">+12</option>
             <option value="2">+14</option>
             <option value="3">APT</option>
@@ -347,9 +348,9 @@
     </div>
   </fieldset>
   <fieldset>
-    <legend class="bg-dark mb-3">Informacion adicional</legend>
+    <legend class="bg-dark mb-3">Información adicional</legend>
     <div class="mb-3">
-      <label for="descriptionMovie" class="form-label">Descripcion</label>
+      <label for="descriptionMovie" class="form-label">Descripción</label>
       <textarea class="form-control" id="descriptionMovie" rows="3"></textarea>
     </div>
   </fieldset>

@@ -1,110 +1,124 @@
-<!-- <div class="bg-dark mt-2" style="width: 100%; height: 30px;">
-  <nav aria-label="breadcrumb ">
-    <ol class="breadcrumb ms-3">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">pelicula</li>
-    </ol>
-  </nav>
-  </div>
-<div class="container-md my-3">
-  <div class="row justify-content-center mb-3">
-    <div class="col-lg-4">
-      <div style="max-width: 300px;height: auto;" >
-        <img src="./assets/img/santiago-italia.jpg" alt=""
-        class="img-fluid" />
-
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <h3>Descripci&oacute;n</h3>
-      <p>
-        (Santiago, Italia, Italia, 2018, DCP, 80’, AM13) Documental dirigido por
-        Nanni Moretti Existe una historia poco conocida sobre el papel de Italia
-        durante un momento crucial en la historia chilena, en concreto tras el
-        derrocamiento del gobierno democrático de Salvador Allende en septiembre
-        de 1973. Entremezclando imágenes de archivo de los años 70 con
-        entrevistas registradas durante doce días en el año 2017, el documental
-        reconstruye el papel de la embajada italiana en Santiago de Chile en los
-        meses siguientes al golpe de Estado de 1973, en particular como asilo
-        para cientos de refugiados opositores a la dictadura militar de Augusto
-        Pinochet, ofreciéndoles la posibilidad de ayudarlos a abandonar el país.
-        2018: Premios David di Donatello: Mejor documental 2019: Festival de
-        Gijón: Sección oficial Martes 29/8, 18:00 hs.
-      </p>
-      <div>
-        <button
-          class="btn btn-outline-info"
-          type="button"
-          (click)="showTriler()"
-        >
-          <i class="fa-solid fa-film"></i> Ver trailer
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="d-flex justify-content-center" *ngIf="triler">
-    <iframe
-      width="800"
-      height="400"
-      src="https://www.youtube.com/embed/A5surOEYLLo"
-      title="El Verano Que Te Vimos (The Summer We Saw You - 2021) - Trailer - English Subtitles"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
-    ></iframe>
-    <div class="">
-      <button
-        class="btn btn-unstyled border-0 text-danger"
-        type="button"
-        (click)="showTriler()"
-      >
-        X Cerrar
-      </button>
-    </div>
-  </div>
-</div>
-<div class="container-fluid">
-  <div class="row justify-content-center">
-    <div class="bg-dark">
-      <h2 class="ms-5">Pelicula</h2>
-    </div>
-    <div class="col-8" style="height: 400px">
-      <iframe
-        width="1520"
-        height="538"
-        src="https://www.youtube.com/embed/KrDKN86pgjI"
-        title="El código enigma | Película completa"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-        style="width: 100%; height: 100%"
-      ></iframe>
-    </div>
-  </div>
-   
-</div> -->
-
+<!--visa de una pelicula-->
 <div *ngIf="ver == ''">
-  <div class="movie-1">
+  <div
+    class="position-absolute start-0 top-0 h-100 w-100 overflow-hidden"
+    style="z-index: -1"
+  >
     <img
       src="./assets/img/slide-todasLasPistas_edited.jpg"
       alt=""
-      class="img-fluid w-100"
+      class="imgPortada"
     />
+    <div class="back-1"></div>
   </div>
-  <div class="back-1">
-    <!-- <div class="container-movie-view">
-        <p class="title-movie">Todas las pistas fueron falsas</p>
-        <div class="img-movie">
+  <div class="container-movieinfo">
+    <div class="container">
+      <div class="row">
+        <h2>{{ peliSel?.nombre }}</h2>
+      </div>
+      <div class="row gap-2">
+        <div class="col-8 col-md-2">
+          <img [src]="peliSel?.imagenPath" alt="" class="img-fluid" />
+        </div>
+        <div class="col-11">
+          <div>
+            <app-valuacion [valoracion]="peliSel?.puntuacion!"></app-valuacion>
+            <p class="fs-5">
+              Duración: {{ peliSel?.duracion }} min. |
+              {{ peliSel?.clasificacion }}
+            </p>
+            <p>{{ peliSel?.descripcion }}</p>
+          </div>
+          <div>
+            <p>
+              Géneros: Drama, Suspenso. <br />
+              Elenco: Actores, Directores. <br />
+              Año: {{ peliSel?.fechaEstreno | date : "yyyy" }}
+            </p>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="btn btn-sm btn-primary"
+              (click)="showTriler()"
+            >
+              Ver trailer
+            </button>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="d-flex justify-content-center" *ngIf="triler">
+        <iframe
+          width="800"
+          height="400"
+          src="https://www.youtube.com/embed/A5surOEYLLo"
+          title="El Verano Que Te Vimos (The Summer We Saw You - 2021) - Trailer - English Subtitles"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+        <div class="">
+          <button
+            class="btn btn-unstyled border-0 text-danger"
+            type="button"
+            (click)="showTriler()"
+          >
+            X Cerrar
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="row justify-content-center">
+        <div class="bg-dark">
+          <h2 class="ms-5">Ver Película</h2>
+        </div>
+        <div class="col-10 col-md-8" style="height: 400px">
+          <iframe
+            width="1520"
+            height="538"
+            src="https://www.youtube.com/embed/KrDKN86pgjI"
+            title="El código enigma | Película completa"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            style="width: 100%; height: 100%"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="position-absolute bottom-0 start-0 w-100">
+    <div class="container-fluid">Titulo</div>
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
           <img
             src="./assets/img/Todas-las-pistas-fueron-falsas-poster-.jpg"
             alt=""
             class="img-fluid"
+            style="width: 240px; height: 338px"
           />
         </div>
-      </div> -->
-  </div>
-  <div class="position-relative start-0 top-0 mt-4">
+        <div class="col">
+          <div>DESCRIPCIONES</div>
+          <div>Elenco</div>
+          <div>Informacion</div>
+          <div>
+            <button
+              type="button"
+              class="btn btn-sm btn-primary"
+              (click)="showTriler()"
+            >
+              Ver trailer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="position-relative start-0 top-0 mt-4">
     <div class="container-md">
       <div class="row">
         <p class="title-movie">TITULO</p>
@@ -171,113 +185,108 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
+<!--Lista de pelicualas-->
 <div *ngIf="ver == 'lista'">
-  <!-- <div
-    class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 w-100 my-3 mx-auto"
-  >
-    <div *ngFor="let item of pelis" class="col">
-      <img
-        [src]="item.imagenPath"
-        class="border border-secondary rounded"
-        alt="..."
-        style="width: 100%; height: 100%"
-      />
-    </div>
-  </div> -->
-
-  <div *ngIf="ver == 'lista'">
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-1 g-4">
-      <div *ngFor="let item of pelis" class="col">
-        <div class="card">
-          <div class="row">
-            <div class="col-md-4">
-              <img
-                [src]="item.imagenPath"
-                class="img-fluid rounded-start"
-                alt="..."
-              />
-            </div>
-            <div class="col-md-8 position-relative">
-              <div class="card-body text-dark">
-                <h5 class="card-title fs-4">{{ item.nombre }}</h5>
-                <p class="card-text">
-                  <b>Valoracion:</b>
-                  <app-valuacion
-                    [valoracion]="item.puntuacion"
-                    class="d-inline-block ms-1"
-                  ></app-valuacion>
-                  <br />
-                  <b>Duracion:</b> {{ item.duracion }} min. <br />
-                  <b>Año de estreno:</b> {{ item.fechaEstreno?.getFullYear() }}
-                  <br />
-                  <b>Clasificacion:</b> {{ item.clasificacion }} <br />
-                  <b>Elenco:</b> Actores , directores <br />
-                  <b>Nominaciones:</b> Nominaciones y premios
-                  <a role="button" class="link-primary" type="button">
-                    Ver más... </a
-                  ><br />
-                  <b>Link del trailer: </b> {{ item.linkTrailer }} <br />
-                  <b>Link del le película: </b> {{ item.linkPelicula }} <br />
-                  <b>Foto de portada: </b>
-                  <a role="button" class="link-primary" type="button">
-                    Ver más...
-                  </a>
-                  <br />
-                  <b>Foto de cartelera: </b
-                  ><a role="button" class="link-primary" type="button">
-                    Ver más...
-                  </a>
-                  <br />
-                  <b>Generos:</b> Drama, suspenso <br />
-                  <span class="d-inline-block text-truncate" style="width: 65%">
-                    <b>Descripción:</b> {{ item.descripcion }}
-                  </span>
-                  <a role="button" class="align-top link-primary" type="button">
-                    Ver más...
-                  </a>
-                </p>
-              </div>
-              <div
-                class="position-absolute position-absolute bottom-0 start-50 translate-middle-x m-2"
-              >
-                <button
-                  class=" btn btn-sm btn-{{
-                    item.publicado ? 'dark' : 'success'
-                  }} "
-                  type="button"
-                  (click)="publicar(item)"
-                >
-                <i class="fa-regular fa-eye{{ item.publicado ? '-slash' : '' }}"></i> {{ item.publicado ? "Ocultar video" : "Publicar video" }}
-                </button>
-                &nbsp;;
-                <button class="btn btn-sm btn-warning" type="button" (click)="editar(item)">
-                  <i class="fa-regular fa-pen-to-square"></i> Editar
-                </button>
-                &nbsp;;
-                <button class="btn btn-sm btn-danger" type="button">
-                  <i class="fa-solid fa-trash-can"></i> Eliminar
-                </button>
-              </div>
+  <div class="row row-cols-lg-1 g-4">
+    <div *ngFor="let item of pelis">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-4">
+            <img
+              [src]="item.imagenPath"
+              class="img-fluid rounded-start"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-8 position-relative">
+            <div class="card-body text-dark">
+              <h5 class="card-title fs-4">{{ item.nombre }}</h5>
+              <p class="card-text">
+                <b>Valoracion:</b>
+                <app-valuacion
+                  [valoracion]="item.puntuacion"
+                  class="d-inline-block ms-1"
+                ></app-valuacion>
+                <br />
+                <b>Duracion:</b> {{ item.duracion }} min. <br />
+                <b>Año de estreno:</b> {{ item.fechaEstreno?.getFullYear() }}
+                <br />
+                <b>Clasificacion:</b> {{ item.clasificacion }} <br />
+                <b>Elenco:</b> Actores , directores <br />
+                <b>Nominaciones:</b> Nominaciones y premios
+                <a role="button" class="link-primary" type="button">
+                  Ver más... </a
+                ><br />
+                <b>Link del trailer: </b> {{ item.linkTrailer }} <br />
+                <b>Link del le película: </b> {{ item.linkPelicula }} <br />
+                <b>Foto de portada: </b>
+                <a role="button" class="link-primary" type="button">
+                  Ver más...
+                </a>
+                <br />
+                <b>Foto de cartelera: </b
+                ><a role="button" class="link-primary" type="button">
+                  Ver más...
+                </a>
+                <br />
+                <b>Generos:</b> Drama, suspenso <br />
+                <span class="d-inline-block text-truncate" style="width: 65%">
+                  <b>Descripción:</b> {{ item.descripcion }}
+                </span>
+                <a role="button" class="align-top link-primary" type="button">
+                  Ver más...
+                </a>
+              </p>
             </div>
           </div>
-          <div class="position-absolute end-0 top-0 mt-2 me-2 text-center fs-5">
-            <span
-              class="badge rounded-pill bg-{{
-                item.publicado ? 'success' : 'dark'
-              }}"
-            >
-              {{
-                item.publicado
-                  ? "Disponible para el público"
-                  : "Oculto para el público"
-              }}
-            </span>
-            <small class="text-muted d-block ">
-              fecha: 22/04/2023
-            </small>
+        </div>
+
+        <div class="position-absolute end-0 top-0 mt-2 me-2 text-center fs-5">
+          <span
+            class="badge rounded-pill bg-{{
+              item.publicado ? 'success' : 'dark'
+            }}"
+          >
+            {{
+              item.publicado
+                ? "Disponible para el público"
+                : "Oculto para el público"
+            }}
+          </span>
+          <small class="text-muted d-block"> fecha: 22/04/2023 </small>
+        </div>
+        F
+        <div class="card-footer bg-transparent border-secondary">
+          <div class="row justify-content-center">
+            <div class="col-auto">
+              <button
+                class=" btn btn-sm btn-{{
+                  item.publicado ? 'dark' : 'success'
+                }} "
+                type="button"
+                (click)="publicar(item)"
+              >
+                <i
+                  class="fa-regular fa-eye{{ item.publicado ? '-slash' : '' }}"
+                ></i>
+                {{ item.publicado ? "Ocultar video" : "Publicar video" }}
+              </button>
+              &nbsp;;
+              <button
+                class="btn btn-sm btn-warning"
+                type="button"
+                (click)="editar(item)"
+              >
+                <i class="fa-regular fa-pen-to-square"></i> Editar
+              </button>
+              &nbsp;;
+              <button class="btn btn-sm btn-danger" type="button">
+                <i class="fa-solid fa-trash-can"></i> Eliminar
+              </button>
+            </div>
           </div>
         </div>
       </div>

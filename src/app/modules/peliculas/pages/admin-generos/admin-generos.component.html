@@ -1,0 +1,123 @@
+<div *ngIf="opSelOut == ''">
+  <div class="bg-dark mt-3">
+    <h3 class="border-bottom">Administración de géneros de películas</h3>
+  </div>
+  <div class="container-sm my-3 bg-secondary p-2">
+    <ul class="nav nav-pills justify-content-end">
+      <li class="nav-item">
+        <button
+          class="nav-link text-white"
+          [class.active]="optSel == 'A'"
+          (click)="agregar()"
+        >
+          Agregar Género
+        </button>
+      </li>
+      <li class="nav-item">
+        <button
+          class="nav-link text-white"
+          aria-current="page"
+          [class.active]="optSel == 'L'"
+          (click)="verGeneros()"
+        >
+          Listar Géneros
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="col border-end border-ligth" *ngIf="optSel != 'L'">
+      <h4 class="text-center"><u>Agregar género</u></h4>
+
+      <form [formGroup]="fgGenero">
+        <div class="row mb-3">
+          <div class="col">
+            <div class="mb-3">
+              <label for="nombreGenero" class="form-label">Nombre</label>
+              <span class="text-danger"> *</span>
+              <input
+                type="text"
+                class="form-control"
+                id="nombreGenero"
+                placeholder="Nombre"
+                formControlName="nombre"
+                [ngClass]="{
+                  'is-invalid':
+                    (fgGenero.controls['nombre'].touched || submitted) &&
+                    fgGenero.controls['nombre'].errors
+                }"
+              />
+              <span
+                class="text-danger"
+                *ngIf="(fgGenero.controls['nombre'].touched || submitted) && fgGenero.controls['nombre'].errors?.['required']"
+              >
+                Requerido.
+              </span>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-sm btn-success">
+              Aceptar
+            </button>
+            &nbsp;
+            <button
+              type="button"
+              class="btn btn-sm btn-danger"
+              (click)="cancelar()"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col">
+      <h4 class="text-center"><u>Lista de géneros</u></h4>
+      <div class="table-responsive">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of generos">
+              <td class="d-flex justify-content-between">
+                {{ item.nombre }}
+                <div class="btn-group dropstart">
+                  <button
+                    class="btn btn-link link-light"
+                    type="button"
+                    id="dropdownMenuConfig"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i class="fa-solid fa-sliders"></i>
+                  </button>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuConfig"
+                  >
+                    <li>
+                      <button class="dropdown-item">
+                        <i class="fa-regular fa-pen-to-square text-warning"></i>
+                        Editar
+                      </button>
+                    </li>
+                    <li>
+                      <button class="dropdown-item">
+                        <i class="fa-regular fa-trash-can text-danger"></i>
+                        Eliminar
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
