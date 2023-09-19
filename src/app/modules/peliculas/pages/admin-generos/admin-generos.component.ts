@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Genero } from 'src/app/models/Genero';
 import { GenerosService } from '../../services/generos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-generos',
@@ -16,7 +17,8 @@ export class AdminGenerosComponent implements OnInit {
   generos!: Genero[];
   constructor(
     private fb: FormBuilder,
-    private generosServices: GenerosService
+    private generosServices: GenerosService,
+    private router : Router
   ) {}
 
   ngOnInit(): void {
@@ -40,5 +42,9 @@ export class AdminGenerosComponent implements OnInit {
   cancelar(){
     this.optSel='L';
   }
+  close(){
+    this.router.navigateByUrl('dashboard')
+  }
+
   
 }

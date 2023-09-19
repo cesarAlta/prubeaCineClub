@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Pelicula } from 'src/app/models/Pelicula';
 
 @Component({
@@ -16,7 +17,7 @@ export class AdminPeliculasComponent implements OnInit {
     M: 'modificar',
 
   }
-  constructor(){}
+  constructor(private router: Router){}
   
   ngOnInit(): void {
   }
@@ -31,6 +32,9 @@ export class AdminPeliculasComponent implements OnInit {
     this.optSel='M'
     this.peliSel= item;
     
+  }
+  close(){
+    this.router.navigateByUrl('dashboard')
   }
 
 

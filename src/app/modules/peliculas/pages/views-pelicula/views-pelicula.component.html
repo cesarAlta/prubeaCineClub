@@ -17,10 +17,10 @@
         <h2>{{ peliSel?.nombre }}</h2>
       </div>
       <div class="row gap-2">
-        <div class="col-8 col-md-2">
+        <div class="col-8 col-md-4 col-lg-2">
           <img [src]="peliSel?.imagenPath" alt="" class="img-fluid" />
         </div>
-        <div class="col-11">
+        <div class="col-11 col-md col-lg-9">
           <div>
             <app-valuacion [valoracion]="peliSel?.puntuacion!"></app-valuacion>
             <p class="fs-5">

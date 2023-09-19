@@ -30,3 +30,24 @@ display: block;
 .collapsed-list li a.active{
     background-color:rgb(53, 53, 53) ;
      }
+
+     .offcanvas-menu{
+        position: fixed;
+        top: 0;
+        left: -70%;
+        width: 70%;
+        height: 100vh;
+        transition: 0.5s;
+        z-index: 1090;
+        overflow-y: auto;
+      }
+      .offcanvas-menu.open{
+        
+        left: 0;
+        transition: 0.5s;
+      
+      }
+      .bg-offcanvas{
+        background-color: #343a40b4;
+        z-index: 1080;
+      }

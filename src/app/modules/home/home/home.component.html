@@ -21,8 +21,8 @@
 <!-- </div> -->
 
 <!--Opcion 1-->
-<div class="cont-viedo" *ngIf="option == 1">
-  <video autoplay muted loop id="video-background">
+<div class="cont-viedo" >
+  <video autoplay [muted]="true" id="video-background" *ngIf="option == 1">
     <source src="./assets/video/VN20230831_004301.mp4" type="video/mp4" />
     Tu navegador no soporta videos en HTML5.
   </video>

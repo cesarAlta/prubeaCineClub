@@ -12,6 +12,8 @@ import { ModalService } from 'src/app/services/modal.service';
 export class NavComponent implements OnInit {
   login: boolean = false;
   
+  option!:number;
+  isNavSolid = false;
   offcanvasmenu:boolean=false;
   
   constructor(
@@ -19,9 +21,10 @@ export class NavComponent implements OnInit {
     private modalService: ModalService,
     private authServ: UsuarioService,
     private route: ActivatedRoute,
-  ) {}
+    ) {}
   ngOnInit(): void {
     this.authServ.islogged$.subscribe((res) => (this.login = res));
+    this.modalService.opnav$.subscribe(res=>this.option=res)
 
   }
 
@@ -40,8 +43,6 @@ export class NavComponent implements OnInit {
     this.isPartyMode = !this.isPartyMode;
   }
 
-  option = 1;
-  isNavSolid = false;
   @HostListener('window:scroll', [])
   onScroll(): void {
     this.isNavSolid = window.scrollY > 0;

@@ -11,6 +11,11 @@ export class DashboardComponent {
   rotate2:boolean=false;
   rotate3:boolean=false;
   rotate4:boolean=false;
+  offcanvasmenu:boolean=false;
+  btnOffCanvas(){
+    this.offcanvasmenu = ! this.offcanvasmenu;
+  }
+
   openClose(num:number){
     
 

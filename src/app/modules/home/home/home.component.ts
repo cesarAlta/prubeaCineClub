@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   Input,
@@ -40,9 +41,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.option)
-    this.hs.optview$.subscribe((op) => (this.option = op));
-    console.log(this.option)
+    
     this.anchorWind = window.innerWidth;
     if (this.anchorWind < 576) {
       this.wdm = true;

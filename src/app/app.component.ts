@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from './modules/auth/services/usuario.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit {
 	// 		this.togglePaused();
 	// 	}
 	// }
+	
 	constructor(private authService: UsuarioService){}
 
 	ngOnInit(){
@@ -46,6 +48,7 @@ export class AppComponent implements OnInit {
 			this.authService.pushNewUser(JSON.parse(user));
 			console.log(user)
 		 }
+		 
 	}
 
 }

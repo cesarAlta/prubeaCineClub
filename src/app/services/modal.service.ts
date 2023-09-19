@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../components/modal/modal.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
+  // para el nav
+  
+	private opnav = new BehaviorSubject<number>(1);
+	opnav$ = this.opnav.asObservable();
+  // 
 
   private lockCounter: number = 0;
   private screenLock: NgbModalRef | undefined;
