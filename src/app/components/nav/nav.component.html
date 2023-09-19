@@ -267,7 +267,7 @@
           Administración
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" (click)="btnOffCanvas()">
         <a
           class="nav-link link-light"
           routerLink="us/login"
@@ -278,7 +278,7 @@
           <i class="fa-solid fa-right-to-bracket"></i>
         </a>
         <ng-template #logoutTemplate>
-          <a type="button" role="button" class="nav-link" (click)="logout(); btnOffCanvas()">
+          <a type="button" role="button" class="nav-link" (click)="logout()">
             <i
               class="fa-solid fa-right-from-bracket text-danger"
               title="Salir"
