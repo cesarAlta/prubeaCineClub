@@ -11,6 +11,7 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class NavComponent implements OnInit {
   login: boolean = false;
+  checkSearch=false;
   
   option!:number;
   isNavSolid = false;
@@ -42,10 +43,11 @@ export class NavComponent implements OnInit {
   like(){
     this.isPartyMode = !this.isPartyMode;
   }
+  navbarFixed = false;
 
   @HostListener('window:scroll', [])
   onScroll(): void {
-    this.isNavSolid = window.scrollY > 0;
+    this.navbarFixed = window.scrollY > 100? true: false;
   }
   getOption(opt: number) {
     this.option = opt;
@@ -55,4 +57,5 @@ export class NavComponent implements OnInit {
     this.offcanvasmenu = ! this.offcanvasmenu;
 
   }
+
 }

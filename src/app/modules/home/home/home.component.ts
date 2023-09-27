@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   @Input() items = [];
   @ViewChild('slider') sliderTs: ElementRef | undefined;
   @ViewChild('imgfilm') imgfilm: ElementRef | undefined;
-
+  films2: Pelicula[] = peliculas.concat(peliculas);
   // faAngleLeft = faAngleLeft;
   // faAngleRight = faAngleRight;
   public moveTo: number = 0;
@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.hs.optview$.subscribe(re=>this.option=re)
     
     this.anchorWind = window.innerWidth;
     if (this.anchorWind < 576) {

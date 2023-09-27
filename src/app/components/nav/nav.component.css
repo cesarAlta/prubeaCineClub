@@ -38,8 +38,25 @@
   background-color: #343a40b4;
   z-index: 1080;
 }
+.hidden{
+ opacity: 0;
+ visibility: hidden;
 
+}
+.show{
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
 
+.nav-fixed{
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.808);
+  width: 100%;
+  height: 70px;
+  transition: all 0.5s ease;
+  z-index: 5;
+}
 
 .like:active {
   animation: party 0.3s ;

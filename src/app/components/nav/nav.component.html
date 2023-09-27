@@ -1,7 +1,7 @@
 <nav
   class="navbar navbar-dark navbar-expand-lg"
-  [ngClass]="{ 'bg-dark': option == 2 }"
   style="height: 150px"
+  *ngIf="option == 1"
 >
   <div class="container-fluid">
     <a class="navbar-brand" href="#" style="width: 150px; height: auto">
@@ -22,10 +22,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div
-      class="collapse navbar-collapse"
-      id="navbarSupportedContent"
-    >
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="ms-auto me-5">
         <ul class="navbar-nav ms-auto me-5 fs-3">
           <li class="nav-item">
@@ -156,20 +153,177 @@
     </a>
   </div>
 </nav>
+<!-- op2 -->
+<nav
+  class="navbar navbar-dark navbar-expand-lg"
+  [style.height]="navbarFixed?'70px': '150px'"
+  [ngClass]="{'nav-fixed': navbarFixed}" 
+  *ngIf="option == 2"
+>
+  <div class="container-fluid">
+    <button
+      #menuCanvas
+      class="navbar-toggler"
+      type="button"
+      (click)="btnOffCanvas()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="me-auto me-5">
+        <ul class="navbar-nav ms-auto me-5 fs-3 my-auto">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              type="button"
+              routerLink="home"
+              routerLinkActive="router-link-active"
+            >
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="home"
+              fragment="Estrenos"
+              routerLinkActive="router-link-active"
+              >Estrenos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              router
+              [routerLink]="['home']"
+              fragment="destacadas"
+              routerLinkActive="router-link-active"
+              >Destacadas</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="home"
+              fragment="todas"
+              routerLinkActive="router-link-active"
+              >Todas</a
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Vista
+            </a>
+            <ul
+              class="dropdown-menu text-dark"
+              aria-labelledby="navbarDropdown"
+            >
+              <li>
+                <a class="dropdown-item" type="button" (click)="getOption(1)"
+                  >Opciión1</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" type="button" (click)="getOption(2)"
+                  >Opción2</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="checkSearch = !checkSearch">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+          </li>
 
+          <li class="nav-item" *appShowForRoles="['Admin']">
+            <a class="nav-link" routerLink="/dashboard"> Administración </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="us/login"
+              *ngIf="!login; else logoutTemplate"
+            >
+              <i class="fa-solid fa-right-to-bracket"></i>
+            </a>
+            <ng-template #logoutTemplate>
+              <a
+                type="button"
+                role="button"
+                class="nav-link"
+                (click)="logout()"
+              >
+                <i
+                  class="fa-solid fa-right-from-bracket text-danger"
+                  title="Salir"
+                ></i>
+              </a>
+            </ng-template>
+          </li>
+        </ul>
+        <form [ngClass]="checkSearch ? 'show' : 'hidden'">
+          <div class="input-group input-group-sm">
+            <input
+              type="search"
+              class="form-control"
+              type="search"
+              placeholder="Buscar película por: nombre, director, actor"
+              aria-label="Buscar"
+              aria-describedby="button-addon2"
+            />
+            <button
+              class="btn btn-outline-success"
+              type="button"
+              id="button-addon2"
+            >
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex position-absolute top-0 end-0 fs-4 mt-3 me-3">
+    <a type="button" role="button" class="like" (click)="like()">
+      <i class="fa-solid fa-heart text-danger"></i>
+    </a>
+    <a class="mx-2" type="button" role="button">
+      <i class="fa-brands fa-facebook text-primary"></i>
+    </a>
+    <a type="button" role="button">
+      <i class="fa-brands fa-instagram text-danger"></i>
+    </a>
+  </div>
+</nav>
 <!--ofcanvas-->
 
-<div class="offcanvas-menu bg-dark" [ngClass]="{'open':offcanvasmenu}" tabindex="-1">
+<div
+  class="offcanvas-menu bg-dark"
+  [ngClass]="{ open: offcanvasmenu }"
+  tabindex="-1"
+>
   <div class="offcanvas-header">
     <h5 class="offcanvas-title fs-3">Menú</h5>
     <button
       type="button"
       class="btn btn-link link-light"
       (click)="btnOffCanvas()"
-    ><i class="fa-solid fa-x "></i></button>
+    >
+      <i class="fa-solid fa-x"></i>
+    </button>
   </div>
   <div class="offcanvas-body">
-    <form >
+    <form>
       <div class="input-group input-group-sm">
         <input
           type="search"
@@ -245,25 +399,24 @@
         </a>
         <ul class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
           <li>
-            <a
-              class="dropdown-item"
-              type="button"
-              (click)="getOption(1)"
+            <a class="dropdown-item" type="button" (click)="getOption(1)"
               >Opción1</a
             >
           </li>
           <li>
-            <a
-              class="dropdown-item"
-              type="button"
-              (click)="getOption(2)"
+            <a class="dropdown-item" type="button" (click)="getOption(2)"
               >Opción2</a
             >
           </li>
         </ul>
       </li>
       <li class="nav-item" *appShowForRoles="['Admin']">
-        <a class="nav-link link-light" routerLink="/dashboard" routerLinkActive="active" (click)="btnOffCanvas()">
+        <a
+          class="nav-link link-light"
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          (click)="btnOffCanvas()"
+        >
           Administración
         </a>
       </li>
@@ -289,6 +442,8 @@
     </ul>
   </div>
 </div>
-<div class="position-fixed top-0 lefth-0 w-100 h-100 bg-offcanvas"*ngIf="offcanvasmenu" (click)="btnOffCanvas()"></div>
-
-
+<div
+  class="position-fixed top-0 lefth-0 w-100 h-100 bg-offcanvas"
+  *ngIf="offcanvasmenu"
+  (click)="btnOffCanvas()"
+></div>

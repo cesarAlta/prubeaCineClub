@@ -1,140 +1,64 @@
-<div class="container-fluid m-0 p-0" *ngIf="option == 2">
-  <div class="row position-relative">
-    <div class="w-75">
-      <video autoplay loop style="height: auto; width: 100%">
-        <source src="./assets/video/VN20230831_004301.mp4" type="video/mp4" />
-        Tu navegador no soporta videos en HTML5.
-      </video>
-    </div>
-    <div class="text-info-home">
-      <div class="position-absolute top-50 end-0 translate-middle-y me-5">
-        <div style="width: 400px">
-          <p class="text-center fs-3">
-            Encontra todas las peliculas del cine cordobes en un solo lugar en
-            alta definicon...
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- </div> -->
-
 <!--Opcion 1-->
-<div class="cont-viedo" >
-  <video autoplay [muted]="true" id="video-background" *ngIf="option == 1">
+<div class="cont-viedo" *ngIf="option == 1">
+  <video autoplay [muted]="true" id="video-background">
     <source src="./assets/video/VN20230831_004301.mp4" type="video/mp4" />
     Tu navegador no soporta videos en HTML5.
   </video>
 </div>
-<div style="height: 150px; width: auto" *ngIf="option == 1"></div>
-<div class="bg-dark" style="width: 100%; height: 30px">
+
+<!--Opcion 2-->
+<div class="video-bg-star" *ngIf="option == 2">
+  <video autoplay loop [muted]="true">
+    <source src="./assets/video/VN20230831_004301.mp4" type="video/mp4" />
+    Tu navegador no soporta videos en HTML5.
+  </video>
+  <div class="text-info-home"></div>
+
+  <div class="position-absolute top-50 end-0 translate-middle-y me-5">
+    <div style="width: 500px">
+      <div class="d-flex mx-auto" style="width: 200px; height: auto">
+        <img
+          src="./assets/img/Cineclub-20-anos-Logo-768x612-1-600x478.png"
+          alt=""
+          class="img-fluid"
+        />
+      </div>
+      <br />
+      <p class="text-center fs-3">
+        El Cineclub Municipal te acompaña hace 20 años. Ahora presenta
+        <b>CineclubPlay</b> para que disfrutes del mejor cine cordobés en alta
+        definicion.
+      </p>
+      <p class="text-center">
+        <b>CineclubPlay</b> <br /><i>El cine cordovés, donde estés</i>
+      </p>
+    </div>
+  </div>
+</div>
+<div
+  class="position-relative bg-dark"
+  style="width: 100%; height: 30px; top: -150px"
+>
   <a class="text-white ms-3" href="https://cineclubmunicipal.org.ar/"
     >Ir al cine</a
   >
 </div>
-
-<!--Opcion 2-->
-
-<!--Estreno-->
-<div id="Estrenos">
-  <div class="container-fluid d-flex justify-content-center mb-4">
-    <div class="cont-film-estreno">
-      <div class="fs-3 ms-3 mb-2">#Estrenos</div>
-      <a
-        type="button"
-        class="sliderBtn btnLeft fs-2"
-        (click)="rigth()"
-        *ngIf="moveTo != 0 && wdm"
-      >
-        <i class="fa-solid text-white fa-angle-left"></i>
-      </a>
-      <a
-        type="button"
-        class="sliderBtn btnRight fs-2"
-        (click)="left()"
-        *ngIf="sizeSlider != -moveTo && wdm"
-      >
-        <i class="fa-solid text-white fa-angle-right"></i>
-      </a>
-      <div
-        class="slide-estreno"
-        #slider
-        [ngStyle]="{ transform: 'translateX(' + moveTo + 'px)' }"
-      >
-        <div
-          #imgfilm
-          *ngFor="let item of films"
-          class="col col-sm-2 col-lg-3 col-xl-3"
-        >
-          <div class="img-film mx-2 position-relative">
-            <a routerLink="/peliculas/ver/{{item.nombre}}" >
-              <img
-                [src]="item.imagenPath"
-                class="border border-secondary rounded"
-                alt="..."
-                style="width: 100%; height: 100%"
-              />
-              <div
-                class="position-absolute top-0 start-0 info-film"
-                style="height: 100%; width: 100%"
-              >
-                <div class="ms-3">
-                  <img
-                    src="./assets/img/pngwing.com (1).png"
-                    style="width: 20px; height: auto"
-                    class="img-fluid"
-                    alt=""
-                  />
-                  <img
-                    src="./assets/img/pngwing.com (1).png"
-                    style="width: 20px; height: auto"
-                    class="img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div
-                  class="position-absolute top-50 start-50 translate-middle text-center text-white"
-                >
-                  <p class="fs-5 text-star">
-                    {{ item.nombre }}
-                  </p>
-                  <p>Ver mas...</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!--Estreno1-->
+<div  class="position-relative" style="top: -150px" *ngIf="option == 1">
+  <app-carousel-estreno1></app-carousel-estreno1>
 </div>
-<!--Mas vistas-->
-<div id="destacadas">
+
+<div class="position-relative" *ngIf="option == 2" style="top: -150px">
+  <app-carousel3d></app-carousel3d>
+</div>
+<!--Estreno2-->
+<div id="Estrenos" class="position-relative"
+*ngIf="option == 2"
+style="top: -150px">
   <div class="container-fluid d-flex justify-content-center mb-4">
     <div class="cont-film-estreno">
-      <div class="fs-3 ms-3 mb-2">#Lo mas visto</div>
-      <a
-        type="button"
-        class="sliderBtn btnLeft fs-2"
-        (click)="rigth()"
-        *ngIf="moveTo != 0 && wdm"
-      >
-        <i class="fa-solid text-white fa-angle-left"></i>
-      </a>
-      <a
-        type="button"
-        class="sliderBtn btnRight fs-2"
-        (click)="left()"
-        *ngIf="sizeSlider != -moveTo && wdm"
-      >
-        <i class="fa-solid text-white fa-angle-right"></i>
-      </a>
-      <div
-        class="slide-estreno"
-        #slider
-        [ngStyle]="{ transform: 'translateX(' + moveTo + 'px)' }"
-      >
+      <div class="fs-3 ms-3 mb-2">#Estreno</div>
+      <div class="slide-estreno">
         <div
           #imgfilm
           *ngFor="let item of films"
@@ -182,6 +106,74 @@
     </div>
   </div>
 </div>
+<!--Mas vistas-->
+<div
+  id="destacadas"
+  class="position-relative"
+  style="top: -150px"
+>
+  <div class="container-fluid d-flex justify-content-center mb-4">
+    <div class="cont-film-estreno">
+      <div class="fs-3 ms-3 mb-2">#Lo mas visto</div>
+      <a type="button" class="sliderBtn btnLeft fs-2" (click)="rigth()">
+        <i class="fa-solid text-white fa-angle-left"></i>
+      </a>
+      <a type="button" class="sliderBtn btnRight fs-2" (click)="left()">
+        <i class="fa-solid text-white fa-angle-right"></i>
+      </a>
+      <div
+        class="slide-estreno"
+        #slider
+        [ngStyle]="{ transform: 'translateX(' + moveTo + 'px)' }"
+      >
+        <div
+          #imgfilm
+          *ngFor="let item of films2"
+          class="col col-sm-2 col-lg-3 col-xl-3"
+        >
+          <div class="img-film mx-2 position-relative">
+            <a routerLink="/peliculas/ver/{{ item.nombre }}">
+              <img
+                [src]="item.imagenPath"
+                class="border border-secondary rounded"
+                alt="..."
+                style="width: 100%; height: 100%"
+              />
+              <div
+                class="position-absolute top-0 start-0 info-film"
+                style="height: 100%; width: 100%"
+              >
+                <div class="ms-3">
+                  <img
+                    src="./assets/img/pngwing.com (1).png"
+                    style="width: 20px; height: auto"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <img
+                    src="./assets/img/pngwing.com (1).png"
+                    style="width: 20px; height: auto"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </div>
+                <div
+                  class="position-absolute top-50 start-50 translate-middle text-center text-white"
+                >
+                  <p class="fs-5 text-star">
+                    {{ item.nombre }}
+                  </p>
+                  <p>Ver mas...</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--Todas-->
 <!--categorias-->
 <div id="todas">
