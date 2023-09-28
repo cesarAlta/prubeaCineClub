@@ -47,7 +47,7 @@ export class NavComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   onScroll(): void {
-    this.navbarFixed = window.scrollY > 100? true: false;
+    this.navbarFixed = window.scrollY > 50? true: false;
   }
   getOption(opt: number) {
     this.option = opt;

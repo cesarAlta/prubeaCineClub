@@ -24,7 +24,7 @@ export class CarouselEstreno1Component {
   showcentrar=false;
   showEspaciarDOble=false
   showEspaciarIz=false;
-  showOcultarOp=false;
+  showOcultarOp=true;
   itemoculto = false;
   mostrarbtndesplzamiento = true;
   

@@ -54,7 +54,7 @@
   background-color: rgba(0, 0, 0, 0.808);
   width: 100%;
   height: 70px;
-  transition: all 0.5s ease;
+  transition: all 1s ease;
   z-index: 5;
 }
 
