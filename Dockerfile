@@ -15,6 +15,8 @@ ENV NODE_ENV="production"
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
+# Instala Angular CLI de forma global
+RUN npm install -g @angular/cli
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
@@ -23,7 +25,6 @@ RUN apt-get update -qq && \
 # Install node modules
 COPY --link package-lock.json package.json ./
 RUN npm ci --include=dev
-RUN npm install -g @angular/cli
 
 # Copy application code
 COPY --link . .
@@ -43,4 +44,5 @@ COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 80
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "start" , "ng", "serve"]
+# CMD ["ng", "serve", "--host", "0.0.0.0"]
