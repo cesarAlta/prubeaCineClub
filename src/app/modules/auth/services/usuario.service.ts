@@ -30,9 +30,9 @@ export class UsuarioService {
     return of(usuarios.find((u) => u.email == value));
   }
   logout(){
-    localStorage.removeItem('userData');
+    localStorage.removeItem(USER_LOCAL_ST_KEY);
     this.user.next(null);
-    this.route.navigateByUrl('/home');
+    this.redirectToHome();
   }
 
   // logging(u: Usuario) {

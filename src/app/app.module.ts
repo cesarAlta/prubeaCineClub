@@ -30,7 +30,7 @@ import { AuthModule } from './modules/auth/auth.module';
     HttpClientModule,
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
-  { provide: LocationStrategy, useClass: HashLocationStrategy }
+  // { provide: LocationStrategy, useClass: HashLocationStrategy }
 ],
   bootstrap: [AppComponent]
 })

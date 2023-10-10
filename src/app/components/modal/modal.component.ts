@@ -19,6 +19,7 @@ export class ModalComponent implements OnInit {
   iconcheck: any=false;
   iconfail: any=false;
   logout:boolean=false;
+  classIcon:string='';
   constructor(public activeModal: NgbActiveModal) {
     this.bloquearPantalla = false;
   }
@@ -34,27 +35,28 @@ export class ModalComponent implements OnInit {
     switch (tipo) {
       case 's':
         this.classHeader = 'bg-success';
-        this.iconcheck = true;
+        this.classIcon = 'fa-solid fa-circle-check fs-3 text-success'
         break;
       case 'd':
         this.classHeader = 'bg-danger';
         this.header = false;
-
-        this.falcon = 'fa-solid fa-circle-exclamation';
+        this.classIcon = 'fa-solid fa-circle-xmark fs-3 text-danger';
         break;
       case 'i':
         this.classHeader = 'bg-info';
-        this.falcon = 'fa-solid fa-circle-info';
+        this.falcon = 'fa-solid fa-circle-info fs-3 text-primary';
         break;
       case 'w':
         this.classHeader = 'bg-warning';
-        this.iconfail = true;
+        this.classIcon = 'fa-solid fa-circle-exclamation fs-3 text-warning';
         break;
       case 'l':
         this.classHeader = '';
         this.header = false;
         break;
         case 'logo':
+        this.classIcon = 'fa-solid fa-door-open fs-3 text-danger';
+
           this.logout=true;
         break;
       default:
