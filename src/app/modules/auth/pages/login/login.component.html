@@ -1,0 +1,282 @@
+<div style="height: 100vh; width: 100%" class="bg-dark">
+  <div class="row justify-content-center m-0 mt-3">
+    <div class="col-11 col-sm-auto mt-3">
+      <div
+        class="card bg-dark text-white position-relative"
+        style="max-width: 24rem"
+      >
+        <img src="./assets/img/login/log-1.png" class="card-img" alt="" />
+        <div class="position-absolute top-0 end-0">
+          <button
+            type="button"
+            class="btn btn-link text-white fs-4"
+            aria-label="Close"
+            (click)="back()"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div
+          class="position-absolute bottom-0 start-50 translate-middle-x w-100"
+        >
+          <h5 class="text-center text-white border-bottom w-75 mx-auto">
+            {{ title }}
+          </h5>
+          <!--Login-->
+          <form
+            name="formLog"
+            [formGroup]="loginF"
+            *ngIf="loginF && op == 1"
+            class="mb-4 w-50 mx-auto"
+          >
+            <div class="mb-3">
+              <label for="flUserName" class="form-label">Mail</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="flUserName"
+                aria-describedby="user"
+                formControlName="mail"
+                [ngClass]="{
+                  'is-invalid':
+                    (loginF.controls['mail'].touched || submitted) &&
+                    loginF.controls['mail'].errors
+                }"
+              />
+              <span
+                class="text-danger"
+                *ngIf="(loginF.controls['mail'].touched || submitted) && loginF.controls['mail'].errors?.['required']"
+              >
+                Campo obligatorio
+              </span>
+              <div
+                id="userName"
+                class="form-text"
+                [ngClass]="{'text-danger':loginF.controls['mail'].errors?.['email']}"
+              >
+                <span *ngIf="loginF.controls['mail'].errors?.['email']"
+                  >Debe tener el formato </span
+                >tumail@xxxx.com
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="flUserPass" class="form-label">Contraseña</label>
+              <input
+                type="password"
+                class="form-control form-control-sm"
+                id="flUserPass"
+                formControlName="pass"
+                [ngClass]="{
+                  'is-invalid':
+                    (loginF.controls['pass'].touched || submitted) &&
+                    loginF.controls['pass'].errors
+                }"
+              />
+              <span
+                class="text-danger"
+                *ngIf="(loginF.controls['pass'].touched || submitted) && loginF.controls['pass'].errors?.['required']"
+              >
+                Campo obligatorio
+              </span>
+              <small class="d-flex justify-content-end mt-1"
+                ><a
+                  type="button"
+                  role="button"
+                  class="btn-link"
+                  (click)="forgotPass()"
+                  >Olvide mi contraseña</a
+                ></small
+              >
+            </div>
+            <div class="d-flex justify-content-center">
+              <button
+                type="submit"
+                class="btn btn-sm btn-primary"
+                (click)="login()"
+              >
+                Ingresar
+              </button>
+            </div>
+          </form>
+          <!--reg-->
+          <form
+            name="formNUser"
+            [formGroup]="newUserF"
+            *ngIf="newUserF && op == 2"
+            class="mb-4 w-75 mx-auto"
+          >
+            <div class="row">
+              <div class="col">
+                <div class="mb-2">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="nombre"
+                    aria-describedby="nombre"
+                    formControlName="nombre"
+                    [ngClass]="{
+                      'is-invalid':
+                        (newUserF.controls['nombre'].touched || submitted) &&
+                        newUserF.controls['nombre'].errors
+                    }"
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="(newUserF.controls['nombre'].touched || submitted) && newUserF.controls['nombre'].errors?.['required']"
+                  >
+                    Campo obligatorio
+                  </small>
+                </div>
+              </div>
+              <div class="col">
+                <div class="mb-2">
+                  <label for="apellido" class="form-label">Apellido</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    id="apellido"
+                    aria-describedby="apellido"
+                    formControlName="apellido"
+                    [ngClass]="{
+                      'is-invalid':
+                        (newUserF.controls['apellido'].touched || submitted) &&
+                        newUserF.controls['apellido'].errors
+                    }"
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="(newUserF.controls['apellido'].touched || submitted) && newUserF.controls['apellido'].errors?.['required']"
+                  >
+                    Campo obligatorio
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control form-control-sm"
+                id="email"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid':
+                    (newUserF.controls['email'].touched || submitted) &&
+                    newUserF.controls['email'].errors
+                }"
+              />
+              <small
+                class="text-danger"
+                *ngIf="(newUserF.controls['email'].touched || submitted) && newUserF.controls['email'].errors?.['required']"
+              >
+                Campo obligatorio
+              </small>
+            </div>
+            <div class="mb-2">
+              <label for="contrasenia" class="form-label">Contraseña</label>
+              <div class="position-relative">
+                <input
+                  [type]="showPass ? 'text' : 'password'"
+                  class="form-control"
+                  placeholder="Contraseña"
+                  aria-label="contrasenia"
+                  formControlName="contrasenia"
+                  [ngClass]="{
+                    'is-invalid':
+                      (newUserF.controls['contrasenia'].touched ||
+                        submitted) &&
+                        newUserF.controls['contrasenia'].errors
+                  }"
+                />
+                <a
+                  *ngIf="!newUserF.controls['contrasenia'].errors"
+                  class="position-absolute end-0 top-50 translate-middle-y me-2"
+                  type="button"
+                  role="button"
+                  (click)="togglePassVisibility()"
+                >
+                  <i
+                    class="fa-regular {{
+                      showPass ? 'fa-eye-slash' : 'fa-eye'
+                    }} text-dark"
+                  ></i>
+                </a>
+              </div>
+              <small
+                class="text-danger"
+                *ngIf="(newUserF.controls['contrasenia'].touched || submitted) && newUserF.controls['contrasenia'].errors?.['required']"
+              >
+                Campo obligatorio
+              </small>
+            </div>
+            <div class="d-flex justify-content-center mt-1">
+              <button
+                type="submit"
+                class="btn btn-sm btn-primary"
+                (click)="getRegister()"
+              >
+                Registrarme
+              </button>
+            </div>
+          </form>
+          <!--recover-->
+          <form
+            name="formFPass"
+            [formGroup]="recoverPassF"
+            *ngIf="recoverPassF && op == 3"
+            class="mb-4 w-75 mx-auto mb-3"
+          >
+            <div class="mb-3">
+              <label for="email" class="form-label">Ingresa tu e-mail</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="email"
+                aria-describedby="email"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid':
+                    (recoverPassF.controls['email'].touched || submitted) &&
+                    recoverPassF.controls['email'].errors
+                }"
+              />
+              <small
+                class="text-danger"
+                *ngIf="(recoverPassF.controls['email'].touched || submitted) && recoverPassF.controls['email'].errors?.['required']"
+              >
+                Campo obligatorio
+              </small>
+              <small
+                class="text-danger"
+                *ngIf="recoverPassF.controls['email'].errors?.['email']"
+              >
+                Debe tener el formato tumail@algo.com
+              </small>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+              <button
+                type="submit"
+                class="btn btn-sm btn-primary"
+                (click)="recoverPass()"
+              >
+                <i class="fa-solid fa-paper-plane"></i> Restablecer contraseña
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="position-absolute end-0 bottom-0 m-2">
+          <a type="button" role="button" (click)="register()">
+            <span class="text-decoration-underline" *ngIf="op == 1"
+              >Registrate!</span
+            >
+            <span class="text-decoration-underline text-warning" *ngIf="op != 1"
+              ><i class="fa-solid fa-arrow-left"></i> volver</span
+            >
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
