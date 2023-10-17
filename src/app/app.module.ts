@@ -12,6 +12,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './modules/private/pages/dashboard/dashboard.component';
 import { AuthModule } from './modules/auth/auth.module';
+import { MyInterceptor } from './interceptor/my.interceptor';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,9 @@ import { AuthModule } from './modules/auth/auth.module';
     HttpClientModule,
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
+  { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+
   // { provide: LocationStrategy, useClass: HashLocationStrategy }
 ],
   bootstrap: [AppComponent]

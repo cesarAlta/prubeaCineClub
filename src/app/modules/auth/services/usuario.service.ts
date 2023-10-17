@@ -1,65 +1,88 @@
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpParams,
+  HttpResponse,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { Usuario, usuarios } from 'src/app/models/Auth/Usuario';
+import { environment } from 'src/environments/environment.development';
 
 const USER_LOCAL_ST_KEY = 'userData';
 @Injectable({
   providedIn: 'root',
 })
 export class UsuarioService {
-  // private resurseUrl: string;
+  private URI: string = environment.api;
   private user = new BehaviorSubject<Usuario | null>(null);
   user$ = this.user.asObservable();
   islogged$ = this.user$.pipe(map(Boolean));
   userToken$: any;
 
-  constructor(private route: Router, private httpClient: HttpClient) {
-    // this.resurseUrl = 'http://localhost:8080/';
-  }
+  constructor(private route: Router, private httpClient: HttpClient) {}
 
   get(email: string, pass: string) {
-    return of(usuarios.find((u) => u.email == email && u.contrasenia == pass));
+    return of(usuarios.find((u) => u._email == email && u._password == pass));
+    // return this.httpClient.post(this.URI, { email, pass} )
   }
-  post(copyform: Usuario) {
-    usuarios.push(copyform);
-    return of<Usuario>(copyform);
+
+  //nuevo usuario
+  post(newUser: Usuario) {
+    return this.httpClient.post(this.URI + 'user', newUser);
   }
-  postRecover(value: string) {
-    return of(usuarios.find((u) => u.email == value));
+
+  //Recuperar contraseña: egenerar token y enviar mail
+  postRecover(email: string) {
+    return this.httpClient.post(this.URI + 'tokenPassword', { email: email });
   }
-  logout(){
+  confirmPassword(newPass: string, token: string) {
+    const param = new HttpParams();
+    param.set('toker', token);
+    return this.httpClient.post(this.URI + 'recoverPassword', newPass, {
+      params: param,
+    });
+  }
+  logout() {
     localStorage.removeItem(USER_LOCAL_ST_KEY);
     this.user.next(null);
     this.redirectToHome();
   }
 
-  // logging(u: Usuario) {
-  //   let userToken;
-  //   this.httpClient.post(this.resurseUrl, u).subscribe((res: any) => {
-  //     userToken = res.jwToken;
-  //     this.saveToken(res.jwToken);
-  //     console.log(res)
-  //     this.user.next(res);
-  //   }),
-  //     (error: HttpErrorResponse) => {
-  //       console.log(error.error);
-  //     };
-  // }
   logging(email: string, pass: string) {
-    
-      let us = usuarios.find((u) => u.email == email && u.contrasenia == pass);
-      if (us) {
-        this.saveToken(JSON.stringify(us));
-        this.user.next(us!);
-      }
-    
-    return of(us);
-    // let invitado: Usuario = new Usuario();
-    // invitado.role = 'none';
-    // this.pushNewUser(invitado);
-    // this.saveToken(invitado.role)
+    let user: Usuario | undefined;
+
+    // credenciales a base64
+    const credentials = btoa(email + ':' + pass);
+    const head = new HttpHeaders({
+      Authorization: 'Basic ' + credentials,
+    });
+    const params = new HttpParams();
+    params.set('email', email);
+    params.set('password', pass);
+
+    return this.httpClient
+      .get(this.URI + 'token', {
+        params: params,
+        headers: head,
+        observe: 'response',
+      })
+      .pipe(
+        map((res) => {
+          if (res.status == 200) {
+            //deberia devolver un usuario
+            console.log(res);
+            user = new Usuario();
+            user.firstName = 'Usuario';
+            user.lastName = 'Unico';
+            user.profile = 'Admin';
+            this.user.next(user);
+            this.saveToken(res.body);
+          }
+          return user;
+        })
+      );
   }
   private saveToken(t: any) {
     localStorage.setItem(USER_LOCAL_ST_KEY, t);
@@ -70,5 +93,14 @@ export class UsuarioService {
 
   redirectToHome() {
     this.route.navigateByUrl('/');
+  }
+  verifyUser(t: string) {
+  //   let param = new HttpParams();
+  //   param.set('token', t);
+  //   this.httpClient
+  //     .get(this.URI + 'verifyToken', { params: param })
+  //     .subscribe((res) => {
+  //       console.log(res);
+  //     });
   }
 }

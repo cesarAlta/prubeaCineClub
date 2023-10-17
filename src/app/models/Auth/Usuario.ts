@@ -1,19 +1,27 @@
 export class Usuario {
   id: number | undefined;
-  nombre: string | undefined;
-  apellido: string | undefined;
-  contrasenia: string | undefined;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  password: string | undefined;
   email: string | undefined;
-  role!: string;
+  profile!: string;
+
+  get _firstName(){
+    return this.firstName;
+  }
+  get _lastNAme(){
+    return this.lastName;
+  }
+  get _password(){
+    return this.password;
+  }
+  get _email(){
+    return this.email;
+  }
+  get _profile(){
+    return this.firstName;
+  }
 }
 
 export const usuarios: Usuario[] = [
-  {
-    id: 1,
-    nombre: 'Maximiliano',
-    apellido: 'El apellido mas largo',
-    contrasenia: 'admin',
-    email: 'admin@admin.com',
-    role: 'Admin'
-  },
 ];

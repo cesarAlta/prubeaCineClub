@@ -10,6 +10,6 @@ export class PeliculasService {
   constructor() { 
   }
   getByName(nombre:string){
-    return of(peliculas.find(p=>p.nombre ==nombre));
+    return of(peliculas.find(p=>p.title ==nombre));
   }
 }

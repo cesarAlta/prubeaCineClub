@@ -4,9 +4,9 @@
     class="position-absolute start-0 top-0 h-100 w-100 overflow-hidden"
     style="z-index: -1"
   >
+  <!-- src="./assets/img/slide-todasLasPistas_edited.jpg" -->
     <img
-      src="./assets/img/slide-todasLasPistas_edited.jpg"
-      alt=""
+    [src]="peliSel?.imagesUrlCover"
       class="imgPortada"
     />
     <div class="back-1"></div>
@@ -14,26 +14,26 @@
   <div class="container-movieinfo">
     <div class="container">
       <div class="row">
-        <h2>{{ peliSel?.nombre }}</h2>
+        <h2>{{ peliSel?.title }}</h2>
       </div>
       <div class="row gap-2">
         <div class="col-8 col-md-4 col-lg-2">
-          <img [src]="peliSel?.imagenPath" alt="" class="img-fluid" />
+          <img [src]="peliSel?.imagesUrlBillboard" alt="" class="img-fluid" />
         </div>
         <div class="col-11 col-md col-lg-9">
           <div>
-            <app-valuacion [valoracion]="peliSel?.puntuacion!"></app-valuacion>
+            <app-valuacion [valoracion]="peliSel?.ratingMovie!"></app-valuacion>
             <p class="fs-5">
-              Duración: {{ peliSel?.duracion }} min. |
-              {{ peliSel?.clasificacion }}
+              Duración: {{ peliSel?.durationInMinutes }} min. |
+              {{ peliSel?.ratingMovieINCAA }}
             </p>
-            <p>{{ peliSel?.descripcion }}</p>
+            <p>{{ peliSel?.synopsis }}</p>
           </div>
           <div>
             <p>
               Géneros: Drama, Suspenso. <br />
               Elenco: Actores, Directores. <br />
-              Año: {{ peliSel?.fechaEstreno | date : "yyyy" }}
+              Año: {{ peliSel?.relaseYear }}
             </p>
           </div>
           <div>
@@ -208,25 +208,25 @@
         <div class="row">
           <div class="col-md-4">
             <img
-              [src]="item.imagenPath"
+              [src]="item.imagesUrlBillboard"
               class="img-fluid rounded-start"
               alt="..."
             />
           </div>
           <div class="col-md-8 position-relative">
             <div class="card-body text-dark">
-              <h5 class="card-title fs-4">{{ item.nombre }}</h5>
+              <h5 class="card-title fs-4">{{ item.title }}</h5>
               <p class="card-text">
                 <b>Valoracion:</b>
                 <app-valuacion
-                  [valoracion]="item.puntuacion"
+                  [valoracion]="item.ratingMovie!"
                   class="d-inline-block ms-1"
                 ></app-valuacion>
                 <br />
-                <b>Duracion:</b> {{ item.duracion }} min. <br />
-                <b>Año de estreno:</b> {{ item.fechaEstreno?.getFullYear() }}
+                <b>Duracion:</b> {{ item.durationInMinutes }} min. <br />
+                <b>Año de estreno:</b> {{ item.relaseYear }}
                 <br />
-                <b>Clasificacion:</b> {{ item.clasificacion }} <br />
+                <b>Clasificacion:</b> {{ item.ratingMovieINCAA }} <br />
                 <b>Elenco:</b> Actores , directores <br />
                 <b>Nominaciones:</b> Nominaciones y premios
                 <a role="button" class="link-primary" type="button">
@@ -246,7 +246,7 @@
                 <br />
                 <b>Generos:</b> Drama, suspenso <br />
                 <span class="d-inline-block text-truncate" style="width: 65%">
-                  <b>Descripción:</b> {{ item.descripcion }}
+                  <b>Descripción:</b> {{ item.synopsis }}
                 </span>
                 <a role="button" class="align-top link-primary" type="button">
                   Ver más...
@@ -259,11 +259,11 @@
         <div class="position-absolute end-0 top-0 mt-2 me-2 text-center fs-5">
           <span
             class="badge rounded-pill bg-{{
-              item.publicado ? 'success' : 'dark'
+              item.publiclyVisible ? 'success' : 'dark'
             }}"
           >
             {{
-              item.publicado
+              item.publiclyVisible
                 ? "Disponible para el público"
                 : "Oculto para el público"
             }}
@@ -276,15 +276,15 @@
             <div class="col-auto">
               <button
                 class=" btn btn-sm btn-{{
-                  item.publicado ? 'dark' : 'success'
+                  item.publiclyVisible ? 'dark' : 'success'
                 }} "
                 type="button"
                 (click)="publicar(item)"
               >
                 <i
-                  class="fa-regular fa-eye{{ item.publicado ? '-slash' : '' }}"
+                  class="fa-regular fa-eye{{ item.publiclyVisible ? '-slash' : '' }}"
                 ></i>
-                {{ item.publicado ? "Ocultar video" : "Publicar video" }}
+                {{ item.publiclyVisible ? "Ocultar video" : "Publicar video" }}
               </button>
               &nbsp;;
               <button

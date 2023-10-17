@@ -33,7 +33,7 @@ export class ViewsPeliculaComponent implements OnInit {
 
   publicar(item:Pelicula){
     let peli = this.pelis.find(p=>p.id ==item.id);
-    peli? peli.publicado=!peli.publicado:''
+    peli? peli.publiclyVisible=!peli.publiclyVisible:''
 
   }
   editar(item:Pelicula){

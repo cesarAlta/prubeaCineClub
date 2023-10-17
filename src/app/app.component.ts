@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from './modules/auth/services/usuario.service';
 import { BehaviorSubject } from 'rxjs';
+import { Usuario } from './models/Auth/Usuario';
 
 @Component({
   selector: 'app-root',
@@ -43,10 +44,14 @@ export class AppComponent implements OnInit {
 	constructor(private authService: UsuarioService){}
 
 	ngOnInit(){
-		let user = localStorage.getItem('userData');
-		 if(user){
-			this.authService.pushNewUser(JSON.parse(user));
-			console.log(user)
+		let t = localStorage.getItem('userData');
+		 if(t){
+			// this.authService.verifyUser(t);
+			let user = new Usuario();
+            user.firstName = 'Usuario';
+            user.lastName = 'Unico';
+            user.profile = 'Admin';
+			this.authService.pushNewUser(user);
 		 }
 		 
 	}

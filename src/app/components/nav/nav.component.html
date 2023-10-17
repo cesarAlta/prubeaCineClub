@@ -10,9 +10,6 @@
         alt=""
         class="img-fluid"
       />
-      <!-- <div class="ms-2">
-        <small class="text-white fs-4">CineClub Play</small>
-      </div> -->
     </a>
     <button
       #menuCanvas
@@ -100,6 +97,7 @@
             <a
               class="nav-link"
               routerLink="us/login"
+              routerLinkActive="active"
               *ngIf="!login; else logoutTemplate"
             >
               <i class="fa-solid fa-right-to-bracket"></i>
@@ -119,20 +117,21 @@
             </ng-template>
           </li>
         </ul>
-        <form class="d-flex">
+        <form name="formSearchNav" class="d-flex">
           <div class="input-group input-group-sm">
             <input
               type="search"
               class="form-control"
               type="search"
+              id="searchNav"
               placeholder="Buscar película"
               aria-label="Buscar"
-              aria-describedby="button-addon2"
+              aria-describedby="button-search"
             />
             <button
               class="btn btn-outline-success"
               type="button"
-              id="button-addon2"
+              id="button-search"
             >
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -279,12 +278,12 @@
               type="search"
               placeholder="Buscar película por: nombre, director, actor"
               aria-label="Buscar"
-              aria-describedby="button-addon2"
+              aria-describedby="button-search2"
             />
             <button
               class="btn btn-outline-success"
               type="button"
-              id="button-addon2"
+              id="button-search2"
             >
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -323,20 +322,21 @@
     </button>
   </div>
   <div class="offcanvas-body">
-    <form>
+    <form name="formSearchCanvas">
       <div class="input-group input-group-sm">
         <input
           type="search"
           class="form-control"
           type="search"
+          id="searchCanvas"
           placeholder="Buscar película"
           aria-label="Buscar"
-          aria-describedby="button-addon2"
+          aria-describedby="button-search3"
         />
         <button
           class="btn btn-outline-success"
           type="button"
-          id="button-addon2"
+          id="button-search3"
         >
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>

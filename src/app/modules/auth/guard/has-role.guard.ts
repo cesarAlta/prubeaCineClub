@@ -46,10 +46,9 @@ export class HasRoleGuard {
 
   private hasRole(route: Route | ActivatedRouteSnapshot) {
     const alloweddRole = route.data?.['allowedRole'];
-    console.log(route);
 
     return this.authService.user$.pipe(
-      map((user) => Boolean(user && alloweddRole.includes(user.role))),
+      map((user) => Boolean(user && alloweddRole.includes(user.profile))),
       tap((hasRole) => hasRole === false && alert('Acceso denegado'))
     );
   }

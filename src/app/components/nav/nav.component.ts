@@ -21,12 +21,10 @@ export class NavComponent implements OnInit {
     private hs: HomeService,
     private modalService: ModalService,
     private authServ: UsuarioService,
-    private route: ActivatedRoute,
     ) {}
   ngOnInit(): void {
     this.authServ.islogged$.subscribe((res) => (this.login = res));
-    this.modalService.opnav$.subscribe(res=>this.option=res)
-
+    this.modalService.opnav$.subscribe(res=>this.option=res);
   }
 
   logout() {

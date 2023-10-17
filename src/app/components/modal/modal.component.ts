@@ -44,7 +44,7 @@ export class ModalComponent implements OnInit {
         break;
       case 'i':
         this.classHeader = 'bg-info';
-        this.falcon = 'fa-solid fa-circle-info fs-3 text-primary';
+        this.classIcon = 'fa-solid fa-circle-info fs-3 text-primary';
         break;
       case 'w':
         this.classHeader = 'bg-warning';
