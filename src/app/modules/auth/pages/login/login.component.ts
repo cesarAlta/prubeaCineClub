@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       .logging(copyForm.mail, copyForm.pass)
       .subscribe((res) => {
         if (res) {
-          this.modalS.Alert(res._firstName?.toUpperCase(), 'Bienvenido!', 's');
+          this.modalS.Alert('Este es tu espacio de trabajo', 'Bienvenido!', 's');
           this.router.navigateByUrl('/dashboard');
         }
       });
@@ -85,9 +85,7 @@ export class LoginComponent implements OnInit {
     let copyform: Usuario = { ...this.newUserF?.value };
     this.usuarioS.post(copyform).subscribe((res) =>
       this.modalS.Alert(
-        `Te enviamos un mail para confirmar tu registro.
-       Muchas gracias!`,
-        'Un paso más y lo lográs!',
+        'Bienvenido a CineClubPlay!',`Registro completo!`,
         's'
       )
     );

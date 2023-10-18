@@ -39,10 +39,9 @@ export class UsuarioService {
   }
   confirmPassword(newPass: string, token: string) {
     const param = new HttpParams();
-    param.set('toker', token);
-    return this.httpClient.post(this.URI + 'recoverPassword', newPass, {
-      params: param,
-    });
+    console.log(newPass)
+    param.set('token', token);
+    return this.httpClient.post(this.URI + 'recoverPassword?token='+token, newPass);
   }
   logout() {
     localStorage.removeItem(USER_LOCAL_ST_KEY);
