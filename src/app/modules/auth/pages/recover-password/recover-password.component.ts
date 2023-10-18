@@ -24,7 +24,7 @@ export class RecoverPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.recoverPassF = this.fb.group({
-      newPassword1: ['', Validators.required],
+      password: ['', Validators.required],
     });
     this.route.queryParamMap.subscribe((param) => {
       this.token = param.get('token') ? param.get('token') : undefined;
@@ -38,8 +38,8 @@ export class RecoverPasswordComponent implements OnInit {
     this.submitted = true;
     if (!this.recoverPassF?.valid) return;
     if (this.token) {
-      this.usuarioS.confirmPassword(
-        this.recoverPassF.get('newPassword1')?.value.trim(),
+      this.recoverPassF.get('newPassword1')?.value.trim(),
+      this.usuarioS.confirmPassword({... this.recoverPassF.value},
         this.token
       ).subscribe(res=> console.log(res));
     }
