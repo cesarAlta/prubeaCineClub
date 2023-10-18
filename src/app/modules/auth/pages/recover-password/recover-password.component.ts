@@ -40,10 +40,12 @@ export class RecoverPasswordComponent implements OnInit {
     if (!this.recoverPassF?.valid) return;
     if (this.token) {
       this.recoverPassF.get('newPassword1')?.value.trim(),
-      this.usuarioS.confirmPassword({... this.recoverPassF.value},
-        this.token
-      ).subscribe(res=> this.router.navigateByUrl('us/login')
-        );
+        this.usuarioS
+          .confirmPassword({ ...this.recoverPassF.value }, this.token)
+          .subscribe((res) => {
+            this.router.navigateByUrl('us/login');
+            console.log(res);
+          });
     }
   }
 }
