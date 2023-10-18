@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
@@ -19,7 +19,8 @@ export class RecoverPasswordComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private usuarioS: UsuarioService
+    private usuarioS: UsuarioService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +42,8 @@ export class RecoverPasswordComponent implements OnInit {
       this.recoverPassF.get('newPassword1')?.value.trim(),
       this.usuarioS.confirmPassword({... this.recoverPassF.value},
         this.token
-      ).subscribe(res=> console.log(res));
+      ).subscribe(res=> this.router.navigateByUrl('us/login')
+        );
     }
   }
 }
