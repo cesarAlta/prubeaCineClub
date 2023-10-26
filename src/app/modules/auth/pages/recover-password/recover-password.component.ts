@@ -31,9 +31,6 @@ export class RecoverPasswordComponent implements OnInit {
       this.token = param.get('token') ? param.get('token') : undefined;
     });
   }
-  forgotPass() {}
-
-  login() {}
 
   confirm() {
     this.submitted = true;

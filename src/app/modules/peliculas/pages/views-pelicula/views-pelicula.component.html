@@ -1,14 +1,11 @@
-<!--visa de una pelicula-->
+<!--vista de una pelicula-->
 <div *ngIf="ver == ''">
   <div
     class="position-absolute start-0 top-0 h-100 w-100 overflow-hidden"
     style="z-index: -1"
   >
-  <!-- src="./assets/img/slide-todasLasPistas_edited.jpg" -->
-    <img
-    [src]="peliSel?.imagesUrlCover"
-      class="imgPortada"
-    />
+    <!-- src="./assets/img/slide-todasLasPistas_edited.jpg" -->
+    <img [src]="peliSel?.imagesUrlCover" class="imgPortada" />
     <div class="back-1"></div>
   </div>
   <div class="container-movieinfo">
@@ -57,7 +54,6 @@
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
-          
         ></iframe>
         <div class="">
           <button
@@ -88,12 +84,11 @@
         </div>
         <div class="col-10 col-md-8" style="height: 400px">
           <iframe
-            width="930"
-            height="523"
-            src="https://www.youtube.com/embed/ntfl31rxBKI?showifo=0"
-            title=""
+            src="https://player.vimeo.com/video/876491534?h=a8661edfc4"
+            width="640"
+            height="564"
             frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow="autoplay; fullscreen"
             allowfullscreen
           ></iframe>
         </div>
@@ -282,7 +277,9 @@
                 (click)="publicar(item)"
               >
                 <i
-                  class="fa-regular fa-eye{{ item.publiclyVisible ? '-slash' : '' }}"
+                  class="fa-regular fa-eye{{
+                    item.publiclyVisible ? '-slash' : ''
+                  }}"
                 ></i>
                 {{ item.publiclyVisible ? "Ocultar video" : "Publicar video" }}
               </button>

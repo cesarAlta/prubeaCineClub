@@ -17,17 +17,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CarouselEstreno1Component {
   option = 1;
-  showTirilla=false;
-  showFondoDark=false;
-  show1film=false;
-  show2film=false;
-  showcentrar=false;
-  showEspaciarDOble=false
-  showEspaciarIz=false;
-  showOcultarOp=true;
+  showTirilla = false;
+  showFondoDark = false;
+  show1film = false;
+  show2film = false;
+  showcentrar = false;
+  showEspaciarDOble = false;
+  showEspaciarIz = false;
+  showOcultarOp = true;
   itemoculto = false;
   mostrarbtndesplzamiento = true;
-  
+
   @Input() items = [];
   @Input() title: string = 'Cargando...';
 
@@ -44,9 +44,8 @@ export class CarouselEstreno1Component {
   private windowWidth = 0;
   public sizeSlider = 0;
 
-//peliculas
-  films: Pelicula[] = peliculas;
-  
+  //peliculas
+  films: Pelicula[] = peliculas.filter((item) => item.isPremiere);
 
   constructor(
     private hs: HomeService,
@@ -84,24 +83,33 @@ export class CarouselEstreno1Component {
   }
   nextSlide() {
     console.log('antes de ejecutar nex', this.currentIndex);
-    if (this.currentIndex < this.sliderItems.length - 1) {
+    if (this.currentIndex < this.sliderItems.length -1) {
       this.currentIndex++;
       console.log('despues de ejecutar nex', this.currentIndex);
     }
   }
-
+  optestreno = 1;
   prevSlide() {
     if (this.currentIndex > 0) {
       this.currentIndex--;
     }
   }
-  showItems(num:number){
-    this.itemoculto=!this.itemoculto
-    this.mostrarbtndesplzamiento=!this.mostrarbtndesplzamiento;
-
+  showItems(num: number) {
+    // this.itemoculto=!this.itemoculto
+    // this.mostrarbtndesplzamiento=!this.mostrarbtndesplzamiento;
+    if (num == 1) this.show1film = !this.show1film;
+    if (num == 2) this.show2film = !this.show2film;
+    if (num == 1) {
+      this.show1film = !this.show1film;
+      if (this.show1film) this.films = [peliculas[0]];
+    }
+    if (this.show2film) {
+      this.films = peliculas.splice(0, 2);
+    } else {
+      this.films = peliculas.splice(0, 3);
+    }
   }
-  centrar(){
-    
-    this.justifyFilm= this.showcentrar?'left':'center'
+  centrar() {
+    this.justifyFilm = this.showcentrar ? 'left' : 'center';
   }
 }

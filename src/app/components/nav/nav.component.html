@@ -1,15 +1,11 @@
 <nav
-  class="navbar navbar-dark navbar-expand-lg"
-  style="height: 150px"
+  class="navbar navbar-dark navbar-expand-lg nav-1 w-100"
+  [ngClass]="{ 'nav-sticky': navbarFixed }"
   *ngIf="option == 1"
 >
-  <div class="container-fluid">
-    <a class="navbar-brand mt-2" href="#" style="width: 200px; height: auto">
-      <img
-        src="./assets/img/logo/logoccp1.png"
-        alt=""
-        class="img-fluid"
-      />
+  <div class="container-fluid  position-relative">
+    <a class="navbar-brand" href="#" style="width: 100px; height: auto">
+      <img src="./assets/img/logo/logoccp1.png" alt="" class="img-fluid" />
     </a>
     <button
       #menuCanvas
@@ -19,144 +15,125 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="ms-auto me-5">
-        <ul class="navbar-nav ms-auto me-5 fs-3">
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              type="button"
-              routerLink="home"
-              routerLinkActive="router-link-active"
-            >
-              Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="home"
-              fragment="Estrenos"
-              routerLinkActive="router-link-active"
-              >Estrenos</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              router
-              [routerLink]="['home']"
-              fragment="destacadas"
-              routerLinkActive="router-link-active"
-              >Destacadas</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="home"
-              fragment="todas"
-              routerLinkActive="router-link-active"
-              (click)="menuCanvas.click()"
-              >Todas</a
-            >
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Vista
-            </a>
-            <ul
-              class="dropdown-menu text-dark"
-              aria-labelledby="navbarDropdown"
-            >
-              <li>
-                <a class="dropdown-item" type="button" (click)="getOption(1)"
-                  >Opción1</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" type="button" (click)="getOption(2)"
-                  >Opción2</a
-                >
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item" *appShowForRoles="['Admin']">
-            <a class="nav-link" routerLink="/dashboard"> Administración </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="us/login"
-              routerLinkActive="active"
-              *ngIf="!login; else logoutTemplate"
-            >
-              <i class="fa-solid fa-right-to-bracket"></i>
-            </a>
-            <ng-template #logoutTemplate>
-              <a
-                type="button"
-                role="button"
-                class="nav-link"
-                (click)="logout()"
+    <div
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav ms-auto fs-4">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            type="button"
+            routerLink="home"
+            routerLinkActive="router-link-active"
+          >
+            Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="home"
+            fragment="Estrenos"
+            routerLinkActive="router-link-active"
+            >Estrenos</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            router
+            [routerLink]="['home']"
+            fragment="destacadas"
+            routerLinkActive="router-link-active"
+            >Destacadas</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="home"
+            fragment="todas"
+            routerLinkActive="router-link-active"
+            (click)="menuCanvas.click()"
+            >Todas</a
+          >
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Vista
+          </a>
+          <ul class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" type="button" (click)="getOption(1)"
+                >Opción1</a
               >
-                <i
-                  class="fa-solid fa-right-from-bracket text-danger"
-                  title="Salir"
-                ></i>
-              </a>
-            </ng-template>
-          </li>
-        </ul>
-        <form name="formSearchNav" class="d-flex">
-          <div class="input-group input-group-sm">
-            <input
-              type="search"
-              class="form-control"
-              type="search"
-              id="searchNav"
-              placeholder="Buscar película"
-              aria-label="Buscar"
-              aria-describedby="button-search"
-            />
-            <button
-              class="btn btn-outline-success"
-              type="button"
-              id="button-search"
-            >
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </div>
-        </form>
+            </li>
+            <li>
+              <a class="dropdown-item" type="button" (click)="getOption(2)"
+                >Opción2</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" type="button" (click)="getOption(3)"
+                >Opción3</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" *appShowForRoles="['Admin']">
+          <a class="nav-link" routerLink="/dashboard"> Administración </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            type="button"
+            (click)="checkSearch = !checkSearch"
+          >
+            <i
+              class="fa-solid fa-magnifying-{{
+                checkSearch ? 'glass-minus' : 'glass'
+              }}"
+            ></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="us/login"
+            routerLinkActive="active"
+            *ngIf="!login; else logoutTemplate"
+          >
+            <i class="fa-solid fa-right-to-bracket"></i>
+          </a>
+          <ng-template #logoutTemplate>
+            <a type="button" role="button" class="nav-link" (click)="logout()">
+              <i
+                class="fa-solid fa-right-from-bracket text-danger"
+                title="Salir"
+              ></i>
+            </a>
+          </ng-template>
+        </li>
+      </ul>
+      <div class="position-absolute bottom-0 end-0 me-5 w-25">
+        <app-search [ngClass]="checkSearch ? 'show' : 'hidden'"></app-search>
       </div>
     </div>
-  </div>
-  <div class="d-flex position-absolute top-0 end-0 fs-4 mt-3 me-3">
-    <a type="button" role="button" class="like" (click)="like()">
-      <i class="fa-solid fa-heart text-danger"></i>
-    </a>
-    <a class="mx-2" type="button" role="button">
-      <i class="fa-brands fa-facebook text-primary"></i>
-    </a>
-    <a type="button" role="button">
-      <i class="fa-brands fa-instagram text-danger"></i>
-    </a>
   </div>
 </nav>
 <!-- op2 -->
 <nav
   class="navbar navbar-dark navbar-expand-lg"
-  [style.height]="navbarFixed?'70px': '150px'"
-  [ngClass]="{'nav-fixed': navbarFixed}" 
+  [style.height]="navbarFixed ? '70px' : '150px'"
+  [ngClass]="{ 'nav-fixed': navbarFixed }"
   *ngIf="option == 2"
 >
   <div class="container-fluid">
@@ -234,8 +211,11 @@
                   >Opción2</a
                 >
               </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li>
+                <a class="dropdown-item" type="button" (click)="getOption(3)"
+                  >Opción3</a
+                >
+              </li>
             </ul>
           </li>
           <li class="nav-item">
@@ -304,6 +284,157 @@
     </a>
   </div>
 </nav>
+
+<!-- op3 -->
+<nav
+  class="navbar position-absolute navbar-dark navbar-expand-lg nav-op3 w-100"
+  style="height: 150px"
+  *ngIf="option == 3"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand mt-2" href="#" style="width: 120px; height: auto">
+      <img src="./assets/img/logo/logoccp1.png" alt="" class="img-fluid" />
+    </a>
+    <button
+      #menuCanvas
+      class="navbar-toggler"
+      type="button"
+      (click)="btnOffCanvas()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="ms-auto me-5">
+        <ul class="navbar-nav ms-auto me-5 fs-4">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              type="button"
+              routerLink="home"
+              routerLinkActive="router-link-active"
+            >
+              <i class="fa-solid fa-house"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="['home']"
+              fragment="destacadas"
+              routerLinkActive="router-link-active"
+              >Destacadas</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="home"
+              fragment="todas"
+              routerLinkActive="router-link-active"
+              (click)="menuCanvas.click()"
+              >Todas</a
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Vista
+            </a>
+            <ul
+              class="dropdown-menu text-dark"
+              aria-labelledby="navbarDropdown"
+            >
+              <li>
+                <a class="dropdown-item" type="button" (click)="getOption(1)"
+                  >Opción1</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" type="button" (click)="getOption(2)"
+                  >Opción2</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" type="button" (click)="getOption(3)"
+                  >Opción3</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item" *appShowForRoles="['Admin']">
+            <a class="nav-link" routerLink="/dashboard"> Administración </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              type="button"
+              (click)="checkSearch = !checkSearch"
+            >
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="us/login"
+              routerLinkActive="active"
+              *ngIf="!login; else logoutTemplate"
+            >
+              <i class="fa-solid fa-right-to-bracket"></i>
+            </a>
+            <ng-template #logoutTemplate>
+              <a
+                type="button"
+                role="button"
+                class="nav-link"
+                (click)="logout()"
+              >
+                <i
+                  class="fa-solid fa-right-from-bracket text-danger"
+                  title="Salir"
+                ></i>
+              </a>
+            </ng-template>
+          </li>
+        </ul>
+        <form [ngClass]="checkSearch ? 'show' : 'hidden'">
+          <div class="input-group input-group-sm">
+            <input
+              type="search"
+              class="form-control"
+              type="search"
+              placeholder="Buscar película por: nombre, director, actor"
+              aria-label="Buscar"
+              aria-describedby="button-search2"
+            />
+            <button
+              class="btn btn-outline-success"
+              type="button"
+              id="button-search2"
+            >
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex position-absolute top-0 end-0 fs-4 mt-3 me-3">
+    <a class="mx-2 link-light" type="button" role="button">
+      <i class="fa-brands fa-facebook"></i>
+    </a>
+    <a type="button" role="button" class="link-light">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+  </div>
+</nav>
+
 <!--ofcanvas-->
 
 <div

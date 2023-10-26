@@ -8,6 +8,8 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CarouselEstreno1Component } from './home/pages/carousel-estreno1/carousel-estreno1.component';
 import { Carousel3dComponent } from './home/pages/carousel3d/carousel3d.component';
+import { CarouselMiniComponent } from './home/pages/carousel-mini/carousel-mini.component';
+import { CarouselSimpleComponent } from './home/pages/carousel-simple/carousel-simple.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { Carousel3dComponent } from './home/pages/carousel3d/carousel3d.componen
     HomeComponent,
     CarouselComponent,
     CarouselEstreno1Component,
-    Carousel3dComponent
+    Carousel3dComponent,
+    CarouselMiniComponent,
+    CarouselSimpleComponent
   ],
   imports: [
     CommonModule,

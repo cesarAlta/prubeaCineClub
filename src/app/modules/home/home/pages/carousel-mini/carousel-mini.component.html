@@ -1,0 +1,17 @@
+<ngb-carousel *ngIf="movies" [interval]="4000">
+  <ng-template ngbSlide *ngFor="let m of movies" class="position-relative">
+    <div
+      class="img-cover-home"
+      style="background-image: url({{m.imagesUrlCover}});"
+    >
+    </div>
+    <div class="carousel-caption ">
+        <h1>{{ m.title }}</h1>
+        <div>{{ m.genero.nombre }}</div>
+        <div class="col-lg-8 text-truncate mx-auto">{{ m.synopsis }}</div>
+        <a class="btn btn-primary mt-3" type="button" 
+        routerLink="/peliculas/ver/{{ m.title }}"
+        >Ver mas</a>
+      </div>
+  </ng-template>
+</ngb-carousel>

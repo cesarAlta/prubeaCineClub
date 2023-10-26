@@ -1,124 +1,84 @@
-<div *ngIf="option == 1">
-    <label for="ocultarOP" *ngIf="showOcultarOp">Ver opciones de configuración de estrenos</label>
-    <input
-      class="form-check-input"
-      type="checkbox"
-      id="ocultarOP"
-      *ngIf="showOcultarOp"
-      [(ngModel)]="showOcultarOp"
-      hidden
-    />
-    <div *ngIf="!showOcultarOp">
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="inlineCheckbox1"
-          [(ngModel)]="showTirilla"
-        />
-        <label class="form-check-label" for="inlineCheckbox1"
-          >Ocultar tirilla</label
-        >
-      </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="inlineCheckbox2"
-          [(ngModel)]="showFondoDark"
-        />
-        <label class="form-check-label" for="inlineCheckbox2"
-          >Ocultar fondo dark</label
-        >
-      </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="inlineCheckbox3"
-          [(ngModel)]="show1film"
-          (click)="showItems(1)"
-          
-        />
-        <label class="form-check-label" for="inlineCheckbox3"
-          >Mostrar con 1 peli</label
-        >
-      </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="inlineCheckbox3"
-          [(ngModel)]="show2film"
-          (click)="showItems(2)"
-        />
-        <label class="form-check-label" for="inlineCheckbox3"
-          >Mostrar con 2 peli</label
-        >
-      </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="inlineCheckbox3"
-          [(ngModel)]="showcentrar"
-          (click)="centrar()"
-        />
-        <label class="form-check-label" for="inlineCheckbox3">Centrar</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="inlineCheckbox3"
-          [(ngModel)]="showEspaciarDOble"
-        />
-        <label class="form-check-label" for="inlineCheckbox3"
-          >Espaciar a los costados</label
-        >
-      </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="inlineCheckbox3"
-          [(ngModel)]="showEspaciarIz"
-        />
-        <label class="form-check-label" for="inlineCheckbox3"
-          >Espaciar al inicio</label
-        >
-      </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="ocultarOP"
-          [(ngModel)]="showOcultarOp"
-        />
-        <label class="form-check-label" for="ocultarOP">Ocultar opciones</label>
-      </div>
-    </div>
-  <div class="row m-0 justify-content-start my-3">
+<div *ngIf="optestreno == 1">
+  <div class="row m-0 justify-content-start my-1">
     <div class="col-auto ms-3 p-0">
-      <div
+      <!-- definitivo no borrar -->
+      <!-- <div
         class="rounded-circle bg-dark p-2 d-flex justify-content-center align-items-center"
         style="width: 50px; height: 50px"
       >
         <i class="fa-solid fa-video"></i>
+      </div> -->
+      <!-- borrar una vez que se confirmo el diseño -->
+      <div class="dropdown">
+        <button
+          class="btn btn-dark rounded-circle p-3"
+          type="button"
+          id="optionShow"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-video"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="optionShow">
+          <li>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox1"
+                [(ngModel)]="showTirilla"
+              />
+              <label class="form-check-label" for="inlineCheckbox1"
+                >Ocultar tirilla</label
+              >
+            </div>
+          </li>
+          <li>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox2"
+                [(ngModel)]="showFondoDark"
+              />
+              <label class="form-check-label" for="inlineCheckbox2"
+                >Ocultar fondo dark</label
+              >
+            </div>
+          </li>
+          <li>
+            <a
+              class="ms-2 text-decoration-none"
+              type="button"
+              role="button"
+              (click)="optestreno = 2"
+            >
+              Opcion 2
+            </a>
+          </li>
+          <li>
+            <a
+              class="ms-2 text-decoration-none"
+              type="button"
+              role="button"
+              (click)="optestreno = 3"
+            >
+              Opcion 3
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="col my-auto">
-      <p class="fs-3">Estrenos </p>
+      <p class="fs-3 my-auto">Estrenos</p>
     </div>
   </div>
-  <div class="container-film-strip bg-{{ !showFondoDark ? 'dark' : 'black' }}"
-  [ngClass]="{'container': showEspaciarDOble, 'col-11 ms-auto':showEspaciarIz}"
-  >
-    <!--btn-left-->
+  <div class="container-film-strip bg-{{ !showFondoDark ? 'dark' : 'black' }}">
+    <!-- btn-left -->
     <div
       class="position-absolute top-50 start-0 translate-middle-y rounded-circle btn-film-strip d-flex justify-content-center align-items-center"
-   *ngIf="mostrarbtndesplzamiento"
-      >
+      *ngIf="mostrarbtndesplzamiento"
+    >
       <a
         type="button"
         role="button"
@@ -128,77 +88,32 @@
         <i class="fa-solid text-white fa-angle-left"></i>
       </a>
     </div>
-    <div class=" m-2" 
-    [ngClass]="{'border-film-strip': !showTirilla}"
-    ></div>
+    <div class="m-2" [ngClass]="{ 'border-film-strip': !showTirilla }"></div>
 
-    <div class="slider-film"></div>
     <div
-      class="slider-film"
-      [style.justifyContent]="justifyFilm"
+      class="slider-film justify-content-start justify-content-md-center"
       [ngStyle]="{
-        transform: 'translateX(-' + currentIndex * (100 / 4) + '%)',
+        transform: 'translateX(-' + currentIndex * (100 / 2) + '%)',
     }"
     >
-      <div class="slider-item" >
+      <div class="slider-item" *ngFor="let item of films; let i = index">
         <img
-          src="./assets/img/estrenos/Todas-las-pistas-estreno.jpg"
-          alt=""
+          src="{{ item.imagesUrlCoverPremier }}"
+          alt="{{ item.title }} imagen"
         />
+        <span
+          class="position-absolute start-50 bottom-0 translate-middle-x bg-danger rounded-top py-1 px-3 fw-bold"
+        >
+          NUEVO
+        </span>
       </div>
-      <div class="slider-item" *ngIf="!show1film ">
-        <img
-          src="./assets/img/estrenos/la-noche-mas-larga-estrenos.jpg"
-          alt=""
-          class="img-fluid"
-        />
-      </div>
-      <div class="slider-item" *ngIf="!itemoculto">
-        <img
-          src="./assets/img/estrenos/la-estrella-estreno.jpg"
-          alt=""
-          class="img-fluid"
-        />
-      </div>
-      <div class="slider-item" *ngIf="!itemoculto">
-        <img
-          src="./assets/img/estrenos/El-verano-que-te-vimos-estreno.jpg"
-          alt=""
-          class="img-fluid"
-        />
-      </div>
-      <div class="slider-item" *ngIf="!itemoculto">
-        <img
-          src="./assets/img/estrenos/Todas-las-pistas-estreno.jpg"
-          alt=""
-          class="img-fluid"
-        />
-      </div>
-      <div class="slider-item" *ngIf="!itemoculto">
-        <img
-          src="./assets/img/estrenos/la-noche-mas-larga-estrenos.jpg"
-          alt=""
-          class="img-fluid"
-        />
-      </div>
-      <div class="slider-item" *ngIf="!itemoculto">
-        <img
-          src="./assets/img/estrenos/la-estrella-estreno.jpg"
-          alt=""
-          class="img-fluid"
-        />
-      </div>
-
-      <!-- Agrega más imágenes si es necesario -->
     </div>
-    <div class=" m-2" 
-    [ngClass]="{'border-film-strip': !showTirilla}"
-    ></div>
+    <div class="m-2" [ngClass]="{ 'border-film-strip': !showTirilla }"></div>
     <!--btn-rigth-->
     <div
       class="position-absolute top-50 end-0 translate-middle-y rounded-circle btn-film-strip d-flex justify-content-center align-items-center"
       *ngIf="mostrarbtndesplzamiento"
-      >
+    >
       <a
         type="button"
         role="button"
@@ -210,8 +125,59 @@
     </div>
   </div>
 </div>
+<div
+  *ngIf="optestreno == 2"
+  style="height: 50vh"
+  class="position-relative mt-3 d-flex align-items-center"
+>
+  <div class="premiere-title-container fs-1 fw-bold text-secondary">
+    ESTRENOS
+  </div>
+  <ngb-carousel *ngIf="films" class="w-100" [showNavigationIndicators]="false">
+    <ng-template ngbSlide *ngFor="let item of films">
+      <div class="row w-75 mx-auto">
+        <div class="col my-auto d-none d-md-block">
+          <h4>{{ item.title }}</h4>
+          <p class="fs-6">{{ item.synopsis }}</p>
+          <button class="btn btn-primary text-center" type="button">
+            Ver más
+          </button>
+        </div>
+        <div class="col">
+          <div
+            class="position-relative overflow-hidden mx-auto ms-md-auto card-movie"
+          >
+            <img
+              [src]="item.imagesUrlCoverPremier"
+              alt="Random first slide"
+              class="img-thumbnail"
+            />
+            <div
+              class="position-absolute top-50 start-50 translate-middle d-md-none"
+            >
+              <button class="btn btn-primary text-center" type="button">
+                Ver más
+              </button>
+            </div>
 
-<div *ngIf="option == 2">
+            <div
+              class="bg-dark position-absolute top-100 start-0 translate-middle rounded-circle"
+              style="width: 250px; height: 200px"
+            >
+              <span class="position-absolute fs-3" style="top: 20%; right: 13%">
+                Nuevo
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
+<div *ngIf="optestreno == 3">
+  <app-carousel3d></app-carousel3d>
+</div>
+<!-- <div *ngIf="option == 2">
   <div class="row m-0 justify-content-start my-3">
     <div class="col-auto ms-3 p-0">
       <div
@@ -245,11 +211,8 @@
         transform: 'translateX(-' + currentIndex * (100 / 4) + '%)'
       }"
     >
-      <div class="slider-item">
-        <img
-          src="./assets/img/estrenos/Todas-las-pistas.jpg"
-          alt=""
-        />
+      <div class="slider-item" *ngFor="let item of films">
+        <img src="./assets/img/estrenos/Todas-las-pistas.jpg" alt="" />
       </div>
       <div class="slider-item">
         <img
@@ -293,9 +256,6 @@
           class="img-fluid"
         />
       </div>
-
-      <br /><br />
-      <!-- Agrega más imágenes si es necesario -->
     </div>
     <div
       class="position-absolute top-50 end-0 translate-middle-y rounded-circle btn-film-strip d-flex justify-content-center align-items-center"
@@ -308,79 +268,6 @@
       >
         <i class="fa-solid text-white fa-angle-right"></i>
       </a>
-    </div>
-  </div>
-</div>
-
-<!-- <div id="Estrenos">
-  <div class="container-fluid d-flex justify-content-center mb-4">
-    <div class="cont-film-estreno">
-      <div class="fs-3 ms-3 mb-2">#Estrenos</div>
-      <a
-        type="button"
-        class="sliderBtn btnLeft fs-2"
-        (click)="rigth()"
-        *ngIf="moveTo != 0 && wdm"
-      >
-        <i class="fa-solid text-white fa-angle-left"></i>
-      </a>
-      <a
-        type="button"
-        class="sliderBtn btnRight fs-2"
-        (click)="left()"
-        *ngIf="sizeSlider != -moveTo && wdm"
-      >
-        <i class="fa-solid text-white fa-angle-right"></i>
-      </a>
-      <div
-        class="slide-estreno"
-        #slider
-        [ngStyle]="{ transform: 'translateX(' + moveTo + 'px)' }"
-      >
-        <div
-          #imgfilm
-          *ngFor="let item of films"
-          class="col col-sm-2 col-lg-3 col-xl-"
-        >
-          <div class="img-film mx-2 position-relative">
-            <a routerLink="/peliculas/ver/{{ item.nombre }}">
-              <img
-                [src]="item.imagenPath"
-                class="border border-secondary rounded"
-                alt="..."
-                style="width: 100%; height: 100%"
-              />
-              <div
-                class="position-absolute top-0 start-0 info-film"
-                style="height: 100%; width: 100%"
-              >
-                <div class="ms-3">
-                  <img
-                    src="./assets/img/pngwing.com (1).png"
-                    style="width: 20px; height: auto"
-                    class="img-fluid"
-                    alt=""
-                  />
-                  <img
-                    src="./assets/img/pngwing.com (1).png"
-                    style="width: 20px; height: auto"
-                    class="img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div
-                  class="position-absolute top-50 start-50 translate-middle text-center text-white"
-                >
-                  <p class="fs-5 text-star">
-                    {{ item.nombre }}
-                  </p>
-                  <p>Ver mas...</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div> -->

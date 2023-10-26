@@ -1,0 +1,65 @@
+<div
+  id="destacadas"
+  class="position-relative"
+>
+  <div class="container-fluid d-flex justify-content-center mb-4">
+    <div class="cont-film-estreno">
+      <div class="fs-3 ms-3 mb-2">#Lo mas visto</div>
+      <a type="button" class="sliderBtn btnLeft fs-2" (click)="rigth()">
+        <i class="fa-solid text-white fa-angle-left"></i>
+      </a>
+      <a type="button" class="sliderBtn btnRight fs-2" (click)="left()">
+        <i class="fa-solid text-white fa-angle-right"></i>
+      </a>
+      <div
+        class="slide-estreno"
+        #slider
+        [ngStyle]="{ transform: 'translateX(' + moveTo + 'px)' }"
+      >
+        <div
+          #imgfilm
+          *ngFor="let item of films2"
+          class="col col-sm-2 col-lg-3 col-xl-3"
+        >
+          <div class="img-film mx-2 position-relative">
+            <a routerLink="/peliculas/ver/{{ item.title }}">
+              <img
+                [src]="item.imagesUrlBillboard"
+                class="border border-secondary rounded"
+                alt="..."
+                style="width: 100%; height: 100%"
+              />
+              <div
+                class="position-absolute top-0 start-0 info-film"
+                style="height: 100%; width: 100%"
+              >
+                <div class="ms-3">
+                  <img
+                    src="./assets/img/pngwing.com (1).png"
+                    style="width: 20px; height: auto"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <img
+                    src="./assets/img/pngwing.com (1).png"
+                    style="width: 20px; height: auto"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </div>
+                <div
+                  class="position-absolute top-50 start-50 translate-middle text-center text-white"
+                >
+                  <p class="fs-5 text-star">
+                    {{ item.title }}
+                  </p>
+                  <p>Ver mas...</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

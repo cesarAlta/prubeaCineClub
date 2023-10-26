@@ -1,79 +1,38 @@
-.cont-film-estreno {
-  position: relative;
-  width: 80%;
-  height: 350px;
-}
-.img-film {
-  width: 200px;
-  height: 300px;
-  overflow: hidden;
-  object-fit: cover;
-}
-
-.slide-estreno {
-  position: relative;
-  width: 80%;
-  height: auto;
-  display: flex;
-  margin: auto;
-}
-
-.img-film:hover {
-  /* opacity: 0.3; */
-  transition: 0.3s;
-}
-.info-film {
-  opacity: 0;
-  transition: 0.3s;
-}
-
-/* inicio-camara */
+/* contenedor */
 .container-film-strip {
   position: relative;
-  height: auto;
+  max-height: 50vh;
   overflow: hidden;
 }
 
+/* efecto rollo de pelicula */
 .border-film-strip {
   display: flex;
   width: 100%;
   height: 10px;
-  background-image: repeating-linear-gradient(
+  /* background-image: repeating-linear-gradient(
     90deg,
     #d6cf7f,
     #fff 1%,
     transparent 1%,
     transparent 2%
+  ); */
+  background-image: repeating-linear-gradient(
+    90deg,
+    #9c976b,
+    #cfcfcf 1%,
+    transparent 1%,
+    transparent 2%
   );
 }
-.film {
-  display: flex;
-  transition: all 0.7s;
-  /* width: 100%; */
-}
-/* .film-blank {
-  width: 2rem;
-  height: 0.6rem;
-  margin: 5px;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #707070;
-  border-radius: 11px;
-  opacity: 1;
-} */
 
-.film-image {
-  width: 400px; /* Ancho de cada imagen */
-  height: auto; /* Altura de cada imagen */
-  background-color: #fff; /* Fondo de cada imagen */
-  margin-right: 10px; /* Espacio entre las imágenes */
-  border-radius: 30px;
-  overflow: hidden;
-}
 .btn-film-strip {
   background-color: rgba(194, 194, 194, 0.5);
   width: 50px;
   height: 50px;
   z-index: 3;
+  visibility: hidden;
+  
 }
 .btn-film-strip:hover {
   background-color: rgba(0, 0, 0, 0.8);
@@ -82,27 +41,69 @@
   font-size: medium;
 }
 
-/* fin-camara */
+/* contenedor de peliculas */
 .slider-film {
   display: flex;
+  height: 100%;
+  margin: 0 1% 0 1%;
   transition: 0.3s ease-in-out;
-  /* justify-content: center; */
 }
 
 .slider-item {
-  flex: 0 0 calc(97% / 4);
+  flex: 0 0 calc(80% / 3);
   box-sizing: border-box;
-  margin: 5px;
+  margin: 5px 2%;
+
+  position: relative;
+
+  border-radius: 20px;
+  overflow: hidden;
 }
-.slider-item img{
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
+.slider-item img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
 }
-.slider-item img:hover{
-    transform: scale(1.1);
-    border: solid 2px white;
-    cursor: pointer;
-    padding: 2px;
-    z-index: 3;
+.slider-item:hover {
+  transform: scale(1.1);
+  border: solid 2px white;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 3;
 }
+.premiere-title-container{
+  position: absolute;
+  top:2%;
+  left: 2%;
+  
+
+}
+.card-movie{
+  width: 500px;
+  height: auto;
+
+}
+
+@media screen and (max-width: 720px) {
+  .card-movie{
+    width: 400px;
+    height: auto;
+  }
+  .slider-item{
+    flex: 0 0 calc(100%/2);
+
+  }
+  .btn-film-strip{
+    visibility: visible;
+  }
+  
+}
+@media screen and (max-width: 540px) {
+
+  .slider-item{
+    flex: 0 0 calc(80%/1);
+
+  }
+  
+}
+ 

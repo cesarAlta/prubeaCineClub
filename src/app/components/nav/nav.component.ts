@@ -24,7 +24,10 @@ export class NavComponent implements OnInit {
     ) {}
   ngOnInit(): void {
     this.authServ.islogged$.subscribe((res) => (this.login = res));
-    this.modalService.opnav$.subscribe(res=>this.option=res);
+    this.hs.optview$.subscribe(res => this.option=res)
+    console.log(this.option)
+  
+    // this.modalService.opnav$.subscribe(res=>this.option=res);
   }
 
   logout() {
@@ -43,7 +46,7 @@ export class NavComponent implements OnInit {
   }
   navbarFixed = false;
 
-  @HostListener('window:scroll', [])
+  @HostListener('window:scroll', ['$event'])
   onScroll(): void {
     this.navbarFixed = window.scrollY > 50? true: false;
   }

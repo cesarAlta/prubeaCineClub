@@ -14,6 +14,8 @@ import { DashboardComponent } from './modules/private/pages/dashboard/dashboard.
 import { AuthModule } from './modules/auth/auth.module';
 import { MyInterceptor } from './interceptor/my.interceptor';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { SearchComponent } from './components/search/search.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
     ModalComponent,
     FooterComponent,
     DashboardComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
     NgbModalModule,
     AuthModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
   { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true },

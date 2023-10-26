@@ -1,6 +1,5 @@
-
 /* Opcion 2 */
-.video-bg-star{
+.video-bg-star {
   position: relative;
   top: -150px;
   left: 0;
@@ -10,75 +9,83 @@
   margin: 0;
   overflow: hidden;
 }
-.text-info-home{
+.text-info-home {
   position: absolute;
   top: 0;
   right: 0;
   width: 75%;
   height: 100vh;
   margin: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)); /* Gradiente de transparente a sólido */
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1)
+  ); /* Gradiente de transparente a sólido */
 }
 /* Opcion 2 */
 
-  /* opcion 1 */ 
-  .cont-viedo{
-    position: relative;
-    top: -150px;
-    left: 0;
-    height: 300px;
-    width: 100%;
-    overflow: hidden;
-    background-color: antiquewhite;
-    z-index: -1; /* Coloca el video detrás del contenido */
+/* opcion 1 */
+.cont-viedo {
+  position: relative;
+  height: 50vh;
+  width: 100%;
+  overflow: hidden;
+}
 
-  }
+#video-background {
+  /* transform: translate(0,-15%);   */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Evita la distorsión y recorta si es necesario */
+}
+.cover-video {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 95%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+.cont-film-estreno {
+  position: relative;
+  width: 80%;
+  height: 350px;
+  overflow: hidden;
+}
+.img-film {
+  width: 200px;
+  height: 300px;
+  overflow: hidden;
+  object-fit: cover;
+}
 
-
-  #video-background {
-    transform: translate(0,-15%);  
-    width: 100%;
-    height: 700px;
-    object-fit: cover; /* Evita la distorsión y recorta si es necesario */
-  
-  }
-  .cont-film-estreno{
-    position: relative;
-    width: 80%;
-    height: 350px;
-    overflow: hidden;
-  }
-  .img-film{
-    width: 200px;
-    height: 300px;
-    overflow: hidden;
-    object-fit: cover;
-  }
-  
-  .slide-estreno{
-    position: relative;
-    width: 80%;
-    height: auto;
-    display: flex;
-    margin: auto;
-    transition: transform 0.3s ease;
-  }
+.slide-estreno {
+  position: relative;
+  width: 80%;
+  height: auto;
+  display: flex;
+  margin: auto;
+  transition: transform 0.3s ease;
+}
 
 .img-film:hover {
   /* opacity: 0.3; */
   transition: 0.3s;
-  
 }
-.info-film{
+.info-film {
   opacity: 0;
   transition: 0.3s;
-  
 }
-.img-film:hover .info-film{
+.img-film:hover .info-film {
   opacity: 1;
   transition: 0.3s;
   background-color: rgba(0, 0, 0, 0.788);
-
 }
 
 .sliderBtn {
@@ -100,75 +107,64 @@
 .btnRight {
   right: 0;
 }
-.btnRight:hover{
+.btnRight:hover {
   width: 7%;
   background-color: rgba(0, 0, 0, 0.8);
 }
-.btnLeft:hover{
+.btnLeft:hover {
   width: 7%;
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-
-
-
-  @media screen and (max-width: 998px) {
-    .slider {
-      width: 300%;
-    }
-       /* prueba 1 */
-       .cont-film-estreno{
-        max-width: 100%;
-        overflow: hidden;
-        
-      }
-      .slide-estreno{
-        width: 200%;
-        display: flex;
-        transition: all 0.5s;
-      margin-left: 2rem ;
-  
-      }
+@media screen and (max-width: 998px) {
+  .slider {
+    width: 300%;
   }
-  @media screen and (max-width: 768px) {
-    .slider {
-      width: 400%;
-    }
-       /* prueba 1 */
-       .cont-film-estreno{
-        max-width: 600px;
-        overflow: hidden;
-        
-      }
-      .slide-estreno{
-        width: 200%;
-        display: flex;
-        transition: all 0.5s;
-      margin-left: 2rem ;
-  
-      }
-  
+  /* prueba 1 */
+  .cont-film-estreno {
+    max-width: 100%;
+    overflow: hidden;
   }
-  @media screen and (max-width: 576px) {
-    .sliderBtn {
-      width: 10%;
-    }
-    .slider {
-      width: 600%;
-      margin-left: 3em;
-    }
-       /* prueba 1 */
-       .cont-film-estreno{
-        max-width: 400px;
-        overflow: hidden;
-        
-      }
-      .slide-estreno{
-        width: 200%;
-        display: flex;
-        transition: all 0.5s;
-      margin-left: 2rem ;
-  
-      }
+  .slide-estreno {
+    width: 200%;
+    display: flex;
+    transition: all 0.5s;
+    margin-left: 2rem;
   }
-  
+}
+@media screen and (max-width: 768px) {
+  .slider {
+    width: 400%;
+  }
+  /* prueba 1 */
+  .cont-film-estreno {
+    max-width: 600px;
+    overflow: hidden;
+  }
+  .slide-estreno {
+    width: 200%;
+    display: flex;
+    transition: all 0.5s;
+    margin-left: 2rem;
+  }
+}
+@media screen and (max-width: 576px) {
+  .sliderBtn {
+    width: 10%;
+  }
+  .slider {
+    width: 600%;
+    margin-left: 3em;
+  }
+  /* prueba 1 */
+  .cont-film-estreno {
+    max-width: 400px;
+    overflow: hidden;
+  }
+  .slide-estreno {
+    width: 200%;
+    display: flex;
+    transition: all 0.5s;
+    margin-left: 2rem;
+  }
+}

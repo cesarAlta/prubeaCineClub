@@ -9,8 +9,8 @@ import { BehaviorSubject } from 'rxjs';
 export class ModalService {
   // para el nav
   
-	private opnav = new BehaviorSubject<number>(1);
-	opnav$ = this.opnav.asObservable();
+	// private opnav = new BehaviorSubject<number>(1);
+	// opnav$ = this.opnav.asObservable();
   // 
 
   private lockCounter: number = 0;

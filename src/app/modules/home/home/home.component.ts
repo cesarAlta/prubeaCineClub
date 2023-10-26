@@ -17,7 +17,7 @@ import { HomeService } from '../home.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  option = 1;
+  option = 3;
   @Input() items = [];
   @ViewChild('slider') sliderTs: ElementRef | undefined;
   @ViewChild('imgfilm') imgfilm: ElementRef | undefined;
@@ -37,9 +37,10 @@ export class HomeComponent implements OnInit {
     private hs: HomeService,
     private rander2: Renderer2,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private vimeoService: HomeService
   ) {}
-
+  tutorialData: any;
   ngOnInit(): void {
     this.hs.optview$.subscribe(re=>this.option=re)
     

@@ -1,4 +1,5 @@
 import { Awards } from './Awards';
+import { Genero } from './Genero';
 import { ImageMovie } from './ImageMovie';
 import { imagesTypes } from './ImageType';
 import { Member, members } from './member';
@@ -20,6 +21,9 @@ export class Pelicula {
   origilaFormat: string | undefined;
   awardsWon?: any[];
   publiclyVisible!: boolean;
+  genero!: Genero;
+  isPremiere: boolean|undefined;
+  imagesUrlCoverPremier: string|undefined;
 }
 
 export const peliculas: Pelicula[] = [
@@ -34,9 +38,10 @@ export const peliculas: Pelicula[] = [
     linkTrailer: 'no',
     ratingMovie: 300,
 
-    imagesUrlBillboard: './assets/img/LaEstrella.jpg',
+    imagesUrlBillboard: './assets/img/laEstrella/LaEstrella-Poster.jpg',
+    imagesUrlCoverPremier:'./assets/img/laEstrella/laEstrella-CoverEstreno.jpg',
 
-    imagesUrlCover: './assets/img/laEstrella/LaEstrella2-1024x536.jpg',
+    imagesUrlCover: '../assets/img/laEstrella/LaEstrella-Cover.jpg',
 
     ratingMovieINCAA: 'atp',
     publiclyVisible: true,
@@ -58,6 +63,8 @@ export const peliculas: Pelicula[] = [
       },
     ],
     origilaFormat: 'Formato original',
+    genero: { id: 1, nombre: 'Drama' },
+    isPremiere: true
   },
   {
     id: 2,
@@ -69,9 +76,9 @@ export const peliculas: Pelicula[] = [
     linkPelicula: 'no',
     linkTrailer: 'no',
     ratingMovie: 250,
-    imagesUrlBillboard: './assets/img/El verano que te vimos.jpeg',
-
-    imagesUrlCover: './assets/img/laEstrella/LaEstrella2-1024x536.jpg',
+    imagesUrlBillboard: '../../assets/img/elVeranoQueTeVimos/ElVerano-Poster.jpg',
+    imagesUrlCoverPremier:'../../assets/img/elVeranoQueTeVimos/ElVerano-CoverEstreno.jpg',
+    imagesUrlCover: '../../assets/img/elVeranoQueTeVimos/ElVerano-cover.jpg',
     ratingMovieINCAA: 'atp',
     publiclyVisible: true,
     awardsWon: [{ name: 'Goya', year: '2019' }],
@@ -128,6 +135,9 @@ export const peliculas: Pelicula[] = [
       },
     ],
     origilaFormat: 'Formato original',
+    genero: { id: 1, nombre: 'Drama' },
+    isPremiere: true
+
   },
   {
     id: 3,
@@ -139,9 +149,11 @@ export const peliculas: Pelicula[] = [
     linkPelicula: 'no',
     linkTrailer: 'no',
     ratingMovie: 400,
-    imagesUrlBillboard: './assets/img/Todas-las-pistas-fueron-falsas-poster-.jpg',
+    imagesUrlBillboard:
+      './assets/img/TodasLasPistas/TodasLasPistas-Poster.jpg',
+    imagesUrlCoverPremier:'./assets/img/TodasLasPistas/TodasLasPistas-CoverEstreno.jpg',
 
-    imagesUrlCover: './assets/img/slide-todasLasPistas_edited.jpg',
+    imagesUrlCover:  './assets/img/TodasLasPistas/TodasLasPistas-Cover.jpg',
     ratingMovieINCAA: 'atp',
     publiclyVisible: false,
     awardsWon: [{ name: 'Goya', year: '2019' }],
@@ -162,7 +174,11 @@ export const peliculas: Pelicula[] = [
       },
     ],
     origilaFormat: 'Formato original',
+    genero: { id: 1, nombre: 'Drama' },
+    isPremiere: true
+
   },
+
   {
     id: 4,
     title: 'La noche mas larga',
@@ -173,9 +189,11 @@ export const peliculas: Pelicula[] = [
     linkPelicula: 'no',
     linkTrailer: 'no',
     ratingMovie: 110,
-    imagesUrlBillboard: './assets/img/LaNocheMasLarga.jpg',
+    imagesUrlBillboard: '../../assets/img/LaNocheMasLarga/LaNoche-Poster.jpg',
+    imagesUrlCoverPremier:'../../assets/img/LaNocheMasLarga/LaNoche-CoverEstreno.jpg',    
+    
 
-    imagesUrlCover: './assets/img/laEstrella/LaEstrella2-1024x536.jpg',
+    imagesUrlCover: '../../assets/img/LaNocheMasLarga/LaNoche-Cover.jpg',
     ratingMovieINCAA: 'atp',
     publiclyVisible: true,
     awardsWon: [{ name: 'Goya', year: '2019' }],
@@ -196,5 +214,8 @@ export const peliculas: Pelicula[] = [
       },
     ],
     origilaFormat: 'Formato original',
+    genero: { id: 1, nombre: 'Drama' },
+    isPremiere: false
   },
+
 ];
