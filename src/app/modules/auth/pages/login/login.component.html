@@ -1,8 +1,10 @@
-<div style="min-height: 100vh; width: 100%" class="bg-dark">
+<div style="height: 100px;">
+</div>
+<div style="min-height: 90vh; width: 100%" class="bg-dark">
   <div class="row justify-content-center m-0 mt-3 ">
     <div class="col-11 col-sm-9 col-md-6 col-lg-5 col-xl-4 m-3 ">
       <div
-        class="card bg-dark text-white position-relative overflow-hidden"
+        class="card bg-dark text-white position-relative overflow-hidden mx-auto"
       >
         <img src="./assets/img/login/log-1.png" class="img-fluid" alt="log-1.png" />
         <div class="position-absolute top-0 end-0">
@@ -291,12 +293,19 @@
             </div>
           </form>
         </div>
-        <div class="position-absolute end-0 bottom-0 m-2">
+        <!-- <div class="position-absolute end-0 bottom-0 m-2">
           <a type="button" role="button" (click)="register()">
             <span class="text-decoration-underline" *ngIf="op == 1"
               >Registrate!</span
             >
             <span class="text-decoration-underline text-warning" *ngIf="op != 1"
+              ><i class="fa-solid fa-arrow-left"></i> volver</span
+            >
+          </a>
+        </div> -->
+        <div class="position-absolute end-0 bottom-0 m-2" *ngIf="op != 1">
+          <a type="button" role="button" (click)="register()">
+            <span class="text-decoration-underline text-warning" 
               ><i class="fa-solid fa-arrow-left"></i> volver</span
             >
           </a>

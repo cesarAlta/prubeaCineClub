@@ -84,7 +84,20 @@
 
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 768px) {
+  .border-film-strip {
+    display: flex;
+    width: 100%;
+    height: 10px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      #9c976b,
+      #cfcfcf 2%,
+      transparent 2%,
+      transparent 4%
+    );
+  }
+  
   .card-movie{
     width: 400px;
     height: auto;
@@ -99,11 +112,25 @@
   
 }
 @media screen and (max-width: 540px) {
-
-  .slider-item{
-    flex: 0 0 calc(80%/1);
-
+  .slider-film{
+    margin-left: 5%;
   }
-  
+  .slider-item{
+    flex: 0 0 90%;
+  }
+  /* efecto rollo de pelicula */
+.border-film-strip {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #9c976b,
+    #cfcfcf 3%,
+    transparent 3%,
+    transparent 6%
+  );
+}
+
 }
  

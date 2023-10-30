@@ -1,92 +1,85 @@
 <!--vista de una pelicula-->
-<div *ngIf="ver == ''">
+<div class="position-relative" *ngIf="ver == ''">
   <div
-    class="position-absolute start-0 top-0 h-100 w-100 overflow-hidden"
-    style="z-index: -1"
+    class="position-relative overflow-hidden"
+    style="height: 100vh; width: 100%"
   >
     <!-- src="./assets/img/slide-todasLasPistas_edited.jpg" -->
-    <img [src]="peliSel?.imagesUrlCover" class="imgPortada" />
+    <img [src]="peliSel?.imagesUrlCover" class="img-fluid" />
     <div class="back-1"></div>
+    <div class="container-movieinfo">
+      <div class="container">
+        <div class="row">
+          <h2>{{ peliSel?.title }}</h2>
+        </div>
+        <div class="row gap-2">
+          <div class="col-8 col-md-4 col-lg-2">
+            <img
+              [src]="peliSel?.imagesUrlBillboard"
+              alt=""
+              class="img-fluid rounded"
+            />
+          </div>
+          <div class="col-11 col-md col-lg-9">
+            <div>
+              <app-valuacion
+                [valoracion]="peliSel?.ratingMovie!"
+              ></app-valuacion>
+              <p class="fs-5">
+                Duración: {{ peliSel?.durationInMinutes }} min. |
+                {{ peliSel?.ratingMovieINCAA }}
+              </p>
+              <p>{{ peliSel?.synopsis }}</p>
+            </div>
+            <div>
+              <p>
+                Géneros: Drama, Suspenso. <br />
+                Elenco: Actores, Directores. <br />
+                Año: {{ peliSel?.relaseYear }}
+              </p>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-sm btn-primary"
+                (click)="showTriler()"
+              >
+                Ver trailer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="container-movieinfo">
-    <div class="container">
-      <div class="row">
-        <h2>{{ peliSel?.title }}</h2>
-      </div>
-      <div class="row gap-2">
-        <div class="col-8 col-md-4 col-lg-2">
-          <img [src]="peliSel?.imagesUrlBillboard" alt="" class="img-fluid" />
-        </div>
-        <div class="col-11 col-md col-lg-9">
-          <div>
-            <app-valuacion [valoracion]="peliSel?.ratingMovie!"></app-valuacion>
-            <p class="fs-5">
-              Duración: {{ peliSel?.durationInMinutes }} min. |
-              {{ peliSel?.ratingMovieINCAA }}
-            </p>
-            <p>{{ peliSel?.synopsis }}</p>
-          </div>
-          <div>
-            <p>
-              Géneros: Drama, Suspenso. <br />
-              Elenco: Actores, Directores. <br />
-              Año: {{ peliSel?.relaseYear }}
-            </p>
-          </div>
-          <div>
-            <button
-              type="button"
-              class="btn btn-sm btn-primary"
-              (click)="showTriler()"
-            >
-              Ver trailer
-            </button>
-          </div>
-        </div>
-      </div>
-      <br />
-      <div class="d-flex justify-content-center" *ngIf="triler">
+  <div id="trailerMovie">
+    <div class="d-flex justify-content-center" *ngIf="triler">
         <iframe
-          width="800"
-          height="400"
-          src="https://www.youtube.com/embed/A5surOEYLLo"
-          title="El Verano Que Te Vimos (The Summer We Saw You - 2021) - Trailer - English Subtitles"
+          src="https://player.vimeo.com/video/876491534?h=a8661edfc4"
           frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          width="680"
+          height="400"
+          allow="autoplay; fullscreen"
           allowfullscreen
         ></iframe>
-        <div class="">
-          <button
-            class="btn btn-unstyled border-0 text-danger"
-            type="button"
-            (click)="showTriler()"
-          >
-            X Cerrar
-          </button>
-        </div>
-      </div>
-      <br />
-      <div class="row justify-content-center">
-        <div class="bg-dark">
-          <h2 class="ms-5">Ver Película</h2>
-        </div>
-        <div class="col-10 col-md-8" style="height: 400px">
-          <iframe
-            width="1520"
-            height="538"
-            src="https://www.youtube.com/embed/KrDKN86pgjI"
-            title="El código enigma | Película completa"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            style="width: 100%; height: 100%"
-          ></iframe>
-        </div>
-        <div class="col-10 col-md-8" style="height: 400px">
+      <a
+        role="button"
+        class="btn btn-unstyled border-0 text-danger"
+        (click)="showTriler()"
+      >
+        X Cerrar
+      </a>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="bg-dark">
+      <h2 class="p-3 ps-5">Ver Película</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-10 col-md-8">
+        <div class="ratio ratio-16x9">
           <iframe
             src="https://player.vimeo.com/video/876491534?h=a8661edfc4"
-            width="640"
-            height="564"
             frameborder="0"
             allow="autoplay; fullscreen"
             allowfullscreen
@@ -95,104 +88,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="position-absolute bottom-0 start-0 w-100">
-    <div class="container-fluid">Titulo</div>
-    <div class="container">
-      <div class="row">
-        <div class="col-4">
-          <img
-            src="./assets/img/Todas-las-pistas-fueron-falsas-poster-.jpg"
-            alt=""
-            class="img-fluid"
-            style="width: 240px; height: 338px"
-          />
-        </div>
-        <div class="col">
-          <div>DESCRIPCIONES</div>
-          <div>Elenco</div>
-          <div>Informacion</div>
-          <div>
-            <button
-              type="button"
-              class="btn btn-sm btn-primary"
-              (click)="showTriler()"
-            >
-              Ver trailer
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- <div class="position-relative start-0 top-0 mt-4">
-    <div class="container-md">
-      <div class="row">
-        <p class="title-movie">TITULO</p>
-        <div class="col-auto">
-          <img
-            src="./assets/img/Todas-las-pistas-fueron-falsas-poster-.jpg"
-            alt=""
-            class="img-fluid"
-            style="width: 240px; height: 338px"
-          />
-        </div>
-        <div class="col">
-          <div>DESCRIPCIONES</div>
-          <div>Elenco</div>
-          <div>Informacion</div>
-          <div>
-            <button
-              type="button"
-              class="btn btn-sm btn-primary"
-              (click)="showTriler()"
-            >
-              Ver trailer
-            </button>
-          </div>
-        </div>
-      </div>
-      <br />
-      <div class="d-flex justify-content-center" *ngIf="triler">
-        <iframe
-          width="800"
-          height="400"
-          src="https://www.youtube.com/embed/A5surOEYLLo"
-          title="El Verano Que Te Vimos (The Summer We Saw You - 2021) - Trailer - English Subtitles"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-        <div class="">
-          <button
-            class="btn btn-unstyled border-0 text-danger"
-            type="button"
-            (click)="showTriler()"
-          >
-            X Cerrar
-          </button>
-        </div>
-      </div>
-      <br />
-      <div class="row justify-content-center">
-        <div class="bg-dark">
-          <h2 class="ms-5">Pelicula</h2>
-        </div>
-        <div class="col-8" style="height: 400px">
-          <iframe
-            width="1520"
-            height="538"
-            src="https://www.youtube.com/embed/KrDKN86pgjI"
-            title="El código enigma | Película completa"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            style="width: 100%; height: 100%"
-          ></iframe>
-        </div>
-      </div>
-    </div>
-  </div> -->
 </div>
 
 <!--Lista de pelicualas-->

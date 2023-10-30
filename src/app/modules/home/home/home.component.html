@@ -7,14 +7,6 @@
     </video>
     <div class="cover-video"></div>
   </div>
-  <!--Estreno1-->
-  <div class="position-relative">
-    <app-carousel-estreno1></app-carousel-estreno1>
-  </div>
-<!--Mas vistas-->
-<app-carousel-simple></app-carousel-simple>
-
-
 </div>
 
 <!--Opcion 2-->
@@ -47,68 +39,6 @@
   </div>
 </div>
 
-<div class="position-relative" *ngIf="option == 2" style="top: -150px">
-  <app-carousel3d></app-carousel3d>
-</div>
-<!--Estreno2-->
-<div
-  id="Estrenos"
-  class="position-relative"
-  *ngIf="option == 2"
-  style="top: -150px"
->
-  <div class="container-fluid d-flex justify-content-center mb-4">
-    <div class="cont-film-estreno">
-      <div class="fs-3 ms-3 mb-2">#Estreno</div>
-      <div class="slide-estreno">
-        <div
-          #imgfilm
-          *ngFor="let item of films"
-          class="col col-sm-2 col-lg-3 col-xl-3"
-        >
-          <div class="img-film mx-2 position-relative">
-            <a routerLink="/peliculas/pelicula">
-              <img
-                [src]="item.imagesUrlBillboard"
-                class="border border-secondary rounded"
-                alt="..."
-                style="width: 100%; height: 100%"
-              />
-              <div
-                class="position-absolute top-0 start-0 info-film"
-                style="height: 100%; width: 100%"
-              >
-                <div class="ms-3">
-                  <img
-                    src="./assets/img/pngwing.com (1).png"
-                    style="width: 20px; height: auto"
-                    class="img-fluid"
-                    alt=""
-                  />
-                  <img
-                    src="./assets/img/pngwing.com (1).png"
-                    style="width: 20px; height: auto"
-                    class="img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div
-                  class="position-absolute top-50 start-50 translate-middle text-center text-white"
-                >
-                  <p class="fs-5 text-star">
-                    {{ item.title }}
-                  </p>
-                  <p>Ver mas...</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- op3 -->
 <div *ngIf="option == 3">
   <app-carousel-mini></app-carousel-mini>
   <div class="position-relative bg-dark">
@@ -121,143 +51,15 @@
       Ir al cineclub municipal
     </a>
   </div>
-  <div id="destacadas" class="position-relative mt-3">
-    <div class="container-fluid d-flex justify-content-center mb-4">
-      <div class="cont-film-estreno">
-        <div class="ms-3 mb-2 d-flex">
-          <span class="bg-dark rounded-circle p-3">
-            <i class="fa-solid fa-video"></i>
-          </span>
-          <h3 class="ms-2 my-auto">Lo más visto</h3>
-        </div>
-        <a type="button" class="sliderBtn btnLeft fs-2" (click)="rigth()">
-          <i class="fa-solid text-white fa-angle-left"></i>
-        </a>
-        <a type="button" class="sliderBtn btnRight fs-2" (click)="left()">
-          <i class="fa-solid text-white fa-angle-right"></i>
-        </a>
-        <div
-          class="slide-estreno"
-          #slider
-          [ngStyle]="{ transform: 'translateX(' + moveTo + 'px)' }"
-        >
-          <div
-            #imgfilm
-            *ngFor="let item of films2"
-            class="col col-sm-2 col-lg-3 col-xl-3"
-          >
-            <div class="img-film mx-2 position-relative">
-              <a routerLink="/peliculas/ver/{{ item.title }}">
-                <img
-                  [src]="item.imagesUrlBillboard"
-                  class="border border-secondary rounded"
-                  alt="..."
-                  style="width: 100%; height: 100%"
-                />
-                <div
-                  class="position-absolute top-0 start-0 info-film"
-                  style="height: 100%; width: 100%"
-                >
-                  <div class="ms-3">
-                    <img
-                      src="./assets/img/pngwing.com (1).png"
-                      style="width: 20px; height: auto"
-                      class="img-fluid"
-                      alt=""
-                    />
-                    <img
-                      src="./assets/img/pngwing.com (1).png"
-                      style="width: 20px; height: auto"
-                      class="img-fluid"
-                      alt=""
-                    />
-                  </div>
-                  <div
-                    class="position-absolute top-50 start-50 translate-middle text-center text-white"
-                  >
-                    <p class="fs-5 text-star">
-                      {{ item.title }}
-                    </p>
-                    <p>Ver mas...</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
-
+<!--Estreno1-->
+<div class="position-relative mb-3" id="Estrenos">
+  <app-carousel-estreno1></app-carousel-estreno1>
+</div>
 <!--Mas vistas-->
-<!-- <div
-  id="destacadas"
-  class="position-relative"
-  style="top: -150px"
->
-  <div class="container-fluid d-flex justify-content-center mb-4">
-    <div class="cont-film-estreno">
-      <div class="fs-3 ms-3 mb-2">#Lo mas visto</div>
-      <a type="button" class="sliderBtn btnLeft fs-2" (click)="rigth()">
-        <i class="fa-solid text-white fa-angle-left"></i>
-      </a>
-      <a type="button" class="sliderBtn btnRight fs-2" (click)="left()">
-        <i class="fa-solid text-white fa-angle-right"></i>
-      </a>
-      <div
-        class="slide-estreno"
-        #slider
-        [ngStyle]="{ transform: 'translateX(' + moveTo + 'px)' }"
-      >
-        <div
-          #imgfilm
-          *ngFor="let item of films2"
-          class="col col-sm-2 col-lg-3 col-xl-3"
-        >
-          <div class="img-film mx-2 position-relative">
-            <a routerLink="/peliculas/ver/{{ item.title }}">
-              <img
-                [src]="item.imagesUrlBillboard"
-                class="border border-secondary rounded"
-                alt="..."
-                style="width: 100%; height: 100%"
-              />
-              <div
-                class="position-absolute top-0 start-0 info-film"
-                style="height: 100%; width: 100%"
-              >
-                <div class="ms-3">
-                  <img
-                    src="./assets/img/pngwing.com (1).png"
-                    style="width: 20px; height: auto"
-                    class="img-fluid"
-                    alt=""
-                  />
-                  <img
-                    src="./assets/img/pngwing.com (1).png"
-                    style="width: 20px; height: auto"
-                    class="img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div
-                  class="position-absolute top-50 start-50 translate-middle text-center text-white"
-                >
-                  <p class="fs-5 text-star">
-                    {{ item.title }}
-                  </p>
-                  <p>Ver mas...</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
+<div class="mb-3">
+  <app-carousel-simple></app-carousel-simple>
+</div>
 <!--Todas-->
 <!--categorias-->
 <div id="todas">
@@ -291,88 +93,3 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="cont-viedo">
-  <video autoplay muted loop id="video-background">
-    <source
-      src="../../../../assets/video/VN20230831_005105.mp4"
-      type="video/mp4"
-    />
-    Tu navegador no soporta videos en HTML5.
-  </video>
-</div>
-<div class="cont-viedo">
-  <video autoplay muted loop id="video-background">
-    <source
-      src="../../../../assets/video/VN20230831_005756.mp4"
-      type="video/mp4"
-    />
-    Tu navegador no soporta videos en HTML5.
-  </video>
-</div> -->
-
-<!-- <div style="height: 400px; width: 100%" class="bg-light">
-  <div class="row mx-0 justify-content-center">
-    <div class="col-auto">
-      <video autoplay muted loop>
-        <source
-          src="../../../../assets/video/videoCineClub.mp4"
-          type="video/mp4"
-        />
-        <source src="../../../../assets/video/videoCineClub.webm" type="video/webm" />
-        <source src="assets/videos/video.ogv" type="video/ogg" />
-        Tu navegador no soporta videos en HTML5.
-      </video>
-    </div>
-    <div class="col-auto my-auto">
-      <div style="width: 70%; height: auto;">
-        <img src="../../../../assets/img/Cineclub-20-anos-Logo-768x612-1-600x478.png" alt="" class="img-fluid">
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- <div class="fs-3 ms-4">#Estrenos</div>
-<div class="slider-container py-3">
-  <a
-    type="button"
-    class="sliderBtn btnLeft fs-2"
-    (click)="rigth()"
-    *ngIf="moveTo != 0"
-  >
-    <i class="fa-solid fa-angle-left"></i>
-  </a>
-  <a
-    type="button"
-    class="sliderBtn btnRight fs-2"
-    (click)="left()"
-    *ngIf="sizeSlider != -moveTo"
-  >
-    <i class="fa-solid fa-angle-right"></i>
-  </a>
-  <div
-    class="slider"
-    #slider
-    [ngStyle]="{ transform: 'translateX(' + moveTo + '%)' }"
-  >
-    <div class="item" *ngFor="let item of list">
-      <div class="card" style="width: 18rem; height: auto">
-        <a type="button" routerLink="/peliculas/pelicula">
-          <img
-            src="../../../../assets/img/santiago-italia.jpg"
-            class="img-fluid movie-carrusel"
-            alt="..."
-          />
-        </a>
-        <div class="card-body">
-          <h5 class="card-title">Titulo pelicula</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->

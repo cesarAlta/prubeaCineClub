@@ -1,10 +1,16 @@
-<div
-  id="destacadas"
-  class="position-relative"
->
-  <div class="container-fluid d-flex justify-content-center mb-4">
-    <div class="cont-film-estreno">
-      <div class="fs-3 ms-3 mb-2">#Lo mas visto</div>
+<div id="destacadas" class="position-relative">
+  <div class="container-fluid d-flex ps-3 mb-3">
+    <div
+      class="rounded-circle bg-dark p-2 d-flex justify-content-center align-items-center"
+      style="width: 50px; height: 50px"
+    >
+      <i class="fa-solid fa-video"></i>
+    </div>
+    <p class="fs-3 my-auto ms-2">Lo más visto</p>  
+  </div>
+
+  <div class="container-fluid d-flex justify-content-center">
+    <div #contFilm class="cont-film-estreno">
       <a type="button" class="sliderBtn btnLeft fs-2" (click)="rigth()">
         <i class="fa-solid text-white fa-angle-left"></i>
       </a>
@@ -19,7 +25,7 @@
         <div
           #imgfilm
           *ngFor="let item of films2"
-          class="col col-sm-2 col-lg-3 col-xl-3"
+          class="col-auto"
         >
           <div class="img-film mx-2 position-relative">
             <a routerLink="/peliculas/ver/{{ item.title }}">

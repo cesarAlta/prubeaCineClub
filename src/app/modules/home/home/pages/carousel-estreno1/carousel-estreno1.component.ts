@@ -53,16 +53,22 @@ export class CarouselEstreno1Component {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
+anchorFilm:any;
+move:number=0;
   ngOnInit(): void {
+    this.anchorFilm = this.films.length * 100;
+
+
     this.getWindowWidth();
     // carga de las peliculas
     this.sliderItems = peliculas;
 
     if (this.windowWidth < 576) {
       //slider = 600%
+      this.move=95;
       this.sizeSlider = 150;
     } else if (this.windowWidth > 576 && this.windowWidth < 768) {
+      this.move= 100/3;
       //slider = 400%
       this.sizeSlider = 80;
     } else if (this.windowWidth > 768 && this.windowWidth < 998) {
@@ -83,7 +89,7 @@ export class CarouselEstreno1Component {
   }
   nextSlide() {
     console.log('antes de ejecutar nex', this.currentIndex);
-    if (this.currentIndex < this.sliderItems.length -1) {
+    if (this.currentIndex < this.sliderItems.length -2) {
       this.currentIndex++;
       console.log('despues de ejecutar nex', this.currentIndex);
     }
@@ -94,22 +100,6 @@ export class CarouselEstreno1Component {
       this.currentIndex--;
     }
   }
-  showItems(num: number) {
-    // this.itemoculto=!this.itemoculto
-    // this.mostrarbtndesplzamiento=!this.mostrarbtndesplzamiento;
-    if (num == 1) this.show1film = !this.show1film;
-    if (num == 2) this.show2film = !this.show2film;
-    if (num == 1) {
-      this.show1film = !this.show1film;
-      if (this.show1film) this.films = [peliculas[0]];
-    }
-    if (this.show2film) {
-      this.films = peliculas.splice(0, 2);
-    } else {
-      this.films = peliculas.splice(0, 3);
-    }
-  }
-  centrar() {
-    this.justifyFilm = this.showcentrar ? 'left' : 'center';
-  }
+
+
 }

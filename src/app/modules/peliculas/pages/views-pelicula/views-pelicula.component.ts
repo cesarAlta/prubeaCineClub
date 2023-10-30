@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Pelicula, peliculas } from 'src/app/models/Pelicula';
 import { PeliculasService } from '../../services/peliculas.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-views-pelicula',
@@ -17,7 +18,8 @@ export class ViewsPeliculaComponent implements OnInit {
   pelis: Pelicula[] = peliculas.concat(peliculas);
 
   constructor(
-    private route: ActivatedRoute, private peliculaService: PeliculasService
+    private route: ActivatedRoute, private peliculaService: PeliculasService,
+    private scrollTo: ViewportScroller
   ){}
 
   ngOnInit(): void {
@@ -28,7 +30,9 @@ export class ViewsPeliculaComponent implements OnInit {
   }
   showTriler() {
     this.triler = !this.triler;
-    this.triler ? window.scrollBy(0, 550) : window.scrollBy(0, -550);
+    // this.triler ? window.scrollBy(0, 550) : window.scrollBy(0, -550);
+    this.triler ? this.scrollTo.scrollToAnchor('trailerMovie'):this.scrollTo.scrollToPosition([0,0])
+
   }
 
   publicar(item:Pelicula){

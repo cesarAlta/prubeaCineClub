@@ -55,7 +55,6 @@
             routerLink="home"
             fragment="todas"
             routerLinkActive="router-link-active"
-            (click)="menuCanvas.click()"
             >Todas</a
           >
         </li>
@@ -131,12 +130,11 @@
 </nav>
 <!-- op2 -->
 <nav
-  class="navbar navbar-dark navbar-expand-lg"
-  [style.height]="navbarFixed ? '70px' : '150px'"
-  [ngClass]="{ 'nav-fixed': navbarFixed }"
+  class="navbar navbar-dark navbar-expand-lg nav-1 w-100"
+  [ngClass]="{ 'nav-sticky': navbarFixed }"
   *ngIf="option == 2"
 >
-  <div class="container-fluid">
+  <div class="container-fluid ">
     <button
       #menuCanvas
       class="navbar-toggler"
@@ -146,7 +144,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="me-auto me-5">
+      <div >
         <ul class="navbar-nav ms-auto me-5 fs-3 my-auto">
           <li class="nav-item">
             <a
@@ -250,13 +248,13 @@
             </ng-template>
           </li>
         </ul>
-        <form [ngClass]="checkSearch ? 'show' : 'hidden'">
+        <form class="w-75 ms-auto me-5" [ngClass]="checkSearch ? 'show' : 'hidden'">
           <div class="input-group input-group-sm">
             <input
               type="search"
               class="form-control"
               type="search"
-              placeholder="Buscar película por: nombre, director, actor"
+              placeholder="Buscar película, director"
               aria-label="Buscar"
               aria-describedby="button-search2"
             />

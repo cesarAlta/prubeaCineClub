@@ -49,14 +49,6 @@
   transition: opacity 0.3s ease;
 }
 
-.nav-fixed{
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.808);
-  width: 100%;
-  height: 70px;
-  transition: all 1s ease;
-  z-index: 5;
-}
 
 .like:active {
   animation: party 0.3s ;
