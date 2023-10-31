@@ -41,8 +41,12 @@ export class HomeComponent implements OnInit {
     private vimeoService: HomeService
   ) {}
   tutorialData: any;
+  // urlVideo:string='https://storage.cloud.google.com/cineclub-cloud-bucket/front-page/VN20230831_004301.mp4';
+  urlVideo!:string;;
+
   ngOnInit(): void {
     this.hs.optview$.subscribe(re=>this.option=re)
+    this.hs.getVideo().subscribe((res:any)=>{this.urlVideo = res[0]; console.log(this.urlVideo)});
     
     this.anchorWind = window.innerWidth;
     if (this.anchorWind < 576) {

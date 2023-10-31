@@ -14,7 +14,7 @@ export class ViewsPeliculaComponent implements OnInit {
   peliSel: Pelicula | undefined;
   @Input()ver: string= '';
   @Output() emitPeli = new EventEmitter<Pelicula>()
-
+  urlImage:string|undefined;
   pelis: Pelicula[] = peliculas.concat(peliculas);
 
   constructor(
@@ -27,6 +27,7 @@ export class ViewsPeliculaComponent implements OnInit {
       this.peliculaService.getByName(p.get('name')!).subscribe(res=>
         this.peliSel=res)
     })
+    this.urlImage= this.peliSel?.imagesUrlCover;
   }
   showTriler() {
     this.triler = !this.triler;

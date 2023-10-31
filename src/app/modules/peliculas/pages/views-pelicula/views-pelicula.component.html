@@ -1,26 +1,26 @@
 <!--vista de una pelicula-->
 <div class="position-relative" *ngIf="ver == ''">
   <div
-    class="position-relative overflow-hidden"
-    style="height: 100vh; width: 100%"
+    class="cover-page"
+    [style.background-image]="'url('+urlImage+')'"
   >
-    <!-- src="./assets/img/slide-todasLasPistas_edited.jpg" -->
-    <img [src]="peliSel?.imagesUrlCover" class="img-fluid" />
-    <div class="back-1"></div>
     <div class="container-movieinfo">
       <div class="container">
-        <div class="row">
-          <h2>{{ peliSel?.title }}</h2>
-        </div>
-        <div class="row gap-2">
-          <div class="col-8 col-md-4 col-lg-2">
+        <div class="row gap-2 justify-content-center">
+          <div class="col-8 col-md-10 col-lg-11 title-movie">
+            <h2>{{ peliSel?.title }}</h2>
+          </div>
+          <div class="col-7 col-md-4 col-lg-2">
             <img
               [src]="peliSel?.imagesUrlBillboard"
               alt=""
               class="img-fluid rounded"
             />
           </div>
-          <div class="col-11 col-md col-lg-9">
+          <div class="col-11 col-md-6 col-lg-9 my-auto">
+            <div class="title-movie-sm">
+              <h2>{{ peliSel?.title }}</h2>
+            </div>
             <div>
               <app-valuacion
                 [valoracion]="peliSel?.ratingMovie!"
@@ -29,7 +29,7 @@
                 Duración: {{ peliSel?.durationInMinutes }} min. |
                 {{ peliSel?.ratingMovieINCAA }}
               </p>
-              <p>{{ peliSel?.synopsis }}</p>
+              <p class="synopsis-movie">{{ peliSel?.synopsis }}</p>
             </div>
             <div>
               <p>
@@ -53,25 +53,32 @@
     </div>
   </div>
   <div id="trailerMovie">
-    <div class="d-flex justify-content-center" *ngIf="triler">
-        <iframe
-          src="https://player.vimeo.com/video/876491534?h=a8661edfc4"
-          frameborder="0"
-          width="680"
-          height="400"
-          allow="autoplay; fullscreen"
-          allowfullscreen
-        ></iframe>
-      <a
-        role="button"
-        class="btn btn-unstyled border-0 text-danger"
-        (click)="showTriler()"
-      >
-        X Cerrar
-      </a>
+    <div class="container-fluid mb-3" *ngIf="triler">
+      <div class="row justify-content-center">
+        <div class="d-flex justify-content-between bg-dark">
+          <h3>Trailer</h3>
+          <a
+            role="button"
+            class="btn btn-unstyled border-0 text-danger"
+            (click)="showTriler()"
+          >
+            X Cerrar
+          </a>
+        </div>
+        <div class="col-10 col-md-8">
+          <div class="ratio ratio-16x9">
+            <iframe
+              src="https://player.vimeo.com/video/876491534?h=a8661edfc4"
+              frameborder="0"
+              allow="autoplay; fullscreen"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="container-fluid">
+  <div class="container-fluid p-0">
     <div class="bg-dark">
       <h2 class="p-3 ps-5">Ver Película</h2>
     </div>

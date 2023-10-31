@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ConfigPageComponent } from './pages/config-page/config-page.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
             (m) => m.PeliculasModule
           ),
       },
+      {path: 'config', component: ConfigPageComponent}
     ],
   },
 ];

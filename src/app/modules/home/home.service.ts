@@ -10,11 +10,16 @@ export class HomeService {
 private optview= new BehaviorSubject<number>(1);
 optview$ = this.optview.asObservable();
 private apiUrl = 'https://api.vimeo.com'; // La URL base de la API de Vimeo
+private apiGoogleVideo:string="https://cineclub-backend-nodejs.fly.dev/getFrontPageVideo";
 
   constructor(private http: HttpClient) { }
 
   upDateOption(num:number){
     this.optview.next(num);
+  }
+  getVideo(){
+    return this.http.get(this.apiGoogleVideo)
+
   }
 //   getTutorial(): Observable<any> {
 //     // Define las cabeceras con tu token de acceso

@@ -88,10 +88,8 @@ move:number=0;
     this.windowWidth = window.innerWidth;
   }
   nextSlide() {
-    console.log('antes de ejecutar nex', this.currentIndex);
     if (this.currentIndex < this.sliderItems.length -2) {
       this.currentIndex++;
-      console.log('despues de ejecutar nex', this.currentIndex);
     }
   }
   optestreno = 1;
