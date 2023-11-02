@@ -1,43 +1,55 @@
 <!-- config- video -->
-<div>
-  <div class="bg-dark my-3">
-    <h3 class="d-flex justify-content-between border-bottom">
+<div class="container my-3 border border-secondary rounded p-3">
+  <div class="mb-3">
+    <h4 class="d-flex justify-content-between border-bottom">
       Configuración: video de portada de inicio.
       <small>
-        <a
-          role="button"
-          class="btn-link link-light"
-          routerLink="/dashboard"
-        >
-          <i class="fa-solid fa-x"></i> </a
-      ></small>
-    </h3>
+        <a role="button" class="btn-link link-light" routerLink="/dashboard">
+          <i class="fa-solid fa-xmark"></i>
+        </a>
+      </small>
+    </h4>
   </div>
   <div class="container">
-    <form name="formVideo">
+    <form name="fgFileVideo" [formGroup]="fgFileVideo">
       <div class="mb-3">
-        <label for="formFile" class="form-label"
-          >Seleccione un video para la portada</label
-        >
+        <label for="formFile" class="form-label">
+          Seleccione un video para la portada
+        </label>
         <input
           accept="video/mp4"
           class="form-control"
           type="file"
           id="formFile"
+          formControlName="file"
+          [ngClass]="{
+            'is-invalid': fgFileVideo.get('file')?.errors && submitted
+          }"
           (change)="getVideo($event)"
         />
+        <span
+          class="text-danger"
+          *ngIf="fgFileVideo.get('file')?.errors && submitted"
+          >Debe seleccionar un video</span
+        >
       </div>
-      <div class="row justify-content-center mb-3" *ngIf="videoPreview">
-        <div class="col-auto">
-          <!-- relacion 16:9 -->
-          <video controls width="800" height="540">
+      <div
+        class="row justify-content-center mb-3"
+        *ngIf="videoPreview"
+      >
+        <div class="ratio ratio-16x9">
+          <video controls width="max-width" height="max-heigth">
             <source [src]="videoPreview" type="video/mp4" />
           </video>
         </div>
       </div>
       <div class="d-flex justify-content-center gap-3 mb-3">
-        <button type="button" class="btn btn-primary" (click)="saveVideo()">Confirmar</button>
-        <button type="button" class="btn btn-warning">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="saveVideo()">
+          Confirmar
+        </button>
+        <button type="button" class="btn btn-warning" (click)="cancel()">
+          Cancelar
+        </button>
       </div>
     </form>
   </div>

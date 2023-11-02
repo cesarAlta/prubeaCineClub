@@ -1,19 +1,19 @@
 <!--Opcion 1-->
 <div class="position-relative" *ngIf="option == 1">
-  <!-- <div class="cont-viedo">
+  <div class="cont-viedo">
     <video loop autoplay [muted]="true" id="video-background">
       <source src="./assets/video/VN20230831_004301.mp4" type="video/mp4" />
       Tu navegador no soporta videos en HTML5.
     </video>
     <div class="cover-video"></div>
-  </div> -->
-  <div class="cont-viedo" *ngIf="urlVideo">
+  </div>
+  <!-- <div class="cont-viedo" *ngIf="urlVideo">
     <video loop autoplay [muted]="true" id="video-background">
-      <source src="{{urlVideo}}" type="video/mp4" />
+      <source src="{{ urlVideo }}" type="video/mp4" />
       Tu navegador no soporta videos en HTML5.
     </video>
     <div class="cover-video"></div>
-  </div>
+  </div> -->
 </div>
 
 <!--Opcion 2-->

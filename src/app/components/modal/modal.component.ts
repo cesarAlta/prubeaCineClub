@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -6,25 +6,19 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
   title: string = '';
-  text: string = '';
   textBtnTrue: string = '';
   textBtnFalse: string = '';
-  bloquearPantalla = false;
-  classHeader: string = 'bg-success';
+  lockScreen = false;
   message: string = '';
-  falcon: any;
-  header: boolean = false;
-  iconcheck: any=false;
-  iconfail: any=false;
-  logout:boolean=false;
-  classIcon:string='';
-  constructor(public activeModal: NgbActiveModal) {
-    this.bloquearPantalla = false;
-  }
+  classIcon: string = '';
+  border?:string;
+  processing: boolean = false;
 
-  ngOnInit(): void {}
+  constructor(public activeModal: NgbActiveModal) {
+    this.lockScreen = false;
+  }
 
   cerrar() {
     this.activeModal.close();
@@ -34,33 +28,35 @@ export class ModalComponent implements OnInit {
 
     switch (tipo) {
       case 's':
-        this.classHeader = 'bg-success';
-        this.classIcon = 'fa-solid fa-circle-check fs-3 text-success'
+        this.classIcon = 'fa-solid fa-circle-check fs-2 text-success';
+        this.border = 'border-success';
+
         break;
       case 'd':
-        this.classHeader = 'bg-danger';
-        this.header = false;
-        this.classIcon = 'fa-solid fa-circle-xmark fs-3 text-danger';
+        this.classIcon = 'fa-solid fa-circle-xmark fs-2 text-danger';
+        this.border = 'border-danger';
+
         break;
       case 'i':
-        this.classHeader = 'bg-info';
-        this.classIcon = 'fa-solid fa-circle-info fs-3 text-primary';
+        this.classIcon = 'fa-solid fa-circle-info fs-2 text-primary';
+        this.border = 'border-info';
+
         break;
       case 'w':
-        this.classHeader = 'bg-warning';
-        this.classIcon = 'fa-solid fa-circle-exclamation fs-3 text-warning';
+        this.classIcon = 'fa-solid fa-circle-exclamation fs-2 text-warning';
+        this.border = 'border-warning';
         break;
-      case 'l':
-        this.classHeader = '';
-        this.header = false;
+      case 'p':
+        this.classIcon = 'fa-solid fa-gear fa-spin fs-2';
+        this.border = 'border-light';
+        this.processing= true;
         break;
-        case 'logo':
-        this.classIcon = 'fa-solid fa-door-open fs-3 text-danger';
+      case 'logout':
+        this.classIcon = 'fa-solid fa-door-open fs-2 text-danger';
+        this.border = 'border-danger';
 
-          this.logout=true;
         break;
       default:
-        this.classHeader = 'bg-success';
         break;
     }
   }

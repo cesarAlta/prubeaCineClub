@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location, ViewportScroller } from '@angular/common';
 import { ModalService } from 'src/app/services/modal.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from 'src/app/models/Auth/Usuario';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit,OnDestroy {
   loginF: FormGroup | undefined; // form para loguearse.
   newUserF: FormGroup | undefined; //form para registrar nuevo usuario.
   recoverPassF: FormGroup | undefined; //form para recuperar constraseña
@@ -26,10 +27,15 @@ export class LoginComponent implements OnInit {
     private modalS: ModalService,
     private usuarioS: UsuarioService,
     private router: Router,
-    private viewportScroller: ViewportScroller
+    private viewportScroller: ViewportScroller,
+    private utilService: UtilsService
   ) {}
+  ngOnDestroy(): void {
+    this.utilService.updateNavConfig('sticky');
+  }
 
   ngOnInit(): void {
+    this.utilService.updateNavConfig('fixed');
     this.viewportScroller.scrollToAnchor('logininit');
     this.loginF = this.fb.group({
       mail: [null, [Validators.required, Validators.email]],
@@ -40,15 +46,13 @@ export class LoginComponent implements OnInit {
   login() {
     this.submitted = true;
     if (this.loginF?.invalid) return;
-    const copyForm = {... this.loginF?.value}
-    this.usuarioS
-      .logging(copyForm.mail, copyForm.pass)
-      .subscribe((res) => {
-        if (res) {
-          this.modalS.Alert('Este es tu espacio de trabajo', 'Bienvenido!', 's');
-          this.router.navigateByUrl('/dashboard');
-        }
-      });
+    const copyForm = { ...this.loginF?.value };
+    this.usuarioS.logging(copyForm.mail, copyForm.pass).subscribe((res) => {
+      if (res) {
+        this.modalS.Alert('Este es tu espacio de trabajo', 'Bienvenido!', 's');
+        this.router.navigateByUrl('/dashboard');
+      }
+    });
   }
   back() {
     this.location.back();
@@ -74,7 +78,7 @@ export class LoginComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      profile:'admin',
+      profile: 'admin',
       password: ['', Validators.required],
     });
   }
@@ -83,12 +87,15 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.newUserF?.invalid) return;
     let copyform: Usuario = { ...this.newUserF?.value };
-    this.usuarioS.post(copyform).subscribe((res) =>
-      this.modalS.Alert(
-        'Bienvenido a CineClubPlay!',`Registro completo!`,
-        's'
-      )
-    );
+    this.usuarioS
+      .post(copyform)
+      .subscribe((res) =>
+        this.modalS.Alert(
+          'Bienvenido a CineClubPlay!',
+          `Registro completo!`,
+          's'
+        )
+      );
     this.op = 1;
     this.submitted = false;
     this.newUserF?.reset();
@@ -111,8 +118,7 @@ export class LoginComponent implements OnInit {
       .subscribe((res) => {
         if (res)
           this.modalS.Alert(
-            `Te enviamos un mail para reestablecer la contraseña. 
-      Abrí tu email y seguí las instrucciones.`,
+            `Revisa tu correo para restablecer la contraseña. Sigue las instrucciones en tu email.`,
             'Perfecto!',
             's'
           );

@@ -16,6 +16,7 @@ import { MyInterceptor } from './interceptor/my.interceptor';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { SearchComponent } from './components/search/search.component';
 import { FormsModule } from '@angular/forms';
+import { BgLoadingComponent } from './components/bg-loading/bg-loading.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     DashboardComponent,
     SearchComponent,
+    BgLoadingComponent,
   ],
   imports: [
     BrowserModule,

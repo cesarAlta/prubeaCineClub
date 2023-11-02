@@ -10,6 +10,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pelicula, peliculas } from 'src/app/models/Pelicula';
 import { HomeService } from '../home.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private hs: HomeService,
+    private utilServices: UtilsService,
     private rander2: Renderer2,
     private router: Router,
     private route: ActivatedRoute,
@@ -45,8 +47,9 @@ export class HomeComponent implements OnInit {
   urlVideo!:string;;
 
   ngOnInit(): void {
+    this.utilServices.updateNavConfig('sticky');
     this.hs.optview$.subscribe(re=>this.option=re)
-    this.hs.getVideo().subscribe((res:any)=>{this.urlVideo = res[0]; console.log(this.urlVideo)});
+    // this.hs.getVideo().subscribe((res:any)=>{this.urlVideo = res[0]; console.log(this.urlVideo)});
     
     this.anchorWind = window.innerWidth;
     if (this.anchorWind < 576) {

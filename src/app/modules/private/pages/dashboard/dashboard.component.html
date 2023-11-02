@@ -1,6 +1,23 @@
-<div class="position-relative" style="height: 130px;"></div>
+<div class="container-fluid bg-dark">
+  <div class="row border-bottom border-secondary">
+    <div class="col-md-3 col-lg-2 ms-0 text-center my-auto">
+      <img
+        src="./assets/img/logo/logoccp1.png"
+        alt=""
+        style="height: 75px; width: 75px"
+        class="m-2"
+      />
+    </div>
+    <div class="col-10 mx-auto col-md-6 col-lg-8 my-auto">
+      <h3 class="text-center">Espacio de trabajo</h3>
+    </div>
+    <div class="col-auto col-md-3 col-lg-2 my-auto">
+      <h3 class="text-center">Noticias</h3>
+    </div>
+  </div>
+</div>
 <div class="position-relative">
-  <div class="row m-0 w-100" >
+  <div class="row m-0 w-100">
     <nav
       class="navbar navbar-expand-lg navbar-dark bg-secondary my-3 d-md-none d-block"
     >
@@ -50,7 +67,7 @@
             </span>
           </a>
         </div>
-  
+
         <div
           class="collapse"
           id="collapseConfigSitio"
@@ -58,7 +75,6 @@
           data-bs-parent="#accordion-nav"
         >
           <ul class="collapsed-list">
-            <li><a routerLink=""> Estrenos</a></li>
             <li><a routerLink="config">Video portada</a></li>
             <li><a href="">Generos favoritos</a></li>
           </ul>
@@ -82,7 +98,7 @@
             </span>
           </a>
         </div>
-  
+
         <div
           class="collapse"
           id="collapseAdminPelicula"
@@ -193,8 +209,10 @@
       <router-outlet></router-outlet>
     </div>
     <div class="col-auto col-md-3 col-lg-2 d-none d-md-block">
-      
-      <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 18rem">
+      <div
+        class="card text-dark bg-light mb-3 mx-auto"
+        style="max-width: 18rem"
+      >
         <div class="card-header">
           <i class="fa-solid fa-globe"></i> Sobre tu repositorio
         </div>
@@ -206,7 +224,10 @@
           <h5 class="card-title text-center">130 usuarios registrados!</h5>
         </div>
       </div>
-      <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 18rem">
+      <div
+        class="card text-dark bg-light mb-3 mx-auto"
+        style="max-width: 18rem"
+      >
         <div class="card-header">
           <i class="fa-solid fa-film"></i> Película más vista
         </div>
@@ -219,7 +240,10 @@
           </p>
         </div>
       </div>
-      <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 18rem">
+      <div
+        class="card text-dark bg-light mb-3 mx-auto"
+        style="max-width: 18rem"
+      >
         <div class="card-header">
           <i class="fa-solid fa-heart"></i> Película más valorada
         </div>
@@ -232,7 +256,10 @@
           </p>
         </div>
       </div>
-      <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 18rem">
+      <div
+        class="card text-dark bg-light mb-3 mx-auto"
+        style="max-width: 18rem"
+      >
         <div class="card-header">
           <i class="fa-solid fa-heart"></i> Géneros más vistos
         </div>
@@ -243,7 +270,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <!--canvasmenu-->

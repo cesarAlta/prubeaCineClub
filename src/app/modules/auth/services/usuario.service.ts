@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { Usuario, usuarios } from 'src/app/models/Auth/Usuario';
 import { environment } from 'src/environments/environment.development';
-
+import { Profile, profiles } from 'src/app/models/Auth/profile';
 const USER_LOCAL_ST_KEY = 'userData';
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,7 @@ export class UsuarioService {
     // return this.httpClient.post(this.URI, { email, pass} )
   }
 
-  //nuevo usuario
+  //Nuevo usuario
   post(newUser: Usuario) {
     return this.httpClient.post(this.URI + 'user', newUser);
   }
@@ -37,43 +37,58 @@ export class UsuarioService {
   postRecover(email: string) {
     return this.httpClient.post(this.URI + 'tokenPassword', { email: email });
   }
+  //Guarda la nueva contraseña
   confirmPassword(newPass: any, token: string) {
     const param = new HttpParams().set('token', token);
-    return this.httpClient.post(this.URI + 'recoverPassword', newPass,{params:param});
+    return this.httpClient
+      .post(this.URI + 'recoverPassword', newPass, {
+        params: param,
+        observe: 'response',
+      })
+      .pipe(map((res) => Boolean(res.status == 200)));
   }
+  //Cierra sesión
   logout() {
     localStorage.removeItem(USER_LOCAL_ST_KEY);
     this.user.next(null);
     this.redirectToHome();
   }
-
+  //Inicio de sesión
   logging(email: string, pass: string) {
     let user: Usuario | undefined;
-
     // credenciales a base64
     const credentials = btoa(email + ':' + pass);
     const head = new HttpHeaders({
       Authorization: 'Basic ' + credentials,
     });
-    const params = new HttpParams();
-    params.set('email', email);
-    params.set('password', pass);
 
     return this.httpClient
       .get(this.URI + 'token', {
-        params: params,
         headers: head,
         observe: 'response',
       })
       .pipe(
         map((res) => {
           if (res.status == 200) {
-            //deberia devolver un usuario
-            console.log(res);
+            /*
+            El jwt consta de 3 partes, header, payload, signature. Los datos vienen en el payload,
+            corto la cadena en '.' y tendría 0,1,2 => tomo el 1 (payload)
+            */
+            const base64Url = res.body!.toString().split('.')[1];
+            /*
+            Normalizo a base64 y remplazo los caracteres '-' y '_' para que sean compatibles con la
+            decodificación.
+            */
+            const base64 = base64Url.replace('-', '+').replace('_', '/');
+            /*
+            Decodifico la cadena base64 en una cadena JSON utilizo window.atob, y la conviero en JSON
+            Defino un usuario tipo any para guardarlo temporalmente.
+            */
+            const us: any = JSON.parse(window.atob(base64));
             user = new Usuario();
-            user.firstName = 'Usuario';
-            user.lastName = 'Unico';
-            user.profile = 'Admin';
+            user.firstName = us.nombre;
+            user.profile = profiles.find((p) => p._id == us.profile)!;
+            user.email = us.email;
             this.user.next(user);
             this.saveToken(res.body);
           }
@@ -92,12 +107,12 @@ export class UsuarioService {
     this.route.navigateByUrl('/');
   }
   verifyUser(t: string) {
-  //   let param = new HttpParams();
-  //   param.set('token', t);
-  //   this.httpClient
-  //     .get(this.URI + 'verifyToken', { params: param })
-  //     .subscribe((res) => {
-  //       console.log(res);
-  //     });
+    //   let param = new HttpParams();
+    //   param.set('token', t);
+    //   this.httpClient
+    //     .get(this.URI + 'verifyToken', { params: param })
+    //     .subscribe((res) => {
+    //       console.log(res);
+    //     });
   }
 }

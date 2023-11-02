@@ -1,5 +1,5 @@
-<div class="modal-body text-dark">
-  <div class="row justify-content-end me-1">
+<!-- <div class="modal-body position-relative text-dark">
+  <div class="position-absolute end-0 top-0 m-2">
     <button
       type="button"
       class="btn-close"
@@ -10,19 +10,14 @@
   </div>
   <h4 class="modal-title text-center">{{ title }}</h4>
   <div class="row mt-3">
-    <div class="text-dark text-center">
+    <div class="text-center fs-5 ">
       <span class="align-middle">
         <i [class]="classIcon"></i>
       </span>
       {{ message }}
     </div>
-    <!-- <div class="d-flex" style="width: 80px; height: auto" >
-      <img src="./assets/img/icons/ok.png" class="img-fluid" alt="ok-icon" *ngIf="iconcheck" >
-      <img src="./assets/img/icons/ok.png" class="img-fluid" alt="x-icon" *ngIf="iconfail">
-      <img src="./assets/img/logout.svg" alt="logout-icon" class="img-fluid" *ngIf="logout">
-    </div> -->
   </div>
-  <div *ngIf="bloquearPantalla" class="progress">
+  <div *ngIf="lockScreen" class="progress">
     <div
       class="progress-bar progress-bar-striped progress-bar-animated"
       role="progrressbar"
@@ -40,6 +35,7 @@
       type="button"
       class="btn btn-sm btn-outline-primary"
       (click)="activeModal.close(true)"
+      ngbAutofocus 
     >
       {{ textBtnTrue }}
     </button>
@@ -53,5 +49,47 @@
     >
       {{ textBtnFalse }}
     </button>
+  </div>
+</div> -->
+
+<div class="modal-content text-dark">
+    <div class="position-absolute end-0 top-0 m-2" *ngIf="!processing">
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-header {{border}}" >
+    <h4 class="modal-title">{{ title }}</h4>
+  </div>
+  <div class="modal-body">
+    <span class="align-middle me-2 my-auto">
+      <i [class]="classIcon"></i>
+    </span>
+    <p class="fs-5 my-auto">{{message}}</p>
+  </div>
+  <div class="modal-footer">
+    <button
+    *ngIf="textBtnTrue !== ''"
+    type="button"
+    class="btn btn-sm btn-outline-primary"
+    (click)="activeModal.close(true)"
+    ngbAutofocus 
+  >
+    {{ textBtnTrue }}
+  </button>
+  &nbsp;
+  <button
+    *ngIf="textBtnFalse !== ''"
+    type="button"
+    class="btn btn-sm btn-outline-danger"
+    data-bs-dismiss="modal"
+    (click)="activeModal.close(false)"
+  >
+    {{ textBtnFalse }}
+  </button>
   </div>
 </div>

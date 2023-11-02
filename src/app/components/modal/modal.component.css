@@ -1,0 +1,26 @@
+.modal-header{
+    justify-content: center;
+}
+.modal-body{
+    display: flex;
+    justify-content: center;
+}
+.modal-footer{
+    border-top: none;
+
+    justify-content: center;
+}
+.btn-close-modal{
+    border-radius: 50%;
+    border: 3px rgba(255, 255, 255, 0);
+    width: 2em;
+    height: 2em;
+    padding: .25em;
+    background-color: #dc3545;
+    text-align: center;
+  line-height: 1.5;
+}
+.btn-close-modal:hover{
+transform: scale(1.2);
+
+}

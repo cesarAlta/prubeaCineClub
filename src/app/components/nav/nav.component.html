@@ -1,9 +1,12 @@
 <nav
-  class="navbar navbar-dark navbar-expand-lg nav-1 w-100"
+  class="navbar navbar-dark navbar-expand-lg w-100 "
   [ngClass]="{ 'nav-sticky': navbarFixed }"
+  [class.navDashboard]="navDashboard"
+  [class.navFixed]="navFixed"
+  [class.nav-1]="navSticky"
   *ngIf="option == 1"
 >
-  <div class="container-fluid  position-relative">
+  <div class="container-fluid position-relative ">
     <a class="navbar-brand" href="#" style="width: 100px; height: auto">
       <img src="./assets/img/logo/logoccp1.png" alt="" class="img-fluid" />
     </a>
@@ -15,10 +18,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div
-      class="collapse navbar-collapse"
-      id="navbarSupportedContent"
-    >
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto fs-4">
         <li class="nav-item">
           <a
@@ -132,9 +132,12 @@
 <nav
   class="navbar navbar-dark navbar-expand-lg nav-1 w-100"
   [ngClass]="{ 'nav-sticky': navbarFixed }"
+  [class.navDashboard]="navDashboard"
+  [class.navFixed]="navFixed"
+  [class.nav-1]="navSticky"
   *ngIf="option == 2"
 >
-  <div class="container-fluid ">
+  <div class="container-fluid">
     <button
       #menuCanvas
       class="navbar-toggler"
@@ -144,7 +147,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div >
+      <div>
         <ul class="navbar-nav ms-auto me-5 fs-3 my-auto">
           <li class="nav-item">
             <a
@@ -201,7 +204,7 @@
             >
               <li>
                 <a class="dropdown-item" type="button" (click)="getOption(1)"
-                  >Opciión1</a
+                  >Opción1</a
                 >
               </li>
               <li>
@@ -248,7 +251,10 @@
             </ng-template>
           </li>
         </ul>
-        <form class="w-75 ms-auto me-5" [ngClass]="checkSearch ? 'show' : 'hidden'">
+        <form
+          class="w-75 ms-auto me-5"
+          [ngClass]="checkSearch ? 'show' : 'hidden'"
+        >
           <div class="input-group input-group-sm">
             <input
               type="search"
@@ -285,8 +291,12 @@
 
 <!-- op3 -->
 <nav
-  class="navbar position-absolute navbar-dark navbar-expand-lg nav-op3 w-100"
+  class="navbar navbar-dark navbar-expand-lg w-100"
   style="height: 150px"
+  [ngClass]="{ 'nav-sticky': navbarFixed }"
+  [class.navDashboard]="navDashboard"
+  [class.navFixed]="navFixed"
+  [class.nav-op3]="navSticky"
   *ngIf="option == 3"
 >
   <div class="container-fluid">
@@ -329,7 +339,6 @@
               routerLink="home"
               fragment="todas"
               routerLinkActive="router-link-active"
-              (click)="menuCanvas.click()"
               >Todas</a
             >
           </li>
@@ -535,6 +544,11 @@
           <li>
             <a class="dropdown-item" type="button" (click)="getOption(2)"
               >Opción2</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" type="button" (click)="getOption(3)"
+              >Opción3</a
             >
           </li>
         </ul>

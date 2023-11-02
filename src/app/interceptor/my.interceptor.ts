@@ -23,13 +23,13 @@ export class MyInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    this.modalS.BloquearPantalla();
+    !this.modalS.lockedSreen() ? this.modalS.BloquearPantalla() : '';
 
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         switch (error.status) {
           case 401: {
-            this.modalS.Alert('Debes iniciar sesión', 'UPS!','i');
+            this.modalS.Alert('Debes iniciar sesión', 'UPS!', 'i');
             this.router.navigateByUrl('login');
             break;
           }
@@ -46,18 +46,18 @@ export class MyInterceptor implements HttpInterceptor {
             //usuario: no se encontro email para recuperar contraseña
             if (error.error == 'user not found') {
               this.modalS.Alert(
-                'Algo salió mal. Ingresa tu mail nuevamente y verifica que sea correcto',
+                'Correo no encontrado. Por favor, verifica tu dirección de correo.',
                 'UPS!',
                 'w'
               );
             }
             break;
           }
-          //usuario recuperacion de pass: no token
-          case 400: {
-            if (error.error == 'no token') {
+          //usuario recuperacion de pass: token no asociado a un usuario
+          case 500: {
+            if (error.error == `TypeError: Cannot read properties of undefined (reading 'ID_USUARIO')`) {
               this.modalS.Alert(
-                `Expiró el timepo de recuperación de contraseña.
+                `Expiró el tiempo de recuperación de contraseña.
                 Seleccione nuevamente "Olvidé la contraseña"`,
                 'UPS!',
                 'd'

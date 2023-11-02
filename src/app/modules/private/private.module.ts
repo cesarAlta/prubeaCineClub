@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PrivateRoutingModule } from './private-routing.module';
 import { ConfigPageComponent } from './pages/config-page/config-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ConfigPageComponent } from './pages/config-page/config-page.component';
   ],
   imports: [
     CommonModule,
-    PrivateRoutingModule
+    PrivateRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class PrivateModule { }

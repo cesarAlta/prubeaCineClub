@@ -70,6 +70,9 @@
 .nav-op3{
   z-index: 100;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.001), rgb(0, 0, 0));
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 /* op3 */
 
@@ -86,4 +89,19 @@ background-color: rgba(0, 0, 0, 0.5);
 z-index: 100;
 transition: all 1s ease;
 }
-/* op1 */
+
+.nav-fixed{
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.navDashboard{
+  position: relative;
+  top: 0;
+  left: 0;
+  background-color: rgba(105, 24, 24, 0.767);
+  height: 50px;
+}
+.navDashboard .navbar-brand{
+ display: none;
+}

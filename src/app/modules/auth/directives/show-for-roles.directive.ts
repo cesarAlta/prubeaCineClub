@@ -14,7 +14,7 @@ export class ShowForRolesDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.authService.user$.pipe(
-      map((user) => Boolean(user && this.allowedRoles?.includes(user.profile!))),
+      map((user) => Boolean(user && this.allowedRoles?.includes(user._nameProfile))),
       distinctUntilChanged(), 
       tap((hasRole)=> hasRole? this.viewContainerRef.createEmbeddedView(this.templateRef):this.viewContainerRef.clear())
     ).subscribe();

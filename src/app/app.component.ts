@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from './modules/auth/services/usuario.service';
 import { BehaviorSubject } from 'rxjs';
 import { Usuario } from './models/Auth/Usuario';
+import { ModalService } from './services/modal.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -41,16 +43,18 @@ export class AppComponent implements OnInit {
 	// 	}
 	// }
 	
-	constructor(private authService: UsuarioService){}
+	constructor(private authService: UsuarioService, private ms:ModalService,
+	){}
 
 	ngOnInit(){
+		// this.ms.BloquearPantalla();
 		let t = localStorage.getItem('userData');
 		 if(t){
 			// this.authService.verifyUser(t);
 			let user = new Usuario();
             user.firstName = 'Usuario';
             user.lastName = 'Unico';
-            user.profile = 'Admin';
+            // user.profile = 'Admin';
 			this.authService.pushNewUser(user);
 		 }
 		 

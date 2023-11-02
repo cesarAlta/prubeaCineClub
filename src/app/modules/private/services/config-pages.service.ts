@@ -15,7 +15,6 @@ export class ConfigPagesService {
   post(videoFile: any) {
     const formData = new FormData();
     formData.append('video', videoFile);
-
     return this.http.post(this.URI + 'uploadFrontPageVideo', formData);
   }
 }

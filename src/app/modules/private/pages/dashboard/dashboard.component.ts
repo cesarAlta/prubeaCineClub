@@ -1,17 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
+
+  
 
   rotate1:boolean=false;
   rotate2:boolean=false;
   rotate3:boolean=false;
   rotate4:boolean=false;
   offcanvasmenu:boolean=false;
+
+  constructor(private utilServices: UtilsService){}
+  ngOnInit(): void {
+    this.utilServices.updateNavConfig('navDash');
+  }
+
   btnOffCanvas(){
     this.offcanvasmenu = ! this.offcanvasmenu;
   }

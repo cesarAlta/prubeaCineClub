@@ -1,10 +1,12 @@
+import { Profile } from "./profile";
+
 export class Usuario {
-  id: number | undefined;
+  id?: number;
   firstName: string | undefined;
   lastName: string | undefined;
-  password: string | undefined;
+  password?: string;
   email: string | undefined;
-  profile!: string;
+  profile!: Profile;
 
   get _firstName(){
     return this.firstName;
@@ -19,9 +21,13 @@ export class Usuario {
     return this.email;
   }
   get _profile(){
-    return this.firstName;
+    return this.profile;
+  }
+  get _nameProfile(){
+    return this.profile._name;
   }
 }
+
 
 export const usuarios: Usuario[] = [
 ];
