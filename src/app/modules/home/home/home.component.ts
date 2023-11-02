@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.utilServices.updateNavConfig('sticky');
     this.hs.optview$.subscribe(re=>this.option=re)
-    // this.hs.getVideo().subscribe((res:any)=>{this.urlVideo = res[0]; console.log(this.urlVideo)});
+    this.hs.getVideo().subscribe((res:any)=>{this.urlVideo = res[0]; console.log(this.urlVideo)});
     
     this.anchorWind = window.innerWidth;
     if (this.anchorWind < 576) {
