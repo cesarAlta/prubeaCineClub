@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
   urlVideo!:string;;
 
   ngOnInit(): void {
+    this.cargando=true;
     this.utilServices.updateNavConfig('sticky');
     this.hs.optview$.subscribe(re=>this.option=re)
     this.hs.getVideo().subscribe((res:any)=>{this.urlVideo = res[0]; console.log(this.urlVideo)});
@@ -70,6 +71,11 @@ export class HomeComponent implements OnInit {
       //slider = 200
       this.sizeSlider = 50;
     }
+  }
+  cargando:boolean = false;
+  start(e:Event){
+    this.cargando = false;
+    
   }
   left() {
     if (this.cantMove == -3) return;

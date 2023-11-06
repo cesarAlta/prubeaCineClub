@@ -96,11 +96,12 @@ transition: all 1s ease;
   left: 0;
 }
 .navDashboard{
-  position: relative;
+  /* position: relative;
   top: 0;
   left: 0;
   background-color: rgba(105, 24, 24, 0.767);
-  height: 50px;
+  height: 50px; */
+  display: none;
 }
 .navDashboard .navbar-brand{
  display: none;

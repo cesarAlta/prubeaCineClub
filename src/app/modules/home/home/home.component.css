@@ -166,3 +166,14 @@
     margin-left: 2rem;
   }
 }
+.cargando {
+  animation: cargando 1s infinite;
+}
+@keyframes cargando {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

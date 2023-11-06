@@ -8,7 +8,7 @@ export class Pelicula {
   id: number | undefined;
   title: string | undefined;
   synopsis: string | undefined;
-  relaseYear: number | undefined;
+  relanseYear: number | undefined;
   durationInMinutes: number | undefined;
   castMovie: Member[] | undefined;
   technicalTeam: Member[] | undefined;
@@ -32,7 +32,7 @@ export const peliculas: Pelicula[] = [
     title: 'La estrella',
     synopsis:
       'Victoria es madre soltera de Salvador e hija de un fallecido gran boxeador Cordobés. Marcos, el padre del niño, inicia un juicio para obtener la tenencia legal. Buscando contención, Victoria vuelve al gimnasio del que surgió su padre, a pesar de la resistencia de Salvador.',
-    relaseYear: 2018,
+    relanseYear: 2018,
     durationInMinutes: 65,
     linkPelicula: 'no',
     linkTrailer: 'no',
@@ -71,7 +71,7 @@ export const peliculas: Pelicula[] = [
     title: 'El verano que te vimos',
     synopsis:
       'Inicia un juicio para obtener la tenencia legal. Buscando contención, Victoria vuelve al gimnasio del que surgió su padre, a pesar de la resistencia de Salvador.',
-    relaseYear: 2018,
+    relanseYear: 2018,
     durationInMinutes: 110,
     linkPelicula: 'no',
     linkTrailer: 'no',
@@ -144,7 +144,7 @@ export const peliculas: Pelicula[] = [
     title: 'Todas las pistas fueron falsas',
     synopsis:
       'Un hombre de mediana edad, recién separado, quiere dedicarse a escribir, el nihilismo lo inunda mientras intenta acercarse sentimentalmente, y con poca fortuna, a una mujer de la que siempre estuvo enamorado.',
-    relaseYear: 2018,
+    relanseYear: 2018,
     durationInMinutes: 79,
     linkPelicula: 'no',
     linkTrailer: 'no',
@@ -155,7 +155,7 @@ export const peliculas: Pelicula[] = [
 
     imagesUrlCover:  './assets/img/TodasLasPistas/TodasLasPistas-Cover.jpg',
     ratingMovieINCAA: 'atp',
-    publiclyVisible: false,
+    publiclyVisible: true,
     awardsWon: [{ name: 'Goya', year: '2019' }],
     castMovie: [
       {
@@ -184,7 +184,7 @@ export const peliculas: Pelicula[] = [
     title: 'La noche mas larga',
     synopsis:
       'Sigue la historia del violador serial más conocido de la historia Argentina, que atacó a más de 93 mujeres en la ciudad de Córdoba entre 1985 y 2004 mientras paralelamente aparentaba ser un padre y esposo ejemplar. (FILMAFFINITY)',
-    relaseYear: 2018,
+    relanseYear: 2018,
     durationInMinutes: 127,
     linkPelicula: 'no',
     linkTrailer: 'no',
@@ -195,7 +195,7 @@ export const peliculas: Pelicula[] = [
 
     imagesUrlCover: '../../assets/img/LaNocheMasLarga/LaNoche-Cover.jpg',
     ratingMovieINCAA: 'atp',
-    publiclyVisible: true,
+    publiclyVisible: false,
     awardsWon: [{ name: 'Goya', year: '2019' }],
     castMovie: [
       {

@@ -9,13 +9,18 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
-        path:'peliculas',
+        path: 'peliculas',
         loadChildren: () =>
           import('../peliculas/peliculas.module').then(
             (m) => m.PeliculasModule
           ),
       },
-      {path: 'config', component: ConfigPageComponent}
+      { path: 'config', component: ConfigPageComponent },
+      {
+        path: '',
+        loadChildren: () =>
+          import('../auth/auth.module').then((m) => m.AuthModule)
+      },
     ],
   },
 ];

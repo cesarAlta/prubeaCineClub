@@ -31,6 +31,25 @@ export class CarouselSimpleComponent implements OnInit{
   ngOnInit(): void {}
   tranlatemove = 1;
 
+  touchStartX:number=0;
+  touchEndX: any;
+  minTouchDistance = 50; // Distancia mínima de desplazamiento para considerarlo un cambio de slide
+  currentIndex = 0;
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.touches[0].clientX;
+  }
+  onTouchMove(event: TouchEvent) {
+    this.touchEndX = event.touches[0].clientX;
+  }
+  onTouchEnd() {
+    const touchDistance = this.touchStartX - this.touchEndX;
+
+    if (touchDistance > this.minTouchDistance && this.currentIndex < this.films2.length - 1) {
+      this.left();
+    } else if (touchDistance < -this.minTouchDistance && this.currentIndex > 0) {
+      this.rigth();
+    }
+  }
 
   left() {
     

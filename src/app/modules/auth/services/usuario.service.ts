@@ -10,6 +10,7 @@ import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { Usuario, usuarios } from 'src/app/models/Auth/Usuario';
 import { environment } from 'src/environments/environment.development';
 import { Profile, profiles } from 'src/app/models/Auth/profile';
+import { Profiles } from 'src/app/models/Auth/profiles';
 const USER_LOCAL_ST_KEY = 'userData';
 @Injectable({
   providedIn: 'root',
@@ -55,7 +56,7 @@ export class UsuarioService {
   }
   //Inicio de sesión
   logging(email: string, pass: string) {
-    let user: Usuario | undefined;
+    let user: Usuario;
     // credenciales a base64
     const credentials = btoa(email + ':' + pass);
     const head = new HttpHeaders({
@@ -74,27 +75,42 @@ export class UsuarioService {
             El jwt consta de 3 partes, header, payload, signature. Los datos vienen en el payload,
             corto la cadena en '.' y tendría 0,1,2 => tomo el 1 (payload)
             */
-            const base64Url = res.body!.toString().split('.')[1];
+            // const base64Url = res.body!.toString().split('.')[1];
+            const us = this.getUserToken(res.body!.toString());
             /*
             Normalizo a base64 y remplazo los caracteres '-' y '_' para que sean compatibles con la
             decodificación.
             */
-            const base64 = base64Url.replace('-', '+').replace('_', '/');
+            // const base64 = base64Url.replace('-', '+').replace('_', '/');
             /*
             Decodifico la cadena base64 en una cadena JSON utilizo window.atob, y la conviero en JSON
             Defino un usuario tipo any para guardarlo temporalmente.
             */
-            const us: any = JSON.parse(window.atob(base64));
-            user = new Usuario();
-            user.firstName = us.nombre;
-            user.profile = profiles.find((p) => p._id == us.profile)!;
-            user.email = us.email;
-            this.user.next(user);
+            // const us: any = JSON.parse(window.atob(base64));
+            user = this.userLogged(us);
             this.saveToken(res.body);
+            this.pushNewUser(user);
           }
           return user;
         })
       );
+  }
+  getUserToken(t: any): JSON {
+    /*
+    El jwt consta de 3 partes, header, payload, signature. Los datos vienen en el payload,
+    corto la cadena en '.' y tendría 0,1,2 => tomo el 1 (payload)
+    */
+    const base64Url = t.split('.')[1];
+    /*
+    Normalizo a base64 y remplazo los caracteres '-' y '_' para que sean compatibles con la
+    decodificación. */
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
+    /*
+    Decodifico la cadena base64 en una cadena JSON utilizo window.atob, y la conviero en JSON
+    Defino un usuario tipo any para guardarlo temporalmente.
+            */
+    const us: any = JSON.parse(window.atob(base64));
+    return us;
   }
   private saveToken(t: any) {
     localStorage.setItem(USER_LOCAL_ST_KEY, t);
@@ -106,13 +122,37 @@ export class UsuarioService {
   redirectToHome() {
     this.route.navigateByUrl('/');
   }
-  verifyUser(t: string) {
-    //   let param = new HttpParams();
-    //   param.set('token', t);
-    //   this.httpClient
-    //     .get(this.URI + 'verifyToken', { params: param })
-    //     .subscribe((res) => {
-    //       console.log(res);
-    //     });
+
+  verifyUser() {
+    const t = localStorage.getItem(USER_LOCAL_ST_KEY);
+    if (t) {
+      const us = this.userLogged(this.getUserToken(t));
+      this.pushNewUser(us);
+      
+    }
+  }
+
+  // verivicar con token
+  // verifyUser() {
+  //   this.httpClient.get(this.URI + 'verifyToken').subscribe((res) => {
+  //     if (res) {
+  //       const user: Usuario = this.userLogged(res);
+  //       this.pushNewUser(user);
+  //       console.log('sdf')
+  //     }
+  //   });
+  // }
+
+  private userLogged(resUser: any): Usuario {
+    const userLogged = new Usuario();
+    userLogged.firstName = resUser.nombre
+      ? resUser.nombre
+      : 'Dato no actualizado';
+    userLogged.lastName = resUser.apellido
+      ? resUser.apellido
+      : 'Dato no actualizado';
+    userLogged.email = resUser.email;
+    userLogged.profile = resUser.profile;
+    return userLogged;
   }
 }

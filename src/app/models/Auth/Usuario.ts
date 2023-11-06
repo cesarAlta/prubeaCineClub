@@ -1,4 +1,5 @@
 import { Profile } from "./profile";
+import { Profiles } from "./profiles";
 
 export class Usuario {
   id?: number;
@@ -6,7 +7,7 @@ export class Usuario {
   lastName: string | undefined;
   password?: string;
   email: string | undefined;
-  profile!: Profile;
+  profile!: Profiles;
 
   get _firstName(){
     return this.firstName;
@@ -24,7 +25,7 @@ export class Usuario {
     return this.profile;
   }
   get _nameProfile(){
-    return this.profile._name;
+    return this.profile;
   }
 }
 

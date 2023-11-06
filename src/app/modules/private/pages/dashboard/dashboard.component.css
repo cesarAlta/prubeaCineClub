@@ -19,10 +19,12 @@
 
 .nav-link:hover {
   background-color: rgb(53, 53, 53);
-  border-left: 3px solid red;
+  border-left: 3px solid #6eade0;
 }
 .collapsed-list {
-  background-color: rgb(27, 27, 27);
+  /* background-color: rgb(27, 27, 27);
+   */
+   background-color: #332b47d2;
 }
 
 .collapsed-list li a.active {

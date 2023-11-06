@@ -9,7 +9,7 @@
     <p class="fs-3 my-auto ms-2">Lo más visto</p>  
   </div>
 
-  <div class="container-fluid d-flex justify-content-center">
+  <div class="container-fluid d-flex justify-content-center" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd()" (touchstart)="onTouchStart($event)">
     <div #contFilm class="cont-film-estreno">
       <a type="button" class="sliderBtn btnLeft fs-2" (click)="rigth()">
         <i class="fa-solid text-white fa-angle-left"></i>
@@ -21,6 +21,7 @@
         class="slide-estreno"
         #slider
         [ngStyle]="{ transform: 'translateX(' + moveTo + 'px)' }"
+
       >
         <div
           #imgfilm

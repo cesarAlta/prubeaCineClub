@@ -10,6 +10,7 @@ import { ViewportScroller } from '@angular/common';
   styleUrls: ['./views-pelicula.component.css'],
 })
 export class ViewsPeliculaComponent implements OnInit {
+  page: number=0;
   triler: boolean = false; 
   peliSel: Pelicula | undefined;
   @Input()ver: string= '';

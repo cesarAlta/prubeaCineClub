@@ -1,9 +1,6 @@
 <!--vista de una pelicula-->
 <div class="position-relative" *ngIf="ver == ''">
-  <div
-    class="cover-page"
-    [style.background-image]="'url('+urlImage+')'"
-  >
+  <div class="cover-page" [style.background-image]="'url(' + urlImage + ')'">
     <div class="container-movieinfo">
       <div class="container">
         <div class="row gap-2 justify-content-center">
@@ -35,7 +32,7 @@
               <p>
                 Géneros: Drama, Suspenso. <br />
                 Elenco: Actores, Directores. <br />
-                Año: {{ peliSel?.relaseYear }}
+                Año: {{ peliSel?.relanseYear }}
               </p>
             </div>
             <div>
@@ -99,6 +96,155 @@
 
 <!--Lista de pelicualas-->
 <div *ngIf="ver == 'lista'">
+  <!-- tabla -->
+  <div class="table-responsive">
+    <table class="table table align-middle">
+      <tbody>
+        <tr *ngFor="let item of pelis">
+          <td style="width: 100px">
+            <img [src]="item.imagesUrlBillboard" alt="" class="img-thumbnail" />
+          </td>
+          <td>
+            <div class="fw-bold fs-5">{{ item.title }}</div>
+            <div class="card-text mt-auto">
+              <div *ngIf="item.isPremiere">
+                <i class="fa-solid fa-star fa-2xs text-warning"></i>
+                Estreno
+                <i class="fa-solid fa-star fa-2xs text-warning"></i>
+              </div>
+
+              <div>
+                <span
+                  class="badge rounded-pill"
+                  [ngClass]="item.publiclyVisible ? 'bg-success' : 'bg-dark'"
+                >
+                  {{ item.publiclyVisible ? "Publicada" : "Oculta" }}
+                </span>
+              </div>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group dropstart">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-primary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Accioens
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="" class="dropdown-item">
+                    <i class="fa-regular fa-pen-to-square text-warning"></i>
+                    Editar
+                  </a>
+                </li>
+                <li>
+                  <a href="" class="dropdown-item">
+                    <i
+                      class="fa-regular"
+                      ngClass=" {{
+                        item.publiclyVisible
+                          ? 'fa-eye-slash text-dark'
+                          : 'fa-eye text-primary'
+                      }}"
+                    ></i>
+                    {{ item.publiclyVisible ? "Ocultar" : "Publicar" }}
+                  </a>
+                </li>
+                <li>
+                  <a href="" class="dropdown-item">
+                    <i class="fa-solid fa-trash-can text-danger"></i>
+                    Eliminar
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ngb-pagination
+      class="d-flex justify-content-center"
+      [collectionSize]="70"
+      [(page)]="page"
+    ></ngb-pagination>
+  </div>
+  <!-- lista1 -->
+  <div class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-4 text-dark mb-3">
+      <div class="col" *ngFor="let item of pelis">
+        <div class="card h-100">
+          <img [src]="item.imagesUrlBillboard" class="card-img-top" alt="..." />
+          <div class="card-body text-center d-flex flex-column">
+            <h5 class="card-title">{{ item.title }}</h5>
+            <div class="card-text mt-auto">
+              <div *ngIf="item.isPremiere">
+                <i class="fa-solid fa-star fa-2xs text-warning"></i>
+                Estreno
+                <i class="fa-solid fa-star fa-2xs text-warning"></i>
+              </div>
+
+              <div>
+                <span
+                  class="badge rounded-pill"
+                  [ngClass]="item.publiclyVisible ? 'bg-success' : 'bg-dark'"
+                >
+                  {{ item.publiclyVisible ? "Publicada" : "Oculta" }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-center">
+            <div class="btn-group dropup">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-primary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Accioens
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="" class="dropdown-item">
+                    <i class="fa-regular fa-pen-to-square text-warning"></i>
+                    Editar
+                  </a>
+                </li>
+                <li>
+                  <a href="" class="dropdown-item">
+                    <i
+                      class="fa-regular"
+                      ngClass=" {{
+                        item.publiclyVisible
+                          ? 'fa-eye-slash text-dark'
+                          : 'fa-eye text-primary'
+                      }}"
+                    ></i>
+                    {{ item.publiclyVisible ? "Ocultar" : "Publicar" }}
+                  </a>
+                </li>
+                <li>
+                  <a href="" class="dropdown-item">
+                    <i class="fa-solid fa-trash-can text-danger"></i>
+                    Eliminar
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ngb-pagination
+      class="d-flex justify-content-center"
+      [collectionSize]="70"
+      [(page)]="page"
+    ></ngb-pagination>
+  </div>
+
   <div class="row row-cols-lg-1 g-4">
     <div *ngFor="let item of pelis">
       <div class="card">
@@ -114,16 +260,16 @@
             <div class="card-body text-dark">
               <h5 class="card-title fs-4">{{ item.title }}</h5>
               <p class="card-text">
-                <b>Valoracion:</b>
+                <!-- <b>Valoracion:</b>
                 <app-valuacion
                   [valoracion]="item.ratingMovie!"
                   class="d-inline-block ms-1"
                 ></app-valuacion>
+                <br /> -->
+                <b>Duración:</b> {{ item.durationInMinutes }} min. <br />
+                <b>Año de estreno:</b> {{ item.relanseYear }}
                 <br />
-                <b>Duracion:</b> {{ item.durationInMinutes }} min. <br />
-                <b>Año de estreno:</b> {{ item.relaseYear }}
-                <br />
-                <b>Clasificacion:</b> {{ item.ratingMovieINCAA }} <br />
+                <b>Clasificación:</b> {{ item.ratingMovieINCAA }} <br />
                 <b>Elenco:</b> Actores , directores <br />
                 <b>Nominaciones:</b> Nominaciones y premios
                 <a role="button" class="link-primary" type="button">
@@ -141,7 +287,7 @@
                   Ver más...
                 </a>
                 <br />
-                <b>Generos:</b> Drama, suspenso <br />
+                <b>Géneros:</b> Drama, suspenso <br />
                 <span class="d-inline-block text-truncate" style="width: 65%">
                   <b>Descripción:</b> {{ item.synopsis }}
                 </span>
@@ -167,7 +313,6 @@
           </span>
           <small class="text-muted d-block"> fecha: 22/04/2023 </small>
         </div>
-        F
         <div class="card-footer bg-transparent border-secondary">
           <div class="row justify-content-center">
             <div class="col-auto">
@@ -202,5 +347,10 @@
         </div>
       </div>
     </div>
+    <ngb-pagination
+      class="d-flex justify-content-center"
+      [collectionSize]="70"
+      [(page)]="page"
+    ></ngb-pagination>
   </div>
 </div>

@@ -5,11 +5,17 @@ import { ViewsPeliculaComponent } from './pages/views-pelicula/views-pelicula.co
 import { AdminPeliculasComponent } from './pages/admin-peliculas/admin-peliculas.component';
 import { GenerosComponent } from './pages/admin-generos/generos/generos.component';
 import { AdminGenerosComponent } from './pages/admin-generos/admin-generos.component';
+import { CastMovieComponent } from './pages/cast-movie/cast-movie.component';
+import { RatingMovieIncaaComponent } from './pages/rating-movie-incaa/rating-movie-incaa.component';
+import { AwardsComponent } from './pages/Awards/awards/awards.component';
 
 const routes: Routes = [  
    { path: 'ver/:name', component: ViewsPeliculaComponent },
     { path: 'adminPeliculas', component: AdminPeliculasComponent },
     { path: 'adminGeneros', component: AdminGenerosComponent },
+    { path: 'reparto', component: CastMovieComponent },
+    { path: 'clasificacion', component: RatingMovieIncaaComponent },
+    { path: 'premios', component: AwardsComponent },
   ];
   
 

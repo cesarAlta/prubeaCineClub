@@ -1,6 +1,6 @@
 <div  class="d-flex justify-content-center align-items-center bg-dark" style="min-height: 100vh; width: 100%;"  >
   <div class="row justify-content-center m-0 w-100 ">
-    <div class="col-11 col-sm-9 col-md-6 col-lg-5 col-xl-4 m-3 ">
+    <div class="col-11 col-sm-9 col-md-6 col-lg-5 col-xl-4 m-3 " id="logininit">
       <div
         class="card bg-dark text-white position-relative overflow-hidden mx-auto"
       >
@@ -96,10 +96,10 @@
 
                 <small class="d-flex justify-content-end mt-1"
                   ><a
-                    type="button"
                     role="button"
                     class="btn-link"
-                    (click)="forgotPass()"
+                    title="Recuperar contraseña"
+                    routerLink="/us/forgot-password"
                     >Olvidé mi contraseña</a
                   ></small
                 >
@@ -241,52 +241,6 @@
                 (click)="getRegister()"
               >
                 Registrarme
-              </button>
-            </div>
-          </form>
-          <!--recover-->
-          <form
-            name="formFPass"
-            [formGroup]="recoverPassF"
-            *ngIf="recoverPassF && op == 3"
-            class="mb-4 w-75 mx-auto mb-3"
-          >
-            <div class="mb-3">
-              <label for="email" class="form-label">Ingresa tu e-mail</label>
-              <input
-                type="text"
-                class="form-control form-control-sm"
-                id="email"
-                autocomplete="email"
-                aria-describedby="email"
-                formControlName="email"
-                placeholder="ejemplo@ejemplo.com"
-                [ngClass]="{
-                  'is-invalid':
-                    (recoverPassF.controls['email'].touched || submitted) &&
-                    recoverPassF.controls['email'].errors
-                }"
-              />
-              <small
-                class="text-danger"
-                *ngIf="(recoverPassF.controls['email'].touched || submitted) && recoverPassF.controls['email'].errors?.['required']"
-              >
-                Campo obligatorio
-              </small>
-              <small
-                class="text-danger"
-                *ngIf="recoverPassF.controls['email'].errors?.['email']"
-              >
-                Debe tener el formato tumail@algo.com
-              </small>
-            </div>
-            <div class="d-flex justify-content-center mb-3">
-              <button
-                type="submit"
-                class="btn btn-sm btn-primary"
-                (click)="recoverPass()"
-              >
-                <i class="fa-solid fa-paper-plane"></i> Restablecer contraseña
               </button>
             </div>
           </form>

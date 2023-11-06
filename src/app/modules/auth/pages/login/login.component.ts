@@ -15,7 +15,6 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class LoginComponent implements OnInit,OnDestroy {
   loginF: FormGroup | undefined; // form para loguearse.
   newUserF: FormGroup | undefined; //form para registrar nuevo usuario.
-  recoverPassF: FormGroup | undefined; //form para recuperar constraseña
   showPass: boolean = false; // para hacer la contraseña visible en el input.
   title: string = 'Iniciar sesión'; // titulo.
   op = 1; // opcion 1-> Ininiciar sesion, 2-> registrarse, 3-> recuprer pass.
@@ -27,7 +26,6 @@ export class LoginComponent implements OnInit,OnDestroy {
     private modalS: ModalService,
     private usuarioS: UsuarioService,
     private router: Router,
-    private viewportScroller: ViewportScroller,
     private utilService: UtilsService
   ) {}
   ngOnDestroy(): void {
@@ -36,7 +34,6 @@ export class LoginComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.utilService.updateNavConfig('fixed');
-    this.viewportScroller.scrollToAnchor('logininit');
     this.loginF = this.fb.group({
       mail: [null, [Validators.required, Validators.email]],
       pass: [null, Validators.required],
@@ -49,7 +46,7 @@ export class LoginComponent implements OnInit,OnDestroy {
     const copyForm = { ...this.loginF?.value };
     this.usuarioS.logging(copyForm.mail, copyForm.pass).subscribe((res) => {
       if (res) {
-        this.modalS.Alert('Este es tu espacio de trabajo', 'Bienvenido!', 's');
+        this.modalS.Alert(`Bienvenido ${res._firstName?.toLocaleUpperCase}`, 'Perfecto!', 's');
         this.router.navigateByUrl('/dashboard');
       }
     });
@@ -99,29 +96,5 @@ export class LoginComponent implements OnInit,OnDestroy {
     this.op = 1;
     this.submitted = false;
     this.newUserF?.reset();
-  }
-  forgotPass() {
-    this.op = 3;
-    this.newUserF?.reset();
-    this.submitted = false;
-    this.title = 'Recuperá tu contraseña!';
-    this.recoverPassF = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-    });
-  }
-  //recuperar contraseña
-  recoverPass() {
-    this.submitted = true;
-    if (this.recoverPassF?.invalid) return;
-    this.usuarioS
-      .postRecover(this.recoverPassF?.get('email')?.value)
-      .subscribe((res) => {
-        if (res)
-          this.modalS.Alert(
-            `Revisa tu correo para restablecer la contraseña. Sigue las instrucciones en tu email.`,
-            'Perfecto!',
-            's'
-          );
-      });
   }
 }

@@ -9,7 +9,10 @@ import { ValuacionComponent } from './components/valuacion/valuacion.component';
 import { AdminGenerosComponent } from './pages/admin-generos/admin-generos.component';
 import { GenerosComponent } from './pages/admin-generos/generos/generos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { AwardsComponent } from './pages/Awards/awards/awards.component';
+import { RatingMovieIncaaComponent } from './pages/rating-movie-incaa/rating-movie-incaa.component';
+import { CastMovieComponent } from './pages/cast-movie/cast-movie.component';
 
 
 @NgModule({
@@ -18,13 +21,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdminPeliculasComponent,
     ValuacionComponent,
     GenerosComponent,
-    AdminGenerosComponent
+    AdminGenerosComponent,
+    AwardsComponent,
+    RatingMovieIncaaComponent,
+    CastMovieComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     PeliculasRoutingModule,
+    NgbPaginationModule
   ]
 })
 export class PeliculasModule { }

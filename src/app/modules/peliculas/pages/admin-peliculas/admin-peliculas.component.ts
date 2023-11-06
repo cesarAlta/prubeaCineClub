@@ -8,6 +8,8 @@ import { Pelicula } from 'src/app/models/Pelicula';
   styleUrls: ['./admin-peliculas.component.css']
 })
 export class AdminPeliculasComponent implements OnInit {
+  date: Date = new Date();
+  currentYear: number = this.date.getFullYear();
   peliSel:Pelicula | undefined ;
   optSel:string='L';
   opt ={
@@ -18,7 +20,7 @@ export class AdminPeliculasComponent implements OnInit {
 
   }
   constructor(private router: Router){}
-  
+
   ngOnInit(): void {
   }
   agregar(){

@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/models/Auth/Usuario';
+import { UsuarioService } from 'src/app/modules/auth/services/usuario.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -7,8 +9,8 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit{
-
   
+  username?: string;
 
   rotate1:boolean=false;
   rotate2:boolean=false;
@@ -16,9 +18,12 @@ export class DashboardComponent implements OnInit{
   rotate4:boolean=false;
   offcanvasmenu:boolean=false;
 
-  constructor(private utilServices: UtilsService){}
+  constructor(private utilServices: UtilsService, private us: UsuarioService){}
   ngOnInit(): void {
+    // this.us.verifyUser();
+
     this.utilServices.updateNavConfig('navDash');
+    this.us.user$.subscribe(us=> us?this.username = us._firstName : 'Ver info');
   }
 
   btnOffCanvas(){

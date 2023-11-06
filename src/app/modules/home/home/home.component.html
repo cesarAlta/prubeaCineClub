@@ -2,13 +2,13 @@
 <div class="position-relative" *ngIf="option == 1">
   <!-- <div class="cont-viedo">
     <video loop autoplay [muted]="true" id="video-background">
-      <source src="./assets/video/VN20230831_004301.mp4" type="video/mp4" />
+      <source src="./assets/video/Vn20230831 004301.mp4" type="video/mp4" />
       Tu navegador no soporta videos en HTML5.
     </video>
     <div class="cover-video"></div>
   </div> -->
   <div class="cont-viedo" *ngIf="urlVideo">
-    <video loop autoplay [muted]="true" id="video-background">
+    <video loop autoplay [muted]="true" id="video-background" (loadeddata)="start($event)">
       <source src="{{ urlVideo }}" type="video/mp4" />
       Tu navegador no soporta videos en HTML5.
     </video>
@@ -103,4 +103,7 @@
       />
     </div>
   </div>
+</div>
+<div *ngIf="cargando" class="position-fixed top-0 start-0 d-flex justify-content-center align-items-center" style="height: 100vh; width: 100%; background-color: black; z-index: 5000;">
+<img src="../../../../assets/img/logo/logoccp1.png" alt="" class="cargando">
 </div>
