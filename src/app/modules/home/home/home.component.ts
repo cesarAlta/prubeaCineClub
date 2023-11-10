@@ -11,14 +11,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Pelicula, peliculas } from 'src/app/models/Pelicula';
 import { HomeService } from '../home.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
-  option = 3;
+export class HomeComponent implements OnInit, AfterViewInit {
   @Input() items = [];
   @ViewChild('slider') sliderTs: ElementRef | undefined;
   @ViewChild('imgfilm') imgfilm: ElementRef | undefined;
@@ -31,26 +31,28 @@ export class HomeComponent implements OnInit {
   public sizeSlider = 0;
   private cantMove = 0;
   public wdm: boolean = false;
+  fullLoad: boolean = false;
 
   films: Pelicula[] = peliculas;
 
   constructor(
-    private hs: HomeService,
+    private dataSvcs: DataService,
     private utilServices: UtilsService,
     private rander2: Renderer2,
     private router: Router,
     private route: ActivatedRoute,
     private vimeoService: HomeService
   ) {}
+  ngAfterViewInit(): void {
+    // this.cargando = true;
+  }
   tutorialData: any;
   // urlVideo:string='https://storage.cloud.google.com/cineclub-cloud-bucket/front-page/VN20230831_004301.mp4';
-  urlVideo!:string;;
+  urlVideo!: string;
 
   ngOnInit(): void {
-    this.cargando=true;
-    this.utilServices.updateNavConfig('sticky');
-    this.hs.optview$.subscribe(re=>this.option=re)
-    this.hs.getVideo().subscribe((res:any)=>{this.urlVideo = res[0]; console.log(this.urlVideo)});
+    this.fullLoad = false;
+    this.dataSvcs.updateNavConfig('sticky');
     
     this.anchorWind = window.innerWidth;
     if (this.anchorWind < 576) {
@@ -72,10 +74,8 @@ export class HomeComponent implements OnInit {
       this.sizeSlider = 50;
     }
   }
-  cargando:boolean = false;
-  start(e:Event){
-    this.cargando = false;
-    
+  start(e: boolean) {
+    this.fullLoad = e;
   }
   left() {
     if (this.cantMove == -3) return;

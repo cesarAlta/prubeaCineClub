@@ -28,6 +28,17 @@ export class MyInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         switch (error.status) {
+          case 400:{
+             //error confirmar contraseña
+             if(error.error=='no password'){
+              this.modalS.Alert(
+                "Algo salio mal. Intente nuvamente o seleccione 'olvide la contraseña' en la pantalla de inicio de sesión.",
+                'UPS!',
+                'd'
+              );
+            }
+            break;
+          }
           case 401: {
             this.modalS.Alert('Debes iniciar sesión', 'UPS!', 'i');
             this.router.navigateByUrl('login');
@@ -38,7 +49,7 @@ export class MyInterceptor implements HttpInterceptor {
             //modificar
             //Usuario: contraseña o usuario incorrecto
             if (error.error == 'not token today') {
-              this.modalS.Alert('Contrseña o usuario incorrecto!', 'UPS!', 'w');
+              this.modalS.Alert('Contraseña o usuario incorrecto!', 'UPS!', 'd');
             }
             break;
           }
@@ -48,9 +59,10 @@ export class MyInterceptor implements HttpInterceptor {
               this.modalS.Alert(
                 'Correo no encontrado. Por favor, verifica tu dirección de correo.',
                 'UPS!',
-                'w'
+                'd'
               );
-            }
+            } 
+           
             break;
           }
           //usuario recuperacion de pass: token no asociado a un usuario

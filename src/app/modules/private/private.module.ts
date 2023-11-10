@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { PrivateRoutingModule } from './private-routing.module';
 import { ConfigPageComponent } from './pages/config-page/config-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CardsComponent } from './components/cards/cards.component';
 
 
 @NgModule({
   declarations: [
-    ConfigPageComponent
+    ConfigPageComponent,
+    CardsComponent
   ],
   imports: [
     CommonModule,

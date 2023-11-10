@@ -1,5 +1,5 @@
-<div class="container my-3 border border-secondary rounded p-3 text-dark">
-  <div class="text-dark">
+<div class="container position-relative my-3 card-100 p-3">
+  <div class="" >
     <h3 class="d-flex justify-content-between border-bottom">
       Administración de películas
       <small>
@@ -14,7 +14,7 @@
       </small>
     </h3>
   </div>
-  <div class="container-sm my-3 p-2 m-0" style="background-color: #332b47d2">
+  <div class="container-sm my-3 p-2 m-0 bg-200">
     <ul class="nav nav-pills justify-content-end">
       <li class="nav-item">
         <button
@@ -64,11 +64,10 @@
     ></app-views-pelicula>
   </div>
   <!--nueva pelicula-->
-  <form class="text-dark" *ngIf="optSel != 'L'">
+  <form class="text-200" *ngIf="optSel != 'L'">
     <fieldset>
       <legend
         class="border-bottom text-light"
-        style="background-color: #332b47"
       >
         Ficha técnica
       </legend>
@@ -177,14 +176,13 @@
     <!--Elenco-->
     <div class="row mb-3">
       <fieldset>
-        <legend class="mb-3 text-light" style="background-color: #332b47">
+        <legend class="mb-3 text-light">
           Reparto
         </legend>
         <div class="row mb-3">
           <div class="col">
             <div class="mb-3">
               <label for="selElenco">Tipo</label>
-              <div class="input-group">
                 <select
                   class="form-select"
                   id="selElenco"
@@ -195,10 +193,6 @@
                   <option value="2">Director</option>
                   <option value="3">Productor</option>
                 </select>
-                <button class="btn btn-primary" type="button">
-                  <i class="fa-solid fa-plus"></i>
-                </button>
-              </div>
             </div>
           </div>
           <div class="col">
@@ -232,7 +226,7 @@
           </div> -->
           </div>
           <div class="col my-auto">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary text-200">
               <i class="fa-solid fa-plus"></i> Agregar
             </button>
           </div>
@@ -270,7 +264,7 @@
     </div>
     <div class="row mb-3">
       <fieldset>
-        <legend class="mb-3 text-light" style="background-color: #332b47">
+        <legend class="mb-3 text-light" >
           Premios
         </legend>
         <div class="row mb-3">
@@ -288,7 +282,7 @@
                   <option value="2">Nombre 2</option>
                   <option value="3">Nombre 3</option>
                 </select>
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary text-200" type="button">
                   <i class="fa-solid fa-plus"></i>
                 </button>
               </div>
@@ -324,7 +318,7 @@
           </div>
         </div> -->
           <div class="col my-auto">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary text-200">
               <i class="fa-solid fa-plus"></i> Agregar
             </button>
           </div>
@@ -343,7 +337,7 @@
       </fieldset>
     </div>
     <fieldset>
-      <legend class="mb-3 text-light" style="background-color: #332b47">
+      <legend class="mb-3 text-light">
         Imágenes y videos
       </legend>
       <div class="mb-3">
@@ -384,11 +378,11 @@
       </div>
     </fieldset>
     <div class="d-flex justify-content-center gap-3">
-      <button class="btn btn-danger" type="button">
+      <button class="btn btn-warning text-200" type="button">
         <i class="fa-solid fa-xmark"></i> Cancelar
       </button>
-      <button class="btn btn-success" type="button">
-        <i class="fa-solid fa-check"></i> Guardar
+      <button class="btn btn-success text-200" type="button">
+        <i class="fa-solid fa-check "></i> Guardar
       </button>
     </div>
   </form>

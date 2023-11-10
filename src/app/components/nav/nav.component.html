@@ -1,10 +1,10 @@
 <nav
   class="navbar navbar-dark navbar-expand-lg w-100 "
-  [ngClass]="{ 'nav-sticky': navbarFixed }"
   [class.navDashboard]="navDashboard"
   [class.navFixed]="navFixed"
   [class.nav-1]="navSticky"
-  *ngIf="option == 1"
+  [ngClass]="{ 'nav-sticky': navbarFixed }"
+  *ngIf="(option|async) == 1"
 >
   <div class="container-fluid position-relative ">
     <a class="navbar-brand" href="#" style="width: 100px; height: auto">
@@ -135,7 +135,7 @@
   [class.navDashboard]="navDashboard"
   [class.navFixed]="navFixed"
   [class.nav-1]="navSticky"
-  *ngIf="option == 2"
+  *ngIf="(option|async) == 2"
 >
   <div class="container-fluid">
     <button
@@ -297,7 +297,7 @@
   [class.navDashboard]="navDashboard"
   [class.navFixed]="navFixed"
   [class.nav-op3]="navSticky"
-  *ngIf="option == 3"
+  *ngIf="(option|async) == 3"
 >
   <div class="container-fluid">
     <a class="navbar-brand mt-2" href="#" style="width: 120px; height: auto">

@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
-import { UtilsService } from 'src/app/services/utils.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { DataService } from 'src/app/services/data.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-recover-password',
@@ -16,28 +17,31 @@ export class RecoverPasswordComponent implements OnInit, OnDestroy {
   submitted: boolean = false;
   private token: string | undefined | null;
 
-  public recoverPassF: FormGroup | undefined;
+  public recoverPassF!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private usuarioS: UsuarioService,
     private router: Router,
-    private utilService: UtilsService,
-    private ms: ModalService
+    private dataSvcs: DataService,
+    private ms: ModalService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
-    this.utilService.updateNavConfig('fixed');
+    this.dataSvcs.updateNavConfig('fixed');
     this.recoverPassF = this.fb.group({
-      password: ['', Validators.required],
+      newPassword: ['', Validators.required],
+      repeatNewPassword: ['', Validators.required]
     });
+    this.recoverPassF.setValidators(this.passwordsMatchValidator())
     this.route.queryParamMap.subscribe((param) => {
       this.token = param.get('token') ? param.get('token') : undefined;
     });
   }
   ngOnDestroy(): void {
-    this.utilService.updateNavConfig('sticky');
+    this.dataSvcs.updateNavConfig('sticky');
   }
   confirm() {
     this.submitted = true;
@@ -57,5 +61,17 @@ export class RecoverPasswordComponent implements OnInit, OnDestroy {
             }
           });
     }
+  }
+  passwordsMatchValidator() {
+    return (): ValidationErrors | null => {
+      const newPass = this.recoverPassF.get('newPassword')?.value;
+      const repeatPass = this.recoverPassF.get('repeatNewPassword')?.value;
+
+      return (newPass !== repeatPass) ? { mismatch: true }: null;
+    };
+  }  
+
+  back() {
+    this.location.back();
   }
 }

@@ -1,8 +1,5 @@
-<div class="position-relative">
-  <nav
-    class="navbar navbar-expand-md navbar-dark d-flex"
-    style="background-color: #332b47"
-  >
+<div class="position-relative bg-100">
+  <nav class="navbar navbar-expand-md navbar-dark d-flex bg-200">
     <div
       class="container-fluid justify-content-md-between justify-content-around"
     >
@@ -10,7 +7,7 @@
         <img
           src="./assets/img/logo/logoccp1.png"
           alt=""
-          style="height: 60px; width: 60px"
+          style="height: 40px; width: 40px"
         />
       </a>
       <h3 class="text-center">Espacio de trabajo</h3>
@@ -24,38 +21,48 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <h3 class="text-center d-md-flex d-none">Noticias</h3>
+      <div
+        class="d-flex justify-content-end gap-3 align-items-center fs-3 me-2"
+      >
+        <a class="link-danger text-decoration-none" routerLink="/home"
+          ><i class="fa-solid fa-xmark"></i
+        ></a>
+      </div>
     </div>
   </nav>
   <div class="row m-0 w-100" style="min-height: 100vh">
+    <!-- menu -->
     <div
-      class="cols col-md-3 col-lg-2 ms-0 d-none d-md-block"
-      style="background-color: #58668b"
+      class="cols col-md-4 col-lg-4 col-xl-3 col-xxl-3 ps-0 d-none d-md-block"
     >
       <nav
-        class="nav flex-column d-none d-md-flex rounded-bottom"
+        class="nav flex-column d-none d-md-flex rounded-bottom bg-200"
         id="accordion-nav"
-        style="background-color: #9cabd3"
       >
         <!-- Usiario logueado -->
         <div
           class="d-flex flex-column justify-content-center align-items-center border-bottom border-secondary p-3"
         >
           <div class="position-relative" title="Ver mis datos">
-            <img src="./assets/img/User_icon_2.svg" alt="user.png" />
+            <div
+              class="rounded-circle bg-dark d-flex"
+              style="width: 4rem; height: 4rem"
+            >
+              <i class="fa-regular fa-user fa-2xl m-auto"></i>
+            </div>
             <a
               role="button"
-              class="d-block link-light stretched-link"
+              class="d-block link-light stretched-link d-flex justify-content-center"
               routerLink="users"
               routerLinkActive="active"
             >
-              <small class="d-block">{{ username | uppercase }}</small>
+              <span class="fs-6">{{ username | uppercase }}</span>
             </a>
           </div>
         </div>
         <div class="position-relative" id="1">
           <a
-            class="nav-link link-light"
+            class="nav-link link-light fs-5"
             type="button"
             role="button"
             href="#collapseConfigSitio"
@@ -79,16 +86,18 @@
           aria-labelledby="1"
           data-bs-parent="#accordion-nav"
         >
-          <ul class="collapsed-list py-1">
+          <ul class="collapsed-list">
             <li>
-              <a routerLink="config" routerLinkActive="active">Video portada</a>
+              <a class="py-1" routerLink="config" routerLinkActive="active"
+                >Video portada</a
+              >
             </li>
             <!-- <li><a href="">Generos favoritos</a></li> -->
           </ul>
         </div>
         <div class="position-relative" id="2">
           <a
-            class="nav-link text-white"
+            class="nav-link link-light fs-5"
             type="button"
             role="button"
             data-bs-toggle="collapse"
@@ -121,22 +130,6 @@
               >
                 Películas
               </a>
-            </li>
-            <li>
-              <a
-                class="py-1"
-                routerLink="peliculas/reparto"
-                routerLinkActive="active"
-                >Reparto</a
-              >
-            </li>
-            <li>
-              <a
-                class="py-1"
-                routerLink="peliculas/clasificacion"
-                routerLinkActive="active"
-                >Clasificacíon</a
-              >
             </li>
             <li>
               <a
@@ -180,7 +173,7 @@
         </div> -->
         <div class="position-relative" id="4">
           <a
-            class="nav-link text-white"
+            class="nav-link link-light fs-5"
             type="button"
             role="button"
             data-bs-toggle="collapse"
@@ -211,86 +204,24 @@
         </div>
       </nav>
       <div class="ms-3 mt-2 d-none d-md-flex flex-column">
-        <a routerLink="/home" class="d-block link-light m-1">
-          <small><i class="fa-solid fa-share"></i></small>
-          ir al Home
-        </a>
+        <a routerLink="/home" class="link-light text-decoration-none fst-italic"
+          ><i class="fa-solid fa-house"></i> Página principal</a
+        >
         <a
           href="https://cineclubmunicipal.org.ar/"
           target="_blank"
-          class="d-block link-light"
+          class="d-block link-light text-decoration-none fst-italic my-1"
         >
-          <small><i class="fa-solid fa-share"></i></small>
+          <i class="fa-solid fa-share"></i>
           ir al cineclubmunicipal
         </a>
+        <a class="link-light text-decoration-none fst-italic"
+          ><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a
+        >
       </div>
     </div>
-    <div class="col-12 mx-auto col-md-6 col-lg-8 bg-light">
+    <div class="col position-relative">
       <router-outlet></router-outlet>
-    </div>
-    <div
-      class="col-auto col-md-3 col-lg-2 d-none d-md-block"
-      style="background-color: #58668b"
-    >
-      <!-- <div
-        class="card text-dark bg-light mb-3 mx-auto"
-        style="max-width: 18rem"
-      >
-        <div class="card-header">
-          <i class="fa-solid fa-globe"></i> Sobre tu repositorio
-        </div>
-        <div class="card-body text-center">
-          <h5 class="card-title text-center">
-            1.138 visitas! y 200 <i class="fa-solid fa-heart"></i>!
-          </h5>
-          <h5 class="card-title text-center"></h5>
-          <h5 class="card-title text-center">130 usuarios registrados!</h5>
-        </div>
-      </div> -->
-      <div
-        class="card text-dark bg-light mb-3 mx-auto"
-        style="max-width: 18rem"
-      >
-        <div class="card-header">
-          <i class="fa-solid fa-film"></i> Película más vista
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Noche más larga</h5>
-          <p class="card-text">
-            Reproducciones: 213 veces <br />
-            Categoría: drama <br />
-            Valoración: 3 estrellas <br />
-          </p>
-        </div>
-      </div>
-      <!-- <div
-        class="card text-dark bg-light mb-3 mx-auto"
-        style="max-width: 18rem"
-      >
-        <div class="card-header">
-          <i class="fa-solid fa-heart"></i> Película más valorada
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">El verano que te vimos</h5>
-          <p class="card-text">
-            Reproducciones: 100 veces <br />
-            Categoría: drama <br />
-            Valoración: 4,5 estrellas <br />
-          </p>
-        </div>
-      </div> -->
-      <div
-        class="card text-dark bg-light mb-3 mx-auto"
-        style="max-width: 18rem"
-      >
-        <div class="card-header">
-          <i class="fa-solid fa-heart"></i> Géneros más vistos
-        </div>
-        <div class="card-body text-center">
-          <h5 class="card-title text-center">TOP 3</h5>
-          <p class="card-text"><b>Drama, Terror, Suspenso</b></p>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -516,9 +447,9 @@
       <h3 class="border-bottom my-3 text-center">
         <i class="fa-solid fa-circle-info"></i>
       </h3>
-    
+
       <div class="m-2">
-          <!-- <div
+        <!-- <div
         class="card text-dark bg-light mb-3 mx-auto"
         style="max-width: 18rem"
       >

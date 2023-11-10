@@ -1,6 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Usuario } from 'src/app/models/Auth/Usuario';
 import { UsuarioService } from 'src/app/modules/auth/services/usuario.service';
+import { DataService } from 'src/app/services/data.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -8,9 +10,10 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit, AfterViewInit{
   
   username?: string;
+  onlyDash :boolean = true;
 
   rotate1:boolean=false;
   rotate2:boolean=false;
@@ -18,20 +21,28 @@ export class DashboardComponent implements OnInit{
   rotate4:boolean=false;
   offcanvasmenu:boolean=false;
 
-  constructor(private utilServices: UtilsService, private us: UsuarioService){}
-  ngOnInit(): void {
-    // this.us.verifyUser();
-
-    this.utilServices.updateNavConfig('navDash');
-    this.us.user$.subscribe(us=> us?this.username = us._firstName : 'Ver info');
+  constructor(private dataSvcs: DataService, private us: UsuarioService,
+    private route: ActivatedRoute
+    ){}
+  ngAfterViewInit(): void {
+    this.dataSvcs.onlyDash$.subscribe(res => this.onlyDash=res)
   }
 
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(res => {console.log(res)
+    });
+    console.log(this.route )
+    //  this.dataSvcs.onlyDash$.subscribe(res=>this.onlyDash=res);
+    this.dataSvcs.updateNavConfig('navDash');
+    this.us.user$.subscribe(us=> us?this.username = us._firstName : 'Ver info');
+  }
   btnOffCanvas(){
     this.offcanvasmenu = ! this.offcanvasmenu;
   }
 
   openClose(num:number){
-    
+  
+
 
 
   }

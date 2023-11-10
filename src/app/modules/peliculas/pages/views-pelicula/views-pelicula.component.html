@@ -97,7 +97,7 @@
 <!--Lista de pelicualas-->
 <div *ngIf="ver == 'lista'">
   <!-- tabla -->
-  <div class="table-responsive">
+  <!-- <div class="table-responsive">
     <table class="table table align-middle">
       <tbody>
         <tr *ngFor="let item of pelis">
@@ -170,41 +170,43 @@
       [collectionSize]="70"
       [(page)]="page"
     ></ngb-pagination>
-  </div>
+  </div> -->
   <!-- lista1 -->
   <div class="container-fluid">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-4 text-dark mb-3">
+    <div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-4  mb-3">
       <div class="col" *ngFor="let item of pelis">
-        <div class="card h-100">
+        <div class="card bg-200 text-200 h-100">
           <img [src]="item.imagesUrlBillboard" class="card-img-top" alt="..." />
           <div class="card-body text-center d-flex flex-column">
             <h5 class="card-title">{{ item.title }}</h5>
             <div class="card-text mt-auto">
               <div *ngIf="item.isPremiere">
-                <i class="fa-solid fa-star fa-2xs text-warning"></i>
-                Estreno
-                <i class="fa-solid fa-star fa-2xs text-warning"></i>
+                <span
+                  class="badge rounded-pill primary-200 px-2"
+                >
+                  Estreno
+                </span>
               </div>
 
               <div>
                 <span
-                  class="badge rounded-pill"
-                  [ngClass]="item.publiclyVisible ? 'bg-success' : 'bg-dark'"
+                  class="badge rounded-pill px-2"
+                  [ngClass]="item.publiclyVisible ? 'bg-success' : 'bg-secondary'"
                 >
                   {{ item.publiclyVisible ? "Publicada" : "Oculta" }}
                 </span>
               </div>
             </div>
           </div>
-          <div class="card-footer text-center">
+          <div class="card-footer bg-300 text-center">
             <div class="btn-group dropup">
               <button
                 type="button"
-                class="btn btn-sm btn-outline-primary dropdown-toggle"
+                class="btn btn-sm btn-primary dropdown-toggle text-200"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Accioens
+                Acciones
               </button>
               <ul class="dropdown-menu">
                 <li>
@@ -239,118 +241,11 @@
       </div>
     </div>
     <ngb-pagination
-      class="d-flex justify-content-center"
+      class="d-flex justify-content-center text-success"
       [collectionSize]="70"
       [(page)]="page"
+      
     ></ngb-pagination>
   </div>
 
-  <div class="row row-cols-lg-1 g-4">
-    <div *ngFor="let item of pelis">
-      <div class="card">
-        <div class="row">
-          <div class="col-md-4">
-            <img
-              [src]="item.imagesUrlBillboard"
-              class="img-fluid rounded-start"
-              alt="..."
-            />
-          </div>
-          <div class="col-md-8 position-relative">
-            <div class="card-body text-dark">
-              <h5 class="card-title fs-4">{{ item.title }}</h5>
-              <p class="card-text">
-                <!-- <b>Valoracion:</b>
-                <app-valuacion
-                  [valoracion]="item.ratingMovie!"
-                  class="d-inline-block ms-1"
-                ></app-valuacion>
-                <br /> -->
-                <b>Duración:</b> {{ item.durationInMinutes }} min. <br />
-                <b>Año de estreno:</b> {{ item.relanseYear }}
-                <br />
-                <b>Clasificación:</b> {{ item.ratingMovieINCAA }} <br />
-                <b>Elenco:</b> Actores , directores <br />
-                <b>Nominaciones:</b> Nominaciones y premios
-                <a role="button" class="link-primary" type="button">
-                  Ver más... </a
-                ><br />
-                <b>Link del trailer: </b> {{ item.linkTrailer }} <br />
-                <b>Link del le película: </b> {{ item.linkPelicula }} <br />
-                <b>Foto de portada: </b>
-                <a role="button" class="link-primary" type="button">
-                  Ver más...
-                </a>
-                <br />
-                <b>Foto de cartelera: </b
-                ><a role="button" class="link-primary" type="button">
-                  Ver más...
-                </a>
-                <br />
-                <b>Géneros:</b> Drama, suspenso <br />
-                <span class="d-inline-block text-truncate" style="width: 65%">
-                  <b>Descripción:</b> {{ item.synopsis }}
-                </span>
-                <a role="button" class="align-top link-primary" type="button">
-                  Ver más...
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="position-absolute end-0 top-0 mt-2 me-2 text-center fs-5">
-          <span
-            class="badge rounded-pill bg-{{
-              item.publiclyVisible ? 'success' : 'dark'
-            }}"
-          >
-            {{
-              item.publiclyVisible
-                ? "Disponible para el público"
-                : "Oculto para el público"
-            }}
-          </span>
-          <small class="text-muted d-block"> fecha: 22/04/2023 </small>
-        </div>
-        <div class="card-footer bg-transparent border-secondary">
-          <div class="row justify-content-center">
-            <div class="col-auto">
-              <button
-                class=" btn btn-sm btn-{{
-                  item.publiclyVisible ? 'dark' : 'success'
-                }} "
-                type="button"
-                (click)="publicar(item)"
-              >
-                <i
-                  class="fa-regular fa-eye{{
-                    item.publiclyVisible ? '-slash' : ''
-                  }}"
-                ></i>
-                {{ item.publiclyVisible ? "Ocultar video" : "Publicar video" }}
-              </button>
-              &nbsp;;
-              <button
-                class="btn btn-sm btn-warning"
-                type="button"
-                (click)="editar(item)"
-              >
-                <i class="fa-regular fa-pen-to-square"></i> Editar
-              </button>
-              &nbsp;;
-              <button class="btn btn-sm btn-danger" type="button">
-                <i class="fa-solid fa-trash-can"></i> Eliminar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <ngb-pagination
-      class="d-flex justify-content-center"
-      [collectionSize]="70"
-      [(page)]="page"
-    ></ngb-pagination>
-  </div>
 </div>

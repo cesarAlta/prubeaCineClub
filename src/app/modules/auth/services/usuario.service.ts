@@ -55,10 +55,10 @@ export class UsuarioService {
     this.redirectToHome();
   }
   //Inicio de sesión
-  logging(email: string, pass: string) {
+  logging(us: Usuario) {
     let user: Usuario;
     // credenciales a base64
-    const credentials = btoa(email + ':' + pass);
+    const credentials = btoa(`${us.email}:${us.password}`);
     const head = new HttpHeaders({
       Authorization: 'Basic ' + credentials,
     });
@@ -128,7 +128,6 @@ export class UsuarioService {
     if (t) {
       const us = this.userLogged(this.getUserToken(t));
       this.pushNewUser(us);
-      
     }
   }
 

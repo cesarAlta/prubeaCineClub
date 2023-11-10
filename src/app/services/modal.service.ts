@@ -25,7 +25,7 @@ export class ModalService {
     const modalRef = this.ngbModal.open(ModalComponent);
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = mensaje;
-    modalRef.componentInstance.textBtnTrue = 'Cerrar';
+    modalRef.componentInstance.textBtnTrue =  '';
     modalRef.componentInstance.textoBotonFalse = '';
     modalRef.componentInstance.setTipo(typeAlert);
     return modalRef;

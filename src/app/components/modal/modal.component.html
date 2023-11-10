@@ -52,44 +52,44 @@
   </div>
 </div> -->
 
-<div class="modal-content text-dark">
-    <div class="position-absolute end-0 top-0 m-2" *ngIf="!processing">
+<div class="modal-content">
+  <div class="position-absolute end-0 top-0 m-2" *ngIf="!processing">
     <button
       type="button"
-      class="btn-close"
+      class="btn-close btn-close-white"
       data-bs-dismiss="modal"
       aria-label="Close"
       (click)="activeModal.dismiss('Cross click')"
     ></button>
   </div>
-  <div class="modal-header {{border}}" >
+  <div class="modal-header {{ border }}">
     <h4 class="modal-title">{{ title }}</h4>
   </div>
-  <div class="modal-body">
-    <span class="align-middle me-2 my-auto">
+  <div class="modal-body justify-content-center align-items-center">
+    <span class="me-2">
       <i [class]="classIcon"></i>
     </span>
-    <p class="fs-5 my-auto">{{message}}</p>
+    <span class="fs-5">{{ message }}</span>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer" *ngIf="footer">
+    <button
+      *ngIf="textBtnFalse !== ''"
+      type="button"
+      class="btn {{ classBtnFalse }} text-white"
+      (click)="activeModal.close(false)"
+    >
+      {{ textBtnFalse }}
+    </button>
+    &nbsp;
     <button
     *ngIf="textBtnTrue !== ''"
-    type="button"
-    class="btn btn-sm btn-outline-primary"
-    (click)="activeModal.close(true)"
-    ngbAutofocus 
-  >
-    {{ textBtnTrue }}
-  </button>
-  &nbsp;
-  <button
-    *ngIf="textBtnFalse !== ''"
-    type="button"
-    class="btn btn-sm btn-outline-danger"
-    data-bs-dismiss="modal"
-    (click)="activeModal.close(false)"
-  >
-    {{ textBtnFalse }}
-  </button>
+      type="button"
+      class="btn {{ classBtnTrue }} text-white"
+      data-bs-dismiss="modal"
+      ngbAutofocus
+      (click)="activeModal.close(true)"
+    >
+      {{ textBtnTrue }}
+    </button>
   </div>
 </div>

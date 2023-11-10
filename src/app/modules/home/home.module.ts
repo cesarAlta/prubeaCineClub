@@ -10,6 +10,8 @@ import { CarouselEstreno1Component } from './home/pages/carousel-estreno1/carous
 import { Carousel3dComponent } from './home/pages/carousel3d/carousel3d.component';
 import { CarouselMiniComponent } from './home/pages/carousel-mini/carousel-mini.component';
 import { CarouselSimpleComponent } from './home/pages/carousel-simple/carousel-simple.component';
+import { VideoHomeComponent } from './components/video-home/video-home.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { CarouselSimpleComponent } from './home/pages/carousel-simple/carousel-s
     CarouselEstreno1Component,
     Carousel3dComponent,
     CarouselMiniComponent,
-    CarouselSimpleComponent
+    CarouselSimpleComponent,
+    VideoHomeComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,

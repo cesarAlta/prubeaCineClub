@@ -1,3 +1,52 @@
+
+
+
+
+/* inicio */
+:root{
+  --primary-100:#1F3A5F;
+--primary-200:#4d648d;
+--primary-300:#acc2ef;
+--accent-100:#3D5A80;
+--accent-200:#cee8ff;
+--text-100:#FFFFFF;
+--text-200:#e0e0e0;
+--bg-100:#0F1C2E;
+--bg-200:#1f2b3e;
+--bg-300:#374357;
+}
+
+.bg-100{
+  background-color: #0f1c2d;
+}
+.bg-200{
+  background-color: #1f2b3e;
+  
+}
+.bg-300{
+  background-color: #374357;
+  
+}
+.primary-100{
+  background-color: #1F3A5F;
+}
+.primary-200{
+  background-color: #4d648d;
+}
+.primary-300{
+  background-color: #acc2ef;
+}
+.accent-100{
+color:#3D5A80 ;
+}
+.accent-200{
+  color:#cee8ff ;
+}
+.bg-grad-100{
+  background: linear-gradient(to left, #0F1C2E,#4b638b );
+}
+
+/* fin */
 .rotate-icon {
   transform: rotate(180deg);
   transition: all 0.5s;
@@ -18,17 +67,19 @@
 }
 
 .nav-link:hover {
-  background-color: rgb(53, 53, 53);
+  /* background-color: rgb(53, 53, 53); */
+  background-color: #1e2424;
   border-left: 3px solid #6eade0;
 }
 .collapsed-list {
   /* background-color: rgb(27, 27, 27);
    */
-   background-color: #332b47d2;
+   /* background-color: #332b47d2; */
+   background-color: #374357;
 }
 
 .collapsed-list li a.active {
-  background-color: rgb(53, 53, 53);
+  background-color: #1e2424;
 }
 
 .offcanvas-menu {

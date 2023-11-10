@@ -43,10 +43,12 @@ export class CarouselSimpleComponent implements OnInit{
   }
   onTouchEnd() {
     const touchDistance = this.touchStartX - this.touchEndX;
+    console.log(touchDistance)
 
-    if (touchDistance > this.minTouchDistance && this.currentIndex < this.films2.length - 1) {
+    if (touchDistance > this.minTouchDistance && this.cantMove < this.films2.length - 1) {
       this.left();
-    } else if (touchDistance < -this.minTouchDistance && this.currentIndex > 0) {
+    } else if (touchDistance < -this.minTouchDistance && this.cantMove < 0) {
+      console.log(touchDistance < -this.minTouchDistance && this.cantMove < 0)
       this.rigth();
     }
   }

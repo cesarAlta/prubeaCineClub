@@ -1,0 +1,9 @@
+.card-100{
+    position: relative;
+    color: #e0e0e0;
+    /* background-color: #1F3A5F ; */
+    border-radius: 2rem;
+    border: solid 2px #4d648d ;
+    /* box-shadow: 0 0 5px #4d648d; */
+    overflow: hidden;
+}

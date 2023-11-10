@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from 'src/app/services/modal.service';
 import { UsuarioService } from '../../services/usuario.service';
-import { Router } from '@angular/router';
-import { UtilsService } from 'src/app/services/utils.service';
 import { Location } from '@angular/common';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -23,11 +22,11 @@ export class ForgotPasswordComponent {
     private location: Location,
     private modalS: ModalService,
     private usuarioS: UsuarioService,
-    private utilService: UtilsService
+    private dataSvcs: DataService
   ) {}
 
   ngOnInit(): void {
-    this.utilService.updateNavConfig('fixed');
+    this.dataSvcs.updateNavConfig('fixed');
     this.recoverPassF = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
     });

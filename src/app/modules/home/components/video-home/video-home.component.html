@@ -1,0 +1,64 @@
+<ng-container *ngIf="(op|async) == 1">
+  <div class="cont-viedo" *ngIf="urlVideo">
+    <video
+      loop
+      autoplay
+      [muted]="true"
+      id="video-background"
+      (loadeddata)="fullLoad($event)"
+    >
+      <source [src]="urlVideo" type="video/mp4" />
+      Tu navegador no soporta videos en HTML5.
+    </video>
+    <div class="cover-video"></div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="(op|async) == 2">
+  <!-- <video autoplay loop [muted]="true">
+    <source src="./assets/video/VN20230831_004301.mp4" type="video/mp4" />
+    Tu navegador no soporta videos en HTML5.
+  </video> -->
+  <div class="video-bg-star" *ngIf="urlVideo">
+    <video autoplay loop [muted]="true"  (loadeddata)="fullLoad($event)">
+      <source [src]="urlVideo" type="video/mp4" />
+      Tu navegador no soporta videos en HTML5.
+    </video>
+    <div class="text-info-home"></div>
+
+    <div class="position-absolute top-50 end-0 translate-middle-y me-5">
+      <div style="width: 500px">
+        <div class="d-flex mx-auto" style="width: 200px; height: auto">
+          <img
+            src="./assets/img/Cineclub-20-anos-Logo-768x612-1-600x478.png"
+            alt=""
+            class="img-fluid"
+          />
+        </div>
+        <br />
+        <p class="text-center fs-3">
+          El Cineclub Municipal te acompaña hace 20 años. Ahora presenta
+          <b>CineclubPlay</b> para que disfrutes del mejor cine cordobés en alta
+          definicion.
+        </p>
+        <p class="text-center">
+          <b>CineclubPlay</b> <br /><i>El cine cordobés, donde estés</i>
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="(op|async) == 3">
+    <app-carousel-mini></app-carousel-mini>
+    <div class="position-relative bg-dark">
+      <a class="text-white ms-3" href="https://cineclubmunicipal.org.ar/">
+        <img
+          src="../../../../assets/img/Cineclub-20-anos-Logo-768x612-1-600x478.png"
+          alt=""
+          style="width: 100px; height: auto"
+        />
+        Ir al cineclub municipal
+      </a>
+    </div>
+  </ng-container>

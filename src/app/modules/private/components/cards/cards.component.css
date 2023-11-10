@@ -1,0 +1,26 @@
+.card-info{
+    position: relative;
+    color: #e0e0e0;
+    width: 18rem;
+    /* background-color: #1F3A5F ; */
+    background: linear-gradient(90deg, #0f1c2d , #2c3e50);
+    border-radius: 2rem;
+    margin: 1rem;
+    border: solid 2px #4d648d ;
+    /* box-shadow: 0 0 5px #4d648d; */
+  }
+  /* .card-info:hover{
+    transform: scale(1.1);
+    transition: 0.5s ease;
+  } */
+  
+  .title-card-info{
+    padding: 1rem 1rem 0.5rem;
+    text-align: center;
+  
+  }
+  .body-card-info{
+    padding: 0rem 1rem 1rem;
+    text-align: center;
+  }
+  

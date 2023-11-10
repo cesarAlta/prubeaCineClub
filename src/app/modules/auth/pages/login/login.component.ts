@@ -5,48 +5,49 @@ import { ModalService } from 'src/app/services/modal.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from 'src/app/models/Auth/Usuario';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UtilsService } from 'src/app/services/utils.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit,OnDestroy {
-  loginF: FormGroup | undefined; // form para loguearse.
+export class LoginComponent implements OnInit {
+  loginF!: FormGroup; // form para loguearse.
   newUserF: FormGroup | undefined; //form para registrar nuevo usuario.
   showPass: boolean = false; // para hacer la contraseña visible en el input.
   title: string = 'Iniciar sesión'; // titulo.
   op = 1; // opcion 1-> Ininiciar sesion, 2-> registrarse, 3-> recuprer pass.
   submitted: boolean = false; //booleano que sirve para saber cuando se envia el form
-
+  option = 2;
   constructor(
     public fb: FormBuilder,
     private location: Location,
     private modalS: ModalService,
     private usuarioS: UsuarioService,
     private router: Router,
-    private utilService: UtilsService
+    private dataSvcs: DataService
   ) {}
-  ngOnDestroy(): void {
-    this.utilService.updateNavConfig('sticky');
-  }
 
   ngOnInit(): void {
-    this.utilService.updateNavConfig('fixed');
+    this.dataSvcs.updateNavConfig('fixed');
     this.loginF = this.fb.group({
-      mail: [null, [Validators.required, Validators.email]],
-      pass: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, Validators.required],
     });
   }
   //iniciar sesión
   login() {
     this.submitted = true;
     if (this.loginF?.invalid) return;
-    const copyForm = { ...this.loginF?.value };
-    this.usuarioS.logging(copyForm.mail, copyForm.pass).subscribe((res) => {
+    const copyForm: Usuario = { ...this.loginF?.value };
+    this.usuarioS.logging(copyForm).subscribe((res) => {
       if (res) {
-        this.modalS.Alert(`Bienvenido ${res._firstName?.toLocaleUpperCase}`, 'Perfecto!', 's');
+        this.modalS.Alert(
+          `Bienvenido ${res._firstName?.toLocaleUpperCase()}`,
+          'Perfecto!',
+          's'
+        );
         this.router.navigateByUrl('/dashboard');
       }
     });

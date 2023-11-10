@@ -106,3 +106,11 @@ transition: all 1s ease;
 .navDashboard .navbar-brand{
  display: none;
 }
+.nav-login{
+  position: relative;
+  height: 50px;
+  background: #000;
+}
+.nav-login img{
+  width: 50px;
+}

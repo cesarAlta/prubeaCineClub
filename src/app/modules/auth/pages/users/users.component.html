@@ -94,24 +94,28 @@
       </form>
     </div>
   </div>
-</div> -->  
-<div
-  class="container position-relative my-3 border border-secondary rounded p-3 text-dark"
->
-  <div class="mb-3">
+</div> -->
+<div class="container position-relative my-3 card-100 p-3">
+  <div class="mb-3 px-2 py-1">
     <h4 class="d-flex justify-content-between border-bottom">
       Mis datos personales
       <small>
-        <a role="button" class="btn-link link-secondary" routerLink="/dashboard">
+        <a
+          role="button"
+          class="btn-link link-secondary"
+          routerLink="/dashboard"
+        >
           <i class="fa-solid fa-xmark"></i>
         </a>
       </small>
     </h4>
   </div>
-  <div class="row " >
-    <div class="col col-md-10 col-xxl-7 m-auto rounded-3 shadow-lg p-3 bg-body rounded">
+  <div class="row">
+    <div
+      class="col col-md-10 col-xxl-7 m-auto rounded-3 shadow-lg p-3 bg-200 text-200 rounded"
+    >
       <div class="row">
-        <div class="col-auto my-auto mx-auto text-dark" > 
+        <div class="col-auto my-auto mx-auto text-dark">
           <div
             class="d-flex flex-column justify-content-center align-items-center"
             style="height: 150px; width: 150px"
@@ -119,20 +123,23 @@
             <div
               class="border border-3 d-flex justify-content-center align-items-center rounded-circle mx-auto h-75 w-75"
             >
+              <!-- <i class="fa-regular fa-user fa-2xl m-auto"></i> -->
               <img
-                src="../../../../../assets/img/User_icon_2.svg"
+                src="../../../../../assets/img/logo/logoccp1.png"
                 alt="user.png"
                 class="h-75 w-75"
               />
             </div>
-            <div class="text-center">
+            <div class="text-center text-200 mt-1">
               {{ fgUserLogged.get("profile")?.value | uppercase }}
             </div>
           </div>
         </div>
         <div class="col my-auto">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex align-items-center">
+            <li
+              class="list-group-item d-flex align-items-center border-secondary"
+            >
               <b>Nombre:</b>&nbsp;{{ user._firstName | uppercase }}
               <button
                 type="button"
@@ -142,7 +149,9 @@
                 <i class="fa-regular fa-pen-to-square fa-lg"></i>
               </button>
             </li>
-            <li class="list-group-item d-flex align-items-center">
+            <li
+              class="list-group-item d-flex align-items-center border-secondary"
+            >
               <b>Apellido:</b>&nbsp;
               {{
                 user._lastNAme
@@ -157,10 +166,14 @@
                 <i class="fa-regular fa-pen-to-square fa-lg"></i>
               </button>
             </li>
-            <li class="list-group-item d-flex align-items-center">
+            <li
+              class="list-group-item d-flex align-items-center border-secondary"
+            >
               <b>Email:</b>&nbsp; {{ user._email }}
             </li>
-            <li class="list-group-item d-flex align-items-center">
+            <li
+              class="list-group-item d-flex align-items-center border-bottom border-secondary"
+            >
               <b>Contraseña:</b>&nbsp; {{ "***********" }}
               <button
                 type="button"
@@ -175,165 +188,159 @@
       </div>
     </div>
   </div>
+</div>
+<div
+  class="position-absolute top-0 start-0 d-flex justify-content-center align-items-center h-100 w-100"
+  style="background-color: rgba(0, 0, 0, 0.555)"
+  tabindex="-1"
+  *ngIf="fgEdit"
+>
   <div
-    class="position-absolute top-0 start-0 d-flex justify-content-center align-items-center h-100 w-100"
-    style="background-color: rgba(0, 0, 0, 0.555)"
-    tabindex="-1"
-    *ngIf="fgEdit"
+    class="text-dark shadow-lg mb-5 bg-300 rounded rounded-3"
+    style="width: 18rem"
   >
-    <div class="text-dark shadow-lg mb-5 bg-body rounded  rounded-3" style="width: 18rem">
-      <h4 class="text-center p-3 border-bottom border-secondary">
-        Modificar {{ subTitle }}
-      </h4>
-      <form action="" class="px-3 pb-3" [formGroup]="fgEdit">
-        <div class="mb-3" *ngIf="opSel != 3">
-          <label for="name" class="form-label">{{ subTitle }}</label>
-          <input
-            type="text"
-            class="form-control"
-            id="exampleFormControlInput1"
-            [placeholder]="editPlaceHolder"
-            formControlName="name"
-            [ngClass]="{
-              'is-invalid':
-                (fgEdit.controls['name'].touched || submitted) &&
-                fgEdit.controls['name'].errors
-            }"
-          />
-          <small
+    <h4 class="text-center text-200 p-3 border-bottom border-secondary">
+      Modificar {{ subTitle }}
+    </h4>
+    <form action="" class="px-3 pb-3 text-200" [formGroup]="fgEdit">
+      <div class="mb-3" *ngIf="opSel != 3">
+        <input
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput1"
+          [placeholder]="editPlaceHolder"
+          formControlName="name"
+          [ngClass]="{
+            'is-invalid':
+              (fgEdit.controls['name'].touched || submitted) &&
+              fgEdit.controls['name'].errors
+          }"
+        />
+        <small
           class="text-danger"
           *ngIf="(fgEdit.controls['name']?.touched || submitted) && fgEdit.controls['name'].errors?.['required']"
         >
           Campo obligatorio
         </small>
-        </div>
-        <div *ngIf="opSel == 3">
-          <div class="mb-2">
-            <label for="currentPassword" class="form-label"
-              >Ingrese su contraseña actual</label
-            >
-            <div class="position-relative">
-              <input
-                [type]="showPass ? 'text' : 'password'"
-                class="form-control"
-                [autocomplete]="false"
-                placeholder="Contraseña"
-                id="currentPassword"
-                aria-label="current password"
-                formControlName="currentPassword"
-                [ngClass]="{
-                  'is-invalid':
-                    (fgEdit.controls['currentPassword'].touched || submitted) &&
-                    fgEdit.controls['currentPassword'].errors
-                }"
-              />
-              <a
-                  *ngIf="!fgEdit.controls['currentPassword'].errors"
-                  class="position-absolute end-0 top-50 translate-middle-y me-2"
-                  type="button"
-                  role="button"
-                  (click)="togglePassVisibility()"
-                >
-                  <i
-                    class="fa-regular {{
-                      showPass ? 'fa-eye-slash' : 'fa-eye'
-                    }} text-dark"
-                  ></i>
-                </a>
-            </div>
-
-            <small
-              class="text-danger"
-              *ngIf="(fgEdit.controls['currentPassword']?.touched || submitted) && fgEdit.controls['currentPassword'].errors?.['required']"
-            >
-              Campo obligatorio
-            </small>
-          </div>
-          <div class="mb-2">
-            <label for="newPassword" class="form-label"
-              >Ingrese su nueva contraseña</label
-            >
-            <div class="position-relative">
-              <input
-                type="password"
-                class="form-control"
-                [autocomplete]="false"
-                placeholder="Nueva contraseña"
-                id="newPassword"
-                aria-label="new password"
-                formControlName="newPassword"
-                [ngClass]="{
-                  'is-invalid':
-                    (fgEdit.controls['newPassword'].touched || submitted) &&
-                    fgEdit.controls['newPassword'].errors
-                }"
-              />
-            </div>
-            <small
-              class="text-danger"
-              *ngIf="(fgEdit.controls['newPassword']?.touched || submitted) && fgEdit.controls['newPassword'].errors?.['required']"
-            >
-              Campo obligatorio
-            </small>
-          </div>
-          <div class="mb-2">
-            <label for="repeatNewPassword" class="form-label"
-              >Repita su nueva contraseña</label
-            >
-            <div class="position-relative">
-              <input
-                type="password"
-                class="form-control"
-                [autocomplete]="false"
-                placeholder="Repetir contraseña"
-                id="repeatNewPassword"
-                aria-label="repeat new password"
-                formControlName="repeatNewPassword"
-                [ngClass]="{
-                  'is-invalid':
-                    (fgEdit.controls['repeatNewPassword'].touched || submitted) &&
-                    fgEdit.controls['repeatNewPassword'].errors
-                }"
-              />
-            </div>
-            <small
-              class="text-danger"
-              *ngIf="(fgEdit.controls['repeatNewPassword']?.touched || submitted) && fgEdit.controls['repeatNewPassword'].errors?.['required']"
-            >
-              Campo obligatorio
-            </small>
-            <small
-              class="text-danger d-block"
-              *ngIf="(fgEdit.get('newPassword')?.touched || submitted) && fgEdit.errors?.['mismatch']"
-            >
-              No coinciden las contraseñas
-            </small>
-          </div>
-          <div class="text-center mb-2">
+      </div>
+      <ng-container *ngIf="opSel == 3">
+        <div class="mb-3">
+          <div class="position-relative">
+            <input
+              [type]="showPass ? 'text' : 'password'"
+              class="form-control"
+              [autocomplete]="false"
+              placeholder="Contraseña actual"
+              id="currentPassword"
+              aria-label="current password"
+              formControlName="currentPassword"
+              [ngClass]="{
+                'is-invalid':
+                  (fgEdit.controls['currentPassword'].touched || submitted) &&
+                  fgEdit.controls['currentPassword'].errors
+              }"
+            />
             <a
+              *ngIf="!fgEdit.controls['currentPassword'].errors"
+              class="position-absolute end-0 top-50 translate-middle-y me-2"
               type="button"
               role="button"
-              class="btn-link"
-              routerLink="/us/forgot-password"
-              >Olvidé mi contraseña</a
+              (click)="togglePassVisibility()"
             >
+              <i
+                class="fa-regular {{
+                  showPass ? 'fa-eye-slash' : 'fa-eye'
+                }} text-dark"
+              ></i>
+            </a>
           </div>
+          <small
+            class="text-danger"
+            *ngIf="(fgEdit.controls['currentPassword']?.touched || submitted) && fgEdit.controls['currentPassword'].errors?.['required']"
+          >
+            Campo obligatorio
+          </small>
         </div>
-        <div class="d-flex justify-content-center gap-2">
-          <button
+        <div class="mb-3">
+          <div class="position-relative">
+            <input
+              type="password"
+              class="form-control"
+              [autocomplete]="false"
+              placeholder="Nueva contraseña"
+              id="newPassword"
+              aria-label="new password"
+              formControlName="newPassword"
+              [ngClass]="{
+                'is-invalid':
+                  (fgEdit.controls['newPassword'].touched || submitted) &&
+                  fgEdit.controls['newPassword'].errors
+              }"
+            />
+          </div>
+          <small
+            class="text-danger"
+            *ngIf="(fgEdit.controls['newPassword']?.touched || submitted) && fgEdit.controls['newPassword'].errors?.['required']"
+          >
+            Campo obligatorio
+          </small>
+        </div>
+        <div class="mb-3">
+          <div class="position-relative">
+            <input
+              type="password"
+              class="form-control"
+              [autocomplete]="false"
+              placeholder="Repetir contraseña"
+              id="repeatNewPassword"
+              aria-label="repeat new password"
+              formControlName="repeatNewPassword"
+              [ngClass]="{
+                'is-invalid':
+                  (fgEdit.controls['repeatNewPassword'].touched || submitted) &&
+                  fgEdit.controls['repeatNewPassword'].errors
+              }"
+            />
+          </div>
+          <small
+            class="text-danger"
+            *ngIf="(fgEdit.controls['repeatNewPassword']?.touched || submitted) && fgEdit.controls['repeatNewPassword'].errors?.['required']"
+          >
+            Campo obligatorio
+          </small>
+          <small
+            class="text-danger d-block"
+            *ngIf="(fgEdit.get('newPassword')?.touched || submitted) && fgEdit.errors?.['mismatch']"
+          >
+            No coinciden las contraseñas
+          </small>
+        </div>
+        <div class="text-end mb-3">
+          <a
             type="button"
-            class="btn btn-sm btn-outline-danger"
-            (click)="cancelEdit()"
+            role="button"
+            class="btn-link link-light text-200"
+            routerLink="/us/forgot-password"
+            >Olvidé mi contraseña</a
           >
-            <i class="fa-solid fa-xmark"></i> Cancelar
-          </button>
-          <button type="button" class="btn btn-sm btn-outline-success"
-          (click)="save()"
-          >
-            <i class="fa-solid fa-check"></i> Confirmar
-          </button>
         </div>
-      </form>
-    </div>
+      </ng-container>
+      <div class="d-flex justify-content-center gap-2">
+        <button
+          type="button"
+          class="btn btn-warning text-200"
+          (click)="cancelEdit()"
+        >
+          <i class="fa-solid fa-xmark"></i> Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-success text-200"
+          (click)="save()"
+        >
+          <i class="fa-solid fa-check"></i> Aceptar
+        </button>
+      </div>
+    </form>
   </div>
 </div>
