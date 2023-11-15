@@ -10,8 +10,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Profiles } from 'src/app/models/Auth/profiles';
-import { group } from '@angular/animations';
 import { DataService } from 'src/app/services/data.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-users',
@@ -33,6 +33,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     private us: UsuarioService,
     private fb: FormBuilder,
     private dataSvcs: DataService,
+    private modalSvcs: ModalService,
     private route: Router
   ) {}
   ngOnDestroy(): void {
@@ -65,9 +66,20 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.fgUserLogged.disable();
   }
   optionEdit = [
-    { id: 1, name: 'Nombre', ph: 'Nombre' },
-    { id: 2, name: 'Apellido', ph: 'Apellido' },
-    { id: 3, name: 'Contraseña', ph: 'Nueva contraseña' },
+    { id: 1, name: 'Nombre', ph: 'Nombre', field: 'nombre' },
+    { id: 2, name: 'Apellido', ph: 'Apellido', field: 'apellido' },
+    {
+      id: 3,
+      name: 'Contraseña',
+      ph: 'Nueva contraseña',
+      field: 'contraseña',
+    },
+    {
+      id: 4,
+      name: 'Email',
+      ph: 'Email',
+      field: 'email',
+    },
   ];
   //Crea dinamicamente el campo a editar con un formGroup
   edit(op: number) {
@@ -76,14 +88,22 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.editPlaceHolder = opt!.ph;
     this.subTitle = opt!.name;
     if (op == 3) {
+      this.editPlaceHolder = 'Nueva contraseña';
+      this.subTitle = 'contraseña';
       this.fgEdit = this.fb.group({
-        currentPassword: ['', Validators.required],
+        // currentPassword: ['', Validators.required],
         newPassword: ['', Validators.required],
         repeatNewPassword: ['', Validators.required],
       });
       this.fgEdit.setValidators(this.passwordsMatchValidator(this.fgEdit));
+    } else if (op == 4) {
+      this.subTitle = 'email';
+      this.editPlaceHolder = 'Email';
+      this.fgEdit = this.fb.group({
+        name: [this.user._email, [Validators.required, Validators.email]],
+      });
     } else {
-      const n = op==1? this.user._firstName: this.user._lastNAme;
+      const n = op == 1 ? this.user._firstName : this.user._lastNAme;
       this.fgEdit = this.fb.group({
         name: [n, Validators.required],
       });
@@ -106,7 +126,36 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   save() {
     this.submitted = true;
-    if (this.fgEdit?.valid) return;
+    if (!this.fgEdit!.valid) return;
+    let updateField: any;
+    if (this.opSel == 3) {
+      updateField = {
+        field: 'TX_CONTRASEÑA',
+        updatedField: this.fgEdit?.get('newPassword')?.value,
+      };
+    } else if (this.opSel == 4) {
+      updateField = {
+        field: 'TX_MAIL',
+        updatedField: this.fgEdit?.get('name')?.value,
+      };
+    } else {
+      let field = this.opSel == 1 ? 'TX_NOMBRE' : 'TX_APELLIDO';
+      updateField = {
+        field: field,
+        updatedField: this.fgEdit?.get('name')?.value,
+      };
+    }
+    this.us.update(updateField).subscribe((res) => {
+      this.modalSvcs.AlertConfirm(
+        'Se actualizó correctamente, debes volver a inicar sesión',
+        'Perfecto!',
+        's',
+        'Aceptar',
+        ()=> { 
+          this.us.logout('us/login')
+         }
+      );
+    });
   }
 
   // recoverPass() {

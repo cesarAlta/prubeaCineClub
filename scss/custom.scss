@@ -5,7 +5,15 @@ $success: #17a589;
 $primary: #3498db;
 $warning: #e0a800;
 $cyan: #0dcaf0;
-
+$primary-100 :  rgba(54, 57, 70, 1);
 $btn-border-radius: 1rem;
 $modal-content-bg: #374357;
+
+$accordion-color: white;
+$accordion-bg: rgb(51, 54, 67);
+$accordion-button-bg:rgba(54, 58, 70, 1);
+$accordion-button-active-bg: rgb(62, 64, 77);
+$accordion-button-active-color: rgba(192,192,193,1);
+$accordion-button-focus-box-shadow:none;
+
 @import "../node_modules/bootstrap/scss/bootstrap";

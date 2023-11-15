@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalComponent {
   title: string = '';
-  textBtnTrue: string = '';
+  textBtnTrue?: string;
   classBtnTrue: string='btn-success';
   textBtnFalse: string = '';
   classBtnFalse: string='btn-danger';

@@ -33,192 +33,9 @@
   <div class="row m-0 w-100" style="min-height: 100vh">
     <!-- menu -->
     <div
-      class="cols col-md-4 col-lg-4 col-xl-3 col-xxl-3 ps-0 d-none d-md-block"
+      class="cols col-md-4 col-lg-3 col-xl-2  ps-0 d-none d-md-block"
     >
-      <nav
-        class="nav flex-column d-none d-md-flex rounded-bottom bg-200"
-        id="accordion-nav"
-      >
-        <!-- Usiario logueado -->
-        <div
-          class="d-flex flex-column justify-content-center align-items-center border-bottom border-secondary p-3"
-        >
-          <div class="position-relative" title="Ver mis datos">
-            <div
-              class="rounded-circle bg-dark d-flex"
-              style="width: 4rem; height: 4rem"
-            >
-              <i class="fa-regular fa-user fa-2xl m-auto"></i>
-            </div>
-            <a
-              role="button"
-              class="d-block link-light stretched-link d-flex justify-content-center"
-              routerLink="users"
-              routerLinkActive="active"
-            >
-              <span class="fs-6">{{ username | uppercase }}</span>
-            </a>
-          </div>
-        </div>
-        <div class="position-relative" id="1">
-          <a
-            class="nav-link link-light fs-5"
-            type="button"
-            role="button"
-            href="#collapseConfigSitio"
-            aria-controls="collapseConfigSitio"
-            aria-expanded="false"
-            data-bs-toggle="collapse"
-            (click)="getRotate(1)"
-            ><i class="fa-solid fa-gears"></i> Configurar mi sitio
-            <span
-              class="position-absolute end-0 me-3"
-              [ngClass]="{ 'rotate-icon': rotate1 }"
-            >
-              <i class="fa-solid fa-angle-down"></i>
-            </span>
-          </a>
-        </div>
-
-        <div
-          class="collapse"
-          id="collapseConfigSitio"
-          aria-labelledby="1"
-          data-bs-parent="#accordion-nav"
-        >
-          <ul class="collapsed-list">
-            <li>
-              <a class="py-1" routerLink="config" routerLinkActive="active"
-                >Video portada</a
-              >
-            </li>
-            <!-- <li><a href="">Generos favoritos</a></li> -->
-          </ul>
-        </div>
-        <div class="position-relative" id="2">
-          <a
-            class="nav-link link-light fs-5"
-            type="button"
-            role="button"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            aria-controls="collapseAdminPelicula"
-            href="#collapseAdminPelicula"
-            (click)="getRotate(2)"
-            ><i class="fa-solid fa-clapperboard"></i> Administrar películas
-            <span
-              class="position-absolute end-0 me-3"
-              [ngClass]="{ 'rotate-icon': rotate2 }"
-            >
-              <i class="fa-solid fa-angle-down"></i>
-            </span>
-          </a>
-        </div>
-
-        <div
-          class="collapse"
-          id="collapseAdminPelicula"
-          aria-labelledby="1"
-          data-bs-parent="#accordion-nav"
-        >
-          <ul class="collapsed-list">
-            <li>
-              <a
-                class="py-1"
-                routerLink="peliculas/adminPeliculas"
-                routerLinkActive="active"
-              >
-                Películas
-              </a>
-            </li>
-            <li>
-              <a
-                class="py-1"
-                routerLink="peliculas/premios"
-                routerLinkActive="active"
-                >Premios</a
-              >
-            </li>
-          </ul>
-        </div>
-        <!-- <div class="position-relative" id="3">
-          <a
-            class="nav-link text-white"
-            type="button"
-            role="button"
-            aria-expanded="false"
-            data-bs-toggle="collapse"
-            href="#collapseAdminUsuarios"
-            aria-controls="collapseAdminUsuarios"
-            (click)="getRotate(3)"
-            ><i class="fa-solid fa-users"></i> Administrar usuarios
-            <span
-              class="position-absolute end-0 me-3"
-              [ngClass]="{ 'rotate-icon': rotate3 }"
-            >
-              <i class="fa-solid fa-angle-down"></i>
-            </span>
-          </a>
-        </div> -->
-        <!-- <div
-          class="collapse"
-          id="collapseAdminUsuarios"
-          aria-labelledby="3"
-          data-bs-parent="#accordion-nav"
-        >
-          <ul class="collapsed-list">
-            <li><a href="">Gestionar permisos</a></li>
-            <li><a href="">Administrar comentarios</a></li>
-          </ul>
-        </div> -->
-        <div class="position-relative" id="4">
-          <a
-            class="nav-link link-light fs-5"
-            type="button"
-            role="button"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            aria-controls="collapseEstadisticas"
-            href="#collapseEstadisticas"
-            (click)="getRotate(4)"
-            ><i class="fa-solid fa-chart-line"></i> Estadísticas
-            <span
-              class="position-absolute end-0 me-3"
-              [ngClass]="{ 'rotate-icon': rotate4 }"
-            >
-              <i class="fa-solid fa-angle-down"></i>
-            </span>
-          </a>
-        </div>
-        <div
-          class="collapse"
-          id="collapseEstadisticas"
-          aria-labelledby="3"
-          data-bs-parent="#accordion-nav"
-        >
-          <ul class="collapsed-list">
-            <li><a class="py-1" href="">Películas más vistas</a></li>
-            <!-- <li><a href="">Películas más valoradas</a></li> -->
-            <!-- <li><a href="">Películas compartídas</a></li> -->
-          </ul>
-        </div>
-      </nav>
-      <div class="ms-3 mt-2 d-none d-md-flex flex-column">
-        <a routerLink="/home" class="link-light text-decoration-none fst-italic"
-          ><i class="fa-solid fa-house"></i> Página principal</a
-        >
-        <a
-          href="https://cineclubmunicipal.org.ar/"
-          target="_blank"
-          class="d-block link-light text-decoration-none fst-italic my-1"
-        >
-          <i class="fa-solid fa-share"></i>
-          ir al cineclubmunicipal
-        </a>
-        <a class="link-light text-decoration-none fst-italic"
-          ><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a
-        >
-      </div>
+   <app-aside></app-aside>
     </div>
     <div class="col position-relative">
       <router-outlet></router-outlet>
@@ -340,7 +157,7 @@
                 Películas
               </a>
             </li>
-            <li>
+            <!-- <li>
               <a
                 class="py-1"
                 routerLink="peliculas/reparto"
@@ -363,7 +180,7 @@
                 routerLinkActive="active"
                 >Premios</a
               >
-            </li>
+            </li> -->
           </ul>
         </div>
         <!-- <div class="position-relative" id="3">

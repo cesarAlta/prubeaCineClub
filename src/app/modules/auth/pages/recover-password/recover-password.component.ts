@@ -47,9 +47,10 @@ export class RecoverPasswordComponent implements OnInit, OnDestroy {
     this.submitted = true;
     if (!this.recoverPassF?.valid) return;
     if (this.token) {
-      this.recoverPassF.get('newPassword1')?.value.trim(),
+
+     const newPass =  this.recoverPassF.get('newPassword')?.value.trim();
         this.usuarioS
-          .confirmPassword({ ...this.recoverPassF.value }, this.token)
+          .confirmPassword(newPass, this.token)
           .subscribe((res) => {
             if (res) {
               this.ms.Alert(

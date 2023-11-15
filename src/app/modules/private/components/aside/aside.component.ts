@@ -1,17 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { Usuario } from 'src/app/models/Auth/Usuario';
+import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/modules/auth/services/usuario.service';
-import { DataService } from 'src/app/services/data.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-aside',
+  templateUrl: './aside.component.html',
+  styleUrls: ['./aside.component.css']
 })
-export class DashboardComponent implements OnInit{
-  
+export class AsideComponent implements OnInit {
   username?: string;
   onlyDash :boolean = true;
 
@@ -20,31 +15,25 @@ export class DashboardComponent implements OnInit{
   rotate3:boolean=false;
   rotate4:boolean=false;
   offcanvasmenu:boolean=false;
+  accordion: boolean = true;
 
-  constructor(private dataSvcs: DataService, private us: UsuarioService,
-    private route: ActivatedRoute
+  constructor(
+     private us: UsuarioService
     ){}
 
-
   ngOnInit(): void {
-    this.route.paramMap.subscribe(res => {console.log(res)
-    });
-    console.log(this.route )
-    //  this.dataSvcs.onlyDash$.subscribe(res=>this.onlyDash=res);
-    this.dataSvcs.updateNavConfig('navDash');
     this.us.user$.subscribe(us=> us?this.username = us._firstName : 'Ver info');
   }
   btnOffCanvas(){
     this.offcanvasmenu = ! this.offcanvasmenu;
   }
-
   openClose(num:number){
-  
-
-
-
   }
-
+  widthNav(){
+    this.accordion= !this.accordion;
+    if(this.accordion){
+    }
+  }
   getRotate(num:number){
     switch (num){
       case 1:

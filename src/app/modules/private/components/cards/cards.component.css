@@ -1,13 +1,13 @@
 .card-info{
-    position: relative;
-    color: #e0e0e0;
-    width: 18rem;
-    /* background-color: #1F3A5F ; */
-    background: linear-gradient(90deg, #0f1c2d , #2c3e50);
-    border-radius: 2rem;
-    margin: 1rem;
-    border: solid 2px #4d648d ;
-    /* box-shadow: 0 0 5px #4d648d; */
+  border-radius: 8px;
+  background: var(--surface-card);
+  /* padding: 16px; */
+  box-sizing: border-box;
+  position: relative;
+  color: #e0e0e0;
+  width: 18rem;
+  border: 1px solid var(--surface-border);
+  margin: 1rem;
   }
   /* .card-info:hover{
     transform: scale(1.1);

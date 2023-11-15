@@ -59,7 +59,7 @@
       class="btn-close btn-close-white"
       data-bs-dismiss="modal"
       aria-label="Close"
-      (click)="activeModal.dismiss('Cross click')"
+      (click)="footer?activeModal.close(false): activeModal.dismiss('Cross click') "
     ></button>
   </div>
   <div class="modal-header {{ border }}">

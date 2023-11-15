@@ -4,30 +4,50 @@ import { ModalComponent } from '../components/modal/modal.component';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ModalService {
   // para el nav
-  
-	// private opnav = new BehaviorSubject<number>(1);
-	// opnav$ = this.opnav.asObservable();
-  // 
+
+  // private opnav = new BehaviorSubject<number>(1);
+  // opnav$ = this.opnav.asObservable();
+  //
 
   private lockCounter: number = 0;
   private screenLock: NgbModalRef | undefined;
 
   constructor(private ngbModal: NgbModal) {}
-  lockedSreen():boolean{
-    return this.lockCounter ===1?true: false
+  lockedSreen(): boolean {
+    return this.lockCounter === 1 ? true : false;
   }
 
   Alert(mensaje?: string, title: string = 'Info!', typeAlert: string = 'i') {
     const modalRef = this.ngbModal.open(ModalComponent);
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = mensaje;
-    modalRef.componentInstance.textBtnTrue =  '';
+    modalRef.componentInstance.textBtnTrue = '';
     modalRef.componentInstance.textoBotonFalse = '';
     modalRef.componentInstance.setTipo(typeAlert);
+    return modalRef;
+  }
+  AlertConfirm(
+    mensaje?: string,
+    title: string = 'Info!',
+    typeAlert: string = 'i',
+    textBtn: string = 'Aceptar',
+    fun?: any
+  ) {
+    const modalRef = this.ngbModal.open(ModalComponent, {
+      backdrop: 'static',
+      keyboard: false,
+    });
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.message = mensaje;
+    modalRef.componentInstance.textBtnTrue = textBtn;
+    modalRef.componentInstance.textoBotonFalse = '';
+    modalRef.componentInstance.footer = true;
+    modalRef.componentInstance.setTipo(typeAlert);
+    modalRef.result.then((x) => fun());
     return modalRef;
   }
 
@@ -39,7 +59,7 @@ export class ModalService {
     funcionTrue: any,
     funcionFalse: any,
     typeAlert: string = 'w',
-    size?:string
+    size?: string
   ) {
     const modalRef = this.ngbModal.open(ModalComponent, { size: size });
     modalRef.componentInstance.message = massage;
@@ -54,14 +74,13 @@ export class ModalService {
   BloquearPantalla() {
     this.lockCounter++;
     if ((this, this.lockCounter === 1)) {
-      this.screenLock = this.ngbModal.open(ModalComponent,  {
+      this.screenLock = this.ngbModal.open(ModalComponent, {
         backdrop: 'static',
-        keyboard: false
+        keyboard: false,
         // fullscreen: true
       });
       this.screenLock.componentInstance.title = 'Aguarde un momento por favor';
-      this.screenLock.componentInstance.message =
-        'Procesando...';
+      this.screenLock.componentInstance.message = 'Procesando...';
       this.screenLock.componentInstance.textBtnFalse = '';
       this.screenLock.componentInstance.textBtnTrue = '';
       this.screenLock.componentInstance.lockScreen = true;

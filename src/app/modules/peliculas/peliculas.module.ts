@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 import { PeliculasRoutingModule } from './peliculas-routing.module';
 import { ViewsPeliculaComponent } from './pages/views-pelicula/views-pelicula.component';
@@ -31,6 +31,7 @@ import { CastMovieComponent } from './pages/cast-movie/cast-movie.component';
     ReactiveFormsModule,
     FormsModule,
     PeliculasRoutingModule,
+    NgOptimizedImage,
     NgbPaginationModule
   ]
 })

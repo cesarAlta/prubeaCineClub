@@ -1,53 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
 
 * {
-    font-family: "Open Sans", sans-serif;
-  }
+  font-family: "Open Sans", sans-serif;
+}
 /* inicio */
-:root{
-  --primary-100:#1F3A5F;
---primary-200:#4d648d;
---primary-300:#acc2ef;
---accent-100:#3D5A80;
---accent-200:#cee8ff;
---text-100:#FFFFFF;
---text-200:#e0e0e0;
---bg-100:#0F1C2E;
---bg-200:#1f2b3e;
---bg-300:#374357;
+:root {
+  --primary-100: #1f3a5f;
+  --primary-200: #4d648d;
+  --primary-300: #acc2ef;
+  --accent-100: #3d5a80;
+  --accent-200: #cee8ff;
+  --text-100: #ffffff;
+  --text-200: #e0e0e0;
+  --bg-100: #0f1c2e;
+  --bg-200: #1f2b3e;
+  --bg-300: #374357;
+  --surface-card: rgba(255, 255, 255, 0.05);
+  --surface-border: rgba(255, 255, 255, 0.15);
+  --surface-list: rgba(54, 57, 70, 1);
+  --text-color-ligth: rgba(224, 224, 224, 1);
+  --surface-primary: rgba(45, 49, 62, 1);
+  --surface-secondary: rgba(54, 58, 70, 1);
 }
 
-.bg-100{
-  background-color: #0f1c2d;
+.bg-100 {
+  background-color: var(--surface-primary);
 }
-.bg-200{
-  background-color: #1f2b3e;
-  
+.bg-200 {
+  background-color: var(--surface-secondary);
 }
-.bg-300{
-  background-color: #374357;
-  
+.bg-300 {
+  /* background-color: #374357; */
 }
-.primary-100{
-  background-color: #1F3A5F;
+.text-light-100 {
+  color: var(--text-color-ligth);
 }
-.primary-200{
-  background-color: #4d648d;
+/* .bg-primary-100{
+  background-color: var(--surface-primary)
 }
-.primary-300{
-  background-color: #acc2ef;
+.bg-secondary-100{
+  background-color: var(--surface-secondary)
+} */
+.primary-100 {
+  /* background-color: #1F3A5F; */
 }
-.accent-100{
-color:#3D5A80 ;
+.primary-200 {
+  /* background-color: #4d648d; */
 }
-.accent-200{
-  color:#cee8ff ;
+.primary-300 {
+  /* background-color: #acc2ef; */
 }
-.bg-grad-100{
-  background: linear-gradient(to left, #0F1C2E,#4b638b );
+.accent-100 {
+  /* color:#3D5A80 ; */
 }
-.text-200{
-  color: #e0e0e0;
+.accent-200 {
+  /* color:#cee8ff ; */
+}
+.bg-grad-100 {
+  /* background: linear-gradient(to left, #0F1C2E,#4b638b ); */
+  /* background-color: #353946; */
+}
+.text-200 {
+  /* color: #e0e0e0; */
 }
 
 /* fin */

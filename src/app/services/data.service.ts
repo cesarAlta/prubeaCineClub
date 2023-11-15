@@ -24,7 +24,7 @@ export class DataService {
   getVideo() {
     return this.http.get(this.URI + 'getFrontPageVideo').pipe(
       map((res: any) => {
-        return res[0];
+        return res;
       })
     );
   }

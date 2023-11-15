@@ -1,101 +1,4 @@
-<!-- <div class="container my-3 border border-secondary rounded p-3">
-  <div class="mb-3">
-    <h4 class="d-flex justify-content-between border-bottom">
-      Mis datos personales
-      <small>
-        <a role="button" class="btn-link link-light" routerLink="/dashboard">
-          <i class="fa-solid fa-xmark"></i>
-        </a>
-      </small>
-    </h4>
-  </div>
-  <div class="row">
-    <div class="col col-sm-8 mx-auto">
-      <div class="row justify-content-center">
-        <div class="col-auto justify-content-center m-3">
-          <div
-            class="border border-3 d-flex justify-content-center align-items-center rounded-circle mx-auto"
-            style="height: 80px; width: 80px"
-          >
-            <img
-              src="../../../../../assets/img/User_icon_2.svg"
-              alt="user.png"
-              class="img-fluid"
-            />
-          </div>
-          <div class="text-center" >{{ fgUserLogged.get("profile")?.value | uppercase }}</div>
-        </div>
-      </div>
-      <form [formGroup]="fgUserLogged" name="fgUserLogged" class="text-dark">
-        <div class="d-flex justify-content-between mb-3">
-          <div class="form-floating flex-fill me-2">
-            <input
-              type="text"
-              class="form-control"
-              id="firstname"
-              placeholder="Nombre"
-              formControlName="firstName"
-            />
-            <label for="firstname">Nombre</label>
-          </div>
-          <button type="button" class="btn btn-link link-warning" (click)="edit('firstName')">
-            <i class="fa-regular fa-pen-to-square fa-xl"></i>
-          </button>
-        </div>
-        <div class="d-flex justify-content-between mb-3">
-          <div class="form-floating flex-fill me-2">
-            <input
-              type="text"
-              class="form-control"
-              id="lastname"
-              placeholder="Apellido"
-              formControlName="lastName"
-            />
-            <label for="lastname">Apellido</label>
-          </div>
-          <button type="button" class="btn btn-link link-warning" (click)="edit('lastName')">
-            <i class="fa-regular fa-pen-to-square fa-xl"></i>
-          </button>
-        </div>
-        <div class="d-flex justify-content-between mb-3">
-          <div class="form-floating flex-fill me-2">
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              placeholder="Apellido"
-              formControlName="email"
-            />
-            <label for="email">Email</label>
-          </div>
-          <button type="button" class="btn btn-link link-warning">
-            <i class="fa-regular fa-pen-to-square fa-xl"></i>
-          </button>
-        </div>
-        <div class="d-flex justify-content-between mb-3">
-          <div class="form-floating flex-fill me-2">
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              placeholder="Constraseña"
-              formControlName="password"
-            />
-            <label for="password">Constraseña</label>
-          </div>
-          <button type="button" class="btn btn-link link-warning">
-            <i class="fa-regular fa-pen-to-square fa-xl"></i>
-          </button>
-        </div>
-        <div class="d-flex justify-content-center gap-2">
-          <button type="button" class="btn btn-danger">Cancelar</button>
-          <button type="button" class="btn btn-success">Guardar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div> -->
-<div class="container position-relative my-3 card-100 p-3">
+<div class="container position-relative card-info  my-3 p-3">
   <div class="mb-3 px-2 py-1">
     <h4 class="d-flex justify-content-between border-bottom">
       Mis datos personales
@@ -112,7 +15,7 @@
   </div>
   <div class="row">
     <div
-      class="col col-md-10 col-xxl-7 m-auto rounded-3 shadow-lg p-3 bg-200 text-200 rounded"
+      class="col col-md-10 col-xxl-7 m-auto rounded-3 shadow-lg p-3 bg-200 text-200 rounded border border-secondary"
     >
       <div class="row">
         <div class="col-auto my-auto mx-auto text-dark">
@@ -130,7 +33,7 @@
                 class="h-75 w-75"
               />
             </div>
-            <div class="text-center text-200 mt-1">
+            <div class="text-center text-light-100 mt-1">
               {{ fgUserLogged.get("profile")?.value | uppercase }}
             </div>
           </div>
@@ -170,6 +73,13 @@
               class="list-group-item d-flex align-items-center border-secondary"
             >
               <b>Email:</b>&nbsp; {{ user._email }}
+              <button
+                type="button"
+                class="btn btn-link link-warning ms-auto"
+                (click)="edit(4)"
+              >
+                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+              </button>
             </li>
             <li
               class="list-group-item d-flex align-items-center border-bottom border-secondary"
@@ -195,14 +105,11 @@
   tabindex="-1"
   *ngIf="fgEdit"
 >
-  <div
-    class="text-dark shadow-lg mb-5 bg-300 rounded rounded-3"
-    style="width: 18rem"
-  >
-    <h4 class="text-center text-200 p-3 border-bottom border-secondary">
+  <div class="shadow-lg rounded rounded-3 card-info">
+    <h4 class="text-center text-200 border-bottom border-secondary p-3">
       Modificar {{ subTitle }}
     </h4>
-    <form action="" class="px-3 pb-3 text-200" [formGroup]="fgEdit">
+    <form class="p-3" [formGroup]="fgEdit">
       <div class="mb-3" *ngIf="opSel != 3">
         <input
           type="text"
@@ -222,9 +129,15 @@
         >
           Campo obligatorio
         </small>
+        <small
+          class="text-danger"
+          *ngIf="(fgEdit.controls['name']?.touched || submitted) && fgEdit.controls['name'].errors?.['email']"
+        >
+          Debe tener el formato ejemplo@ejemplo.com
+        </small>
       </div>
       <ng-container *ngIf="opSel == 3">
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <div class="position-relative">
             <input
               [type]="showPass ? 'text' : 'password'"
@@ -260,8 +173,17 @@
           >
             Campo obligatorio
           </small>
-        </div>
-        <div class="mb-3">
+        </div> -->
+        <div class="mb-3 position-relative">
+          <label
+            for="newPassword"
+            [ngClass]="
+              fgEdit.get('newPassword')?.value
+                ? 'form-label show-label'
+                : 'form-label hidden-label'
+            "
+            >Nueva contraseña</label
+          >
           <div class="position-relative">
             <input
               type="password"
@@ -286,6 +208,15 @@
           </small>
         </div>
         <div class="mb-3">
+          <label
+            for="repeatNewPassword"
+            [ngClass]="
+              fgEdit.get('repeatNewPassword')?.value
+                ? 'form-label show-label'
+                : 'form-label hidden-label'
+            "
+            >Repetir contraseña</label
+          >
           <div class="position-relative">
             <input
               type="password"
@@ -326,18 +257,10 @@
         </div>
       </ng-container>
       <div class="d-flex justify-content-center gap-2">
-        <button
-          type="button"
-          class="btn btn-warning text-200"
-          (click)="cancelEdit()"
-        >
+        <button type="button" class="btn btn-warning" (click)="cancelEdit()">
           <i class="fa-solid fa-xmark"></i> Cancelar
         </button>
-        <button
-          type="button"
-          class="btn btn-success text-200"
-          (click)="save()"
-        >
+        <button type="button" class="btn btn-success" (click)="save()">
           <i class="fa-solid fa-check"></i> Aceptar
         </button>
       </div>

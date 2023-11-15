@@ -1,5 +1,5 @@
-<div class="container position-relative my-3 card-100 p-3">
-  <div class="" >
+<div class="container position-relative my-3 card-info p-3">
+  <div class="">
     <h3 class="d-flex justify-content-between border-bottom">
       Administración de películas
       <small>
@@ -14,7 +14,7 @@
       </small>
     </h3>
   </div>
-  <div class="container-sm my-3 p-2 m-0 bg-200">
+  <div class="container-sm my-3 p-2 m-0 bg-100">
     <ul class="nav nav-pills justify-content-end">
       <li class="nav-item">
         <button
@@ -64,13 +64,10 @@
     ></app-views-pelicula>
   </div>
   <!--nueva pelicula-->
-  <form class="text-200" *ngIf="optSel != 'L'">
+  <form class="text-200" [formGroup]="fgMovie" *ngIf="optSel != 'L'">
+    <!-- titulo, diracion genero... -->
     <fieldset>
-      <legend
-        class="border-bottom text-light"
-      >
-        Ficha técnica
-      </legend>
+      <legend class="border-bottom text-light">Ficha técnica</legend>
       <div class="row mb-3">
         <div class="col">
           <label for="nameMovie" class="form-label">Nombre</label>
@@ -79,56 +76,128 @@
             class="form-control"
             id="nameMovie"
             placeholder="Nombre"
+            formControlName="nombre"
+            [ngClass]="{
+              'is-invalid':
+                (fgMovie.controls['nombre'].touched || submitted) &&
+                fgMovie.controls['nombre'].errors
+            }"
           />
+          <small
+            class="text-danger"
+            *ngIf="(fgMovie.controls['nombre']?.touched || submitted) && fgMovie.controls['nombre'].errors?.['required']"
+          >
+            Campo obligatorio
+          </small>
         </div>
         <div class="col-3">
           <label for="relaseMovie" class="form-label">Año de estreno</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             id="relaseMovie"
             placeholder="Año de estreno"
+            formControlName="anioEstreno"
+            [ngClass]="{
+              'is-invalid':
+                (fgMovie.controls['anioEstreno'].touched || submitted) &&
+                fgMovie.controls['anioEstreno'].errors
+            }"
           />
+          <small
+            class="text-danger"
+            *ngIf="(fgMovie.controls['anioEstreno']?.touched || submitted) && fgMovie.controls['anioEstreno'].errors?.['required']"
+          >
+            Campo obligatorio
+          </small>
+          <small
+            class="text-danger"
+            *ngIf="fgMovie.controls['anioEstreno'].errors?.['pattern']"
+          >
+            Requiere dato num&eacute;rico. De 4 cifras que comiencen con 19 o
+            20.
+          </small>
         </div>
         <div class="col-3">
           <label for="lengthMovie" class="form-label">Duración</label>
-          <input
-            type="text"
-            class="form-control"
-            id="lengthMovie"
-            placeholder="Duracion en minutos"
-          />
-          <small>En minutos</small>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="lengthMovie"
+              placeholder="Duracion"
+              formControlName="duracion"
+              [ngClass]="{
+                'is-invalid':
+                  (fgMovie.controls['duracion'].touched || submitted) &&
+                  fgMovie.controls['duracion'].errors
+              }"
+            />
+            <span class="input-group-text" id="lengthMovie"> Minutos </span>
+          </div>
+
+          <small
+            class="text-danger"
+            *ngIf="(fgMovie.controls['duracion']?.touched || submitted) && fgMovie.controls['duracion'].errors?.['required']"
+          >
+            Campo obligatorio
+          </small>
+          <small
+            class="text-danger"
+            *ngIf="fgMovie.controls['duracion'].errors?.['pattern']"
+          >
+            Requiere dato num&eacute;rico
+          </small>
         </div>
       </div>
       <div class="row mb-3">
         <!--genero-->
         <div class="col position-relative">
-          <label class="form-label" for="">Géneros</label>
-          <div class="mb-3">
+          <label class="form-label" for="selgenero">Géneros</label>
+          <div class="mb-3" [formGroup]="genreMovieF">
             <select
-              class="form-select"
-              id="selnominacion"
-              aria-label="selnominacion"
+              class="form-select text-dark"
+              id="selgenero"
+              aria-label="select generes"
+              formControlName="name"
+              [ngClass]="{
+                'is-invalid': genreListAdded.length <= 0 && submitted
+              }"
+              (change)="addGenreMovie()"
             >
-              <option selected>Géneros</option>
-              <option value="1">Accion</option>
-              <option value="2">Terror</option>
-              <option value="3">Comedia</option>
+              <option [ngValue]="null" [disabled] selected>
+                Seleccione...
+              </option>
+              <option *ngFor="let item of generesList" [ngValue]="item.NOMBRE">
+                {{ item.NOMBRE }}
+              </option>
             </select>
+            <small
+              class="text-danger"
+              *ngIf="genreListAdded.length <= 0 && submitted"
+            >
+              Requiere agregar al menos un g&eacute;nero
+            </small>
           </div>
-          <div>
-            Se Agregó
-            <ul>
-              <li>
-                Terror
-                <button class="btn btn-sm btn-unstyled border-0 text-danger">
-                  <i class="fa-solid fa-trash-can"></i>
-                </button>
-              </li>
-              <li>
-                Drama
-                <button class="btn btn-sm btn-unstyled border-0 text-danger">
+          <div
+            *ngIf="genreListAdded.length > 0"
+            class="border border-secondary rounded p-3"
+          >
+            <span>Se Agreg&oacute;:</span>
+            <ul
+              class="list-group list-group-flush w-75 mx-auto"
+              formArrayName="generos"
+            >
+              <li
+                class="list-group-item bg-transparent text-light-100 d-flex justify-content-between align-items-center border-secondary"
+                *ngFor="let item of genreListAdded; index as i"
+                [formGroupName]="i"
+              >
+                <span>{{ item.get("nombre")?.value }}</span>
+                <button
+                  class="btn btn-sm btn-unstyled border-0 text-danger"
+                  (click)="deleteItem(i)"
+                >
                   <i class="fa-solid fa-trash-can"></i>
                 </button>
               </li>
@@ -137,217 +206,289 @@
         </div>
         <!--clasificacion-->
         <div class="col">
-          <label class="form-label">Clasificación</label>
-          <div class="mb-3">
-            <select
-              class="form-select"
-              id="selElenco"
-              aria-label="selElencoType"
-            >
-              <option selected>Clasificación</option>
-              <option value="1">+12</option>
-              <option value="2">+14</option>
-              <option value="3">APT</option>
-            </select>
-          </div>
-          <div>
-            Se Agregó
-            <ul>
-              <li>
-                +14
-                <button class="btn btn-sm btn-unstyled border-0 text-danger">
-                  <i class="fa-solid fa-trash-can"></i>
-                </button>
-              </li>
-            </ul>
-          </div>
+          <label for="calif" class="form-label">Clasificación</label>
+          <input
+            type="text"
+            class="form-control"
+            id="calif"
+            placeholder="Calificacion"
+            formControlName="calificacion"
+            [ngClass]="{
+              'is-invalid':
+                (fgMovie.controls['calificacion'].touched || submitted) &&
+                fgMovie.controls['calificacion'].errors
+            }"
+          />
+          <small
+            class="text-danger"
+            *ngIf="(fgMovie.controls['calificacion']?.touched || submitted) && fgMovie.controls['calificacion'].errors?.['required']"
+          >
+            Campo obligatorio
+          </small>
         </div>
       </div>
+      <!-- sinopsis -->
       <div class="mb-3">
-        <label for="descriptionMovie" class="form-label">Sinopsis</label>
+        <label for="sinopsis" class="form-label">Sinopsis</label>
         <textarea
           class="form-control"
-          id="descriptionMovie"
+          id="sinopsis"
           rows="3"
+          formControlName="sinopsis"
+          [ngClass]="{
+            'is-invalid':
+              (fgMovie.controls['sinopsis'].touched || submitted) &&
+              fgMovie.controls['sinopsis'].errors
+          }"
         ></textarea>
+        <small
+          class="text-danger"
+          *ngIf="(fgMovie.controls['sinopsis']?.touched || submitted) && fgMovie.controls['sinopsis'].errors?.['required']"
+        >
+          Campo obligatorio
+        </small>
       </div>
     </fieldset>
-
     <!--Elenco-->
-    <div class="row mb-3">
-      <fieldset>
-        <legend class="mb-3 text-light">
-          Reparto
-        </legend>
-        <div class="row mb-3">
-          <div class="col">
-            <div class="mb-3">
-              <label for="selElenco">Tipo</label>
+    <fieldset>
+      <legend class="mb-3 text-light border-bottom border-secondary">
+        Reparto
+      </legend>
+      <button
+        type="button"
+        class="btn btn-primary text-light-100 mb-3"
+        (click)="agregarElenco()"
+      >
+        Agregar nuevo miembro
+      </button>
+      <div
+        *ngIf="castMemberAdded.length > 0"
+        class="row w-75 mx-auto border border-secondary rounded"
+        formArrayName="elenco"
+      >
+        <div
+          *ngFor="let elenco of castMemberAdded; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="row mb-2">
+            <div class="col">
+              <label class="form-label" for="rol{{ i }}">Rol</label>
+              <div class="input-group">
                 <select
-                  class="form-select"
-                  id="selElenco"
-                  aria-label="selElencoType"
+                  class="form-select text-dark"
+                  id="rol{{ i }}"
+                  aria-label="role"
+                  formControlName="rol"
                 >
-                  <option selected>Tipo...</option>
-                  <option value="1">Actor</option>
-                  <option value="2">Director</option>
-                  <option value="3">Productor</option>
+                  <option [ngValue]="null" disabled selected>Rol...</option>
+                  <option
+                    *ngFor="let item of roleList"
+                    [ngValue]="item.DESCRIPCION"
+                  >
+                    {{ item.DESCRIPCION }}
+                  </option>
                 </select>
+              </div>
             </div>
-          </div>
-          <div class="col">
-            <div class="mb-3">
-              <label for="inputNameMember">Nombre completo</label>
+            <div class="col">
+              <label for="nombreMember{{ i }}" class="form-label">Nombre</label>
               <input
                 type="text"
                 class="form-control"
-                placeholder="Nombre completo"
+                id="nombreMember{{ i }}"
+                placeholder="Nombre"
+                formControlName="nombre"
+                [ngClass]="{
+                  'is-invalid':
+                    (elenco.get('nombre')?.touched || submitted) &&
+                    elenco.get('nombre')?.errors
+                }"
               />
+              <small
+                class="text-danger"
+                *ngIf="(elenco.get('nombre')?.touched || submitted) && elenco.get('nombre')?.errors?.['required']"
+              >
+                Campo obligatorio
+              </small>
             </div>
-            <!-- <div class="input-group">
-            <select
-              class="form-select"
-              id="selElenco"
-              aria-label="selElencoName"
-            >
-              <option selected>Participante</option>
-              <option value="1">Actor1</option>
-              <option value="2">Actor2</option>
-              <option value="3">Director1</option>
-              <option value="4">Director2</option>
-              <option value="5">Director3</option>
-              <option value="6">Productor1</option>
-              <option value="7">Productor2</option>
-              <option value="8">Productor3</option>
-            </select>
-            <button class="btn btn-primary" type="button">
-              <i class="fa-solid fa-plus"></i>
-            </button>
-          </div> -->
-          </div>
-          <div class="col my-auto">
-            <button class="btn btn-primary text-200">
-              <i class="fa-solid fa-plus"></i> Agregar
-            </button>
-          </div>
-        </div>
-        <div>
-          Se Agregó
-          <ul>
-            <li>
-              Director: Nombre del director
-              <button class="btn btn-sm btn-unstyled border-0 text-danger">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </li>
-            <li>
-              Productor: Nombre del productor
-              <button class="btn btn-sm btn-unstyled border-0 text-danger">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </li>
-            <li>
-              Actor: Nombre del actor
-              <button class="btn btn-sm btn-unstyled border-0 text-danger">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </li>
-            <li>
-              Actris: Nombre de la actriz
-              <button class="btn btn-sm btn-unstyled border-0 text-danger">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </fieldset>
-    </div>
-    <div class="row mb-3">
-      <fieldset>
-        <legend class="mb-3 text-light" >
-          Premios
-        </legend>
-        <div class="row mb-3">
-          <div class="col">
-            <div class="mb-3">
-              <label for="selnominacion">Premios</label>
-              <div class="input-group">
-                <select
-                  class="form-select"
-                  id="selnominacion"
-                  aria-label="selnominacion"
-                >
-                  <option selected>Premios</option>
-                  <option value="1">Nombre 1</option>
-                  <option value="2">Nombre 2</option>
-                  <option value="3">Nombre 3</option>
-                </select>
-                <button class="btn btn-primary text-200" type="button">
-                  <i class="fa-solid fa-plus"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="mb-3">
-              <label for="añoPremio">Año</label>
+            <div class="col">
+              <label for="apMember{{ i }}" class="form-label">Apellido</label>
               <input
-                id="añoPremio"
-                type="number"
-                min="1900"
-                max="2023"
+                type="text"
                 class="form-control"
-                placeholder="año"
+                id="apMember{{ i }}"
+                placeholder="Apellido"
+                formControlName="apellido"
+                [ngClass]="{
+                  'is-invalid':
+                    (elenco.get('apellido')?.touched || submitted) &&
+                    elenco.get('apellido')?.errors
+                }"
               />
+              <small
+                class="text-danger"
+                *ngIf="(elenco.get('apellido')?.touched || submitted) && elenco.get('apellido')?.errors?.['required']"
+              >
+                Campo obligatorio
+              </small>
             </div>
-          </div>
-          <!-- <div class="col">
-          <div class="input-group">
-            <select
-              class="form-select"
-              id="selElenco"
-              aria-label="selElencoName"
-            >
-              <option selected>Resultado</option>
-              <option value="1">Nominada</option>
-              <option value="2">Ganadora</option>
-            </select>
-            <button class="btn btn-primary" type="button">
-              <i class="fa-solid fa-plus"></i>
-            </button>
-          </div>
-        </div> -->
-          <div class="col my-auto">
-            <button class="btn btn-primary text-200">
-              <i class="fa-solid fa-plus"></i> Agregar
-            </button>
-          </div>
-        </div>
-        <div>
-          Se Agregó
-          <ul>
-            <li>
-              Globo de oro 2021
-              <button class="btn btn-sm btn-unstyled border-0 text-danger">
+            <div class="col-auto my-auto">
+              <button
+                class="btn btn-unstyled border-0 text-danger"
+                (click)="eliminarElenco(i)"
+              >
                 <i class="fa-solid fa-trash-can"></i>
               </button>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
-      </fieldset>
-    </div>
+      </div>
+      <ng-container *ngIf="submitted && castMemberAdded.length == 0">
+        <div class="d-flex justify-content-center" role="alert">
+          <span class="border rounded border-danger fs-5 p-3">
+            <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+            Requiere agregar miembro/s al reparto de la película.
+          </span>
+        </div>
+      </ng-container>
+    </fieldset>
+    <!--premios-->
     <fieldset>
-      <legend class="mb-3 text-light">
+      <legend class="mb-3 text-light border-bottom border-secondary">
+        Premios
+      </legend>
+      <button
+        type="button"
+        class="btn btn-primary text-light-100 mb-3"
+        (click)="agregarPremio()"
+      >
+        Agregar nuevo premio
+      </button>
+      <div
+        *ngIf="premioFormArray.length > 0"
+        class="row w-75 mx-auto border border-secondary rounded"
+        formArrayName="premios"
+      >
+        <div
+          *ngFor="let premio of premioFormArray; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="row mb-2">
+            <div class="col">
+              <label for="nombreMember{{ i }}" class="form-label">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombreMember{{ i }}"
+                placeholder="Nombre"
+                formControlName="nombre"
+                [ngClass]="{
+                  'is-invalid':
+                    (premio.get('nombre')?.touched || submitted) &&
+                    premio.get('nombre')?.errors
+                }"
+              />
+              <small
+                class="text-danger"
+                *ngIf="(premio.get('nombre')?.touched || submitted) && premio.get('nombre')?.errors?.['required']"
+              >
+                Campo obligatorio
+              </small>
+            </div>
+
+            <div class="col">
+              <label for="nombreMember{{ i }}" class="form-label"
+                >Descripcion</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nombreMember{{ i }}"
+                placeholder="Nombre"
+                formControlName="descripcion"
+                [ngClass]="{
+                  'is-invalid':
+                    (premio.get('descripcion')?.touched || submitted) &&
+                    premio.get('descripcion')?.errors
+                }"
+              />
+              <small
+                class="text-danger"
+                *ngIf="(premio.get('descripcion')?.touched || submitted) && premio.get('descripcion')?.errors?.['required']"
+              >
+                Campo obligatorio
+              </small>
+            </div>
+            <div class="col">
+              <label for="apMember{{ i }}" class="form-label">Año</label>
+              <input
+                type="number"
+                class="form-control"
+                id="apMember{{ i }}"
+                placeholder="Apellido"
+                formControlName="anio"
+                [ngClass]="{
+                  'is-invalid':
+                    (premio.get('anio')?.touched || submitted) &&
+                    premio.get('anio')?.errors
+                }"
+              />
+              <small
+                class="text-danger"
+                *ngIf="(premio.get('anio')?.touched || submitted) && premio.get('anio')?.errors?.['required']"
+              >
+                Campo obligatorio
+              </small>
+              <small
+                class="text-danger"
+                *ngIf="premio.get('anio')?.errors?.['pattern']"
+              >
+                Requiere dato num&eacute;rico. De 4 cifras que comiencen con 19
+                o 20.
+              </small>
+            </div>
+            <div class="col-auto my-auto">
+              <button
+                class="btn btn-unstyled border-0 text-danger"
+                (click)="eliminarPremio(i)"
+              >
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <!-- imagenes y video -->
+    <fieldset>
+      <legend class="mb-3 text-light border-bottom border-secondary">
         Imágenes y videos
       </legend>
       <div class="mb-3">
-        <label for="linkTrailerMovie" class="form-label">Link del triler</label>
+        <label
+          for="linkTrailerMovie"
+          class="form-label"
+          formArrayName="linkTrailer"
+          >Link del triler</label
+        >
         <input
           type="url"
           class="form-control"
           id="linkTrailerMovie"
           placeholder="link trailer"
+          formControlName="linkTrailer"
+          [ngClass]="{
+            'is-invalid':
+              (fgMovie.controls['linkTrailer'].touched || submitted) &&
+              fgMovie.controls['linkTrailer'].errors
+          }"
         />
+        <small
+          class="text-danger"
+          *ngIf="(fgMovie.controls['linkTrailer']?.touched || submitted) && fgMovie.controls['linkTrailer'].errors?.['required']"
+        >
+          Campo obligatorio
+        </small>
       </div>
       <div class="mb-3">
         <label for="linkMovie" class="form-label">Link de la película</label>
@@ -356,7 +497,19 @@
           class="form-control"
           id="linkMovie"
           placeholder="link de la pelicula"
+          formControlName="linkPelicula"
+          [ngClass]="{
+            'is-invalid':
+              (fgMovie.controls['linkPelicula'].touched || submitted) &&
+              fgMovie.controls['linkPelicula'].errors
+          }"
         />
+        <small
+          class="text-danger"
+          *ngIf="(fgMovie.controls['linkPelicula']?.touched || submitted) && fgMovie.controls['linkPelicula'].errors?.['required']"
+        >
+          Campo obligatorio
+        </small>
       </div>
       <div class="mb-3">
         <label for="frontPageMovie" class="form-label">Portada</label>
@@ -365,7 +518,19 @@
           class="form-control"
           id="frontPageMovie"
           placeholder="portada"
+          formControlName="linkEstreno"
+          [ngClass]="{
+            'is-invalid':
+              (fgMovie.controls['linkEstreno'].touched || submitted) &&
+              fgMovie.controls['linkEstreno'].errors
+          }"
         />
+        <small
+          class="text-danger"
+          *ngIf="(fgMovie.controls['linkEstreno']?.touched || submitted) && fgMovie.controls['linkEstreno'].errors?.['required']"
+        >
+          Campo obligatorio
+        </small>
       </div>
       <div class="mb-3">
         <label for="frontPageCartelera" class="form-label">Cartelera</label>
@@ -374,15 +539,32 @@
           class="form-control"
           id="frontPageCartelera"
           placeholder="cartelera"
+          formControlName="linkPoster"
+          [ngClass]="{
+            'is-invalid':
+              (fgMovie.controls['linkPoster'].touched || submitted) &&
+              fgMovie.controls['linkPoster'].errors
+          }"
         />
+        <small
+          class="text-danger"
+          *ngIf="(fgMovie.controls['linkPoster']?.touched || submitted) && fgMovie.controls['linkPoster'].errors?.['required']"
+        >
+          Campo obligatorio
+        </small>
       </div>
     </fieldset>
+    <!-- botones -->
     <div class="d-flex justify-content-center gap-3">
       <button class="btn btn-warning text-200" type="button">
         <i class="fa-solid fa-xmark"></i> Cancelar
       </button>
-      <button class="btn btn-success text-200" type="button">
-        <i class="fa-solid fa-check "></i> Guardar
+      <button
+        class="btn btn-success text-200"
+        type="button"
+        (click)="guardar()"
+      >
+        <i class="fa-solid fa-check"></i> Guardar
       </button>
     </div>
   </form>

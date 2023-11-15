@@ -10,7 +10,6 @@ import { NavComponent } from './components/nav/nav.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { DashboardComponent } from './modules/private/pages/dashboard/dashboard.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { MyInterceptor } from './interceptor/my.interceptor';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
@@ -24,7 +23,6 @@ import { BgLoadingComponent } from './components/bg-loading/bg-loading.component
     NavComponent,
     ModalComponent,
     FooterComponent,
-    DashboardComponent,
     SearchComponent,
     BgLoadingComponent,
   ],

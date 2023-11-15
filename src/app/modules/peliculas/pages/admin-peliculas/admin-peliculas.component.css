@@ -7,3 +7,12 @@
     /* box-shadow: 0 0 5px #4d648d; */
     overflow: hidden;
 }
+.card-info{
+    border-radius: 8px;
+    background: var(--surface-card);
+    /* padding: 16px; */
+    box-sizing: border-box;
+    position: relative;
+    color: #e0e0e0;
+    border: 1px solid var(--surface-border);
+    }

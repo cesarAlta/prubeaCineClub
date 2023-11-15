@@ -1,4 +1,4 @@
-<ng-container *ngIf="option === 1">
+<!-- <ng-container *ngIf="option === 1">
   <div
     class="d-flex justify-content-center align-items-center bg-dark"
     style="min-height: 100vh; width: 100%"
@@ -32,7 +32,6 @@
             <h5 class="text-center text-white border-bottom w-75 mx-auto">
               {{ title }}
             </h5>
-            <!--Login-->
             <form
               name="formLog"
               [formGroup]="loginF"
@@ -127,7 +126,6 @@
                 </button>
               </div>
             </form>
-            <!--reg-->
             <form
               name="formNewUser"
               [formGroup]="newUserF"
@@ -257,7 +255,7 @@
                 </button>
               </div>
             </form>
-          </div>
+          </div> -->
           <!-- <div class="position-absolute end-0 bottom-0 m-2">
             <a type="button" role="button" (click)="register()">
               <span class="text-decoration-underline" *ngIf="op == 1"
@@ -268,7 +266,7 @@
               >
             </a>
           </div> -->
-          <div class="position-absolute end-0 bottom-0 m-2" *ngIf="op != 1">
+          <!-- <div class="position-absolute end-0 bottom-0 m-2" *ngIf="op != 1">
             <a type="button" role="button" (click)="register()">
               <span class="text-decoration-underline text-warning"
                 ><i class="fa-solid fa-arrow-left"></i> volver</span
@@ -279,7 +277,7 @@
       </div>
     </div>
   </div>
-</ng-container>
+</ng-container> -->
 
 <div class="position-relative bg-dark" style="height: 100vh">
   <div class="row m-0 h-75 justify-content-center align-items-center">
@@ -308,7 +306,7 @@
         <h4 class="col-10 text-white title-form mb-3">
           {{ title }}
         </h4>
-        <form [formGroup]="loginF" class="col-10">
+        <form [formGroup]="loginF" class="col-12 col-sm-10">
           <div class="mb-3">
             <div class="input-group">
               <span

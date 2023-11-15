@@ -1,0 +1,30 @@
+.accordion-body{
+    /* background-color: rgb(50, 52, 66); */
+    padding: 0;
+}
+.accordion-body a{
+    padding-left: 3rem;
+}
+.accordion-button:hover{
+    background-color:     rgb(62, 64, 77);
+
+}
+.accordion-body a:hover{
+    background-color: rgb(62, 64, 77);
+    border-left: solid 3px white;
+
+}
+.links-foot a{
+    padding: 0 1rem 0.3rem;
+
+}
+.links-foot a:hover{
+    background-color:     rgb(62, 64, 77);
+
+
+}
+.user:hover{
+    transform: scale(1.1);
+    transition: transform .3s ease;
+
+}

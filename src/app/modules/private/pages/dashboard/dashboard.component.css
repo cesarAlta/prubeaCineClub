@@ -3,7 +3,7 @@
 
 
 /* inicio */
-:root{
+/* :root{
   --primary-100:#1F3A5F;
 --primary-200:#4d648d;
 --primary-300:#acc2ef;
@@ -44,7 +44,7 @@ color:#3D5A80 ;
 }
 .bg-grad-100{
   background: linear-gradient(to left, #0F1C2E,#4b638b );
-}
+} */
 
 /* fin */
 .rotate-icon {
@@ -67,15 +67,14 @@ color:#3D5A80 ;
 }
 
 .nav-link:hover {
-  /* background-color: rgb(53, 53, 53); */
-  background-color: #1e2424;
+  background-color: #404250;
   border-left: 3px solid #6eade0;
 }
 .collapsed-list {
   /* background-color: rgb(27, 27, 27);
    */
    /* background-color: #332b47d2; */
-   background-color: #374357;
+   background-color: #353945;
 }
 
 .collapsed-list li a.active {
@@ -100,3 +99,4 @@ color:#3D5A80 ;
   background-color: #343a40b4;
   z-index: 1080;
 }
+

@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, map, of, tap } from 'rxjs';
 import { Usuario, usuarios } from 'src/app/models/Auth/Usuario';
 import { environment } from 'src/environments/environment.development';
 import { Profile, profiles } from 'src/app/models/Auth/profile';
@@ -41,18 +41,19 @@ export class UsuarioService {
   //Guarda la nueva contraseña
   confirmPassword(newPass: any, token: string) {
     const param = new HttpParams().set('token', token);
+    const pass = { password: newPass };
     return this.httpClient
-      .post(this.URI + 'recoverPassword', newPass, {
+      .post(this.URI + 'recoverPassword', pass, {
         params: param,
         observe: 'response',
       })
       .pipe(map((res) => Boolean(res.status == 200)));
   }
   //Cierra sesión
-  logout() {
+  logout(path?: string) {
     localStorage.removeItem(USER_LOCAL_ST_KEY);
     this.user.next(null);
-    this.redirectToHome();
+    path ? this.route.navigateByUrl('us/login') : this.redirectToHome();
   }
   //Inicio de sesión
   logging(us: Usuario) {
@@ -153,5 +154,11 @@ export class UsuarioService {
     userLogged.email = resUser.email;
     userLogged.profile = resUser.profile;
     return userLogged;
+  }
+  // moficar usuario
+  update(us: any) {
+    return this.httpClient
+      .put(this.URI + 'modifyUser', us)
+      .pipe(tap((res) => console.log(res)));
   }
 }

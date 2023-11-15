@@ -1,0 +1,132 @@
+<nav class="nav flex-column bg-200">
+  <!-- Usiario logueado -->
+  <div
+    class="d-flex justify-content-center align-items-center border-bottom border-secondary pb-2"
+  >
+    <div class="position-relative d-flex flex-column justify-content-center user" title="Ver mis datos" >
+      <div
+        class="bg-dark rounded-circle m-auto d-flex"
+        style="width: 4rem; height: 4rem"
+      >
+        <i class="fa-regular fa-user m-auto fa-2xl"></i>
+      </div>
+      <a
+        role="button"
+        class="link-light d-flex justify-content-center stretched-link"
+        routerLink="users"
+        routerLinkActive="active"
+      >
+        <span class="fs-6" *ngIf="accordion">{{ username | uppercase }}</span>
+      </a>
+    </div>
+  </div>
+  <div class="accordion accordion-flush border-bottom border-secondary mb-3" id="accordionMenu">
+    <div class="accordion-item ">
+      <h2 class="accordion-header" id="flush-headingOne">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseOne"
+          aria-expanded="false"
+          aria-controls="flush-collapseOne"
+        >
+          <i class="fa-solid fa-gears me-2"></i> Ajustes
+        </button>
+      </h2>
+      <div
+        id="flush-collapseOne"
+        class="accordion-collapse collapse"
+        aria-labelledby="flush-headingOne"
+        data-bs-parent="#accordionMenu"
+      >
+        <div class="accordion-body">
+          <a
+            class="nav-link link-light"
+            routerLink="config"
+            routerLinkActive="active"
+          >
+            Video portada
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingTwo">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseTwo"
+          aria-expanded="false"
+          aria-controls="flush-collapseTwo"
+        >
+          <i class="fa-solid fa-clapperboard me-2"></i> Películas
+        </button>
+      </h2>
+      <div
+        id="flush-collapseTwo"
+        class="accordion-collapse collapse"
+        aria-labelledby="flush-headingTwo"
+        data-bs-parent="#accordionMenu"
+      >
+        <div class="accordion-body">
+          <a
+            class="nav-link link-light"
+            routerLink="peliculas/adminPeliculas"
+            routerLinkActive="active"
+          >
+            Películas
+          </a>
+          <!-- <a
+            class="nav-link link-light"
+            routerLink="peliculas/premios"
+            routerLinkActive="active"
+            > Premios</a
+          > -->
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingThree">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseThree"
+          aria-expanded="false"
+          aria-controls="flush-collapseThree"
+        >
+          <i class="fa-solid fa-chart-line me-2"></i> Estadísticas
+        </button>
+      </h2>
+      <div
+        id="flush-collapseThree"
+        class="accordion-collapse collapse"
+        aria-labelledby="flush-headingThree"
+        data-bs-parent="#accordionMenu"
+      >
+        <div class="accordion-body">
+          <a class="nav-link link-light" href="">
+            Películas más vistas</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3 links-foot">
+    <a routerLink="/home" class="d-block link-light text-decoration-none fst-italic"
+      ><i class="fa-solid fa-house"></i> Página principal</a
+    >
+    <a
+      href="https://cineclubmunicipal.org.ar/"
+      target="_blank"
+      class="d-block  link-light text-decoration-none fst-italic"
+    >
+    <i class="fa-solid fa-link"></i> Cineclubmunicipal
+    </a>
+    <a type="button" class="d-block  link-light text-decoration-none fst-italic"
+      ><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a
+    >
+  </div>
+</nav>
