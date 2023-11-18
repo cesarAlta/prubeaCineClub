@@ -1,0 +1,88 @@
+<!--Lista de pelicualas-->
+<div class="container-fluid">
+  <div
+    class="row row-cols-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-4 mb-3"
+  >
+    <div class="col" *ngFor="let item of moviesList">
+      <div
+        class="card bg-200 text-200 h-100 border border-secondary position-relative"
+      >
+        <img
+          [src]="item.linkPoster"
+          class="card-img-top"
+          alt="..."
+          (load)="onImageLoad()"
+        />
+        <div
+          *ngIf="loading"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="card-body text-center d-flex flex-column">
+          <h5 class="card-title">{{ item.nombre }}</h5>
+          <div class="card-text mt-auto">
+            <div *ngIf="item.estreno">
+              <span class="badge rounded-pill primary-200 px-2"> Estreno </span>
+            </div>
+
+            <div>
+              <span
+                class="badge rounded-pill px-2"
+                [ngClass]="!item.oculta ? 'bg-success' : 'bg-secondary'"
+              >
+                {{ !item.oculta ? "Publicada" : "Oculta" }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer bg-300 text-center">
+          <div class="btn-group dropup">
+            <button
+              type="button"
+              class="btn btn-sm btn-primary dropdown-toggle text-200"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Acciones
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="" class="dropdown-item">
+                  <i class="fa-regular fa-pen-to-square text-warning"></i>
+                  Editar
+                </a>
+              </li>
+              <li>
+                <a href="" class="dropdown-item">
+                  <i
+                    class="fa-regular"
+                    ngClass=" {{
+                      !item.oculta
+                        ? 'fa-eye-slash text-dark'
+                        : 'fa-eye text-primary'
+                    }}"
+                  ></i>
+                  {{ !item.oculta ? "Ocultar" : "Publicar" }}
+                </a>
+              </li>
+              <li>
+                <a href="" class="dropdown-item">
+                  <i class="fa-solid fa-trash-can text-danger"></i>
+                  Eliminar
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ngb-pagination
+    class="d-flex justify-content-center text-success"
+    [collectionSize]="70"
+    [(page)]="page"
+  ></ngb-pagination>
+</div>

@@ -13,6 +13,8 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { AwardsComponent } from './pages/Awards/awards/awards.component';
 import { RatingMovieIncaaComponent } from './pages/rating-movie-incaa/rating-movie-incaa.component';
 import { CastMovieComponent } from './pages/cast-movie/cast-movie.component';
+import { MoviesViewComponent } from './pages/movies-view/movies-view.component';
+import { ViewMovieComponent } from './pages/view-movie/view-movie.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { CastMovieComponent } from './pages/cast-movie/cast-movie.component';
     AdminGenerosComponent,
     AwardsComponent,
     RatingMovieIncaaComponent,
-    CastMovieComponent
+    CastMovieComponent,
+    MoviesViewComponent,
+    ViewMovieComponent
   ],
   imports: [
     CommonModule,

@@ -23,14 +23,15 @@ export class MyInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    !this.modalS.lockedSreen() ? this.modalS.BloquearPantalla() : '';
+    // !this.modalS.lockedSreen() ? this.modalS.BloquearPantalla() : '';
+    this.modalS.BloquearPantalla();
 
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         switch (error.status) {
-          case 400:{
-             //error confirmar contraseña
-             if(error.error=='no password'){
+          case 400: {
+            //error confirmar contraseña
+            if (error.error == 'no password') {
               this.modalS.Alert(
                 "Algo salio mal. Intente nuvamente o seleccione 'olvide la contraseña' en la pantalla de inicio de sesión.",
                 'UPS!',
@@ -49,7 +50,11 @@ export class MyInterceptor implements HttpInterceptor {
             //modificar
             //Usuario: contraseña o usuario incorrecto
             if (error.error == 'not token today') {
-              this.modalS.Alert('Contraseña o usuario incorrecto!', 'UPS!', 'd');
+              this.modalS.Alert(
+                'Contraseña o usuario incorrecto!',
+                'UPS!',
+                'd'
+              );
             }
             break;
           }
@@ -61,13 +66,16 @@ export class MyInterceptor implements HttpInterceptor {
                 'UPS!',
                 'd'
               );
-            } 
-           
+            }
+
             break;
           }
           //usuario recuperacion de pass: token no asociado a un usuario
           case 500: {
-            if (error.error == `TypeError: Cannot read properties of undefined (reading 'ID_USUARIO')`) {
+            if (
+              error.error ==
+              `TypeError: Cannot read properties of undefined (reading 'ID_USUARIO')`
+            ) {
               this.modalS.Alert(
                 `Expiró el tiempo de recuperación de contraseña.
                 Seleccione nuevamente "Olvidé la contraseña"`,

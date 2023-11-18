@@ -258,7 +258,7 @@
     <div
       class="row row-cols-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-4 mb-3"
     >
-      <div class="col" *ngFor="let item of newMovies">
+      <div class="col" *ngFor="let item of newMovies | async">
         <div
           class="card bg-200 text-200 h-100 border border-secondary position-relative"
         >
@@ -268,7 +268,10 @@
             alt="..."
             (load)="onImageLoad()"
           />
-          <div *ngIf="loading" class="d-flex justify-content-center align-items-center"  >
+          <div
+            *ngIf="loading"
+            class="d-flex justify-content-center align-items-center"
+          >
             <div class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
@@ -277,17 +280,17 @@
             <h5 class="card-title">{{ item.nombre }}</h5>
             <div class="card-text mt-auto">
               <div *ngIf="item.estreno">
-                <span class="badge rounded-pill primary-200 px-2">
+                <span class="badge rounded-pill bg-dark px-2 fs-6">
                   Estreno
                 </span>
               </div>
 
               <div>
                 <span
-                  class="badge rounded-pill px-2"
+                  class="badge rounded-pill px-2 fs-6 mt-1"
                   [ngClass]="!item.oculta ? 'bg-success' : 'bg-secondary'"
                 >
-                  {{ !item.oculta ? "Publicada" : "Oculta" }}
+                  {{ item.oculta ? "Oculta": "Publicada"  }}
                 </span>
               </div>
             </div>
@@ -304,22 +307,43 @@
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="" class="dropdown-item">
+                  <a type="button" (click)="editar(item)" class="dropdown-item">
                     <i class="fa-regular fa-pen-to-square text-warning"></i>
+
                     Editar
                   </a>
                 </li>
                 <li>
-                  <a href="" class="dropdown-item">
+                  <a type="button" (click)="view(item)" class="dropdown-item">
+                    <i class="fa-solid fa-eye text-primary"></i>
+                    Vista previa
+                  </a>
+                </li>
+                <li>
+                  <a type="button" class="dropdown-item" (click)="updatePublicar(item)">
                     <i
-                      class="fa-regular"
+                      class="fa-solid"
                       ngClass=" {{
                         !item.oculta
-                          ? 'fa-eye-slash text-dark'
-                          : 'fa-eye text-primary'
+                          ? 'fa-xmark text-dark'
+                          : 'fa-check  text-success'
                       }}"
                     ></i>
                     {{ !item.oculta ? "Ocultar" : "Publicar" }}
+                  </a>
+                </li>
+                <li>
+                  <a  type="button" class="dropdown-item" (click)="updateEstrenar(item)">
+                    <i
+                      class="fa-solid fa-film"
+                      ngClass="{{
+                        item.estreno ? 'text-danger' : 'text-warning'
+                      }}"
+                    ></i>
+
+                    {{
+                      item.estreno ? "Quitar de estreno" : "Poner en estreno"
+                    }}
                   </a>
                 </li>
                 <li>

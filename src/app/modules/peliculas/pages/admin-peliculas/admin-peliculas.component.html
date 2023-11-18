@@ -16,13 +16,23 @@
   </div>
   <div class="container-sm my-3 p-2 m-0 bg-100">
     <ul class="nav nav-pills justify-content-end">
+      <li class="nav-item" *ngIf="optSel === 'C'">
+        <button
+          class="nav-link text-white"
+          disabled
+          aria-current="page"
+          [class.active]="optSel == 'C'"
+        >
+          Vista previa de la pelicula
+        </button>
+      </li>
       <li class="nav-item">
         <button
           class="nav-link text-white"
-          [class.active]="optSel == 'A'"
+          [class.active]="optSel == 'A' || optSel == 'M'"
           (click)="agregar()"
         >
-          Agregar película
+          {{ optSel == "M" ? "Editar" : "Registrar" }} película
         </button>
       </li>
       <li class="nav-item">
@@ -63,8 +73,30 @@
       (emitPeli)="getPeliSel($event)"
     ></app-views-pelicula>
   </div>
+  <!-- Vista preliminar de una pelicula -->
+  <div *ngIf="optSel == 'C' && peliSel" class="position-relative">
+    <div class="position-sticky " 
+    style="z-index: 1000;top: 1rem; left: 0;"
+    >
+    <div class="d-flex justify-content-end gap-2 my-3">
+      <button class="btn btn-warning  text-light-100" type="button" (click)="verRepo()">
+        <i class="fa-solid fa-reply"></i> Regresar
+      </button>
+      <button class="btn btn-primary text-light-100" type="button" (click)="updateItem()">
+        <i class="fa-solid fa-pen-to-square"></i> Modificar datos
+      </button>
+    </div>
+      
+    </div>
+
+    <app-view-movie [peliSel]="peliSel"></app-view-movie>
+  </div>
   <!--nueva pelicula-->
-  <form class="text-200" [formGroup]="fgMovie" *ngIf="optSel != 'L'">
+  <form
+    class="text-200"
+    [formGroup]="fgMovie"
+    *ngIf="optSel === 'A' || optSel === 'M'"
+  >
     <!-- titulo, diracion genero... -->
     <fieldset>
       <legend class="border-bottom text-light">Ficha técnica</legend>
@@ -163,7 +195,7 @@
               [ngClass]="{
                 'is-invalid': genreListAdded.length <= 0 && submitted
               }"
-              (change)="addGenreMovie()"
+              (change)="addGenreMovies()"
             >
               <option [ngValue]="null" [disabled] selected>
                 Seleccione...
@@ -254,16 +286,9 @@
       <legend class="mb-3 text-light border-bottom border-secondary">
         Reparto
       </legend>
-      <button
-        type="button"
-        class="btn btn-primary text-light-100 mb-3"
-        (click)="agregarElenco()"
-      >
-        Agregar nuevo miembro
-      </button>
       <div
+        class="row w-75 mx-auto border border-secondary rounded p-3"
         *ngIf="castMemberAdded.length > 0"
-        class="row w-75 mx-auto border border-secondary rounded"
         formArrayName="elenco"
       >
         <div
@@ -272,26 +297,40 @@
         >
           <div class="row mb-2">
             <div class="col">
-              <label class="form-label" for="rol{{ i }}">Rol</label>
-              <div class="input-group">
-                <select
-                  class="form-select text-dark"
-                  id="rol{{ i }}"
-                  aria-label="role"
-                  formControlName="rol"
+              <label class="form-label" for="rol{{ i }}" *ngIf="i == 0"
+                >Rol</label
+              >
+              <select
+                class="form-select text-dark"
+                id="rol{{ i }}"
+                aria-label="role"
+                formControlName="nombreRol"
+                [ngClass]="{
+                  'is-invalid':
+                    (elenco.get('nombreRol')?.touched || submitted) &&
+                    elenco.get('nombreRol')?.errors
+                }"
+              >
+                <option [ngValue]="null" disabled selected>Rol...</option>
+                <option
+                  *ngFor="let item of roleList"
+                  [ngValue]="item.DESCRIPCION"
                 >
-                  <option [ngValue]="null" disabled selected>Rol...</option>
-                  <option
-                    *ngFor="let item of roleList"
-                    [ngValue]="item.DESCRIPCION"
-                  >
-                    {{ item.DESCRIPCION }}
-                  </option>
-                </select>
-              </div>
+                  {{ item.DESCRIPCION }}
+                </option>
+              </select>
+
+              <small
+                class="text-danger"
+                *ngIf="(elenco.get('nombreRol')?.touched || submitted) && elenco.get('nombreRol')?.errors?.['required']"
+              >
+                Campo obligatorio
+              </small>
             </div>
             <div class="col">
-              <label for="nombreMember{{ i }}" class="form-label">Nombre</label>
+              <label for="nombreMember{{ i }}" class="form-label" *ngIf="i == 0"
+                >Nombre</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -312,7 +351,9 @@
               </small>
             </div>
             <div class="col">
-              <label for="apMember{{ i }}" class="form-label">Apellido</label>
+              <label for="apMember{{ i }}" class="form-label" *ngIf="i == 0"
+                >Apellido</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -332,7 +373,10 @@
                 Campo obligatorio
               </small>
             </div>
-            <div class="col-auto my-auto">
+            <div
+              class="col-auto d-flex"
+              ngClass="{{ i == 0 ? 'align-items-end' : 'align-items-center' }}"
+            >
               <button
                 class="btn btn-unstyled border-0 text-danger"
                 (click)="eliminarElenco(i)"
@@ -351,22 +395,22 @@
           </span>
         </div>
       </ng-container>
+      <button
+        type="button"
+        class="btn btn-primary text-light-100 my-3"
+        (click)="agregarElenco()"
+      >
+        Agregar nuevo miembro
+      </button>
     </fieldset>
     <!--premios-->
     <fieldset>
       <legend class="mb-3 text-light border-bottom border-secondary">
         Premios
       </legend>
-      <button
-        type="button"
-        class="btn btn-primary text-light-100 mb-3"
-        (click)="agregarPremio()"
-      >
-        Agregar nuevo premio
-      </button>
       <div
+        class="row w-75 mx-auto border border-secondary rounded p-3"
         *ngIf="premioFormArray.length > 0"
-        class="row w-75 mx-auto border border-secondary rounded"
         formArrayName="premios"
       >
         <div
@@ -375,70 +419,44 @@
         >
           <div class="row mb-2">
             <div class="col">
-              <label for="nombreMember{{ i }}" class="form-label">Nombre</label>
+              <label for="nameAward{{ i }}" class="form-label" *ngIf="i == 0"
+                >Nombre</label
+              >
               <input
                 type="text"
                 class="form-control"
-                id="nombreMember{{ i }}"
+                id="nameAward{{ i }}"
                 placeholder="Nombre"
                 formControlName="nombre"
-                [ngClass]="{
-                  'is-invalid':
-                    (premio.get('nombre')?.touched || submitted) &&
-                    premio.get('nombre')?.errors
-                }"
               />
-              <small
-                class="text-danger"
-                *ngIf="(premio.get('nombre')?.touched || submitted) && premio.get('nombre')?.errors?.['required']"
-              >
-                Campo obligatorio
-              </small>
             </div>
 
             <div class="col">
-              <label for="nombreMember{{ i }}" class="form-label"
+              <label for="descAward{{ i }}" class="form-label" *ngIf="i == 0"
                 >Descripcion</label
               >
               <input
                 type="text"
                 class="form-control"
-                id="nombreMember{{ i }}"
+                id="descAward{{ i }}"
                 placeholder="Nombre"
                 formControlName="descripcion"
-                [ngClass]="{
-                  'is-invalid':
-                    (premio.get('descripcion')?.touched || submitted) &&
-                    premio.get('descripcion')?.errors
-                }"
               />
-              <small
-                class="text-danger"
-                *ngIf="(premio.get('descripcion')?.touched || submitted) && premio.get('descripcion')?.errors?.['required']"
-              >
-                Campo obligatorio
-              </small>
             </div>
             <div class="col">
-              <label for="apMember{{ i }}" class="form-label">Año</label>
+              <label for="anioAward{{ i }}" class="form-label" *ngIf="i == 0"
+                >Año</label
+              >
               <input
-                type="number"
+                type="text"
                 class="form-control"
-                id="apMember{{ i }}"
+                id="anioAward{{ i }}"
                 placeholder="Apellido"
                 formControlName="anio"
                 [ngClass]="{
-                  'is-invalid':
-                    (premio.get('anio')?.touched || submitted) &&
-                    premio.get('anio')?.errors
+                  'is-invalid': premio.get('anio')?.errors
                 }"
               />
-              <small
-                class="text-danger"
-                *ngIf="(premio.get('anio')?.touched || submitted) && premio.get('anio')?.errors?.['required']"
-              >
-                Campo obligatorio
-              </small>
               <small
                 class="text-danger"
                 *ngIf="premio.get('anio')?.errors?.['pattern']"
@@ -447,7 +465,10 @@
                 o 20.
               </small>
             </div>
-            <div class="col-auto my-auto">
+            <div
+              class="col-auto d-flex"
+              ngClass="{{ i == 0 ? 'align-items-end' : 'align-items-center' }}"
+            >
               <button
                 class="btn btn-unstyled border-0 text-danger"
                 (click)="eliminarPremio(i)"
@@ -458,6 +479,13 @@
           </div>
         </div>
       </div>
+      <button
+        type="button"
+        class="btn btn-primary text-light-100 my-3"
+        (click)="agregarPremio()"
+      >
+        Agregar nuevo premio
+      </button>
     </fieldset>
     <!-- imagenes y video -->
     <fieldset>
@@ -512,51 +540,88 @@
         </small>
       </div>
       <div class="mb-3">
-        <label for="frontPageMovie" class="form-label">Portada</label>
+        <p class="fs-4 border-bottom border-secondary" *ngIf="optSel == 'M'">
+          Portada
+        </p>
+        <div *ngIf="portadaImagePreview" class="w-50 mx-auto">
+          <div class="ratio ratio-16x9">
+            <img [src]="portadaImagePreview" alt="" class="img-fluid" />
+          </div>
+        </div>
+        <div *ngIf="optSel == 'M'" class="d-flex justify-content-center m-3">
+          <label for="frontPageMovie" class="btn btn-primary text-light-100"
+            ><i class="fa-solid fa-arrows-rotate"></i> Cambiar</label
+          >
+        </div>
+        <label
+          for="frontPageMovie"
+          class="form-label"
+          [class.d-none]="optSel == 'M'"
+          >Portada</label
+        >
         <input
           type="file"
           class="form-control"
+          [class.d-none]="optSel == 'M'"
           id="frontPageMovie"
           placeholder="portada"
-          formControlName="linkEstreno"
-          [ngClass]="{
-            'is-invalid':
-              (fgMovie.controls['linkEstreno'].touched || submitted) &&
-              fgMovie.controls['linkEstreno'].errors
-          }"
+          [class.is-invalid]="!portadaImagePreview && submitted"
+          (change)="getImage($event.target, 'cart')"
         />
-        <small
-          class="text-danger"
-          *ngIf="(fgMovie.controls['linkEstreno']?.touched || submitted) && fgMovie.controls['linkEstreno'].errors?.['required']"
-        >
+        <small class="text-danger" *ngIf="!portadaImagePreview && submitted">
           Campo obligatorio
         </small>
       </div>
       <div class="mb-3">
-        <label for="frontPageCartelera" class="form-label">Cartelera</label>
+        <p class="fs-4 border-bottom border-secondary" *ngIf="optSel == 'M'">
+          Cartelera
+        </p>
+        <div
+          *ngIf="carteleraImagePreview"
+          class="d-flex justify-content-center"
+        >
+          <div style="width: 200px; height: 300px">
+            <img
+              [src]="carteleraImagePreview"
+              alt=""
+              style="width: 100%; height: 100%"
+            />
+          </div>
+        </div>
+        <div *ngIf="optSel == 'M'" class="d-flex justify-content-center m-3">
+          <label for="frontPageCartelera" class="btn btn-primary text-light-100"
+            ><i class="fa-solid fa-arrows-rotate"></i> Cambiar</label
+          >
+        </div>
+
+        <label
+          for="frontPageCartelera"
+          class="form-label"
+          [class.d-none]="optSel == 'M'"
+          >Cartelera</label
+        >
         <input
           type="file"
           class="form-control"
+          [class.d-none]="optSel == 'M'"
           id="frontPageCartelera"
           placeholder="cartelera"
-          formControlName="linkPoster"
-          [ngClass]="{
-            'is-invalid':
-              (fgMovie.controls['linkPoster'].touched || submitted) &&
-              fgMovie.controls['linkPoster'].errors
-          }"
+          [class.is-invalid]="!carteleraImagePreview && submitted"
+          (change)="getImage($event.target, 'port')"
         />
-        <small
-          class="text-danger"
-          *ngIf="(fgMovie.controls['linkPoster']?.touched || submitted) && fgMovie.controls['linkPoster'].errors?.['required']"
-        >
+        <small class="text-danger" *ngIf="!carteleraImagePreview && submitted">
           Campo obligatorio
         </small>
       </div>
     </fieldset>
+    <hr />
     <!-- botones -->
     <div class="d-flex justify-content-center gap-3">
-      <button class="btn btn-warning text-200" type="button">
+      <button
+        class="btn btn-warning text-200"
+        type="button"
+        (click)="verRepo()"
+      >
         <i class="fa-solid fa-xmark"></i> Cancelar
       </button>
       <button

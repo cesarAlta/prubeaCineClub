@@ -27,10 +27,6 @@ export class DashboardComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(res => {console.log(res)
-    });
-    console.log(this.route )
-    //  this.dataSvcs.onlyDash$.subscribe(res=>this.onlyDash=res);
     this.dataSvcs.updateNavConfig('navDash');
     this.us.user$.subscribe(us=> us?this.username = us._firstName : 'Ver info');
   }

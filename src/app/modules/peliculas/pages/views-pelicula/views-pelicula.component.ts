@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Pelicula, peliculas } from 'src/app/models/Pelicula';
 import { PeliculasService } from '../../services/peliculas.service';
 import { ViewportScroller } from '@angular/common';
+import { IPelicula } from 'src/app/components/interface/IPelicula';
 
 @Component({
   selector: 'app-views-pelicula',
@@ -22,11 +23,11 @@ export class ViewsPeliculaComponent implements OnInit {
   triler: boolean = false;
   peliSel: Pelicula | undefined;
   @Input() ver: string = '';
-  @Output() emitPeli = new EventEmitter<Pelicula>();
+  @Output() emitPeli = new EventEmitter<[IPelicula,string]>();
   urlImage: string | undefined;
   pelis: Pelicula[] = peliculas.concat(peliculas);
   // nuevo
-  newMovies: any;
+  newMovies = this.peliculaSvcs.movies$;
   loading:boolean=true;
 
   constructor(
@@ -36,9 +37,7 @@ export class ViewsPeliculaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.peliculaSvcs.getAll().subscribe((res) => {
-      this.newMovies = res;
-    });
+   
     this.route.paramMap.subscribe((p) => {
       this.peliculaSvcs
         .getByName(p.get('name')!)
@@ -58,11 +57,20 @@ export class ViewsPeliculaComponent implements OnInit {
     let peli = this.pelis.find((p) => p.id == item.id);
     peli ? (peli.publiclyVisible = !peli.publiclyVisible) : '';
   }
-  editar(item: Pelicula) {
-    this.emitPeli.emit(item);
+  editar(item: IPelicula) {
+    this.emitPeli.emit([item,'M']);
+  }
+  view(item:IPelicula){
+    this.emitPeli.emit([item,'C']);
   }
   onImageLoad(){
     this.loading=false;
 
+  }
+  updateEstrenar(item:IPelicula){
+    this.emitPeli.emit([item,'E']);
+  }
+  updatePublicar(item:IPelicula){
+    this.emitPeli.emit([item,'P']);
   }
 }

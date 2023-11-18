@@ -4,6 +4,7 @@ import { IPremio } from "./IPremio";
 import { IRol } from "./IRol";
 
 export interface IPelicula{
+    idPelicula:number;
     nombre: string;
     anioEstreno:number;
     sinopsis: string;

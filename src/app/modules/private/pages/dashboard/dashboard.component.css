@@ -47,7 +47,7 @@ color:#3D5A80 ;
 } */
 
 /* fin */
-.rotate-icon {
+/* .rotate-icon {
   transform: rotate(180deg);
   transition: all 0.5s;
   cursor: pointer;
@@ -74,10 +74,10 @@ color:#3D5A80 ;
   /* background-color: rgb(27, 27, 27);
    */
    /* background-color: #332b47d2; */
-   background-color: #353945;
-}
+   /* background-color: #353945; */
+/* } */
 
-.collapsed-list li a.active {
+/* .collapsed-list li a.active {
   background-color: #1e2424;
 }
 
@@ -99,4 +99,4 @@ color:#3D5A80 ;
   background-color: #343a40b4;
   z-index: 1080;
 }
-
+  */

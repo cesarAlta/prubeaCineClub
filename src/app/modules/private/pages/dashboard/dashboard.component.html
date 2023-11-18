@@ -1,4 +1,4 @@
-<div class="position-relative bg-100">
+<div class="position-relative bg-100 w-100">
   <nav class="navbar navbar-expand-md navbar-dark d-flex bg-200">
     <div
       class="container-fluid justify-content-md-between justify-content-around"
@@ -32,304 +32,37 @@
   </nav>
   <div class="row m-0 w-100" style="min-height: 100vh">
     <!-- menu -->
-    <div
-      class="cols col-md-4 col-lg-3 col-xl-2  ps-0 d-none d-md-block"
-    >
-   <app-aside></app-aside>
+    <div class="col-auto position-relative">
+      <button
+        class="btn btn-link text-white fs-4"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#menuDash"
+        aria-controls="menuDash"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="menuDash"
+        aria-labelledby="offcanvasMenu"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasLabel">Menú</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="offcanvas"
+            aria-label="close"
+          ></button>
+        </div>
+        
+        <app-aside></app-aside>
+      </div>
     </div>
-    <div class="col position-relative">
+    <div class="col">
       <router-outlet></router-outlet>
     </div>
   </div>
 </div>
-
-<!--canvasmenu-->
-<aside>
-  <div
-    class="offcanvas-menu"
-    [ngClass]="{ open: offcanvasmenu }"
-    style="background-color: #58668b"
-    tabindex="-1"
-  >
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title fs-3">Menú</h5>
-      <button
-        type="button"
-        class="btn btn-link link-light"
-        (click)="btnOffCanvas()"
-      >
-        <i class="fa-solid fa-x"></i>
-      </button>
-    </div>
-    <div class="offcanvas-body px-0">
-      <nav
-        class="nav flex-column"
-        id="accordion-nav"
-        style="background-color: #9cabd3"
-      >
-        <div
-          class="d-flex flex-column justify-content-center align-items-center border-bottom border-ligth p-3"
-        >
-          <div class="position-relative" title="Ver mis datos">
-            <img src="./assets/img/User_icon_2.svg" alt="user.png" />
-            <a
-              role="button"
-              class="d-block link-light stretched-link"
-              routerLink="users"
-              routerLinkActive="active"
-            >
-              <small class="d-block">{{ username | uppercase }}</small>
-            </a>
-          </div>
-        </div>
-        <div class="position-relative" id="1">
-          <a
-            class="nav-link link-light"
-            type="button"
-            role="button"
-            href="#collapseConfigSitio"
-            aria-controls="collapseConfigSitio"
-            aria-expanded="false"
-            data-bs-toggle="collapse"
-            (click)="getRotate(1)"
-            ><i class="fa-solid fa-gears"></i> Configurar mi sitio
-            <span
-              class="position-absolute end-0 me-3"
-              [ngClass]="{ 'rotate-icon': rotate1 }"
-            >
-              <i class="fa-solid fa-angle-down"></i>
-            </span>
-          </a>
-        </div>
-
-        <div
-          class="collapse"
-          id="collapseConfigSitio"
-          aria-labelledby="1"
-          data-bs-parent="#accordion-nav"
-        >
-          <ul class="collapsed-list">
-            <li>
-              <a
-                class="text-decoration-none link-light py-1"
-                routerLink="config"
-                routerLinkActive="active"
-                >Video portada</a
-              >
-            </li>
-
-            <!-- <li><a href="">Generos favoritos</a></li> -->
-          </ul>
-        </div>
-        <div class="position-relative" id="2">
-          <a
-            class="nav-link text-white"
-            type="button"
-            role="button"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            aria-controls="collapseAdminPelicula"
-            href="#collapseAdminPelicula"
-            (click)="getRotate(2)"
-            ><i class="fa-solid fa-clapperboard"></i> Administrar películas
-            <span
-              class="position-absolute end-0 me-3"
-              [ngClass]="{ 'rotate-icon': rotate2 }"
-            >
-              <i class="fa-solid fa-angle-down"></i>
-            </span>
-          </a>
-        </div>
-
-        <div
-          class="collapse"
-          id="collapseAdminPelicula"
-          aria-labelledby="2"
-          data-bs-parent="#accordion-nav"
-        >
-          <ul class="collapsed-list">
-            <li>
-              <a
-                class="py-1"
-                routerLink="peliculas/adminPeliculas"
-                routerLinkActive="active"
-              >
-                Películas
-              </a>
-            </li>
-            <!-- <li>
-              <a
-                class="py-1"
-                routerLink="peliculas/reparto"
-                routerLinkActive="active"
-                >Reparto</a
-              >
-            </li>
-            <li>
-              <a
-                class="py-1"
-                routerLink="peliculas/clasificacion"
-                routerLinkActive="active"
-                >Clasificacíon</a
-              >
-            </li>
-            <li>
-              <a
-                class="py-1"
-                routerLink="peliculas/premios"
-                routerLinkActive="active"
-                >Premios</a
-              >
-            </li> -->
-          </ul>
-        </div>
-        <!-- <div class="position-relative" id="3">
-          <a
-            class="nav-link text-white"
-            type="button"
-            role="button"
-            aria-expanded="false"
-            data-bs-toggle="collapse"
-            href="#collapseAdminUsuarios"
-            aria-controls="collapseAdminUsuarios"
-            (click)="getRotate(3)"
-            ><i class="fa-solid fa-users"></i> Administrar usuarios
-            <span
-              class="position-absolute end-0 me-3"
-              [ngClass]="{ 'rotate-icon': rotate3 }"
-            >
-              <i class="fa-solid fa-angle-down"></i>
-            </span>
-          </a>
-        </div> -->
-        <!-- <div
-          class="collapse"
-          id="collapseAdminUsuarios"
-          aria-labelledby="3"
-          data-bs-parent="#accordion-nav"
-        >
-          <ul class="collapsed-list">
-            <li><a href="">Gestionar permisos</a></li>
-            <li><a href="">Administrar comentarios</a></li>
-          </ul>
-        </div> -->
-        <div class="position-relative" id="4">
-          <a
-            class="nav-link text-white"
-            type="button"
-            role="button"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            aria-controls="collapseEstadisticas"
-            href="#collapseEstadisticas"
-            (click)="getRotate(4)"
-            ><i class="fa-solid fa-chart-line"></i> Estadísticas
-            <span
-              class="position-absolute end-0 me-3"
-              [ngClass]="{ 'rotate-icon': rotate4 }"
-            >
-              <i class="fa-solid fa-angle-down"></i>
-            </span>
-          </a>
-        </div>
-        <div
-          class="collapse"
-          id="collapseEstadisticas"
-          aria-labelledby="3"
-          data-bs-parent="#accordion-nav"
-        >
-          <ul class="collapsed-list">
-            <li><a href="">Películas más vistas</a></li>
-            <!-- <li><a href="">Películas más valoradas</a></li>
-            <li><a href="">Películas compartídas</a></li> -->
-          </ul>
-        </div>
-      </nav>
-      <div class="ms-3 mt-2">
-        <a routerLink="/home" class="d-block link-light m-1">
-          <small><i class="fa-solid fa-share"></i></small>
-          ir al Home
-        </a>
-        <a
-          href="https://cineclubmunicipal.org.ar/"
-          target="_blank"
-          class="d-block link-light"
-        >
-          <small><i class="fa-solid fa-share"></i></small>
-          ir al cineclubmunicipal
-        </a>
-      </div>
-
-      <br />
-      <h3 class="border-bottom my-3 text-center">
-        <i class="fa-solid fa-circle-info"></i>
-      </h3>
-
-      <div class="m-2">
-        <!-- <div
-        class="card text-dark bg-light mb-3 mx-auto"
-        style="max-width: 18rem"
-      >
-        <div class="card-header">
-          <i class="fa-solid fa-globe"></i> Sobre tu repositorio
-        </div>
-        <div class="card-body text-center">
-          <h5 class="card-title text-center">
-            1.138 visitas! y 200 <i class="fa-solid fa-heart"></i>!
-          </h5>
-          <h5 class="card-title text-center"></h5>
-          <h5 class="card-title text-center">130 usuarios registrados!</h5>
-        </div>
-      </div> -->
-        <div
-          class="card text-dark bg-light mb-3 mx-auto"
-          style="max-width: 18rem"
-        >
-          <div class="card-header">
-            <i class="fa-solid fa-film"></i> Película más vista
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Noche más larga</h5>
-            <p class="card-text">
-              Reproducciones: 213 veces <br />
-              Categoría: drama <br />
-            </p>
-          </div>
-        </div>
-        <!-- <div
-        class="card text-dark bg-light mb-3 mx-auto"
-        style="max-width: 18rem"
-      >
-        <div class="card-header">
-          <i class="fa-solid fa-heart"></i> Película más valorada
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">El verano que te vimos</h5>
-          <p class="card-text">
-            Reproducciones: 100 veces <br />
-            Categoría: drama <br />
-            Valoración: 4,5 estrellas <br />
-          </p>
-        </div>
-      </div> -->
-        <div
-          class="card text-dark bg-light mb-3 mx-auto"
-          style="max-width: 18rem"
-        >
-          <div class="card-header">
-            <i class="fa-solid fa-heart"></i> Géneros más vistos
-          </div>
-          <div class="card-body text-center">
-            <h5 class="card-title text-center">TOP 3</h5>
-            <p class="card-text"><b>Drama, Terror, Suspenso</b></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    class="position-fixed top-0 lefth-0 w-100 h-100 bg-offcanvas"
-    *ngIf="offcanvasmenu"
-    (click)="btnOffCanvas()"
-  ></div>
-</aside>

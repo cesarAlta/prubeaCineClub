@@ -1,0 +1,87 @@
+<div
+  class="cover-page"
+  [style.background-image]="'url(' + peliSel.linkEstreno + ')'"
+>
+  <div class="container-movieinfo">
+    <div class="container">
+      <div class="row gap-2 justify-content-center">
+        <div class="col-8 col-md-10 col-lg-11 title-movie">
+          <h2>{{ peliSel.nombre }}</h2>
+        </div>
+        <div class="col-7 col-md-4 col-lg-2">
+          <img [src]="peliSel.linkPoster" alt="" class="img-fluid rounded" />
+        </div>
+        <div class="col-11 col-md-6 col-lg-9 my-auto">
+          <div class="title-movie-sm">
+            <h2>{{ peliSel.nombre }}</h2>
+          </div>
+          <div>
+            <p class="fs-5">
+              Duración: {{ peliSel.duracion }} min. |
+              {{ peliSel.calificacion }}
+            </p>
+            <p class="synopsis-movie">{{ peliSel.sinopsis }}</p>
+          </div>
+          <div>
+            <p>
+              Géneros: Drama, Suspenso. <br />
+              Elenco: Actores, Directores. <br />
+              Año: {{ peliSel.anioEstreno }}
+            </p>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="btn btn-sm btn-primary"
+              (click)="showTriler()"
+            >
+              Ver trailer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="trailerMovie">
+  <div class="container-fluid mb-3" *ngIf="triler">
+    <div class="row justify-content-center">
+      <div class="d-flex justify-content-between bg-dark">
+        <h3>Trailer</h3>
+        <a
+          role="button"
+          class="btn btn-unstyled border-0 text-danger"
+          (click)="showTriler()"
+        >
+          X Cerrar
+        </a>
+      </div>
+      <div class="col-10 col-md-8">
+        <div class="ratio ratio-16x9">
+          <iframe
+            [src]="peliSel.linkPelicula"
+            frameborder="0"
+            allow="autoplay; fullscreen"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid p-0">
+  <div class="bg-dark">
+    <h2 class="p-3 ps-5">Ver Película</h2>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-10 col-md-8">
+      <div class="ratio ratio-16x9">
+        <iframe
+          src="https://player.vimeo.com/video/884182527?p_id=58479"
+          frameborder="0"
+          allow="autoplay; fullscreen"
+          
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</div>
