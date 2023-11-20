@@ -1,22 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Pelicula } from 'src/app/models/Pelicula';
+import {  Router } from '@angular/router';
 import { PeliculasService } from '../../services/peliculas.service';
 import { IGenero } from 'src/app/components/interface/IGenero';
-import { IPremio } from 'src/app/components/interface/IPremio';
 import { IRol } from 'src/app/components/interface/IRol';
 import { IPelicula } from 'src/app/components/interface/IPelicula';
 import { ModalService } from 'src/app/services/modal.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Target } from '@angular/compiler';
-import { imagesTypes } from 'src/app/models/ImageType';
 import { IElenco } from 'src/app/components/interface/IElenco';
 
 @Component({
@@ -25,6 +20,8 @@ import { IElenco } from 'src/app/components/interface/IElenco';
   styleUrls: ['./admin-peliculas.component.css'],
 })
 export class AdminPeliculasComponent implements OnInit {
+  @ViewChild('tagCartelera') tagCartelera!: ElementRef;
+  @ViewChild('tagPortada') tagPortada!: ElementRef;
   date: Date = new Date();
   currentYear: number = this.date.getFullYear();
   peliSel: IPelicula | undefined;
@@ -50,7 +47,6 @@ export class AdminPeliculasComponent implements OnInit {
     private moviesSvcs: PeliculasService,
     private modalSvcs: ModalService,
     private sanitizer: DomSanitizer,
-    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -94,6 +90,8 @@ export class AdminPeliculasComponent implements OnInit {
       oculta: [true, Validators.required],
       estreno: [false, Validators.required],
     });
+    
+   
   }
 
   addGenreMovies(genre?: any) {
@@ -173,6 +171,8 @@ export class AdminPeliculasComponent implements OnInit {
   verRepo() {
     this.optSel = 'L';
     this.init();
+    this.moviesSvcs.getAll();
+    window.scrollTo(0,0);
   }
   updateItem() {
     this.getPeliSel([this.peliSel, 'M']);
@@ -212,8 +212,7 @@ export class AdminPeliculasComponent implements OnInit {
         this.moviesSvcs
           .updatePublicada(itemUpdate)
           .subscribe((res) => {this.modalSvcs.Alert(msj1, 'Perfecto!', 's');this.moviesSvcs.getAll();});
-      }
-    
+      }    
     }
   }
 
@@ -280,6 +279,7 @@ export class AdminPeliculasComponent implements OnInit {
         null;
       }
     });
+
   guardar() {
     this.submitted = true;
     const movie: IPelicula = { ...this.fgMovie.value };
@@ -295,6 +295,7 @@ export class AdminPeliculasComponent implements OnInit {
             's'
           );
           this.init();
+          window.scrollTo(0,0)
         });
     } else {
       this.moviesSvcs
@@ -323,6 +324,8 @@ export class AdminPeliculasComponent implements OnInit {
     this.portadaImage = null;
     this.submitted = false;
     this.peliSel = undefined;
+    this.tagCartelera.nativeElement.value= null
+    this.tagPortada.nativeElement.value = null
   }
 
   cleanFormArray() {
@@ -336,12 +339,5 @@ export class AdminPeliculasComponent implements OnInit {
       }
     });
   }
-  updatePublicada() {
-    const itemUpdate = { nombrePelicula: this.peliSel?.nombre };
-    this.moviesSvcs.updatePublicada(itemUpdate);
-  }
-  updateEstreno() {
-    const itemUpdate = { nombrePelicula: this.peliSel?.nombre };
-    this.moviesSvcs.updateEstreno(itemUpdate);
-  }
+
 }

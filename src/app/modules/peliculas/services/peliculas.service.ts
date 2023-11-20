@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, map, of } from 'rxjs';
 import { IGenero } from 'src/app/components/interface/IGenero';
 import { IPelicula } from 'src/app/components/interface/IPelicula';
 import { IRol } from 'src/app/components/interface/IRol';
@@ -11,9 +11,12 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class PeliculasService {
-
   private movies = new BehaviorSubject<IPelicula[]>([]);
   movies$ = this.movies.asObservable();
+  private movieSize = new BehaviorSubject<number>(0);
+  movieSize$ = this.movieSize.asObservable();
+
+  private allMovieList!: IPelicula[];
 
   private URI!: string;
 
@@ -22,9 +25,10 @@ export class PeliculasService {
   }
 
   getAll() {
-    this.httpClient
-      .get<IPelicula[]>(this.URI + 'movies')
-      .subscribe((res) => this.movies.next(res));
+    this.httpClient.get<IPelicula[]>(this.URI + 'movies').subscribe((res) => {
+      this.allMovieList = res;
+      this.searchByName('', 1);
+    });
   }
   getGeneros() {
     return this.httpClient.get<IGenero[]>(this.URI + 'genres');
@@ -63,11 +67,11 @@ export class PeliculasService {
     formData.append('linkPelicula', movie.linkPelicula);
     formData.append('linkTrailer', movie.linkTrailer);
 
-    return this.httpClient.post(this.URI + 'createMovie', formData);
+    // return this.httpClient.post(this.URI + 'createMovie', formData);
+    return of(true);
   }
 
   put(movie: any, portada: any, cartelera: any) {
-
     let generos: string | undefined;
     movie.generos?.forEach((g: any) => {
       if (!generos) {
@@ -89,24 +93,50 @@ export class PeliculasService {
     formData.append('idioma', movie.idioma);
     formData.append('soporte', movie.soporte);
     formData.append('calificacion', movie.calificacion);
-    if(portada) formData.append('estreno', portada);
-    if(cartelera) formData.append('poster', cartelera);
+    if (portada) formData.append('estreno', portada);
+    if (cartelera) formData.append('poster', cartelera);
     formData.append('premios', JSON.stringify(movie.premios));
     formData.append('elenco', JSON.stringify(movie.elenco));
     formData.append('linkPelicula', movie.linkPelicula);
     formData.append('linkTrailer', movie.linkTrailer);
 
-
-    return this.httpClient.post(this.URI + 'updateMovie', formData);
-
+    // return this.httpClient.post(this.URI + 'updateMovie', formData);
+    return of(true);
   }
-  updateEstreno(item:any){
-    return this.httpClient.post(this.URI+'switchBooleanEstreno', item)
-
+  updateEstreno(item: any) {
+    return this.httpClient.post(this.URI + 'switchBooleanEstreno', item);
   }
-  updatePublicada(item:any){
-    return this.httpClient.post(this.URI+'switchBooleanOculta', item)
+  updatePublicada(item: any) {
+    return this.httpClient.post(this.URI + 'switchBooleanOculta', item);
+  }
+  searchByName(searchName: string, page: number) {
+    console.log(this.allMovieList,page);
+    let moviess: IPelicula[] = [];
+    if (searchName) {
+      this.allMovieList.forEach((m) => {
+        if (m.nombre.toUpperCase().includes(searchName.toUpperCase())) {
+          moviess.push(m);
+        }
+      });
+      this.allMovieList.forEach((m) => {
+        m.elenco.forEach((e) => {
+          if (
+            e.nombreRol === 'DIRECTOR' &&
+            (e.nombre.toUpperCase().includes(searchName.toUpperCase()) ||
+              e.apellido.toUpperCase().includes(searchName.toUpperCase()))
+          )
+            moviess.push(m);
+        });
+      });
+    }else{      
+      moviess = this.allMovieList;
+    }
 
+    const movieSize = moviess.length;
+    moviess = moviess.slice((page - 1)*10, page + 9);
+    
+    this.movies.next(moviess);
+    this.movieSize.next(movieSize)
 
   }
 }

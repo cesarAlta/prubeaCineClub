@@ -1,4 +1,4 @@
-<div class="position-relative bg-100 w-100">
+<div class="position-relative bg-100 m-0">
   <nav class="navbar navbar-expand-md navbar-dark d-flex bg-200">
     <div
       class="container-fluid justify-content-md-between justify-content-around"
@@ -11,20 +11,24 @@
         />
       </a>
       <h3 class="text-center">Espacio de trabajo</h3>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        #menuCanvasAdmin
-        type="button"
-        (click)="btnOffCanvas()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <div
         class="d-flex justify-content-end gap-3 align-items-center fs-3 me-2"
       >
-        <a class="link-danger text-decoration-none" routerLink="/home"
+        <a
+          routerLink="/dashboard"
+          class="link-light text-decoration-none fst-italic d-none d-sm-flex"
+          title="Ir al dashboard"
+          ><i class="fa-solid fa-house"></i
+        ></a>
+        <a
+          type="button"
+          class="link-light text-decoration-none fst-italic d-none d-sm-flex"
+          title="Cerrar sesión"
+          (click)="logout()"
+          ><i class="fa-solid fa-right-from-bracket"></i>
+        </a>
+        <a class="link-light text-decoration-none" routerLink="/home"
+        title="Cerrar ventana"
           ><i class="fa-solid fa-xmark"></i
         ></a>
       </div>
@@ -57,7 +61,7 @@
             aria-label="close"
           ></button>
         </div>
-        
+
         <app-aside></app-aside>
       </div>
     </div>

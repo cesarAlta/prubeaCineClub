@@ -116,8 +116,11 @@ style="height: 100vh;">
     </div>
   </div>
   <div class="mb-3 links-foot">
+    <a routerLink="/dashboard" class="d-block link-light text-decoration-none fst-italic"
+      ><i class="fa-solid fa-house"></i> Espacio de trabajo</a
+    >
     <a routerLink="/home" class="d-block link-light text-decoration-none fst-italic"
-      ><i class="fa-solid fa-house"></i> Página principal</a
+      ><i class="fa-solid fa-link"></i> Pagina principal</a
     >
     <a
       href="https://cineclubmunicipal.org.ar/"
@@ -127,6 +130,7 @@ style="height: 100vh;">
     <i class="fa-solid fa-link"></i> Cineclubmunicipal
     </a>
     <a type="button" class="d-block  link-light text-decoration-none fst-italic"
+    (click)="logout()"
       ><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a
     >
   </div>

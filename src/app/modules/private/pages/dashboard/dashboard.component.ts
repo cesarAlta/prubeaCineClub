@@ -3,6 +3,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Usuario } from 'src/app/models/Auth/Usuario';
 import { UsuarioService } from 'src/app/modules/auth/services/usuario.service';
 import { DataService } from 'src/app/services/data.service';
+import { ModalService } from 'src/app/services/modal.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -13,16 +14,12 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class DashboardComponent implements OnInit{
   
   username?: string;
-  onlyDash :boolean = true;
-
-  rotate1:boolean=false;
-  rotate2:boolean=false;
-  rotate3:boolean=false;
-  rotate4:boolean=false;
   offcanvasmenu:boolean=false;
 
-  constructor(private dataSvcs: DataService, private us: UsuarioService,
-    private route: ActivatedRoute
+  constructor(
+    private dataSvcs: DataService, 
+    private us: UsuarioService,
+    private modalSvcs: ModalService
     ){}
 
 
@@ -30,43 +27,19 @@ export class DashboardComponent implements OnInit{
     this.dataSvcs.updateNavConfig('navDash');
     this.us.user$.subscribe(us=> us?this.username = us._firstName : 'Ver info');
   }
-  btnOffCanvas(){
-    this.offcanvasmenu = ! this.offcanvasmenu;
+
+  logout() {
+    this.modalSvcs.Confirm(
+      'Hasta pronto!',
+      'Cerrar Sesión',
+      'Salir',
+      'Cancelar',
+      () => this.us.logout(),
+      () => undefined,
+      'logout',
+      'sm'
+    );
   }
 
-  openClose(num:number){
-  
 
-
-
-  }
-
-  getRotate(num:number){
-    switch (num){
-      case 1:
-        this.rotate1 = ! this.rotate1;
-        this.rotate2=false
-        this.rotate3=false
-        this.rotate4=false
-        break;
-      case 2:
-        this.rotate2 = ! this.rotate2;
-        this.rotate1=false
-        this.rotate3=false
-        this.rotate4=false
-        break;
-      case 3:
-        this.rotate3 = ! this.rotate3;
-        this.rotate2=false
-        this.rotate1=false
-        this.rotate4=false
-        break;
-      default:
-        this.rotate4 = ! this.rotate4;
-        this.rotate2=false
-        this.rotate3=false
-        this.rotate1=false
-        break;
-    }
-  }
 }

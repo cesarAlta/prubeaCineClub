@@ -83,12 +83,6 @@
     <div class="row justify-content-center">
       <div class="col-10 col-md-8">
         <div class="ratio ratio-16x9">
-          <!-- <iframe
-            src="https://player.vimeo.com/video/876491534?h=a8661edfc4"
-            frameborder="0"
-            allow="autoplay; fullscreen"
-            allowfullscreen
-          ></iframe> -->
           <iframe
             src="https://player.vimeo.com/video/884182527?p_id=58479"
             frameborder="0"
@@ -102,163 +96,40 @@
 </div>
 
 <!--Lista de pelicualas-->
-<div *ngIf="ver == 'lista'">
-  <!-- tabla -->
-  <!-- <div class="table-responsive">
-    <table class="table table align-middle">
-      <tbody>
-        <tr *ngFor="let item of pelis">
-          <td style="width: 100px">
-            <img [src]="item.imagesUrlBillboard" alt="" class="img-thumbnail" />
-          </td>
-          <td>
-            <div class="fw-bold fs-5">{{ item.title }}</div>
-            <div class="card-text mt-auto">
-              <div *ngIf="item.isPremiere">
-                <i class="fa-solid fa-star fa-2xs text-warning"></i>
-                Estreno
-                <i class="fa-solid fa-star fa-2xs text-warning"></i>
-              </div>
-
-              <div>
-                <span
-                  class="badge rounded-pill"
-                  [ngClass]="item.publiclyVisible ? 'bg-success' : 'bg-dark'"
-                >
-                  {{ item.publiclyVisible ? "Publicada" : "Oculta" }}
-                </span>
-              </div>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group dropstart">
-              <button
-                type="button"
-                class="btn btn-sm btn-outline-primary dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Accioens
-              </button>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="" class="dropdown-item">
-                    <i class="fa-regular fa-pen-to-square text-warning"></i>
-                    Editar
-                  </a>
-                </li>
-                <li>
-                  <a href="" class="dropdown-item">
-                    <i
-                      class="fa-regular"
-                      ngClass=" {{
-                        item.publiclyVisible
-                          ? 'fa-eye-slash text-dark'
-                          : 'fa-eye text-primary'
-                      }}"
-                    ></i>
-                    {{ item.publiclyVisible ? "Ocultar" : "Publicar" }}
-                  </a>
-                </li>
-                <li>
-                  <a href="" class="dropdown-item">
-                    <i class="fa-solid fa-trash-can text-danger"></i>
-                    Eliminar
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <ngb-pagination
-      class="d-flex justify-content-center"
-      [collectionSize]="70"
-      [(page)]="page"
-    ></ngb-pagination>
-  </div> -->
-  <!-- lista1 -->
-  <!-- <div class="container-fluid">
-    <div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-4  mb-3">
-      <div class="col" *ngFor="let item of pelis">
-        <div class="card bg-200 text-200 h-100 border border-secondary">
-          <img [src]="item.imagesUrlBillboard" class="card-img-top" alt="..." />
-          <div class="card-body text-center d-flex flex-column">
-            <h5 class="card-title">{{ item.title }}</h5>
-            <div class="card-text mt-auto">
-              <div *ngIf="item.isPremiere">
-                <span
-                  class="badge rounded-pill primary-200 px-2"
-                >
-                  Estreno
-                </span>
-              </div>
-
-              <div>
-                <span
-                  class="badge rounded-pill px-2"
-                  [ngClass]="item.publiclyVisible ? 'bg-success' : 'bg-secondary'"
-                >
-                  {{ item.publiclyVisible ? "Publicada" : "Oculta" }}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer bg-300 text-center">
-            <div class="btn-group dropup">
-              <button
-                type="button"
-                class="btn btn-sm btn-primary dropdown-toggle text-200"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Acciones
-              </button>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="" class="dropdown-item">
-                    <i class="fa-regular fa-pen-to-square text-warning"></i>
-                    Editar
-                  </a>
-                </li>
-                <li>
-                  <a href="" class="dropdown-item">
-                    <i
-                      class="fa-regular"
-                      ngClass=" {{
-                        item.publiclyVisible
-                          ? 'fa-eye-slash text-dark'
-                          : 'fa-eye text-primary'
-                      }}"
-                    ></i>
-                    {{ item.publiclyVisible ? "Ocultar" : "Publicar" }}
-                  </a>
-                </li>
-                <li>
-                  <a href="" class="dropdown-item">
-                    <i class="fa-solid fa-trash-can text-danger"></i>
-                    Eliminar
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+<div>
+  <div class="d-flex justify-content-end my-3">
+    <div class="input-group input-group-sm" style="width: 400px">
+      <input
+        type="search"
+        class="form-control"
+        type="search"
+        placeholder="Buscar película, director"
+        aria-label="Buscar"
+        aria-describedby="button-addon2"
+        [(ngModel)]="searchName"
+        (keyup.enter)="search(); page = 1"
+      />
+      <button
+        class="btn btn-outline-success"
+        type="button"
+        id="button-addon2"
+        (click)="search()"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
     </div>
-    <ngb-pagination
-      class="d-flex justify-content-center text-success"
-      [collectionSize]="70"
-      [(page)]="page"
-      
-    ></ngb-pagination>
-  </div> -->
-  <div class="container-fluid">
+    <button type="button" class="btn btn-sm btn-primary ms-2 text-light" (click)="clean()">
+      <i class="fa-solid fa-rotate-right"></i> Limpiar
+    </button>
+  </div>
+  <div
+    class="container-fluid"
+    *ngIf="ver == 'lista' && newMovies.length > 0; else movieEmpty"
+  >
     <div
       class="row row-cols-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-4 mb-3"
     >
-      <div class="col" *ngFor="let item of newMovies | async">
+      <div class="col" *ngFor="let item of newMovies">
         <div
           class="card bg-200 text-200 h-100 border border-secondary position-relative"
         >
@@ -290,7 +161,7 @@
                   class="badge rounded-pill px-2 fs-6 mt-1"
                   [ngClass]="!item.oculta ? 'bg-success' : 'bg-secondary'"
                 >
-                  {{ item.oculta ? "Oculta": "Publicada"  }}
+                  {{ item.oculta ? "Oculta" : "Publicada" }}
                 </span>
               </div>
             </div>
@@ -320,7 +191,11 @@
                   </a>
                 </li>
                 <li>
-                  <a type="button" class="dropdown-item" (click)="updatePublicar(item)">
+                  <a
+                    type="button"
+                    class="dropdown-item"
+                    (click)="updatePublicar(item)"
+                  >
                     <i
                       class="fa-solid"
                       ngClass=" {{
@@ -333,7 +208,11 @@
                   </a>
                 </li>
                 <li>
-                  <a  type="button" class="dropdown-item" (click)="updateEstrenar(item)">
+                  <a
+                    type="button"
+                    class="dropdown-item"
+                    (click)="updateEstrenar(item)"
+                  >
                     <i
                       class="fa-solid fa-film"
                       ngClass="{{
@@ -360,8 +239,14 @@
     </div>
     <ngb-pagination
       class="d-flex justify-content-center text-success"
-      [collectionSize]="70"
+      [collectionSize]="moviesSize"
+      [pageSize]="10"
+      [maxSize]="10"
       [(page)]="page"
+      (pageChange)="search()"
     ></ngb-pagination>
   </div>
+  <ng-template #movieEmpty>
+    <h3>No se encuantraron peliculas para "{{searchName}}"</h3>
+  </ng-template>
 </div>
