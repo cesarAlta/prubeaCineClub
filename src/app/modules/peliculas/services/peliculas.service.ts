@@ -16,6 +16,15 @@ export class PeliculasService {
   private movieSize = new BehaviorSubject<number>(0);
   movieSize$ = this.movieSize.asObservable();
 
+  private viewMovie = new BehaviorSubject<IPelicula | undefined>(undefined);
+  viewMovie$ = this.viewMovie.asObservable();
+
+  private premiereMovie = new BehaviorSubject<IPelicula[]>([]);
+  premiereMovie$ = this.premiereMovie.asObservable();
+  
+  private mostViewedMovie = new BehaviorSubject<IPelicula[]>([]);
+  mostViewedMovie$ = this.mostViewedMovie.asObservable();
+
   private allMovieList!: IPelicula[];
 
   private URI!: string;
@@ -23,11 +32,26 @@ export class PeliculasService {
   constructor(private httpClient: HttpClient) {
     this.URI = environment.api;
   }
+  selectMovie(m: IPelicula) {
+    this.viewMovie.next(m);
+  }
 
   getAll() {
     this.httpClient.get<IPelicula[]>(this.URI + 'movies').subscribe((res) => {
       this.allMovieList = res;
-      this.searchByName('', 1);
+      this.searchByName('',1)
+    });
+  }
+  getAllMovies(){
+    return this.httpClient.get<IPelicula[]>(this.URI + 'movies')
+  }
+  //Obtiene todas las peliculas y emnite observables para las mas visatas y estrenos.
+  getAllHome() {
+    this.httpClient.get<IPelicula[]>(this.URI + 'movies').subscribe((res) => {
+      this.allMovieList = res;      
+      this.mostViewedMovie.next( this.allMovieList.slice(0,10));
+      this.premiereMovie.next( this.allMovieList.filter(m=>m.estreno));
+      this.movies.next(res);
     });
   }
   getGeneros() {
@@ -37,7 +61,9 @@ export class PeliculasService {
     return this.httpClient.get<IRol[]>(this.URI + 'roles');
   }
   getByName(nombre: string) {
-    return of(peliculas.find((p) => p.title == nombre));
+    return this.httpClient
+      .get<IPelicula[]>(this.URI + 'movies')
+      .pipe(map((res) => res.find((m) => m.nombre == nombre)));
   }
   post(movie: any, portada: File, cartelera: File) {
     let generos: string | undefined;
@@ -67,8 +93,8 @@ export class PeliculasService {
     formData.append('linkPelicula', movie.linkPelicula);
     formData.append('linkTrailer', movie.linkTrailer);
 
-    // return this.httpClient.post(this.URI + 'createMovie', formData);
-    return of(true);
+    return this.httpClient.post(this.URI + 'createMovie', formData);
+    // return of(true);
   }
 
   put(movie: any, portada: any, cartelera: any) {
@@ -100,8 +126,7 @@ export class PeliculasService {
     formData.append('linkPelicula', movie.linkPelicula);
     formData.append('linkTrailer', movie.linkTrailer);
 
-    // return this.httpClient.post(this.URI + 'updateMovie', formData);
-    return of(true);
+    return this.httpClient.post(this.URI + 'updateMovie', formData);
   }
   updateEstreno(item: any) {
     return this.httpClient.post(this.URI + 'switchBooleanEstreno', item);
@@ -110,7 +135,7 @@ export class PeliculasService {
     return this.httpClient.post(this.URI + 'switchBooleanOculta', item);
   }
   searchByName(searchName: string, page: number) {
-    console.log(this.allMovieList,page);
+    console.log(this.allMovieList, page);
     let moviess: IPelicula[] = [];
     if (searchName) {
       this.allMovieList.forEach((m) => {
@@ -128,15 +153,14 @@ export class PeliculasService {
             moviess.push(m);
         });
       });
-    }else{      
+    } else {
       moviess = this.allMovieList;
     }
 
     const movieSize = moviess.length;
-    moviess = moviess.slice((page - 1)*10, page + 9);
-    
-    this.movies.next(moviess);
-    this.movieSize.next(movieSize)
+    moviess = moviess.slice((page - 1) * 10, page + 9);
 
+    this.movies.next(moviess);
+    this.movieSize.next(movieSize);
   }
 }

@@ -1,0 +1,64 @@
+<div id="destacadas" class="position-relative">
+    <div class="container-fluid d-flex ps-3 mb-3">
+      <div
+        class="rounded-circle bg-dark p-2 d-flex justify-content-center align-items-center"
+        style="width: 50px; height: 50px"
+      >
+        <i class="fa-solid fa-video"></i>
+      </div>
+      <p class="fs-3 my-auto ms-2">Lo más visto</p>
+    </div>
+  
+    <div
+      class="container-fluid d-flex justify-content-center"
+      (touchmove)="onTouchMove($event)"
+      (touchend)="onTouchEnd()"
+      (touchstart)="onTouchStart($event)"
+    >
+      <div #contFilm class="cont-film-estreno bg-secondary">
+        <a type="button" class="sliderBtn btnLeft fs-2" (click)="rigth()">
+          <i class="fa-solid text-white fa-angle-left"></i>
+        </a>
+        <a type="button" class="sliderBtn btnRight fs-2" (click)="left()">
+          <i class="fa-solid text-white fa-angle-right"></i>
+        </a>
+        <div
+          class="slide-estreno"
+          #slider
+          [ngStyle]="{ transform: 'translateX(' + moveTo + 'px)' }"
+        >
+          <div #imgfilm *ngFor="let item of films2" class="col-auto">
+            <div class="img-film mx-2 position-relative">
+              <a role="button" (click)="goMovie(item)">
+                <img
+                  [src]="item.linkEstreno"
+                  alt="..."
+                  style="width: 100%; height: 100%"
+                />
+                <div
+                  class="position-absolute top-0 start-0 info-film"
+                  style="height: 100%; width: 100%"
+                >
+                  <div class="position-absolute top-50 start-50 translate-middle">
+                    <p class="fs-5 text-center">
+                      {{ item.nombre }}
+                    </p>
+                    <div class="text-white d-flex justify-content-center">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-danger rounded-circle fs-3 text-light d-flex justify-content-center align-items-center"
+                        style="height: 3rem; width: 3rem"
+                      >
+                        <i class="fa-solid fa-play"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

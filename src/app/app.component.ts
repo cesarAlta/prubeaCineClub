@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Profile } from './models/Auth/profile';
 import { Profiles } from './models/Auth/profiles';
 import { verify } from 'jsonwebtoken';
+import { PeliculasService } from './modules/peliculas/services/peliculas.service';
 
 @Component({
   selector: 'app-root',
@@ -46,11 +47,16 @@ export class AppComponent implements OnInit, AfterViewInit {
   // 	}
   // }
 
-  constructor(private authService: UsuarioService, private ms: ModalService) {}
+  constructor(
+    private authService: UsuarioService, 
+    private ms: ModalService,
+    private moviesSvcs: PeliculasService
+    ) {}
   ngAfterViewInit(): void {
     // this.authService.verifyUser();
   }
   ngOnInit() {
-    this.authService.verifyUser()
+    this.authService.verifyUser();
+    // this.moviesSvcs.getAll();
   }
 }

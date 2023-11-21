@@ -1,0 +1,54 @@
+.cover-page {
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    opacity: 0.8;
+  }
+  .cover-page::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: transparent
+      linear-gradient(
+        180deg,
+        #00000000 40%,
+        #000000 70%,
+        #000000 90%,
+        #000000 100%
+      )
+      0% 0% no-repeat padding-box;
+  }
+  .container-movieinfo {
+    position: absolute;
+    bottom: 7%;
+    width: 100%;
+    z-index: 3;
+  }
+  .title-movie-sm{
+      display: none;
+  }
+  
+  @media screen and (max-width: 540px) {
+  
+    .synopsis-movie {
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* Muestra solo 2 líneas de texto */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .container-movieinfo{
+      bottom: 3%;
+    }
+    .title-movie-sm{
+      display: block;
+    }
+    .title-movie{
+      display: none;
+    }
+  }

@@ -1,21 +1,14 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPelicula } from 'src/app/components/interface/IPelicula';
-import { Pelicula, peliculas } from 'src/app/models/Pelicula';
 import { PeliculasService } from 'src/app/modules/peliculas/services/peliculas.service';
 
 @Component({
-  selector: 'app-carousel-simple',
-  templateUrl: './carousel-simple.component.html',
-  styleUrls: ['./carousel-simple.component.css'],
+  selector: 'app-cinematic-premieres-slider',
+  templateUrl: './cinematic-premieres-slider.component.html',
+  styleUrls: ['./cinematic-premieres-slider.component.css']
 })
-export class CarouselSimpleComponent implements OnInit {
+export class CinematicPremieresSliderComponent {
   option = 3;
   @ViewChild('slider') sliderTs: ElementRef | undefined;
   @ViewChild('imgfilm') imgfilm: ElementRef | undefined;
@@ -33,7 +26,7 @@ export class CarouselSimpleComponent implements OnInit {
   constructor(private route: Router, private movieSvcs: PeliculasService) {}
 
   ngOnInit(): void {
-    this.movieSvcs.mostViewedMovie$.subscribe((res) => (this.films2 = res));
+    this.movieSvcs.premiereMovie$.subscribe((res) => (this.films2 = res));
   }
   tranlatemove = 1;
 

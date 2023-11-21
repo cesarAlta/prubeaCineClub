@@ -12,6 +12,7 @@ import { Pelicula, peliculas } from 'src/app/models/Pelicula';
 import { HomeService } from '../home.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { DataService } from 'src/app/services/data.service';
+import { PeliculasService } from '../../peliculas/services/peliculas.service';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dataSvcs: DataService,
+    private movieSvcs: PeliculasService,
     private utilServices: UtilsService,
     private rander2: Renderer2,
     private router: Router,
@@ -51,6 +53,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   urlVideo!: string;
 
   ngOnInit(): void {
+    this.movieSvcs.getAllHome();
+
+
     this.fullLoad = false;
     this.dataSvcs.updateNavConfig('sticky');
     

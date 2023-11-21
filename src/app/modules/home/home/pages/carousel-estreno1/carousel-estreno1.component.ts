@@ -1,14 +1,9 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  Input,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
+import { Component, HostListener, Input, Renderer2 } from '@angular/core';
 import { Pelicula, peliculas } from 'src/app/models/Pelicula';
 import { HomeService } from '../../../home.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PeliculasService } from 'src/app/modules/peliculas/services/peliculas.service';
+import { IPelicula } from 'src/app/components/interface/IPelicula';
 
 @Component({
   selector: 'app-carousel-estreno1',
@@ -33,7 +28,6 @@ export class CarouselEstreno1Component {
 
   //configuration slider
   scrollSlider: number = 0;
-  sliderItems: Pelicula[] = []; // las peliculas
   currentIndex: number = 0; // Índice actual del slider
 
   //configuration html
@@ -45,30 +39,32 @@ export class CarouselEstreno1Component {
   public sizeSlider = 0;
 
   //peliculas
-  films: Pelicula[] = peliculas.filter((item) => item.isPremiere);
+  premiereMovies!: IPelicula[]; // las peliculas
 
   constructor(
     private hs: HomeService,
     private rander2: Renderer2,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private movieSvcs: PeliculasService
   ) {}
-anchorFilm:any;
-move:number=0;
+  anchorFilm: any;
+  move: number = 0;
   ngOnInit(): void {
-    this.anchorFilm = this.films.length * 100;
+    this.movieSvcs.premiereMovie$.subscribe(
+      (res) => (this.premiereMovies = res)
+    );
 
+    this.anchorFilm = this.premiereMovies.length * 100;
 
     this.getWindowWidth();
-    // carga de las peliculas
-    this.sliderItems = peliculas;
 
     if (this.windowWidth < 576) {
       //slider = 600%
-      this.move=95;
+      this.move = 95;
       this.sizeSlider = 150;
     } else if (this.windowWidth > 576 && this.windowWidth < 768) {
-      this.move= 100/3;
+      this.move = 100 / 3;
       //slider = 400%
       this.sizeSlider = 80;
     } else if (this.windowWidth > 768 && this.windowWidth < 998) {
@@ -88,7 +84,7 @@ move:number=0;
     this.windowWidth = window.innerWidth;
   }
   nextSlide() {
-    if (this.currentIndex < this.sliderItems.length -2) {
+    if (this.currentIndex < this.premiereMovies.length - 1) {
       this.currentIndex++;
     }
   }
@@ -96,6 +92,36 @@ move:number=0;
   prevSlide() {
     if (this.currentIndex > 0) {
       this.currentIndex--;
+    }
+  }
+  
+  goMovie(item: IPelicula) {
+    this.movieSvcs.selectMovie(item);
+    this.router.navigate(['ver', item.nombre]);
+  }
+  /// nuevo
+  tranlatemove = 1;
+
+  touchStartX: number = 0;
+  touchEndX: any;
+  minTouchDistance = 50; // Distancia mínima de desplazamiento para considerarlo un cambio de slide
+  // currentIndex = 0;
+
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.touches[0].clientX;
+  }
+  onTouchMove(event: TouchEvent) {
+    this.touchEndX = event.touches[0].clientX;
+  }
+  onTouchEnd() {
+    const touchDistance = this.touchStartX - this.touchEndX;
+    if (
+      touchDistance > this.minTouchDistance &&
+      this.currentIndex < this.premiereMovies.length - 1
+    ) {
+      this.nextSlide();
+    } else if (touchDistance < -this.minTouchDistance && this.currentIndex > 0) {
+      this.prevSlide();
     }
   }
 

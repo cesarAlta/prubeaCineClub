@@ -1,5 +1,6 @@
 <div *ngIf="optestreno == 1">
-  <div class="row m-0 justify-content-start my-1">
+  <div class="row m-0 justify-content-start my-1"
+  >
     <div class="col-auto ms-3 p-0">
       <!-- definitivo no borrar -->
       <!-- <div
@@ -73,7 +74,10 @@
       <p class="fs-3 my-auto">Estrenos</p>
     </div>
   </div>
-  <div class="container-film-strip bg-{{ !showFondoDark ? 'dark' : 'black' }}">
+  <div class="container-film-strip bg-{{ !showFondoDark ? 'dark' : 'black' }}"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd()"
+  (touchstart)="onTouchStart($event)">
     <!-- btn-left -->
     <div
       class="position-absolute top-50 start-0 translate-middle-y rounded-circle btn-film-strip d-flex justify-content-center align-items-center"
@@ -91,24 +95,29 @@
     <div class="m-2" [ngClass]="{ 'border-film-strip': !showTirilla }"></div>
 
     <div
-      class="slider-film  justify-content-start justify-content-md-center"
+      class="slider-film justify-content-start justify-content-md-center"
       [ngStyle]="{
         transform: 'translateX(-' + currentIndex * (move) + '%)',
     }"
     >
-      <div class="slider-item" *ngFor="let item of films; let i = index">
-        <a class="link-light" routerLink="/peliculas/ver/{{ item.title }}">
-            <img
-          src="{{ item.imagesUrlCoverPremier }}"
-          alt="{{ item.title }} imagen"
-        />
-        <span
-          class="position-absolute start-50 bottom-0 translate-middle-x bg-danger rounded-top py-1 px-3 fw-bold"
-        >
-          NUEVO
-        </span>
+      <div
+        class="slider-item"
+        *ngFor="let item of premiereMovies; let i = index"
+      >
+        <a class="link-light" role="button" (click)="goMovie(item)">
+          <img src="{{ item.linkEstreno }}" alt="{{ item.nombre }} imagen" />
+          <h3
+            class="position-absolute start-50 translate-middle fw-bold w-100 text-center"
+            style="top: 3rem;"
+          >
+            {{ item.nombre }}
+          </h3>
+          <span
+            class="position-absolute start-50 bottom-0 translate-middle-x bg-danger rounded-top py-1 px-3 fw-bold"
+          >
+            NUEVO
+          </span>
         </a>
-      
       </div>
     </div>
     <div class="m-2" [ngClass]="{ 'border-film-strip': !showTirilla }"></div>
@@ -136,13 +145,23 @@
   <div class="premiere-title-container fs-1 fw-bold text-secondary">
     ESTRENOS
   </div>
-  <ngb-carousel *ngIf="films" class="w-100" [showNavigationIndicators]="false">
-    <ng-template ngbSlide *ngFor="let item of films">
+  <ngb-carousel
+    *ngIf="premiereMovies"
+    class="w-100"
+    [showNavigationIndicators]="false"
+  >
+    <ng-template ngbSlide *ngFor="let item of premiereMovies">
       <div class="row justify-content-center">
         <div class="col col-md-4 col-lg-4 my-auto d-none d-md-block">
-          <h4>{{ item.title }}</h4>
-          <p class="fs-6">{{ item.synopsis }}</p>
-          <a class="btn btn-primary text-center"  routerLink="/peliculas/ver/{{ item.title }}" role="button">
+          <h4>{{ item.nombre }}</h4>
+          <p class="fs-6" style="max-height: 300px; overflow: hidden">
+            {{ item.sinopsis }}
+          </p>
+          <a
+            class="btn btn-primary text-center"
+            routerLink="/peliculas/ver/{{ item.nombre }}"
+            role="button"
+          >
             Ver más
           </a>
         </div>
@@ -151,7 +170,7 @@
             class="position-relative overflow-hidden mx-auto ms-md-auto card-movie"
           >
             <img
-              [src]="item.imagesUrlCoverPremier"
+              [src]="item.linkEstreno"
               alt="Random first slide"
               class="img-thumbnail"
             />

@@ -14,11 +14,12 @@
   
   .slide-estreno {
     position: relative;
-    width: 100%;
+    width: 90%;
     height: auto;
     display: flex;
     margin: auto;
     transition: transform 0.3s ease;
+    
   }
   
   .img-film:hover {

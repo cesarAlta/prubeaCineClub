@@ -10,7 +10,7 @@ import { RatingMovieIncaaComponent } from './pages/rating-movie-incaa/rating-mov
 import { AwardsComponent } from './pages/Awards/awards/awards.component';
 
 const routes: Routes = [  
-   { path: 'ver/:name', component: ViewsPeliculaComponent },
+  //  { path: 'ver/:name', component: ViewsPeliculaComponent },
     { path: 'adminPeliculas', component: AdminPeliculasComponent },
     { path: 'adminGeneros', component: AdminGenerosComponent },
     { path: 'reparto', component: CastMovieComponent },

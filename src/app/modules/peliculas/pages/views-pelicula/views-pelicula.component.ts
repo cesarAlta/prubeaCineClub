@@ -45,12 +45,12 @@ export class ViewsPeliculaComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((p) => {
-      this.peliculaSvcs
-        .getByName(p.get('name')!)
-        .subscribe((res) => (this.peliSel = res));
-    });
-    this.urlImage = this.peliSel?.imagesUrlCover;
+    // this.route.paramMap.subscribe((p) => {
+    //   this.peliculaSvcs
+    //     .getByName(p.get('name')!)
+    //     .subscribe((res) => (this.peliSel = res));
+    // });
+    // this.urlImage = this.peliSel?.imagesUrlCover;
   }
   
   showTriler() {

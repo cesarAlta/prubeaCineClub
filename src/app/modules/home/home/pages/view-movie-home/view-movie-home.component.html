@@ -1,0 +1,116 @@
+<div *ngIf="movieSel">
+  <div
+    class="cover-page"
+    [style.background-image]="'url(' + movieSel.linkEstreno + ')'"
+  >
+    <div class="container-movieinfo">
+      <div class="container">
+        <div class="row gap-2 justify-content-center">
+          <div class="col-8 col-md-10 col-lg-11 title-movie">
+            <h2>{{ movieSel.nombre }}</h2>
+          </div>
+          <div class="col-7 col-md-4 col-lg-2">
+            <img [src]="movieSel.linkPoster" alt="" class="img-fluid rounded" />
+          </div>
+          <div class="col-11 col-md-6 col-lg-9 my-auto">
+            <div class="title-movie-sm">
+              <h2>{{ movieSel.nombre }}</h2>
+            </div>
+            <div>
+              <p class="fs-5">
+                Duración: {{ movieSel.duracion }} min. |
+                {{ movieSel.calificacion }}
+              </p>
+              <p class="synopsis-movie">{{ movieSel.sinopsis }}</p>
+            </div>
+            <div>
+              <p>
+                Año: {{ movieSel.anioEstreno }}
+                Géneros:
+                <span *ngFor="let g of movieSel.generos; let i = index">
+                  {{ i != 0 ? "|" : "" }}{{ g }}</span
+                >
+                <br />
+                Director:
+                <span *ngFor="let g of director; let i = index">
+                  {{ i != 0 ? "|" : "" }}{{ g }}</span
+                >
+                <br />
+                Actores:
+                <span *ngFor="let g of actores; let i = index">
+                  {{ i != 0 ? "|" : "" }}{{ g }}</span
+                >
+                <br />
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-auto my-auto">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger rounded-circle fs-3 text-light d-flex justify-content-center align-items-center"
+                  (click)="showMovie()"
+                  style="height: 4rem; width: 4rem"
+                >
+                  <i class="fa-solid fa-play"></i>
+                </button>
+                <small class="d-block">Ver película</small>
+              </div>
+              <div class="col-auto mt-auto">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-secondary rounded-circle fs-3 text-light d-flex justify-content-center align-items-center"
+                  (click)="showTriler()"
+                  style="height: 3rem; width: 3rem"
+                >
+                  <i class="fa-regular fa-circle-play"></i>
+                </button>
+                <small class="d-block">Ver trailer</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="trailerMovie">
+    <div class="container-fluid mb-3" *ngIf="triler">
+      <div class="row justify-content-center">
+        <div class="d-flex justify-content-between bg-dark">
+          <h3>Trailer</h3>
+          <a
+            role="button"
+            class="btn btn-unstyled border-0 text-danger"
+            (click)="showTriler()"
+          >
+            X Cerrar
+          </a>
+        </div>
+        <div class="col-10 col-md-8">
+          <div class="ratio ratio-16x9">
+            <iframe
+              [src]="movieSel.linkTrailer"
+              frameborder="0"
+              allow="autoplay; fullscreen"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="Movie" class="row m-0">
+    <div class="bg-dark">
+      <h2 class="py-3 ps-5">Ver Película</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-10 col-md-8">
+        <div class="ratio ratio-16x9">
+          <iframe
+            [src]="movieSel.linkPelicula"
+            frameborder="0"
+            allow="autoplay; fullscreen"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
