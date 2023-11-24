@@ -15,6 +15,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ViewMovieHomeComponent } from './home/pages/view-movie-home/view-movie-home.component';
 import { CinematicPremieresSliderComponent } from './components/cinematic-premieres-slider/cinematic-premieres-slider.component';
 import { AllMoviesComponent } from './home/pages/all-movies/all-movies.component';
+import { GenresMoviesComponent } from './home/pages/genres-movies/genres-movies.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AllMoviesComponent } from './home/pages/all-movies/all-movies.component
     LoadingComponent,
     ViewMovieHomeComponent,
     CinematicPremieresSliderComponent,
-    AllMoviesComponent
+    AllMoviesComponent,
+    GenresMoviesComponent
   ],
   imports: [
     CommonModule,

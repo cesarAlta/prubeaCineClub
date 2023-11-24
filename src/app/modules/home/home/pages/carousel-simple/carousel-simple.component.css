@@ -95,6 +95,9 @@
       transition: all 0.5s;
       margin-left: 2rem;
     }
+    .btnLeft , .btnRight {
+      display: none;
+    }
   }
   @media screen and (max-width: 576px) {
     .sliderBtn {

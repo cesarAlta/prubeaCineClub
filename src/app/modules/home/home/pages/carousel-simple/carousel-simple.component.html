@@ -37,22 +37,34 @@
                 style="width: 100%; height: 100%"
               />
               <div
-                class="position-absolute top-0 start-0 info-film"
+                class="position-absolute top-0 start-0 info-film d-flex flex-column"
                 style="height: 100%; width: 100%"
               >
-                <div class="position-absolute top-50 start-50 translate-middle">
-                  <p class="fs-5 text-center">
-                    {{ item.nombre }}
-                  </p>
-                  <div class="text-white d-flex justify-content-center">
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-danger rounded-circle fs-3 text-light d-flex justify-content-center align-items-center"
-                      style="height: 3rem; width: 3rem"
-                    >
-                      <i class="fa-solid fa-play"></i>
-                    </button>
-                  </div>
+                <!-- modificar -->
+                <p class="me-auto p-2">
+                  <span class="fs-5">{{ item.nombre }} </span> <br />
+                
+                </p>
+                <p class="mx-auto">
+                  {{ item.anioEstreno }}<br />
+                </p>
+
+                <div class="text-white mx-auto my-auto ">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-danger rounded-circle fs-3 text-light d-flex justify-content-center align-items-center"
+                    style="height: 3rem; width: 3rem"
+                  >
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div
+                  class="mt-auto me-auto d-inline-block text-truncate "
+                  style="max-width: 150px"
+                >
+                  <small>
+                    {{ item.generos }}
+                  </small>
                 </div>
               </div>
             </a>

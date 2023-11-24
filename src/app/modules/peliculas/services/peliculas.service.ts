@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, of } from 'rxjs';
+import { BehaviorSubject, map, of, tap } from 'rxjs';
 import { IGenero } from 'src/app/components/interface/IGenero';
 import { IPelicula } from 'src/app/components/interface/IPelicula';
 import { IRol } from 'src/app/components/interface/IRol';
@@ -21,7 +21,7 @@ export class PeliculasService {
 
   private premiereMovie = new BehaviorSubject<IPelicula[]>([]);
   premiereMovie$ = this.premiereMovie.asObservable();
-  
+
   private mostViewedMovie = new BehaviorSubject<IPelicula[]>([]);
   mostViewedMovie$ = this.mostViewedMovie.asObservable();
 
@@ -39,20 +39,29 @@ export class PeliculasService {
   getAll() {
     this.httpClient.get<IPelicula[]>(this.URI + 'movies').subscribe((res) => {
       this.allMovieList = res;
-      this.searchByName('',1)
+      this.searchByName('', 1);
     });
   }
-  getAllMovies(){
-    return this.httpClient.get<IPelicula[]>(this.URI + 'movies')
+  getAllMovies() {
+    return this.httpClient.get<IPelicula[]>(this.URI + 'movies');
   }
   //Obtiene todas las peliculas y emnite observables para las mas visatas y estrenos.
   getAllHome() {
-    this.httpClient.get<IPelicula[]>(this.URI + 'movies').subscribe((res) => {
-      this.allMovieList = res;      
-      this.mostViewedMovie.next( this.allMovieList.slice(0,10));
-      this.premiereMovie.next( this.allMovieList.filter(m=>m.estreno));
+    this.getAllMovies().subscribe((res) => {
+      this.allMovieList = res;
+      this.mostViewedMovie.next(this.allMovieList.slice(0, 10));
+      this.premiereMovie.next(this.allMovieList.filter((m) => m.estreno));
       this.movies.next(res);
     });
+  }
+  getMovieXGenre(genre: any) {
+    return this.httpClient
+      .get<IPelicula[]>(this.URI + 'movies')
+      .pipe(
+        map((res) =>
+          genre != 'todas' ? res.filter((m) => m.generos.includes(genre)) : res
+        )
+      );
   }
   getGeneros() {
     return this.httpClient.get<IGenero[]>(this.URI + 'genres');
@@ -61,9 +70,9 @@ export class PeliculasService {
     return this.httpClient.get<IRol[]>(this.URI + 'roles');
   }
   getByName(nombre: string) {
-    return this.httpClient
-      .get<IPelicula[]>(this.URI + 'movies')
-      .pipe(map((res) => res.find((m) => m.nombre == nombre)));
+    return this.getAllMovies().pipe(
+      map((res) => res.find((m) => m.nombre == nombre))
+    );
   }
   post(movie: any, portada: File, cartelera: File) {
     let generos: string | undefined;
@@ -96,7 +105,6 @@ export class PeliculasService {
     return this.httpClient.post(this.URI + 'createMovie', formData);
     // return of(true);
   }
-
   put(movie: any, portada: any, cartelera: any) {
     let generos: string | undefined;
     movie.generos?.forEach((g: any) => {
@@ -134,8 +142,8 @@ export class PeliculasService {
   updatePublicada(item: any) {
     return this.httpClient.post(this.URI + 'switchBooleanOculta', item);
   }
+
   searchByName(searchName: string, page: number) {
-    console.log(this.allMovieList, page);
     let moviess: IPelicula[] = [];
     if (searchName) {
       this.allMovieList.forEach((m) => {
@@ -162,5 +170,43 @@ export class PeliculasService {
 
     this.movies.next(moviess);
     this.movieSize.next(movieSize);
+  }
+
+  private movieSearch= new BehaviorSubject<IPelicula[]>([]);
+  movieSearch$ = this.movieSearch.asObservable();
+  movieSearchSize$ = this.movieSearch$.pipe(map(res=>res.length))
+  
+  searchMovieOrDir(searchName: string, page: number, size: number) {
+    console.log("busqueda")
+    let moviess: IPelicula[] = [];
+
+   return this.getAllMovies().pipe(
+      map((m) => {
+        m.forEach((movie) => {
+          if (movie.nombre.toUpperCase().includes(searchName.toUpperCase())) {
+            moviess.push(movie);
+          }
+        });
+        m.forEach((movie) => {
+          movie.elenco.forEach((eMovie) => {
+            if (
+              eMovie.nombreRol === 'DIRECTOR' &&
+              (eMovie.nombre.toUpperCase().includes(searchName.toUpperCase()) ||
+                eMovie.apellido
+                  .toUpperCase()
+                  .includes(searchName.toUpperCase()))
+            )
+              moviess.push(movie);
+          });
+        });
+
+        const movieSize = moviess.length;
+        moviess = moviess.slice((page - 1) * 10, page + 9);
+        console.log(moviess)
+        return moviess;
+
+        // this.movieSearch.next(moviess);
+      })
+    );
   }
 }

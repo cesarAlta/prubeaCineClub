@@ -1,0 +1,12 @@
+@media screen and (max-width: 720px) {
+  .img-footer {
+    width: 150px;
+    height: auto;
+  }
+}
+@media screen and (max-width: 540px) {
+  .img-footer {
+    width: 100px;
+    height: auto;
+  }
+}

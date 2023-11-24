@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { UsuarioService } from 'src/app/modules/auth/services/usuario.service';
 import { HomeService } from 'src/app/modules/home/home.service';
+import { PeliculasService } from 'src/app/modules/peliculas/services/peliculas.service';
 import { DataService } from 'src/app/services/data.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -22,11 +23,14 @@ export class NavComponent implements OnInit {
   navDashboard:boolean=false;
   navFixed:boolean = false;
   navLogin:boolean=false;
+  searchName: string = '';
+
 
   constructor(
     private dataSvcs: DataService,
     private modalService: ModalService,
     private authServ: UsuarioService,
+    private router: Router,
   ) {}
   ngOnInit(): void {
     this.authServ.islogged$.subscribe((res) => (this.login = res));
@@ -98,5 +102,9 @@ export class NavComponent implements OnInit {
   }
   btnOffCanvas() {
     this.offcanvasmenu = !this.offcanvasmenu;
+  }
+  search(){
+      this.router.navigate(['peliculas/',this.searchName])
+  
   }
 }

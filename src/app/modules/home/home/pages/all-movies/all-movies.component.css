@@ -1,0 +1,8 @@
+@media screen and (max-width: 922px) {
+  .item-genre-md {
+    display: none;
+  }
+  .item-genre-md.active {
+    display: block;
+  }
+}

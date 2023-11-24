@@ -1,0 +1,59 @@
+<div class="container-md my-4">
+  <div class="d-flex mb-3 align-items-center" *ngIf="searchMovieOrDir">
+    <h4 class="me-2">Peliculas encontradas para: " {{ searchMovieOrDir }} "</h4>
+    <button
+      type="button"
+      class="btn btn-secondary rounded-circle"
+      (click)="clean()"
+    >
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div *ngIf="allMovies.length==0" >
+    <div class="bg-secondary rounded rounded-3 p-3 text-center">
+      <h4>No se encontraron peliculas!</h4>
+    </div>
+  </div>
+  <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-2">
+    <div *ngFor="let item of allMovies" class="col">
+      <div class="img-film mx-2 position-relative h-100">
+        <a role="button" (click)="goMovie(item)">
+          <img
+            [src]="item.linkPoster"
+            class="border border-secondary rounded"
+            alt="..."
+            style="width: 100%; height: 100%"
+          />
+          <div
+            class="position-absolute top-0 start-0 info-film d-flex flex-column"
+            style="height: 100%; width: 100%"
+          >
+            <!-- modificar -->
+            <p class="me-auto">
+              <span class="fs-5">{{ item.nombre }} </span>
+            </p>
+            <p class="mx-auto">{{ item.anioEstreno }}</p>
+
+            <div class="text-white mx-auto my-auto">
+              <button
+                type="button"
+                class="btn btn-sm btn-danger rounded-circle fs-3 text-light d-flex justify-content-center align-items-center"
+                style="height: 3rem; width: 3rem"
+              >
+                <i class="fa-solid fa-play"></i>
+              </button>
+            </div>
+            <div
+              class="mt-auto me-auto d-inline-block text-truncate"
+              style="max-width: 150px"
+            >
+              <small>
+                {{ item.generos }}
+              </small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

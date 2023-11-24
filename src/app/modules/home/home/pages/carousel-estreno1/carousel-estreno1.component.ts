@@ -63,7 +63,10 @@ export class CarouselEstreno1Component {
       //slider = 600%
       this.move = 95;
       this.sizeSlider = 150;
+      this.mostrarbtndesplzamiento=false;
     } else if (this.windowWidth > 576 && this.windowWidth < 768) {
+      this.mostrarbtndesplzamiento=false;
+
       this.move = 100 / 3;
       //slider = 400%
       this.sizeSlider = 80;

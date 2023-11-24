@@ -1,0 +1,14 @@
+.img-film:hover {
+    /* opacity: 0.3; */
+    transition: 0.3s;
+  }
+  .info-film {
+    opacity: 0;
+    transition: 0.3s;
+  }
+  .img-film:hover .info-film {
+    opacity: 1;
+    transition: 0.3s;
+    background-color: rgba(0, 0, 0, 0.788);
+  }
+  

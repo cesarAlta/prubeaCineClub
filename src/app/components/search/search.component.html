@@ -1,12 +1,13 @@
 <div class="position-relative">
-  <div class="input-group input-group-sm">
+  <div class="input-group input-group-sm" style="max-width: 100%;width: 400px ">
     <input
       [(ngModel)]="searchMovie"
       type="search"
       placeholder="Buscar película, director"
       class="form-control"
+      (keyup.enter)="search()"
     />
-    <button type="button" class="btn btn-dark">
+    <button type="button" class="btn btn-secondary" (click)="search()">
       <i class="fa-solid fa-magnifying-glass"></i>
     </button>
   </div>
@@ -19,7 +20,7 @@
     placeholder="Buscar película, director"
     class="form-control"
   />
-  <button type="button" class="btn btn-dark">
+  <button type="button" class="btn btn-secondary">
     <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 </div>

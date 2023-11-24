@@ -84,7 +84,7 @@
 
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .border-film-strip {
     display: flex;
     width: 100%;
@@ -109,7 +109,9 @@
   .btn-film-strip{
     visibility: visible;
   }
-  
+  .btn-next-slider, .btn-prev-slider{
+    display: none;
+  }
 }
 @media screen and (max-width: 540px) {
   .slider-film{
